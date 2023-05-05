@@ -1,0 +1,22 @@
+Users:
+1.类似中介公司或者工会？还是我们..检查资格 BRP, 
+2.Service provider
+3.Customer
+
+Homepage UI 两种用户的登录界面
+用户 选择服务，选择价格，选择服务者，给服务者发通知
+时间表匹配
+Chat function
+Map
+
+服务者：
+看到谁预定了，其他没听清
+
+Payment：
+
+其他功能的后面再加
+
+开发：前端React Native or Flutter
+后端数据库 MYSQL/ NO SQL MongoDB Presgre SQL
+需要考虑的事情： load balancing (NGINX -middleware). 访问队列。。。
+传输用户信息： use encryption. RSA, SHA
