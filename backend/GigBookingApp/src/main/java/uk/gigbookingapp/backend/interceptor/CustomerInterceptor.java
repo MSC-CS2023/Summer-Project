@@ -4,15 +4,24 @@ import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
-import uk.gigbookingapp.backend.mapper.UserMapper;
+import uk.gigbookingapp.backend.entity.CurrentId;
+import uk.gigbookingapp.backend.entity.Customer;
+import uk.gigbookingapp.backend.mapper.CustomerMapper;
 import uk.gigbookingapp.backend.utils.JwtUtils;
 
-//@Component // The '@Autowired' will error without this annotation
-public class TokenInterceptor implements HandlerInterceptor {
+@Configuration
+public class CustomerInterceptor implements HandlerInterceptor {
+    @Autowired
+    private CustomerMapper mapper;
+
+    private CurrentId currentId;
 
     @Autowired
-    private UserMapper userMapper;
+    public CustomerInterceptor(CurrentId currentId) {
+        this.currentId = currentId;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -25,11 +34,11 @@ public class TokenInterceptor implements HandlerInterceptor {
             return false;
         }
         String uid = claims.getSubject();
-        if (userMapper.selectById(uid) == null){
+        if (mapper.selectById(uid) == null){
             return false;
         }
-        //request.setAttribute("uid", uid);
+        this.currentId.setId(Integer.parseInt(uid));
+        System.out.println(currentId);
         return true;
     }
-
 }

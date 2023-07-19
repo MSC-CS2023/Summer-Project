@@ -1,8 +1,9 @@
 package uk.gigbookingapp.backend.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import uk.gigbookingapp.backend.entity.User;
 import uk.gigbookingapp.backend.mapper.UserMapper;
 import uk.gigbookingapp.backend.utils.JwtUtils;
@@ -16,7 +17,7 @@ public class LoginController {
 
     @PostMapping
     public Result login(String id, String password){
-
+        System.out.println(id+password);
         User user = userMapper.selectById(id);
         if (user == null){
             return Result.error().setMessage("ID does not exist.");
@@ -24,6 +25,6 @@ public class LoginController {
             return Result.error().setMessage("Password is wrong.");
         }
         String token = JwtUtils.generateToken(user);
-        return Result.ok().data("user", user).data("token", token);
+        return Result.ok().data("user", user).data("token", token).data("user", user);
     }
 }
