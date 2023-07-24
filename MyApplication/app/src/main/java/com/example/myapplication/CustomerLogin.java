@@ -41,14 +41,16 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
         } else if (view.getId() ==  R.id.btnCustomerLogin) {
             // to be complete , verifying via database
 
+            startActivity(new Intent(CustomerLogin.this, CustomerHomePage.class));
+
 
             Toast.makeText(getApplicationContext(), "click login", Toast.LENGTH_SHORT).show();
         } else if (view.getId() == R.id.btnCustomerRegister) {
             // to be complete
 
             Toast.makeText(getApplicationContext(),"click register", Toast.LENGTH_SHORT).show();
-            Intent intentToCustomerRegisterPage = new Intent(CustomerLogin.this,CustomerRegister.class);
-            startActivity(intentToCustomerRegisterPage);
+            startActivity(new Intent(CustomerLogin.this, CustomerRegister.class));
+
         }
 
     }
