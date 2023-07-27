@@ -29,10 +29,11 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
 
-        if (view.getId() == R.id.btnCustomerRegister){
-            // to be completed
-            Toast.makeText(this, "Register successfully", Toast.LENGTH_SHORT).show();
-        } else if (view.getId() == R.id.btnRegisterCustomerBack) {
+//        if (view.getId() == R.id.btnCustomerRegister){
+//            // to be completed
+//            Toast.makeText(this, "Register successfully", Toast.LENGTH_SHORT).show();
+//        } else
+            if (view.getId() == R.id.btnRegisterCustomerBack) {
             Intent intentToCustomerLoginPage = new Intent(CustomerRegister.this, CustomerLogin.class);
             startActivity(intentToCustomerLoginPage);
         }
