@@ -39,8 +39,7 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
 
         if (view.getId() == R.id.txtCustomerForgetPassword){
             Toast.makeText(this, "forget password", Toast.LENGTH_SHORT).show();
-//            Intent intentToMainPage = new Intent(CustomerLogin.this, MainActivity.class);
-//            startActivity(intentToMainPage);
+             startActivity(new Intent(CustomerLogin.this,CustomerForgetPassword.class));
         } else if (view.getId() ==  R.id.btnCustomerLogin) {
             // to be complete , verifying via database
 
