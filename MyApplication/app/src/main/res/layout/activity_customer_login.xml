@@ -12,11 +12,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
 
 
-        <TextView
+        <EditText
             android:id="@+id/txtWelcome1"
             style="@style/WelcomeText"
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:text="  Easy Housekeeping," />
 
 
-        <TextView
+        <EditText
             android:id="@+id/txtWelcome2"
             style="@style/WelcomeText"
             android:layout_width="match_parent"
@@ -81,9 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txtCustomerPassword"
         android:layout_marginTop="15dp"
+        android:gravity="right"
         android:text="Forget password ?"
-        android:textColor="#737171"
-        android:gravity="right"/>
+        android:textColor="#737171" />
 
 </RelativeLayout>
 

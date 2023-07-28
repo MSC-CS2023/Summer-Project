@@ -22,6 +22,9 @@
             android:name=".CustomerAccountPage"
             android:exported="false" />
         <activity
+            android:name=".CustomerHomePage"
+            android:exported="false" />
+        <activity
             android:name=".ProviderRegister"
             android:exported="false" />
         <activity

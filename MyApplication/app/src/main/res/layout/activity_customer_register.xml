@@ -52,17 +52,17 @@
 
 
             <EditText
-        android:id="@+id/txtRegisterCustomerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="139dp" />
+                android:id="@+id/txtRegisterCustomerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Username"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="139dp" />
 
 
             <EditText
@@ -108,41 +108,41 @@
             </LinearLayout>
 
             <EditText
-        android:id="@+id/txtRegisterCustomerCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Verification Code"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="358dp" />
+                android:id="@+id/txtRegisterCustomerCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Verification Code"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="358dp" />
 
-    <EditText
-        android:id="@+id/txtRegisterCustomerPassword1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="456dp" />
+            <EditText
+                android:id="@+id/txtRegisterCustomerPassword1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                tools:layout_editor_absoluteX="107dp"
+                tools:layout_editor_absoluteY="456dp" />
 
-    <EditText
-        android:id="@+id/txtRegisterCustomerPassword2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="Password Again"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="109dp"
-        tools:layout_editor_absoluteY="567dp" />
+            <EditText
+                android:id="@+id/txtRegisterCustomerPassword2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Password Again"
+                android:inputType="textPassword"
+                tools:layout_editor_absoluteX="109dp"
+                tools:layout_editor_absoluteY="567dp" />
 
 
             <EditText
