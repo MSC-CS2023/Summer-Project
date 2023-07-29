@@ -161,7 +161,7 @@
                     android:layout_width="380dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="110dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -208,10 +208,121 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/service1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="190dp"
-                        android:src="@color/skyBlue"></ImageView>
+                        android:src="@drawable/img_sample1"
+                        android:scaleType="centerCrop"></ImageView>
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="30dp"
+                        android:text="title"></TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:text="price info"></TextView>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:text="available state"></TextView>
+
+                    </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/btn_avatar2"
+                            >
+                        </ImageButton>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="4"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                android:text="username"
+                                android:textStyle="bold"
+                                android:textSize="20dp"></TextView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="user information, clarify what kind of service "
+                                android:textColor="#333232"></TextView>
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/btn_emptyheart"
+                            android:backgroundTint="@android:color/transparent">
+                        </ImageButton>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/service2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        android:src="@drawable/img_sample2"
+                        android:scaleType="centerCrop"></ImageView>
 
 
 
@@ -265,6 +376,7 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
+                            android:src="@drawable/btn_avatar2"
                             >
                         </ImageButton>
 
@@ -299,14 +411,21 @@
 
                     </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="190dp"
-                        android:src="@color/skyBlue"></ImageView>
+
+                    <LinearLayout
+                        android:id="@+id/service3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
 
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="190dp"
+                            android:src="@drawable/img_sample2"
+                            android:scaleType="centerCrop"></ImageView>
 
-                    <TextView
+                        <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -334,96 +453,9 @@
 
                     </LinearLayout>
 
-
-
-
-
+                    </LinearLayout>
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="380dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            >
-                        </ImageButton>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="4"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="username"
-                                android:textStyle="bold"
-                                android:textSize="20dp"></TextView>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="user information, clarify what kind of service "
-                                android:textColor="#333232"></TextView>
-
-                        </LinearLayout>
-
-                        <ImageButton
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/btn_emptyheart"
-                            android:backgroundTint="@android:color/transparent">
-                        </ImageButton>
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="190dp"
-                        android:src="@color/skyBlue"></ImageView>
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="30dp"
-                        android:text="title"></TextView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:text="price info"></TextView>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:text="available state"></TextView>
-
-                    </LinearLayout>
 
 
 
@@ -451,6 +483,7 @@
         android:layout_alignParentBottom="true">
 
         <ImageButton
+            android:id="@+id/btnCustomerHomepage1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="50dp"
@@ -462,6 +495,7 @@
             android:layout_height="wrap_content" />
 
         <ImageButton
+            android:id="@+id/btnCustomerMessage1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="50dp"
@@ -473,6 +507,7 @@
             android:layout_height="wrap_content" />
 
         <ImageButton
+            android:id="@+id/btnCustomerCollection1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="50dp"
@@ -484,7 +519,7 @@
             android:layout_height="wrap_content" />
 
         <ImageButton
-            android:id="@+id/btnCustomerAccount"
+            android:id="@+id/btnCustomerAccount1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="50dp"

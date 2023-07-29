@@ -217,6 +217,7 @@
         >
 
         <ImageButton
+            android:id="@+id/btnCustomerHomepage4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -228,6 +229,7 @@
             android:layout_height="wrap_content" />
 
         <ImageButton
+            android:id="@+id/btnCustomerMessage4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -239,6 +241,7 @@
             android:layout_height="wrap_content" />
 
         <ImageButton
+            android:id="@+id/btnCustomerCollection4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -250,7 +253,7 @@
             android:layout_height="wrap_content" />
 
         <ImageButton
-            android:id="@+id/btnCustomerAccount"
+            android:id="@+id/btnCustomerAccount4"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
