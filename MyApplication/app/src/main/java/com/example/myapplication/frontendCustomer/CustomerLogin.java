@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.frontendCustomer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.myapplication.R;
 
 public class CustomerLogin extends AppCompatActivity implements View.OnClickListener {
 

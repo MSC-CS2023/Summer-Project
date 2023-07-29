@@ -13,28 +13,28 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".CustomerResetPassword"
+            android:name=".frontendCustomer.CustomerResetPassword"
             android:exported="false" />
         <activity
-            android:name=".CustomerForgetPassword"
+            android:name=".frontendCustomer.CustomerForgetPassword"
             android:exported="false" />
         <activity
-            android:name=".CustomerAccountPage"
+            android:name=".frontendCustomer.CustomerAccountPage"
             android:exported="false" />
         <activity
-            android:name=".CustomerHomePage"
+            android:name=".frontendCustomer.CustomerHomePage"
             android:exported="false" />
         <activity
             android:name=".ProviderRegister"
             android:exported="false" />
         <activity
-            android:name=".CustomerRegister"
+            android:name=".frontendCustomer.CustomerRegister"
             android:exported="false" />
         <activity
             android:name=".ProviderLogin"
             android:exported="true" />
         <activity
-            android:name=".CustomerLogin"
+            android:name=".frontendCustomer.CustomerLogin"
             android:exported="true"
             android:label="@string/title_activity_customer_login"
             android:theme="@style/Theme.MyApplication" />

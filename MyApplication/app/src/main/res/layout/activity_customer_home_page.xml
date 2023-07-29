@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CustomerHomePage">
+    tools:context=".frontendCustomer.CustomerHomePage">
 
 
 
@@ -166,12 +166,12 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="60dp"
                         android:orientation="horizontal">
 
                         <ImageButton
                             android:layout_width="0dp"
-                            android:layout_height="50dp"
+                            android:layout_height="60dp"
                             android:layout_weight="1"
                             android:src="@drawable/btn_avatar1"
                             >
@@ -202,7 +202,7 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:src="@drawable/btn_heart"
+                            android:src="@drawable/btn_redheart"
                             android:backgroundTint="@android:color/transparent">
                         </ImageButton>
 
@@ -293,7 +293,7 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:src="@drawable/btn_heart"
+                            android:src="@drawable/btn_emptyheart"
                             android:backgroundTint="@android:color/transparent">
                         </ImageButton>
 
@@ -384,7 +384,7 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:src="@drawable/btn_heart"
+                            android:src="@drawable/btn_emptyheart"
                             android:backgroundTint="@android:color/transparent">
                         </ImageButton>
 
@@ -477,7 +477,7 @@
             android:layout_weight="1"
             android:layout_height="50dp"
             android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_heart" />
+            android:src="@drawable/btn_emptyheart" />
 
         <Space
             android:layout_width="8dp"
