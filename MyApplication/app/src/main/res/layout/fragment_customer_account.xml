@@ -125,13 +125,13 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/btn_voucher" />
+                android:src="@drawable/btn_notification" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="voucher"
+                android:text="Notification"
 
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -216,63 +216,75 @@
     </GridLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        >-->
 
-        <ImageButton
-            android:id="@+id/btnCustomerHomepage4"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_home" />
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerHomepage5"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_home" />-->
 
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
 
-        <ImageButton
-            android:id="@+id/btnCustomerMessage4"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_message" />
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerSearch5"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_search" />-->
 
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
 
-        <ImageButton
-            android:id="@+id/btnCustomerCollection4"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_emptyheart" />
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerMessage5"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_message" />-->
 
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
 
-        <ImageButton
-            android:id="@+id/btnCustomerAccount4"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_user" />
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerCollection5"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_emptyheart" />-->
 
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
+
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerAccount5"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_user" />-->
+
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
 
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

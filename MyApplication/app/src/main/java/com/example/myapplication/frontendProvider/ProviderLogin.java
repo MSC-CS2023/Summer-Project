@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.frontendProvider;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.R;
 
 public class ProviderLogin extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,7 +47,7 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
                 // to be complete
 
                 Toast.makeText(getApplicationContext(),"click register", Toast.LENGTH_SHORT).show();
-                Intent intentToProviderRegisterPage = new Intent(ProviderLogin.this,ProviderRegister.class);
+                Intent intentToProviderRegisterPage = new Intent(ProviderLogin.this, ProviderRegister.class);
                 startActivity(intentToProviderRegisterPage);
             }
 

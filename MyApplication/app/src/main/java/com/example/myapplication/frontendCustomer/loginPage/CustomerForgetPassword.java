@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer;
+package com.example.myapplication.frontendCustomer.loginPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,7 +27,7 @@ public class CustomerForgetPassword extends AppCompatActivity implements View.On
     public void onClick(View view) {
         if (view.getId() == R.id.btnForgetPasswordSend){
             Toast.makeText(this, "verify code sent", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(CustomerForgetPassword.this,CustomerResetPassword.class));
+            startActivity(new Intent(CustomerForgetPassword.this, CustomerResetPassword.class));
         }
     }
 }

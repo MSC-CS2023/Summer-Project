@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer;
+package com.example.myapplication.frontendCustomer.loginPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,7 +27,7 @@ public class CustomerResetPassword extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         if (view.getId() == R.id.btnCustomerResetPassword){
             Toast.makeText(this, "password reset successfully", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(CustomerResetPassword.this,CustomerLogin.class));
+            startActivity(new Intent(CustomerResetPassword.this, CustomerLogin.class));
         }
 
     }

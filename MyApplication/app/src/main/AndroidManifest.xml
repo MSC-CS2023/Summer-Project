@@ -13,40 +13,31 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".frontendCustomer.CustomerMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".frontendCustomer.CustomerChatPage"
-            android:exported="false" />
-        <activity
-            android:name=".frontendCustomer.CustomerMessageList"
-            android:exported="false" />
-        <activity
-            android:name=".frontendCustomer.CustomerCollection"
             android:exported="false" />
         <activity
             android:name=".frontendCustomer.CustomerServiceDetailPage"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.CustomerResetPassword"
+            android:name=".frontendCustomer.loginPage.CustomerResetPassword"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.CustomerForgetPassword"
+            android:name=".frontendCustomer.loginPage.CustomerForgetPassword"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.CustomerAccountPage"
+            android:name=".frontendProvider.ProviderRegister"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.CustomerHomePage"
+            android:name=".frontendCustomer.loginPage.CustomerRegister"
             android:exported="false" />
         <activity
-            android:name=".ProviderRegister"
-            android:exported="false" />
-        <activity
-            android:name=".frontendCustomer.CustomerRegister"
-            android:exported="false" />
-        <activity
-            android:name=".ProviderLogin"
+            android:name=".frontendProvider.ProviderLogin"
             android:exported="true" />
         <activity
-            android:name=".frontendCustomer.CustomerLogin"
+            android:name=".frontendCustomer.loginPage.CustomerLogin"
             android:exported="true"
             android:label="@string/title_activity_customer_login"
             android:theme="@style/Theme.MyApplication" />

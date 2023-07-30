@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@null"
+        android:icon="@drawable/btn_home"
+        android:id="@+id/btnCustomerHomepage"></item>
+
+    <item
+        android:title="@null"
+        android:icon="@drawable/btn_search"
+        android:id="@+id/btnCustomerSearch"></item>
+
+    <item
+        android:title="@null"
+        android:icon="@drawable/btn_message"
+        android:id="@+id/btnCustomerMessage"></item>
+
+    <item
+        android:title="@null"
+        android:icon="@drawable/btn_emptyheart"
+        android:id="@+id/btnCustomerCollection"></item>
+
+    <item
+        android:title="@null"
+        android:icon="@drawable/btn_user"
+        android:id="@+id/btnCustomerAccount"></item>
+
+</menu>

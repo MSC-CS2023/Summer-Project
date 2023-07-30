@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer;
+package com.example.myapplication.frontendCustomer.loginPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 

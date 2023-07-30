@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".frontendCustomer.CustomerSearchPage">
+
+
+    <LinearLayout
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <EditText
+            android:id="@+id/txtCustomerSearchBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:layout_marginStart="15dp"
+            android:hint="search for information"
+            android:textColor="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btnCustomerSearchButton"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/btn_search" />
+
+
+
+    </LinearLayout>
+
+
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/nav_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        >-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/btnCustomerHomepage2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:src="@drawable/btn_home" />-->
+
+<!--        <Space-->
+<!--            android:layout_width="8dp"-->
+<!--            android:layout_height="wrap_content" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/btnCustomerSearch2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:src="@drawable/btn_search" />-->
+
+<!--        <Space-->
+<!--            android:layout_width="8dp"-->
+<!--            android:layout_height="wrap_content" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/btnCustomerMessage2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:src="@drawable/btn_message" />-->
+
+<!--        <Space-->
+<!--            android:layout_width="8dp"-->
+<!--            android:layout_height="wrap_content" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/btnCustomerCollection2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:src="@drawable/btn_emptyheart" />-->
+
+<!--        <Space-->
+<!--            android:layout_width="8dp"-->
+<!--            android:layout_height="wrap_content" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/btnCustomerAccount2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:src="@drawable/btn_user" />-->
+
+<!--        <Space-->
+<!--            android:layout_width="8dp"-->
+<!--            android:layout_height="wrap_content" />-->
+
+
+<!--    </LinearLayout>-->
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

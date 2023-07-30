@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer;
+package com.example.myapplication.frontendCustomer.loginPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.frontendCustomer.CustomerMainActivity;
 
 public class CustomerLogin extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,7 +45,7 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
         } else if (view.getId() ==  R.id.btnCustomerLogin) {
             // to be complete , verifying via database
             Toast.makeText(getApplicationContext(), "click login", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(CustomerLogin.this, CustomerHomePage.class));
+            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
 
         }
         else if (view.getId() == R.id.txtCustomerRegister) {

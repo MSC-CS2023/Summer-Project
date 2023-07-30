@@ -10,36 +10,10 @@
 
 
 
-<!--    search bar and search icon , fixed-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        android:layout_alignParentTop="true"
-        >
-
-        <EditText
-            android:id="@+id/txtCustomerSearchBar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:hint="search for information"
-            android:textColor="@color/white" />
-
-        <ImageButton
-            android:id="@+id/btnCustomerSearchButton"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_search" />
+    <!--    search bar and search icon , fixed-->
 
 
-
-    </LinearLayout>
-
-<!--   scroll content in the middle -->
+    <!--   scroll content in the middle -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -218,41 +192,41 @@
 
 
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="190dp"
-                        android:src="@drawable/img_sample1"
-                        android:scaleType="centerCrop"></ImageView>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="190dp"
+                            android:src="@drawable/img_sample1"
+                            android:scaleType="centerCrop"></ImageView>
 
 
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="30dp"
-                        android:text="title"></TextView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:text="price info"></TextView>
+                            android:textStyle="bold"
+                            android:textSize="30dp"
+                            android:text="title"></TextView>
 
-                        <TextView
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:text="available state"></TextView>
+                            android:orientation="horizontal">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="20dp"
+                                android:text="price info"></TextView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="20dp"
+                                android:text="available state"></TextView>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -322,146 +296,146 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="190dp"
-                        android:src="@drawable/img_sample2"
-                        android:scaleType="centerCrop"></ImageView>
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="30dp"
-                        android:text="title"></TextView>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:text="price info"></TextView>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:text="available state"></TextView>
-
-                    </LinearLayout>
-
-
-
-
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="380dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/circular_background"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/btn_avatar2"
-                            >
-                        </ImageButton>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="4"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="username"
-                                android:textStyle="bold"
-                                android:textSize="20dp"></TextView>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="user information, clarify what kind of service "
-                                android:textColor="#333232"></TextView>
-
-                        </LinearLayout>
-
-                        <ImageButton
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/btn_emptyheart"
-                            android:backgroundTint="@android:color/transparent">
-                        </ImageButton>
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:id="@+id/service3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="190dp"
                             android:src="@drawable/img_sample2"
                             android:scaleType="centerCrop"></ImageView>
 
-                        <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="30dp"
-                        android:text="title"></TextView>
 
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="30dp"
+                            android:text="title"></TextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="20dp"
+                                android:text="price info"></TextView>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="20dp"
+                                android:text="available state"></TextView>
+
+                        </LinearLayout>
+
+
+
+
+
+
+                    </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="380dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30dp"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:text="price info"></TextView>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="0dp"
+                            <ImageButton
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/circular_background"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/btn_avatar2"
+                                >
+                            </ImageButton>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="4"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="username"
+                                    android:textStyle="bold"
+                                    android:textSize="20dp"></TextView>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="user information, clarify what kind of service "
+                                    android:textColor="#333232"></TextView>
+
+                            </LinearLayout>
+
+                            <ImageButton
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/btn_emptyheart"
+                                android:backgroundTint="@android:color/transparent">
+                            </ImageButton>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/service3"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:text="available state"></TextView>
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="190dp"
+                                android:src="@drawable/img_sample2"
+                                android:scaleType="centerCrop"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="30dp"
+                                android:text="title"></TextView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textSize="20dp"
+                                    android:text="price info"></TextView>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textSize="20dp"
+                                    android:text="available state"></TextView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
 
 
 
@@ -480,67 +454,92 @@
     </ScrollView>
 
 
-<!--    navigation bar at bottom-->
+    <!--    navigation bar at bottom-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:layout_alignParentBottom="true">-->
 
-        <ImageButton
-            android:id="@+id/btnCustomerHomepage1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="50dp"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_home" />
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerHomepage1"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_home" />-->
 
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
 
-        <ImageButton
-            android:id="@+id/btnCustomerMessage1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="50dp"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_message" />
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerSearch1"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_search" />-->
 
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
 
-        <ImageButton
-            android:id="@+id/btnCustomerCollection1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="50dp"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_emptyheart" />
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerMessage1"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_message" />-->
 
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
 
-        <ImageButton
-            android:id="@+id/btnCustomerAccount1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="50dp"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_user" />
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerCollection1"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_emptyheart" />-->
 
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
+
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/btnCustomerAccount1"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:backgroundTint="@android:color/transparent"-->
+    <!--            android:src="@drawable/btn_user" />-->
+
+    <!--        <Space-->
+    <!--            android:layout_width="8dp"-->
+    <!--            android:layout_height="wrap_content" />-->
 
 
 
 
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
+
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_alignParentBottom="true">-->
+
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/bottom_navigation"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:menu="@menu/buttom_navigation_bar"></com.google.android.material.bottomnavigation.BottomNavigationView>-->
+
+<!--    </FrameLayout>-->
 
 
 

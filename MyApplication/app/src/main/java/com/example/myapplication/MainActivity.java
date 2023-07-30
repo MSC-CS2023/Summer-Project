@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.myapplication.frontendCustomer.CustomerLogin;
+import com.example.myapplication.frontendCustomer.loginPage.CustomerLogin;
+import com.example.myapplication.frontendProvider.ProviderLogin;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,9 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.btnCustomer) {
             Intent intentCustomer = new Intent(MainActivity.this, CustomerLogin.class);
             startActivity(intentCustomer);
+            finish();
         } else if (view.getId() == R.id.btnProvider) {
             Intent intentProvider = new Intent(MainActivity.this, ProviderLogin.class);
             startActivity(intentProvider);
+            finish();
         }
     }
 

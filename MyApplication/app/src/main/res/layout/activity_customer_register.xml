@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".frontendCustomer.CustomerRegister">
+    tools:context=".frontendCustomer.loginPage.CustomerRegister">
 
 <ScrollView
     android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
                     android:ems="10"
-                    android:hint="   Verification Code"
+                    android:hint="   OPT"
                     android:inputType="text"
                     android:background="@drawable/edit_text_rounded_corner"
                     android:elevation="5dp"
