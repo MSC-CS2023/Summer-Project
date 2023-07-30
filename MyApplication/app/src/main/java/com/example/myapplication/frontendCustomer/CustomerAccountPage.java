@@ -43,7 +43,7 @@ public class CustomerAccountPage extends AppCompatActivity implements View.OnCli
         }else if (view.getId() == btnCustomerCollection.getId()) {
             startActivity(new Intent(CustomerAccountPage.this, CustomerCollection.class));
         }else if (view.getId() == btnCustomerMessage.getId()) {
-            startActivity(new Intent(CustomerAccountPage.this, CustomerMessage.class));
+            startActivity(new Intent(CustomerAccountPage.this, CustomerMessageList.class));
         }else if (view.getId() == btnCustomerHomePage.getId()) {
             startActivity(new Intent(CustomerAccountPage.this, CustomerHomePage.class));
         }

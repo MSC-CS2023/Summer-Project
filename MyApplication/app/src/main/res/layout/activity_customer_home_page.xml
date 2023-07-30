@@ -173,6 +173,8 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight="1"
+                            android:background="@drawable/circular_background"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/btn_avatar1"
                             >
                         </ImageButton>
@@ -276,6 +278,8 @@
                             android:layout_width="0dp"
                             android:layout_height="60dp"
                             android:layout_weight="1"
+                            android:background="@drawable/circular_background"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/btn_avatar2"
                             >
                         </ImageButton>
@@ -376,6 +380,8 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
+                            android:background="@drawable/circular_background"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/btn_avatar2"
                             >
                         </ImageButton>

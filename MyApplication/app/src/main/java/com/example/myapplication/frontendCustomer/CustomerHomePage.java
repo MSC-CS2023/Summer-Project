@@ -51,7 +51,7 @@ public class CustomerHomePage extends AppCompatActivity implements View.OnClickL
         }else if (view.getId() == btnCustomerCollection.getId()) {
             startActivity(new Intent(CustomerHomePage.this, CustomerCollection.class));
         }else if (view.getId() == btnCustomerMessage.getId()) {
-            startActivity(new Intent(CustomerHomePage.this, CustomerMessage.class));
+            startActivity(new Intent(CustomerHomePage.this, CustomerMessageList.class));
         }else if (view.getId() == btnCustomerHomePage.getId()) {
 //            startActivity(new Intent(CustomerHomePage.this, CustomerCollection.class));
         }else if (view.getId() == serviceDetail1.getId()) {

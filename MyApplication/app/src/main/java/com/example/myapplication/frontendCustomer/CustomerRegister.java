@@ -24,8 +24,8 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
 
         btnRegisterCustomer = findViewById(R.id.btnRegisterCustomer);
         btnRegisterCustomer.setOnClickListener(this);
-        btnRegisterCustomerSend = findViewById(R.id.btnRegisterCustomerSend);
-        btnRegisterCustomerSend.setOnClickListener(this);
+//        btnRegisterCustomerSend = findViewById(R.id.btnRegisterCustomerSend);
+//        btnRegisterCustomerSend.setOnClickListener(this);
     }
 
     @Override
@@ -34,9 +34,10 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
         if (view.getId() == R.id.btnRegisterCustomer){
             // to be completed
             Toast.makeText(this, "Register successfully", Toast.LENGTH_SHORT).show();
-        } else if (view.getId() == R.id.btnRegisterCustomerSend) {
-            Toast.makeText(this, "verify code sent", Toast.LENGTH_SHORT).show();
         }
+//        else if (view.getId() == R.id.btnRegisterCustomerSend) {
+//            Toast.makeText(this, "verify code sent", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 }
