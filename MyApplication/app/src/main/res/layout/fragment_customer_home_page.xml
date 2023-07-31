@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".frontendCustomer.CustomerHomePage">
-
-
+    tools:context=".frontendCustomer.fiveMainInterfaces.CustomerHomePageFragment">
 
 
     <!--    search bar and search icon , fixed-->
@@ -17,8 +15,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="60dp">
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -42,7 +39,7 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"
                         android:backgroundTint="@android:color/transparent"
-                        android:src="@drawable/btn_washing" />
+                        android:src="@drawable/btn_cleaning" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -50,6 +47,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="Cleaning" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,7 +58,8 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@android:drawable/arrow_up_float" />
+                        android:backgroundTint="@android:color/transparent"
+                        android:src="@drawable/btn_maintain" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -79,7 +78,7 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"
                         android:backgroundTint="@android:color/transparent"
-                        android:src="@drawable/btn_washing" />
+                        android:src="@drawable/btn_laundry" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -97,7 +96,8 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@android:drawable/arrow_up_float" />
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/btn_landscape" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -115,7 +115,8 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@android:drawable/arrow_up_float" />
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/btn_more" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -149,9 +150,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/circular_background"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/btn_avatar1"
-                            >
-                        </ImageButton>
+                            android:src="@drawable/btn_avatar1"></ImageButton>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -163,8 +162,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="username"
-                                android:textStyle="bold"
-                                android:textSize="20dp"></TextView>
+                                android:textSize="20dp"
+                                android:textStyle="bold"></TextView>
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -178,9 +177,8 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:src="@drawable/btn_redheart"
-                            android:backgroundTint="@android:color/transparent">
-                        </ImageButton>
+                            android:backgroundTint="@android:color/transparent"
+                            android:src="@drawable/btn_redheart"></ImageButton>
 
                     </LinearLayout>
 
@@ -191,21 +189,19 @@
                         android:orientation="vertical">
 
 
-
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="190dp"
-                            android:src="@drawable/img_sample1"
-                            android:scaleType="centerCrop"></ImageView>
-
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_sample1"></ImageView>
 
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
+                            android:text="title"
                             android:textSize="30dp"
-                            android:text="title"></TextView>
+                            android:textStyle="bold"></TextView>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -216,26 +212,23 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:textSize="20dp"
-                                android:text="price info"></TextView>
+                                android:text="price info"
+                                android:textSize="20dp"></TextView>
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:textSize="20dp"
-                                android:text="available state"></TextView>
+                                android:text="available state"
+                                android:textSize="20dp"></TextView>
 
                         </LinearLayout>
 
                     </LinearLayout>
 
 
-
-
-
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="380dp"
                     android:layout_height="wrap_content"
@@ -254,9 +247,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/circular_background"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/btn_avatar2"
-                            >
-                        </ImageButton>
+                            android:src="@drawable/btn_avatar2"></ImageButton>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -269,8 +260,8 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="2"
                                 android:text="username"
-                                android:textStyle="bold"
-                                android:textSize="20dp"></TextView>
+                                android:textSize="20dp"
+                                android:textStyle="bold"></TextView>
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -285,9 +276,8 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:src="@drawable/btn_emptyheart"
-                            android:backgroundTint="@android:color/transparent">
-                        </ImageButton>
+                            android:backgroundTint="@android:color/transparent"
+                            android:src="@drawable/btn_emptyheart"></ImageButton>
 
                     </LinearLayout>
 
@@ -296,20 +286,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="190dp"
-                            android:src="@drawable/img_sample2"
-                            android:scaleType="centerCrop"></ImageView>
-
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_sample2"></ImageView>
 
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
+                            android:text="title"
                             android:textSize="30dp"
-                            android:text="title"></TextView>
+                            android:textStyle="bold"></TextView>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -320,24 +310,21 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:textSize="20dp"
-                                android:text="price info"></TextView>
+                                android:text="price info"
+                                android:textSize="20dp"></TextView>
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:textSize="20dp"
-                                android:text="available state"></TextView>
+                                android:text="available state"
+                                android:textSize="20dp"></TextView>
 
                         </LinearLayout>
 
 
-
-
-
-
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="380dp"
                         android:layout_height="wrap_content"
@@ -356,9 +343,7 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/circular_background"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/btn_avatar2"
-                                >
-                            </ImageButton>
+                                android:src="@drawable/btn_avatar2"></ImageButton>
 
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -370,8 +355,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="username"
-                                    android:textStyle="bold"
-                                    android:textSize="20dp"></TextView>
+                                    android:textSize="20dp"
+                                    android:textStyle="bold"></TextView>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -385,9 +370,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:src="@drawable/btn_emptyheart"
-                                android:backgroundTint="@android:color/transparent">
-                            </ImageButton>
+                                android:backgroundTint="@android:color/transparent"
+                                android:src="@drawable/btn_emptyheart"></ImageButton>
 
                         </LinearLayout>
 
@@ -402,15 +386,15 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="190dp"
-                                android:src="@drawable/img_sample2"
-                                android:scaleType="centerCrop"></ImageView>
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/img_sample2"></ImageView>
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
+                                android:text="title"
                                 android:textSize="30dp"
-                                android:text="title"></TextView>
+                                android:textStyle="bold"></TextView>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -421,15 +405,15 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:text="price info"></TextView>
+                                    android:text="price info"
+                                    android:textSize="20dp"></TextView>
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:textSize="20dp"
-                                    android:text="available state"></TextView>
+                                    android:text="available state"
+                                    android:textSize="20dp"></TextView>
 
                             </LinearLayout>
 
@@ -438,14 +422,9 @@
                     </LinearLayout>
 
 
-
-
-
-
                 </LinearLayout>
 
             </LinearLayout>
-
 
 
         </RelativeLayout>

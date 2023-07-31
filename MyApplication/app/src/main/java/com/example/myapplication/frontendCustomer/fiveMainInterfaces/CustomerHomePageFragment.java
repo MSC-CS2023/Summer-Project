@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer._fiveMainInterfaces;
+package com.example.myapplication.frontendCustomer.fiveMainInterfaces;
 
 import android.os.Bundle;
 
@@ -10,19 +10,19 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.R;
 
-
-public class CustomerMessageListFragment extends Fragment {
-
+public class CustomerHomePageFragment extends Fragment {
 
 
-    public CustomerMessageListFragment() {
+    public CustomerHomePageFragment() {
+
     }
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_customer_message_list, container, false);
+        return inflater.inflate(R.layout.fragment_customer_home_page, container, false);
     }
 }

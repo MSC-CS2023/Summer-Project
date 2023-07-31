@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer._fiveMainInterfaces;
+package com.example.myapplication.frontendCustomer.fiveMainInterfaces;
 
 import android.os.Bundle;
 
@@ -11,10 +11,11 @@ import android.view.ViewGroup;
 import com.example.myapplication.R;
 
 
-public class CustomerSearchPageFragment extends Fragment {
+public class CustomerAccountFragment extends Fragment {
 
 
-    public CustomerSearchPageFragment() {
+
+    public CustomerAccountFragment() {
 
     }
 
@@ -22,7 +23,6 @@ public class CustomerSearchPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_customer_search_page, container, false);
+        return inflater.inflate(R.layout.fragment_customer_account, container, false);
     }
 }

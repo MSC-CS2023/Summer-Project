@@ -3,15 +3,17 @@ package com.example.myapplication.frontendCustomer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer._fiveMainInterfaces.CustomerAccountFragment;
-import com.example.myapplication.frontendCustomer._fiveMainInterfaces.CustomerCollectionFragment;
-import com.example.myapplication.frontendCustomer._fiveMainInterfaces.CustomerHomePageFragment;
-import com.example.myapplication.frontendCustomer._fiveMainInterfaces.CustomerMessageListFragment;
-import com.example.myapplication.frontendCustomer._fiveMainInterfaces.CustomerSearchPageFragment;
+import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerAccountFragment;
+import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerCollectionFragment;
+import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerHomePageFragment;
+import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerMessageListFragment;
+import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerSearchPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -24,6 +26,7 @@ public class CustomerMainActivity extends AppCompatActivity {
     CustomerCollectionFragment customerCollectionFragment;
     CustomerAccountFragment customerAccountFragment;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         customerMessageListFragment = new CustomerMessageListFragment();
         customerCollectionFragment = new CustomerCollectionFragment();
         customerAccountFragment =new CustomerAccountFragment();
+
 
         bottomNavigationView = findViewById(R.id.nav_bar);
 
@@ -60,4 +64,5 @@ public class CustomerMainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.btnCustomerHomepage);
 
     }
+
 }

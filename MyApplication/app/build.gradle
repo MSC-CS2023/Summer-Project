@@ -76,4 +76,6 @@ dependencies {
     //rounded imageview
 //    implementation 'com.makeraman: roundedimage'
 
+    implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
+
 }

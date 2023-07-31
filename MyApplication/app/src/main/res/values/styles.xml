@@ -5,4 +5,12 @@
         <item name="android:typeface">normal</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+
+    //not bounce when selected
+    <style name="AppBottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="itemHorizontalTranslationEnabled">false</item>
+    </style>
+
+
 </resources>
