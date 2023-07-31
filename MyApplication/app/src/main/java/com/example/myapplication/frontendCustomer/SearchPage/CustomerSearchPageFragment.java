@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer.fiveMainInterfaces;
+package com.example.myapplication.frontendCustomer.SearchPage;
 
 import android.os.Bundle;
 

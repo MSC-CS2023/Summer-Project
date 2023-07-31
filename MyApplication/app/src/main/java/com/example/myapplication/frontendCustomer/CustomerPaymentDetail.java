@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.myapplication.R;
 
-public class CustomerChatPage extends AppCompatActivity {
+public class CustomerPaymentDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_chat_page);
+        setContentView(R.layout.activity_customer_payment_detail);
     }
 }

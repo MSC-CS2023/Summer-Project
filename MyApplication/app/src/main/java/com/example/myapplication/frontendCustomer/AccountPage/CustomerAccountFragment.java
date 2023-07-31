@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer.fiveMainInterfaces;
+package com.example.myapplication.frontendCustomer.AccountPage;
 
 import android.os.Bundle;
 
@@ -10,19 +10,19 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.R;
 
-public class CustomerHomePageFragment extends Fragment {
+
+public class CustomerAccountFragment extends Fragment {
 
 
-    public CustomerHomePageFragment() {
+
+    public CustomerAccountFragment() {
 
     }
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_customer_home_page, container, false);
+        return inflater.inflate(R.layout.fragment_customer_account, container, false);
     }
 }

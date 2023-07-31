@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer.fiveMainInterfaces;
+package com.example.myapplication.frontendCustomer.MessagePage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer.CustomerChatPage;
-import com.example.myapplication.frontendCustomer.CustomerMainActivity;
 
 
 public class CustomerMessageListFragment extends Fragment {

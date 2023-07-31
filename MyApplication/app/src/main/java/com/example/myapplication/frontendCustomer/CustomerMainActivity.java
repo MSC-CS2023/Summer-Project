@@ -3,17 +3,15 @@ package com.example.myapplication.frontendCustomer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerAccountFragment;
-import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerCollectionFragment;
-import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerHomePageFragment;
-import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerMessageListFragment;
-import com.example.myapplication.frontendCustomer.fiveMainInterfaces.CustomerSearchPageFragment;
+import com.example.myapplication.frontendCustomer.AccountPage.CustomerAccountFragment;
+import com.example.myapplication.frontendCustomer.CollectionPage.CustomerCollectionFragment;
+import com.example.myapplication.frontendCustomer.HomePage.CustomerHomePageFragment;
+import com.example.myapplication.frontendCustomer.MessagePage.CustomerMessageListFragment;
+import com.example.myapplication.frontendCustomer.SearchPage.CustomerSearchPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
