@@ -39,11 +39,11 @@ public class CustomerMainActivity extends AppCompatActivity {
         customerCollectionFragment = new CustomerCollectionFragment();
         customerAccountFragment =new CustomerAccountFragment();
 
-        Intent intent = getIntent();
-        User user = (User) intent.getSerializableExtra("User");
-        String token = intent.getStringExtra("token");
-        Long exp = intent.getLongExtra("exp",0);
-        Toast.makeText(this, token, Toast.LENGTH_LONG).show();
+//        Intent intent = getIntent();
+//        User user = (User) intent.getSerializableExtra("User");
+//        String token = intent.getStringExtra("token");
+//        Long exp = intent.getLongExtra("exp",0);
+//        Toast.makeText(this, token, Toast.LENGTH_LONG).show();
 
 
         bottomNavigationView = findViewById(R.id.nav_bar);
