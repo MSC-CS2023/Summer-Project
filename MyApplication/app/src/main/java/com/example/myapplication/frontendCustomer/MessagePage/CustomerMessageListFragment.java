@@ -27,16 +27,19 @@ public class CustomerMessageListFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_customer_message_list, container, false);
 
-        View chatTag =rootView.findViewById(R.id.chat_tag1);
 
-        chatTag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == chatTag.getId()){
-                    startActivity(new Intent(getContext(), CustomerChatPage.class));
-                }
-            }
-        });
+
+
+//        View chatTag =rootView.findViewById(R.id.chat_tag);
+
+//        chatTag.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (view.getId() == chatTag.getId()){
+//                    startActivity(new Intent(getContext(), CustomerChatPage.class));
+//                }
+//            }
+//        });
 
         return rootView;
 
