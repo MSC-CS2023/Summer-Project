@@ -1,5 +1,6 @@
 package com.example.myapplication.network;
 
+<<<<<<< Updated upstream
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.GetMessageData;
 import com.example.myapplication.Bean.Httpdata.data.ModifyDetailData;
@@ -10,6 +11,18 @@ import com.example.myapplication.Bean.Httpdata.data.SendMessageData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 import com.example.myapplication.Bean.Httpdata.data.TimeStampData;
+=======
+import com.example.myapplication.Bean.httpData.HttpBaseBean;
+import com.example.myapplication.Bean.httpData.data.GetMessageData;
+import com.example.myapplication.Bean.httpData.data.ModifyDetailData;
+import com.example.myapplication.Bean.httpData.data.OrderData;
+import com.example.myapplication.Bean.httpData.data.OrderListData;
+import com.example.myapplication.Bean.httpData.data.SelfDetailData;
+import com.example.myapplication.Bean.httpData.data.SendMessageData;
+import com.example.myapplication.Bean.httpData.data.ServiceDetailData;
+import com.example.myapplication.Bean.httpData.data.ServiceShortListData;
+import com.example.myapplication.Bean.httpData.data.TimeStampData;
+>>>>>>> Stashed changes
 
 import io.reactivex.rxjava3.core.Flowable;
 import okhttp3.MultipartBody;

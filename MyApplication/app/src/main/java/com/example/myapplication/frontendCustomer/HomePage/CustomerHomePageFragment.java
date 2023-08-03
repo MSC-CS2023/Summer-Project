@@ -12,8 +12,13 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+<<<<<<< Updated upstream
 import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
+=======
+import com.example.myapplication.Adapter.ServiceCardAdapter;
+import com.example.myapplication.Bean.Adapterdata.ServiceCard;
+>>>>>>> Stashed changes
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -113,6 +118,7 @@ public class CustomerHomePageFragment extends Fragment {
 
         ServiceCard serviceCard1 = new ServiceCard(R.drawable.btn_avatar1,"Eric","some info balabalabala",R.drawable.btn_emptyheart,R.drawable.img_sample1,"Repair Air conditioner","100","available tomorrow");
         ServiceCard serviceCard2 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
+<<<<<<< Updated upstream
         ServiceCard serviceCard3 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
         ServiceCard serviceCard4 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
         ServiceCard serviceCard5 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
@@ -128,6 +134,15 @@ public class CustomerHomePageFragment extends Fragment {
         // Create an Adapter and set it to the ListView
         ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(demoDataList,getContext());
         listView.setAdapter(serviceCardAdapter);
+=======
+
+        demoDataList.add(serviceCard1);
+        demoDataList.add(serviceCard2);
+
+        // Create an Adapter and set it to the ListView
+        ServiceCardAdapter ServiceCardAdapter = new ServiceCardAdapter(demoDataList,getContext());
+        listView.setAdapter(ServiceCardAdapter);
+>>>>>>> Stashed changes
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
