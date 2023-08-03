@@ -1,19 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
     tools:context=".frontendCustomer.AccountPage.CustomerSettingPage">
 
-    <TextView
-        android:id="@+id/textView"
+    <ImageButton
+        android:id="@+id/accountSecurity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@android:color/transparent"
+    android:src="@drawable/btn_account_security"></ImageButton>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp"></Space>
+
+    <ImageButton
+        android:id="@+id/notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Setting Page"
-        android:textSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/btn_notification_setting"></ImageButton>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp"></Space>
+
+    <ImageButton
+        android:id="@+id/help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/btn_help"></ImageButton>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp"></Space>
+
+    <ImageButton
+        android:id="@+id/about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/btn_about"></ImageButton>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="70dp"></Space>
+
+    <ImageButton
+        android:id="@+id/switchAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/btn_switch"></ImageButton>
+
+    <ImageButton
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/btn_logout"></ImageButton>
+
+
+
+
+</LinearLayout>
