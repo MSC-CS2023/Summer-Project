@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer;
+package com.example.myapplication.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,20 +9,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.R;
 
 import java.util.List;
 
-public class MyAdapter extends BaseAdapter {
+public class ServiceCardAdapter extends BaseAdapter {
 
-    private List<ItemData> demoData;
-    private LayoutInflater layoutInflater;
+    private List<ServiceCard> demoData;
     private Context context;
 
-    public MyAdapter(List<ItemData> demoData, Context context) {
+    public ServiceCardAdapter(List<ServiceCard> demoData, Context context) {
         this.demoData = demoData;
         this.context = context;
-        this.layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -42,8 +41,9 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
-        view = layoutInflater.inflate(R.layout.service_card_item,  viewGroup,false);
+        if(view == null){
+            view = LayoutInflater.from(context).inflate(R.layout.service_card_item, viewGroup, false);
+        }
 
         ImageView avatar = view.findViewById(R.id.avatar);
         TextView username = view.findViewById(R.id.username);
@@ -54,16 +54,16 @@ public class MyAdapter extends BaseAdapter {
         TextView servicePrice = view.findViewById(R.id.servicePrice);
         TextView serviceState = view.findViewById(R.id.state);
 
-        ItemData itemData =  demoData.get(i);
+        ServiceCard serviceCard =  demoData.get(i);
 
-        avatar.setImageResource(itemData.getAvatarSrcId());
-        username.setText(itemData.getUsername());
-        serviceInfo.setText(itemData.getServiceInfo());
-        collection.setImageResource(itemData.getColletionSrcId());
-        serviceImg.setImageResource(itemData.getServiceImgSrcId());
-        serviceTitle.setText(itemData.getServiceTitle());
-        servicePrice.setText(itemData.getServicePrice());
-        serviceState.setText(itemData.getState());
+        avatar.setImageResource(serviceCard.getAvatarSrcId());
+        username.setText(serviceCard.getUsername());
+        serviceInfo.setText(serviceCard.getServiceInfo());
+        collection.setImageResource(serviceCard.getColletionSrcId());
+        serviceImg.setImageResource(serviceCard.getServiceImgSrcId());
+        serviceTitle.setText(serviceCard.getServiceTitle());
+        servicePrice.setText(serviceCard.getServicePrice());
+        serviceState.setText(serviceCard.getState());
 
 
         return view;

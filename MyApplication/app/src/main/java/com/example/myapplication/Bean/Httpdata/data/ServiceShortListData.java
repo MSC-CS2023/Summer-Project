@@ -1,6 +1,6 @@
-package com.example.myapplication.Bean.data;
+package com.example.myapplication.Bean.Httpdata.data;
 
-import com.example.myapplication.Bean.ServiceShort;
+import com.example.myapplication.Bean.Httpdata.ServiceShort;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.Bean;
+package com.example.myapplication.Bean.Httpdata;
 
 public class Session {
     /**

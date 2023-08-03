@@ -1,10 +1,10 @@
 package com.example.myapplication.network;
 
-import com.example.myapplication.Bean.HttpBaseBean;
-import com.example.myapplication.Bean.data.LoginData;
-import com.example.myapplication.Bean.data.PictureListData;
-import com.example.myapplication.Bean.data.ServiceDetailData;
-import com.example.myapplication.Bean.data.ServiceShortListData;
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.data.LoginData;
+import com.example.myapplication.Bean.Httpdata.data.PictureListData;
+import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
+import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 
 import io.reactivex.rxjava3.core.Flowable;
 import okhttp3.ResponseBody;

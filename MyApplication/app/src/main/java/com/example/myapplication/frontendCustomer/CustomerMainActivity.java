@@ -3,12 +3,9 @@ package com.example.myapplication.frontendCustomer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.myapplication.Bean.User;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.AccountPage.CustomerAccountFragment;
 import com.example.myapplication.frontendCustomer.CollectionPage.CustomerCollectionFragment;

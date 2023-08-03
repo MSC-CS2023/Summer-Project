@@ -1,4 +1,4 @@
-package com.example.myapplication.Bean.data;
+package com.example.myapplication.Bean.Httpdata.data;
 
 public class ModifyDetailData {
     /**

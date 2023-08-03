@@ -9,13 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.Bean.HttpBaseBean;
-import com.example.myapplication.Bean.User;
-import com.example.myapplication.Bean.data.LoginData;
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.data.LoginData;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.CustomerMainActivity;
 import com.example.myapplication.network.PublicMethodApi;
@@ -47,7 +45,6 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
         btnCustomerLogin.setOnClickListener(this);
         txtCustomerUsername = findViewById(R.id.txtCustomerUsername);
         txtCustomerPassword = findViewById(R.id.txtCustomerPassword);
-
 
     }
 

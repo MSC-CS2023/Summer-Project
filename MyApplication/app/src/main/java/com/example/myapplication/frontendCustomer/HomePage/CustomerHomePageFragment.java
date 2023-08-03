@@ -12,8 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.myapplication.frontendCustomer.ItemData;
-import com.example.myapplication.frontendCustomer.MyAdapter;
+import com.example.myapplication.Bean.AdapterData.ServiceCard;
+import com.example.myapplication.Adapter.ServiceCardAdapter;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -109,17 +109,25 @@ public class CustomerHomePageFragment extends Fragment {
 
         ListView listView = rootView.findViewById(R.id.homepageListView);
         // Create a demo data list
-        List<ItemData> demoDataList = new ArrayList<>();
+        List<ServiceCard> demoDataList = new ArrayList<>();
 
-        ItemData itemData1 = new ItemData(R.drawable.btn_avatar1,"Eric","some info balabalabala",R.drawable.btn_emptyheart,R.drawable.img_sample1,"Repair Air conditioner","100","available tomorrow");
-        ItemData itemData2 = new ItemData(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
+        ServiceCard serviceCard1 = new ServiceCard(R.drawable.btn_avatar1,"Eric","some info balabalabala",R.drawable.btn_emptyheart,R.drawable.img_sample1,"Repair Air conditioner","100","available tomorrow");
+        ServiceCard serviceCard2 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
+        ServiceCard serviceCard3 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
+        ServiceCard serviceCard4 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
+        ServiceCard serviceCard5 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
+        ServiceCard serviceCard6 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
 
-        demoDataList.add(itemData1);
-        demoDataList.add(itemData2);
+        demoDataList.add(serviceCard1);
+        demoDataList.add(serviceCard2);
+        demoDataList.add(serviceCard3);
+        demoDataList.add(serviceCard4);
+        demoDataList.add(serviceCard5);
+        demoDataList.add(serviceCard6);
 
         // Create an Adapter and set it to the ListView
-        MyAdapter myAdapter = new MyAdapter(demoDataList,getContext());
-        listView.setAdapter(myAdapter);
+        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(demoDataList,getContext());
+        listView.setAdapter(serviceCardAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

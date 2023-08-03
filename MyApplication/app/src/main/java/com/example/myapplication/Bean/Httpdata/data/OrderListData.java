@@ -1,6 +1,6 @@
-package com.example.myapplication.Bean.data;
+package com.example.myapplication.Bean.Httpdata.data;
 
-import com.example.myapplication.Bean.Order;
+import com.example.myapplication.Bean.Httpdata.Order;
 
 import java.util.List;
 

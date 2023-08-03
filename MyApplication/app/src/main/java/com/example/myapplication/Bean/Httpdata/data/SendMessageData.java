@@ -1,6 +1,6 @@
-package com.example.myapplication.Bean.data;
+package com.example.myapplication.Bean.Httpdata.data;
 
-import com.example.myapplication.Bean.Session;
+import com.example.myapplication.Bean.Httpdata.Session;
 
 public class SendMessageData {
     private Session session;

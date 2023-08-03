@@ -1,17 +1,15 @@
 package com.example.myapplication.network;
 
-import com.example.myapplication.Bean.HttpBaseBean;
-import com.example.myapplication.Bean.Service;
-import com.example.myapplication.Bean.ServiceShort;
-import com.example.myapplication.Bean.data.GetMessageData;
-import com.example.myapplication.Bean.data.ModifyDetailData;
-import com.example.myapplication.Bean.data.OrderData;
-import com.example.myapplication.Bean.data.OrderListData;
-import com.example.myapplication.Bean.data.SelfDetailData;
-import com.example.myapplication.Bean.data.SendMessageData;
-import com.example.myapplication.Bean.data.ServiceDetailData;
-import com.example.myapplication.Bean.data.ServiceShortListData;
-import com.example.myapplication.Bean.data.TimeStampData;
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.data.GetMessageData;
+import com.example.myapplication.Bean.Httpdata.data.ModifyDetailData;
+import com.example.myapplication.Bean.Httpdata.data.OrderData;
+import com.example.myapplication.Bean.Httpdata.data.OrderListData;
+import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
+import com.example.myapplication.Bean.Httpdata.data.SendMessageData;
+import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
+import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
+import com.example.myapplication.Bean.Httpdata.data.TimeStampData;
 
 import io.reactivex.rxjava3.core.Flowable;
 import okhttp3.MultipartBody;

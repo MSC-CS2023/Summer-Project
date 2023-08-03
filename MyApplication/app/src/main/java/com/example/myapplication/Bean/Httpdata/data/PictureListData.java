@@ -1,6 +1,6 @@
-package com.example.myapplication.Bean.data;
+package com.example.myapplication.Bean.Httpdata.data;
 
-import com.example.myapplication.Bean.Picture;
+import com.example.myapplication.Bean.Httpdata.Picture;
 
 import java.util.List;
 

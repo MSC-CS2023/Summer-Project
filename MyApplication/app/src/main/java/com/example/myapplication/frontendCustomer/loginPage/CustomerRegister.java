@@ -1,23 +1,18 @@
 package com.example.myapplication.frontendCustomer.loginPage;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.myapplication.Bean.HttpBaseBean;
-import com.example.myapplication.Bean.data.LoginData;
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.data.LoginData;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.CustomerMainActivity;
 import com.example.myapplication.network.PublicMethodApi;

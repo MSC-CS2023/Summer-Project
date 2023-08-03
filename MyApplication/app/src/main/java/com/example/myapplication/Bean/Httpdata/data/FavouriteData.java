@@ -1,6 +1,6 @@
-package com.example.myapplication.Bean.data;
+package com.example.myapplication.Bean.Httpdata.data;
 
-import com.example.myapplication.Bean.Favourite;
+import com.example.myapplication.Bean.Httpdata.Favourite;
 
 public class FavouriteData {
     private Favourite favourite;

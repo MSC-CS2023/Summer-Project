@@ -1,6 +1,6 @@
-package com.example.myapplication.Bean.data;
+package com.example.myapplication.Bean.Httpdata.data;
 
-import com.example.myapplication.Bean.Service;
+import com.example.myapplication.Bean.Httpdata.Service;
 
 public class ServiceDetailData {
 

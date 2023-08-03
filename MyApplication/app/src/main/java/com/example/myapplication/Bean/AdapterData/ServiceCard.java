@@ -1,6 +1,6 @@
-package com.example.myapplication.frontendCustomer;
+package com.example.myapplication.Bean.AdapterData;
 
-public class ItemData {
+public class ServiceCard {
 
 
         private int avatarSrcId;
@@ -12,7 +12,7 @@ public class ItemData {
         private String servicePrice;
         private String state;
 
-    public ItemData(int avatarSrcId, String username, String serviceInfo, int colletionSrcId, int serviceImgSrcId, String serviceTitle, String servicePrice, String state) {
+    public ServiceCard(int avatarSrcId, String username, String serviceInfo, int colletionSrcId, int serviceImgSrcId, String serviceTitle, String servicePrice, String state) {
         this.avatarSrcId = avatarSrcId;
         this.username = username;
         this.serviceInfo = serviceInfo;
@@ -23,7 +23,7 @@ public class ItemData {
         this.state = state;
     }
 
-    public ItemData() {
+    public ServiceCard() {
     }
 
     public int getAvatarSrcId() {

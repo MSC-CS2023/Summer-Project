@@ -1,4 +1,4 @@
-package com.example.myapplication.Bean;
+package com.example.myapplication.Bean.Httpdata;
 
 import org.jetbrains.annotations.NotNull;
 

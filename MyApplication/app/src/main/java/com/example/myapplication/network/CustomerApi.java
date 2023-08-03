@@ -1,27 +1,23 @@
 package com.example.myapplication.network;
 
-import com.example.myapplication.Bean.HttpBaseBean;
-import com.example.myapplication.Bean.data.FavouriteData;
-import com.example.myapplication.Bean.data.FavouriteListData;
-import com.example.myapplication.Bean.data.GetMessageData;
-import com.example.myapplication.Bean.data.ModifyDetailData;
-import com.example.myapplication.Bean.data.OrderData;
-import com.example.myapplication.Bean.data.OrderListData;
-import com.example.myapplication.Bean.data.SelfDetailData;
-import com.example.myapplication.Bean.data.SendMessageData;
-import com.example.myapplication.Bean.data.TimeStampData;
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.data.FavouriteData;
+import com.example.myapplication.Bean.Httpdata.data.FavouriteListData;
+import com.example.myapplication.Bean.Httpdata.data.GetMessageData;
+import com.example.myapplication.Bean.Httpdata.data.ModifyDetailData;
+import com.example.myapplication.Bean.Httpdata.data.OrderData;
+import com.example.myapplication.Bean.Httpdata.data.OrderListData;
+import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
+import com.example.myapplication.Bean.Httpdata.data.SendMessageData;
+import com.example.myapplication.Bean.Httpdata.data.TimeStampData;
 
 import io.reactivex.rxjava3.core.Flowable;
-import kotlinx.coroutines.flow.Flow;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
