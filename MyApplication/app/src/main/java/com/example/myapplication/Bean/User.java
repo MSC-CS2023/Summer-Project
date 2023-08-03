@@ -1,6 +1,8 @@
 package com.example.myapplication.Bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     /**
      * The address of the user.

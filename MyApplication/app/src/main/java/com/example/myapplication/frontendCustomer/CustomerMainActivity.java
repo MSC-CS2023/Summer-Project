@@ -3,9 +3,12 @@ package com.example.myapplication.frontendCustomer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.myapplication.Bean.User;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.AccountPage.CustomerAccountFragment;
 import com.example.myapplication.frontendCustomer.CollectionPage.CustomerCollectionFragment;
@@ -35,6 +38,12 @@ public class CustomerMainActivity extends AppCompatActivity {
         customerMessageListFragment = new CustomerMessageListFragment();
         customerCollectionFragment = new CustomerCollectionFragment();
         customerAccountFragment =new CustomerAccountFragment();
+
+        Intent intent = getIntent();
+        User user = (User) intent.getSerializableExtra("User");
+        String token = intent.getStringExtra("token");
+        Long exp = intent.getLongExtra("exp",0);
+        Toast.makeText(this, token, Toast.LENGTH_LONG).show();
 
 
         bottomNavigationView = findViewById(R.id.nav_bar);
