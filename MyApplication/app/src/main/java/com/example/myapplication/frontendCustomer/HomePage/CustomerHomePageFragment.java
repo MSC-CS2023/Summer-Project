@@ -84,9 +84,11 @@ public class CustomerHomePageFragment extends Fragment {
                         if (Button.getId() == button1.getId()){
                             resetButton();
                             button1.setImageResource(R.drawable.btn_cleaning_aft);
+                            // change data imported to listView
                         } else if (Button.getId() == button2.getId()) {
                             resetButton();
                             button2.setImageResource(R.drawable.btn_maintain_aft);
+                            // change data imported to listView
                         }else if (Button.getId() == button3.getId()) {
                             resetButton();
                             button3.setImageResource(R.drawable.btn_laundry_aft);
