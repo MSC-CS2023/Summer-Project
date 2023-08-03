@@ -69,14 +69,11 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
-//    //scalable size unit
-//    implementation 'com.intuit.sdp: sdp-android:1.0.6'
-//    implementation 'com.intuit.ssp: ssp-android:1.0.6'
-//
-    //rounded imageview
-//    implementation 'com.makeraman: roundedimage'
 
+    //ui
     implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
+
+
 
     //Internet
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

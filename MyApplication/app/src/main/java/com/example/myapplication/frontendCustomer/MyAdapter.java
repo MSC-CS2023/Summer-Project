@@ -43,7 +43,7 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        view = layoutInflater.inflate(R.layout.homepage_service_item,  viewGroup,false);
+        view = layoutInflater.inflate(R.layout.service_card_item,  viewGroup,false);
 
         ImageView avatar = view.findViewById(R.id.avatar);
         TextView username = view.findViewById(R.id.username);
