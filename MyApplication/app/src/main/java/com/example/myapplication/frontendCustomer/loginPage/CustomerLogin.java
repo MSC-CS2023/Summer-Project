@@ -61,8 +61,8 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "forget password", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(CustomerLogin.this, CustomerForgetPassword.class));
         } else if (view.getId() ==  R.id.btnCustomerLogin) {
-//            customerLogin();
-            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
+            customerLogin();
+//            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
         }
         else if (view.getId() == R.id.txtCustomerRegister) {
             startActivity(new Intent(CustomerLogin.this, CustomerRegister.class));
