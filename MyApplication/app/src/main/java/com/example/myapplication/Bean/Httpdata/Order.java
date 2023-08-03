@@ -1,8 +1,4 @@
-<<<<<<<< Updated upstream:MyApplication/app/src/main/java/com/example/myapplication/Bean/Httpdata/Order.java
 package com.example.myapplication.Bean.Httpdata;
-========
-package com.example.myapplication.Bean.httpData;
->>>>>>>> Stashed changes:MyApplication/app/src/main/java/com/example/myapplication/Bean/httpData/Order.java
 
 import org.jetbrains.annotations.NotNull;
 

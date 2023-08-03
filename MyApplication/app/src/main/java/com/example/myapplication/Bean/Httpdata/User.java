@@ -1,8 +1,4 @@
-<<<<<<<< Updated upstream:MyApplication/app/src/main/java/com/example/myapplication/Bean/Httpdata/User.java
 package com.example.myapplication.Bean.Httpdata;
-========
-package com.example.myapplication.Bean.httpData;
->>>>>>>> Stashed changes:MyApplication/app/src/main/java/com/example/myapplication/Bean/httpData/User.java
 
 import java.io.Serializable;
 

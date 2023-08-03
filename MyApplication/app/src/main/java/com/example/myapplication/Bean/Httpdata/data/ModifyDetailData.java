@@ -1,8 +1,4 @@
-<<<<<<<< Updated upstream:MyApplication/app/src/main/java/com/example/myapplication/Bean/Httpdata/data/ModifyDetailData.java
 package com.example.myapplication.Bean.Httpdata.data;
-========
-package com.example.myapplication.Bean.httpData.data;
->>>>>>>> Stashed changes:MyApplication/app/src/main/java/com/example/myapplication/Bean/httpData/data/ModifyDetailData.java
 
 public class ModifyDetailData {
     /**

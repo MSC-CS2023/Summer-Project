@@ -1,8 +1,4 @@
-<<<<<<<< Updated upstream:MyApplication/app/src/main/java/com/example/myapplication/Bean/Httpdata/ServiceShort.java
 package com.example.myapplication.Bean.Httpdata;
-========
-package com.example.myapplication.Bean.httpData;
->>>>>>>> Stashed changes:MyApplication/app/src/main/java/com/example/myapplication/Bean/httpData/ServiceShort.java
 
 public class ServiceShort {
     /**

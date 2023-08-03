@@ -1,18 +1,10 @@
 package com.example.myapplication.network;
 
-<<<<<<< Updated upstream
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
 import com.example.myapplication.Bean.Httpdata.data.PictureListData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
-=======
-import com.example.myapplication.Bean.httpData.HttpBaseBean;
-import com.example.myapplication.Bean.httpData.data.LoginData;
-import com.example.myapplication.Bean.httpData.data.PictureListData;
-import com.example.myapplication.Bean.httpData.data.ServiceDetailData;
-import com.example.myapplication.Bean.httpData.data.ServiceShortListData;
->>>>>>> Stashed changes
 
 import io.reactivex.rxjava3.core.Flowable;
 import okhttp3.ResponseBody;

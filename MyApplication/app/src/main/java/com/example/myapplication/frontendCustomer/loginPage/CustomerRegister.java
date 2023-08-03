@@ -11,13 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-<<<<<<< Updated upstream
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
-=======
-import com.example.myapplication.Bean.httpData.HttpBaseBean;
-import com.example.myapplication.Bean.httpData.data.LoginData;
->>>>>>> Stashed changes
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.CustomerMainActivity;
 import com.example.myapplication.network.PublicMethodApi;

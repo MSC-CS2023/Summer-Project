@@ -1,12 +1,6 @@
-<<<<<<<< Updated upstream:MyApplication/app/src/main/java/com/example/myapplication/Bean/Httpdata/data/LoginData.java
 package com.example.myapplication.Bean.Httpdata.data;
 
 import com.example.myapplication.Bean.Httpdata.User;
-========
-package com.example.myapplication.Bean.httpData.data;
-
-import com.example.myapplication.Bean.httpData.User;
->>>>>>>> Stashed changes:MyApplication/app/src/main/java/com/example/myapplication/Bean/httpData/data/LoginData.java
 
 public class LoginData {
 

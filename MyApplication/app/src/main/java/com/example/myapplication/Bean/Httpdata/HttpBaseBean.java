@@ -1,8 +1,4 @@
-<<<<<<<< Updated upstream:MyApplication/app/src/main/java/com/example/myapplication/Bean/Httpdata/HttpBaseBean.java
 package com.example.myapplication.Bean.Httpdata;
-========
-package com.example.myapplication.Bean.httpData;
->>>>>>>> Stashed changes:MyApplication/app/src/main/java/com/example/myapplication/Bean/httpData/HttpBaseBean.java
 
 public class HttpBaseBean<T>{
         private Boolean success;

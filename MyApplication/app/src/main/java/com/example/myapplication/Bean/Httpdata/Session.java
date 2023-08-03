@@ -1,8 +1,4 @@
-<<<<<<<< Updated upstream:MyApplication/app/src/main/java/com/example/myapplication/Bean/Httpdata/Session.java
 package com.example.myapplication.Bean.Httpdata;
-========
-package com.example.myapplication.Bean.httpData;
->>>>>>>> Stashed changes:MyApplication/app/src/main/java/com/example/myapplication/Bean/httpData/Session.java
 
 public class Session {
     /**
