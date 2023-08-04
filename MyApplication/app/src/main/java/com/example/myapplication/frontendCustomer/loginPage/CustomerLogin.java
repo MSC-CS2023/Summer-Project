@@ -30,7 +30,6 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
 
 
     ImageButton btnCustomerLogin;
-    TextView txtCustomerForgetPassword;
     TextView txtCustomerRegister;
     EditText txtCustomerUsername;
     EditText txtCustomerPassword;
@@ -42,8 +41,6 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
 
         txtCustomerRegister = findViewById(R.id.txtCustomerRegister);
         txtCustomerRegister.setOnClickListener(this);
-        txtCustomerForgetPassword = findViewById(R.id.txtCustomerForgetPassword);
-        txtCustomerForgetPassword.setOnClickListener(this);
         btnCustomerLogin = findViewById(R.id.btnCustomerLogin);
         btnCustomerLogin.setOnClickListener(this);
         txtCustomerUsername = findViewById(R.id.txtCustomerUsername);
@@ -55,10 +52,7 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.txtCustomerForgetPassword){
-            Toast.makeText(this, "forget password", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(CustomerLogin.this, CustomerForgetPassword.class));
-        } else if (view.getId() ==  R.id.btnCustomerLogin) {
+        if (view.getId() ==  R.id.btnCustomerLogin) {
 //            customerLogin();
             startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
         }
