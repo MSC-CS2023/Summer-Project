@@ -6,9 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".frontendCustomer.CustomerMainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/btn_back"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order"
+            android:layout_gravity="center"
+            android:textSize="20dp"></TextView>
+    </androidx.appcompat.widget.Toolbar>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"></View>
+
 
 
     <FrameLayout
+
         android:id="@+id/nav_bar_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

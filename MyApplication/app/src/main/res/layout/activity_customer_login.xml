@@ -77,15 +77,6 @@
         android:hint="    Password"
         android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/txtCustomerForgetPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCustomerPassword"
-        android:layout_marginTop="15dp"
-        android:gravity="right"
-        android:text="Forget password ?"
-        android:textColor="#737171" />
 
 </RelativeLayout>
 

@@ -18,6 +18,15 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".frontendCustomer.AccountPage.CustomerSettingAbout"
+            android:exported="false" />
+        <activity
+            android:name=".frontendCustomer.AccountPage.CustomerSettingHelp"
+            android:exported="false" />
+        <activity
+            android:name=".frontendCustomer.AccountPage.CustomerSettingNotification"
+            android:exported="false" />
+        <activity
             android:name=".frontendCustomer.AccountPage.CustomerWalletPage"
             android:exported="false" />
         <activity
@@ -45,7 +54,7 @@
             android:name=".frontendCustomer.loginPage.CustomerResetPassword"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.loginPage.CustomerForgetPassword"
+            android:name=".frontendCustomer.AccountPage.CustomerSettingAccountSecurity"
             android:exported="false" />
         <activity
             android:name=".frontendProvider.ProviderRegister"

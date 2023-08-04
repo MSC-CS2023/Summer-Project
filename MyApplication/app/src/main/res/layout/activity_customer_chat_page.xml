@@ -6,34 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".frontendCustomer.MessagePage.CustomerChatPage">
 
-    <LinearLayout
-        android:id="@+id/topBar"
+    <androidx.appcompat.widget.Toolbar
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_return"/>
-
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/btn_back"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="name"
-            android:textSize="30dp"
-            android:layout_marginLeft="110dp"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_info"></ImageButton>
-
-    </LinearLayout>
+            android:text="NAME"
+            android:layout_gravity="center"
+            android:textSize="20dp"></TextView>
+    </androidx.appcompat.widget.Toolbar>
+    <View
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"></View>
 
 
     <ScrollView
