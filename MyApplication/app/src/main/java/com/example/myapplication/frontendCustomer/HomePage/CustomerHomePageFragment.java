@@ -1,5 +1,6 @@
 package com.example.myapplication.frontendCustomer.HomePage;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,29 +15,39 @@ import android.widget.Toast;
 
 import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.ServiceShort;
+import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 import com.example.myapplication.R;
+import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.PublicMethodApi;
+import com.example.myapplication.network.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
+
 public class CustomerHomePageFragment extends Fragment {
 
+    private static final Integer DEFAULT_RECOMMEND_NUMBER = 5;
+    private String token;
 
 
-
+    List<ImageButton> buttonList = new ArrayList<>();
+    ImageButton buttonCleaning;
+    ImageButton buttonMaintain;
+    ImageButton buttonLaundry;
+    ImageButton buttonLandscape;
+    ImageButton buttonOthers;
 
 
     public CustomerHomePageFragment() {
 
     }
 
-    List<ImageButton> buttonList = new ArrayList<>();
-
-    ImageButton button1;
-    ImageButton button2;
-    ImageButton button3;
-    ImageButton button4;
-    ImageButton button5;
 
 
 
@@ -63,17 +74,17 @@ public class CustomerHomePageFragment extends Fragment {
 
         //5 top icons action here
 
-        button1 = rootView.findViewById(R.id.cleaning);
-        button2 = rootView.findViewById(R.id.maintain);
-        button3 = rootView.findViewById(R.id.laundry);
-        button4 = rootView.findViewById(R.id.landscape);
-        button5 = rootView.findViewById(R.id.others);
+        buttonCleaning = rootView.findViewById(R.id.cleaning);
+        buttonMaintain = rootView.findViewById(R.id.maintain);
+        buttonLaundry = rootView.findViewById(R.id.laundry);
+        buttonLandscape = rootView.findViewById(R.id.landscape);
+        buttonOthers = rootView.findViewById(R.id.others);
 
-        buttonList.add(button1);
-        buttonList.add(button2);
-        buttonList.add(button3);
-        buttonList.add(button4);
-        buttonList.add(button5);
+        buttonList.add(buttonCleaning);
+        buttonList.add(buttonMaintain);
+        buttonList.add(buttonLaundry);
+        buttonList.add(buttonLandscape);
+        buttonList.add(buttonOthers);
 
 
         for (ImageButton Button : buttonList) {
@@ -81,23 +92,26 @@ public class CustomerHomePageFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (view.getId() == Button.getId()){
-                        if (Button.getId() == button1.getId()){
+                        if (Button.getId() == buttonCleaning.getId()){
                             resetButton();
-                            button1.setImageResource(R.drawable.btn_cleaning_aft);
-                            // change data imported to listView
-                        } else if (Button.getId() == button2.getId()) {
+                            buttonCleaning.setImageResource(R.drawable.btn_cleaning_aft);
+                            //Update listview with cleaning recommend.
+//                            randomlyRecommend("cleaning");
+                        } else if (Button.getId() == buttonMaintain.getId()) {
                             resetButton();
-                            button2.setImageResource(R.drawable.btn_maintain_aft);
-                            // change data imported to listView
-                        }else if (Button.getId() == button3.getId()) {
+                            buttonMaintain.setImageResource(R.drawable.btn_maintain_aft);
+//                            randomlyRecommend("maintain");
+                        }else if (Button.getId() == buttonLaundry.getId()) {
                             resetButton();
-                            button3.setImageResource(R.drawable.btn_laundry_aft);
-                        }else if (Button.getId() == button4.getId()) {
+                            buttonLaundry.setImageResource(R.drawable.btn_laundry_aft);
+//                            randomlyRecommend("laundry");
+                        }else if (Button.getId() == buttonLandscape.getId()) {
                             resetButton();
-                            button4.setImageResource(R.drawable.btn_landscape_aft);
-                        }else if (Button.getId() == button5.getId()) {
+                            buttonLandscape.setImageResource(R.drawable.btn_landscape_aft);
+//                            randomlyRecommend("landscape");
+                        }else if (Button.getId() == buttonOthers.getId()) {
                             resetButton();
-                            button5.setImageResource(R.drawable.btn_more_aft);
+                            buttonOthers.setImageResource(R.drawable.btn_more_aft);
                         }
                     }
                 }
@@ -143,11 +157,60 @@ public class CustomerHomePageFragment extends Fragment {
 
 
     private void resetButton() {
-        button1.setImageResource(R.drawable.btn_cleaning);
-        button2.setImageResource(R.drawable.btn_maintain);
-        button3.setImageResource(R.drawable.btn_laundry);
-        button4.setImageResource(R.drawable.btn_landscape);
-        button5.setImageResource(R.drawable.btn_more);
+        buttonCleaning.setImageResource(R.drawable.btn_cleaning);
+        buttonMaintain.setImageResource(R.drawable.btn_maintain);
+        buttonLaundry.setImageResource(R.drawable.btn_laundry);
+        buttonLandscape.setImageResource(R.drawable.btn_landscape);
+        buttonOthers.setImageResource(R.drawable.btn_more);
+    }
+
+    //Http request and change view after getting response.
+    @SuppressLint("CheckResult")
+    private void randomlyRecommend(String recommendType){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.randomlyRecommend(this.token, DEFAULT_RECOMMEND_NUMBER, recommendType)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<ServiceShortListData> serviceShortListDataHttpBaseBean) {
+                        if(serviceShortListDataHttpBaseBean.getSuccess()){
+                            List<ServiceCard> serviceCards = getServiceCardList(
+                                    serviceShortListDataHttpBaseBean.getData().getServices());
+                            updateViewByList(serviceCards);
+                        }else{
+                            //test
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        //test
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //Convert http response data suitable for adapter data.
+    private List<ServiceCard> getServiceCardList(List<ServiceShort> serviceShorts){
+        List<ServiceCard> serviceCards = new ArrayList<>();
+        ServiceCard serviceCard;
+        for(ServiceShort serviceShort : serviceShorts){
+            serviceCard = new ServiceCard(
+                    serviceShort.getId().toString(), serviceShort.getFee(),serviceShort.getTitle());
+            //Picture path initialize
+            serviceCards.add(serviceCard);
+        }
+        return serviceCards;
+    }
+
+    //Use adapter data list to update view.
+    private void updateViewByList(List<ServiceCard> serviceCards){
+
     }
 
 }

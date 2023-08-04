@@ -3,14 +3,21 @@ package com.example.myapplication.Bean.AdapterData;
 public class ServiceCard {
 
 
-        private int avatarSrcId;
-        private String username;
-        private String serviceInfo;
-        private int colletionSrcId;
-        private int serviceImgSrcId;
-        private String serviceTitle;
-        private String servicePrice;
-        private String state;
+    private int avatarSrcId;
+    private String username;
+    private String serviceInfo;
+    private int colletionSrcId;
+    private int serviceImgSrcId;
+    private String serviceTitle;
+    private String servicePrice;
+    private String state;
+
+    public ServiceCard(String username, Double servicePrice, String serviceTitle){
+        this.username = username;
+        this.servicePrice = servicePrice.toString();
+        this.serviceTitle = serviceTitle;
+
+    }
 
     public ServiceCard(int avatarSrcId, String username, String serviceInfo, int colletionSrcId, int serviceImgSrcId, String serviceTitle, String servicePrice, String state) {
         this.avatarSrcId = avatarSrcId;

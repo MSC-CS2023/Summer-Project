@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.CustomerMainActivity;
 import com.example.myapplication.network.PublicMethodApi;
@@ -56,8 +59,8 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "forget password", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(CustomerLogin.this, CustomerForgetPassword.class));
         } else if (view.getId() ==  R.id.btnCustomerLogin) {
-            customerLogin();
-//            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
+//            customerLogin();
+            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
         }
         else if (view.getId() == R.id.txtCustomerRegister) {
             startActivity(new Intent(CustomerLogin.this, CustomerRegister.class));
@@ -79,10 +82,13 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(getApplicationContext(),
                                     loginDataHttpBaseBean.getData().getUser().getUsername() + " login successfully",
                                     Toast.LENGTH_SHORT).show();
+                            SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+                            sp.edit().putBoolean("isLoggedIn", true).apply();
+                            sp.edit().putString("userType", "customer").apply();
+                            sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
+                            sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
                             startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class)
-                                    .putExtra("User", loginDataHttpBaseBean.getData().getUser())
-                                    .putExtra("token", loginDataHttpBaseBean.getData().getToken())
-                                    .putExtra("exp", loginDataHttpBaseBean.getData().getExp()));
+                                    .putExtra("User", loginDataHttpBaseBean.getData().getUser()));
                         }else{
                             Toast.makeText(getApplicationContext(),
                                     loginDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
@@ -92,7 +98,7 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onError(Throwable t) {
                         Toast.makeText(getApplicationContext(),
-                                "Something wrong" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

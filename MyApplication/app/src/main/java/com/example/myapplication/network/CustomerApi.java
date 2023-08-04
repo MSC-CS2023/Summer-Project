@@ -1,14 +1,17 @@
 package com.example.myapplication.network;
 
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.ServiceShort;
 import com.example.myapplication.Bean.Httpdata.data.FavouriteData;
 import com.example.myapplication.Bean.Httpdata.data.FavouriteListData;
 import com.example.myapplication.Bean.Httpdata.data.GetMessageData;
+import com.example.myapplication.Bean.Httpdata.data.LoginData;
 import com.example.myapplication.Bean.Httpdata.data.ModifyDetailData;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
 import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
 import com.example.myapplication.Bean.Httpdata.data.SendMessageData;
+import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 import com.example.myapplication.Bean.Httpdata.data.TimeStampData;
 
 import io.reactivex.rxjava3.core.Flowable;
@@ -124,5 +127,13 @@ public interface CustomerApi {
 
     @DELETE("customer/delete_account")
     Flowable<HttpBaseBean<Object>> deleteCustomerAccount(@Header("Authorization") String authorization);
+
+    //TO do
+    @GET("customer/get_rec")
+    Flowable<HttpBaseBean<ServiceShortListData>> randomlyRecommend(
+            @Header("Authorization") String authorization, @Query("num") Integer recommendNum, @Query("type") String type);
+
+    @POST("re_login")
+    Flowable<HttpBaseBean<LoginData>> customerReLogin(@Header("Authorization") String authorization);
 
 }

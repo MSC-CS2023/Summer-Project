@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -103,10 +105,13 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
                             Toast.makeText(getApplicationContext(),
                                     loginDataHttpBaseBean.getData().getUser().getUsername() + "sign up successfully",
                                     Toast.LENGTH_SHORT).show();
+                            SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+                            sp.edit().putBoolean("isLoggedIn", true).apply();
+                            sp.edit().putString("userType", "customer").apply();
+                            sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
+                            sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
                             startActivity(new Intent(CustomerRegister.this, CustomerMainActivity.class)
-                                    .putExtra("User", loginDataHttpBaseBean.getData().getUser())
-                                    .putExtra("token", loginDataHttpBaseBean.getData().getToken())
-                                    .putExtra("exp", loginDataHttpBaseBean.getData().getExp()));
+                                    .putExtra("User", loginDataHttpBaseBean.getData().getUser()));
                         }else{
                             Toast.makeText(getApplicationContext(),
                                     loginDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();

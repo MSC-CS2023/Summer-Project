@@ -12,7 +12,7 @@ import com.example.myapplication.R;
 
 
 public class CustomerCollectionFragment extends Fragment {
-
+    String token;
 
 
     public CustomerCollectionFragment() {
