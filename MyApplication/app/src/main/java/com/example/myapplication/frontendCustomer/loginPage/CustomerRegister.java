@@ -121,7 +121,7 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onError(Throwable t) {
                         Toast.makeText(getApplicationContext(),
-                                "Something wrong" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                "Network error!" + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

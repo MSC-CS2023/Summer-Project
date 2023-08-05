@@ -1,44 +1,43 @@
 package com.example.myapplication.Bean.AdapterData;
 
+import com.example.myapplication.R;
+
 public class ServiceCard {
-
-
-    private int avatarSrcId;
     private String username;
-    private String serviceInfo;
-    private int colletionSrcId;
-    private int serviceImgSrcId;
+    private String providerAvatarSrc;
     private String serviceTitle;
     private String servicePrice;
+
+    //to add
+    private String serviceInfo;
+    private int collectionSrcId;
+    private int serviceImgSrcId;
     private String state;
+    private int avatarSrcId;
 
-    public ServiceCard(String username, Double servicePrice, String serviceTitle){
+    public ServiceCard(String username, String servicePrice, String serviceTitle, String providerAvatarSrc){
         this.username = username;
-        this.servicePrice = servicePrice.toString();
-        this.serviceTitle = serviceTitle;
-
-    }
-
-    public ServiceCard(int avatarSrcId, String username, String serviceInfo, int colletionSrcId, int serviceImgSrcId, String serviceTitle, String servicePrice, String state) {
-        this.avatarSrcId = avatarSrcId;
-        this.username = username;
-        this.serviceInfo = serviceInfo;
-        this.colletionSrcId = colletionSrcId;
-        this.serviceImgSrcId = serviceImgSrcId;
-        this.serviceTitle = serviceTitle;
         this.servicePrice = servicePrice;
-        this.state = state;
+        this.serviceTitle = serviceTitle;
+        this.providerAvatarSrc = providerAvatarSrc;
+
+        //to add
+        this.serviceInfo = "some info balabalabala";
+        this.state = "available tomorrow";
+        this.serviceImgSrcId = R.drawable.img_sample1;
+        this.collectionSrcId = R.drawable.btn_emptyheart;
+        this.avatarSrcId = R.drawable.btn_avatar1;
     }
 
     public ServiceCard() {
     }
 
-    public int getAvatarSrcId() {
-        return avatarSrcId;
+    public String getProviderAvatarSrc() {
+        return providerAvatarSrc;
     }
 
-    public void setAvatarSrcId(int avatarSrcId) {
-        this.avatarSrcId = avatarSrcId;
+    public void setProviderAvatarSrc(String providerAvatarSrc) {
+        this.providerAvatarSrc = providerAvatarSrc;
     }
 
     public String getUsername() {
@@ -57,12 +56,12 @@ public class ServiceCard {
         this.serviceInfo = serviceInfo;
     }
 
-    public int getColletionSrcId() {
-        return colletionSrcId;
+    public int getCollectionSrcId() {
+        return collectionSrcId;
     }
 
-    public void setColletionSrcId(int colletionSrcId) {
-        this.colletionSrcId = colletionSrcId;
+    public void setCollectionSrcId(int collectionSrcId) {
+        this.collectionSrcId = collectionSrcId;
     }
 
     public int getServiceImgSrcId() {
@@ -94,6 +93,14 @@ public class ServiceCard {
     }
 
     public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getAvatarSrcId() {
+        return avatarSrcId;
+    }
+
+    public void setAvatarSrcId(int setAvatarSrcId) {
         this.state = state;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.myapplication.network;
 
+import com.example.myapplication.Constant;
 import com.example.myapplication.R;
 
 import retrofit2.Retrofit;
@@ -9,7 +10,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitClient {
     private static volatile RetrofitClient mInstance;
-    private static final String BASE_URL = "http://192.168.233.152:8080/";
     private Retrofit retrofit;
 
     private RetrofitClient(){
@@ -33,7 +33,7 @@ public class RetrofitClient {
 
     private synchronized Retrofit getRetrofit(){
         if(retrofit == null){
-            retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
+            retrofit = new Retrofit.Builder().baseUrl(Constant.BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())

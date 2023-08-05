@@ -18,6 +18,7 @@ import com.example.myapplication.Adapter.ServiceCardAdapter;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.ServiceShort;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
+import com.example.myapplication.Constant;
 import com.example.myapplication.R;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.PublicMethodApi;
@@ -125,12 +126,12 @@ public class CustomerHomePageFragment extends Fragment {
         // Create a demo data list
         List<ServiceCard> demoDataList = new ArrayList<>();
 
-        ServiceCard serviceCard1 = new ServiceCard(R.drawable.btn_avatar1,"Eric","some info balabalabala",R.drawable.btn_emptyheart,R.drawable.img_sample1,"Repair Air conditioner","100","available tomorrow");
-        ServiceCard serviceCard2 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
-        ServiceCard serviceCard3 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
-        ServiceCard serviceCard4 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
-        ServiceCard serviceCard5 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
-        ServiceCard serviceCard6 = new ServiceCard(R.drawable.btn_avatar2,"Alice","some info balabalabala",R.drawable.btn_redheart,R.drawable.img_sample2,"Clean gutter","150","available today");
+        ServiceCard serviceCard1 = new ServiceCard("Eric","Repair Air conditioner","100","available tomorrow");
+        ServiceCard serviceCard2 = new ServiceCard("Alice","Clean gutter","150","available today");
+        ServiceCard serviceCard3 = new ServiceCard("Alice","Clean gutter","150","available today");
+        ServiceCard serviceCard4 = new ServiceCard("Alice","Clean gutter","150","available today");
+        ServiceCard serviceCard5 = new ServiceCard("Alice","Clean gutter","150","available today");
+        ServiceCard serviceCard6 = new ServiceCard("Alice","Clean gutter","150","available today");
 
         demoDataList.add(serviceCard1);
         demoDataList.add(serviceCard2);
@@ -200,9 +201,9 @@ public class CustomerHomePageFragment extends Fragment {
         List<ServiceCard> serviceCards = new ArrayList<>();
         ServiceCard serviceCard;
         for(ServiceShort serviceShort : serviceShorts){
-            serviceCard = new ServiceCard(
-                    serviceShort.getId().toString(), serviceShort.getFee(),serviceShort.getTitle());
-            //Picture path initialize
+            String Link = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
+            serviceCard = new ServiceCard(serviceShort.getId().toString(), serviceShort.getFee().toString(),
+                    serviceShort.getTitle(), Link);
             serviceCards.add(serviceCard);
         }
         return serviceCards;
