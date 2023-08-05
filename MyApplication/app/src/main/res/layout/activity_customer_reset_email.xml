@@ -7,6 +7,7 @@
     tools:context=".frontendCustomer.AccountPage.CustomerResetEmail">
 
     <androidx.appcompat.widget.Toolbar
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -20,7 +21,61 @@
             android:textSize="20dp"></TextView>
     </androidx.appcompat.widget.Toolbar>
     <View
+        android:id="@+id/spaceLine"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"></View>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@+id/spaceLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/txtOldEmail"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="65dp"
+            android:background="@drawable/edit_text_rounded_corner"
+            android:elevation="5dp"
+            android:hint="    Enter your old E-mail"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/txtNewEmail"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="65dp"
+            android:background="@drawable/edit_text_rounded_corner"
+            android:elevation="5dp"
+            android:hint="    Enter your new E-mail"
+            android:inputType="text" />
+
+        <ImageButton
+            android:id="@+id/btnSubmit"
+            android:layout_marginTop="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_submit"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_gravity="center"
+            >
+
+        </ImageButton>
+
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,9 +63,6 @@
             android:name=".frontendCustomer.CustomerServiceDetailPage"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.loginPage.CustomerResetPassword"
-            android:exported="false" />
-        <activity
             android:name=".frontendCustomer.AccountPage.CustomerSettingAccountSecurity"
             android:exported="false" />
         <activity
