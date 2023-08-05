@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Service;
@@ -31,7 +32,7 @@ public class CustomerServiceDetailPage extends AppCompatActivity {
     }
 
     @SuppressLint("CheckResult")
-    private void getServiceDetail(){
+    private void getServiceDetail(Long serviceId){
         PublicMethodApi publicMethodApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
         publicMethodApi.getServiceDetail(serviceId)
                 .subscribeOn(Schedulers.io())
@@ -48,8 +49,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable t) {
-                        //test
-
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -60,6 +61,5 @@ public class CustomerServiceDetailPage extends AppCompatActivity {
     }
 
     private void updateView(Service service){
-
     }
 }

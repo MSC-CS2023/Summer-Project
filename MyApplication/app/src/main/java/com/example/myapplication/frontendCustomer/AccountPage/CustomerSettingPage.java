@@ -3,7 +3,9 @@ package com.example.myapplication.frontendCustomer.AccountPage;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -65,8 +67,17 @@ public class CustomerSettingPage extends AppCompatActivity implements View.OnCli
         }else if (view.getId() == R.id.switchAccount) {
 //            startActivity(new Intent(this, CustomerSettingNotification.class));
         }else if (view.getId() == R.id.logout) {
-            startActivity(new Intent(this, CustomerLogin.class));
+            logout();
         }
 
+    }
+
+    private void logout(){
+        SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+        sp.edit().putBoolean("isLoggedIn", false).apply();
+        sp.edit().putString("userType", "none").apply();
+        sp.edit().putString("token", null).apply();
+        sp.edit().putLong("exp", 0).apply();
+        startActivity(new Intent(this, CustomerLogin.class));
     }
 }

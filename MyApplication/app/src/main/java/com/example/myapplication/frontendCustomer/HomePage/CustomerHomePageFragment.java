@@ -97,19 +97,19 @@ public class CustomerHomePageFragment extends Fragment {
                             resetButton();
                             buttonCleaning.setImageResource(R.drawable.btn_cleaning_aft);
                             //Update listview with cleaning recommend.
-//                            randomlyRecommend("cleaning");
+//                            randomlyRecommend("cleaning", rootView);
                         } else if (Button.getId() == buttonMaintain.getId()) {
                             resetButton();
                             buttonMaintain.setImageResource(R.drawable.btn_maintain_aft);
-//                            randomlyRecommend("maintain");
+//                            randomlyRecommend("maintain", rootView);
                         }else if (Button.getId() == buttonLaundry.getId()) {
                             resetButton();
                             buttonLaundry.setImageResource(R.drawable.btn_laundry_aft);
-//                            randomlyRecommend("laundry");
+//                            randomlyRecommend("laundry", rootView);
                         }else if (Button.getId() == buttonLandscape.getId()) {
                             resetButton();
                             buttonLandscape.setImageResource(R.drawable.btn_landscape_aft);
-//                            randomlyRecommend("landscape");
+//                            randomlyRecommend("landscape", rootView);
                         }else if (Button.getId() == buttonOthers.getId()) {
                             resetButton();
                             buttonOthers.setImageResource(R.drawable.btn_more_aft);
@@ -119,10 +119,8 @@ public class CustomerHomePageFragment extends Fragment {
             });
         }
 
+//        randomlyRecommend(null, rootView);
 
-        //listView down here
-
-        ListView listView = rootView.findViewById(R.id.homepageListView);
         // Create a demo data list
         List<ServiceCard> demoDataList = new ArrayList<>();
 
@@ -140,15 +138,7 @@ public class CustomerHomePageFragment extends Fragment {
         demoDataList.add(serviceCard5);
         demoDataList.add(serviceCard6);
 
-        // Create an Adapter and set it to the ListView
-        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(demoDataList,getContext());
-        listView.setAdapter(serviceCardAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(), "xxxxxx", Toast.LENGTH_SHORT).show();
-            }
-        });
+        updateViewByList(demoDataList, rootView);
 
 
 
@@ -167,7 +157,7 @@ public class CustomerHomePageFragment extends Fragment {
 
     //Http request and change view after getting response.
     @SuppressLint("CheckResult")
-    private void randomlyRecommend(String recommendType){
+    private void randomlyRecommend(String recommendType, View view){
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
         customerApi.randomlyRecommend(this.token, DEFAULT_RECOMMEND_NUMBER, recommendType)
                 .subscribeOn(Schedulers.io())
@@ -178,7 +168,7 @@ public class CustomerHomePageFragment extends Fragment {
                         if(serviceShortListDataHttpBaseBean.getSuccess()){
                             List<ServiceCard> serviceCards = getServiceCardList(
                                     serviceShortListDataHttpBaseBean.getData().getServices());
-                            updateViewByList(serviceCards);
+                            updateViewByList(serviceCards, view);
                         }else{
                             //test
                         }
@@ -186,7 +176,8 @@ public class CustomerHomePageFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable t) {
-                        //test
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -210,7 +201,18 @@ public class CustomerHomePageFragment extends Fragment {
     }
 
     //Use adapter data list to update view.
-    private void updateViewByList(List<ServiceCard> serviceCards){
+    private void updateViewByList(List<ServiceCard> serviceCards, View view){
+        //listView down here
+        ListView listView = view.findViewById(R.id.homepageListView);
+        // Create an Adapter and set it to the ListView
+        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards,getContext());
+        listView.setAdapter(serviceCardAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getContext(), "xxxxxx", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

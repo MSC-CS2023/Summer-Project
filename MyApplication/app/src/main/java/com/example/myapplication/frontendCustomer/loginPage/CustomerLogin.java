@@ -53,7 +53,7 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view.getId() ==  R.id.btnCustomerLogin) {
-//            customerLogin();
+//            customerLogin(txtCustomerUsername.getText().toString(),txtCustomerPassword.getText().toString());
             startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
         }
         else if (view.getId() == R.id.txtCustomerRegister) {
@@ -64,9 +64,9 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
 
 
     @SuppressLint("CheckResult")
-    private void customerLogin(){
+    private void customerLogin(String username, String password){
         PublicMethodApi httpApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
-        httpApi.customerLogin(txtCustomerUsername.getText().toString(),txtCustomerPassword.getText().toString())
+        httpApi.customerLogin(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<LoginData>>() {

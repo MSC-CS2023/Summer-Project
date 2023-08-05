@@ -3,13 +3,23 @@ package com.example.myapplication.frontendCustomer.AccountPage;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.EditText;
 import android.widget.ImageButton;
+
 import android.widget.Toast;
 
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.R;
+import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.RetrofitClient;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerResetPassword extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,4 +63,34 @@ public class CustomerResetPassword extends AppCompatActivity implements View.OnC
             Toast.makeText(this, "submit click", Toast.LENGTH_SHORT).show();
         }
     }
+    @SuppressLint("CheckResult")
+    private void resetCustomerPassword(String token, String oldPassword, String newPassWord){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.resetCustomerPassword(token, oldPassword, newPassWord)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<Object>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<Object> objectHttpBaseBean) {
+                        if(objectHttpBaseBean.getSuccess()){
+                            Toast.makeText(getApplicationContext(), "password reset successfully", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(),
+                                    objectHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 }

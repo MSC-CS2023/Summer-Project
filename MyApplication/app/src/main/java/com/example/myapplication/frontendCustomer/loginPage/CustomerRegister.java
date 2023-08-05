@@ -58,7 +58,10 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
 
         if (view.getId() == R.id.btnRegisterCustomer){
             if(checkRegisterDetail()){
-                customerRegister();
+                customerRegister(
+                        txtRegisterCustomerEmail.getText().toString(), txtRegisterCustomerName.getText().toString(),
+                        txtRegisterCustomerPassword1.getText().toString(), txtRegisterCustomerCode.getText().toString(),
+                        txtRegisterCustomerNumber.getText().toString());
             }
         }
 
@@ -87,15 +90,13 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
     }
 
     @SuppressLint("CheckResult")
-    private void customerRegister(){
+    private void customerRegister(String email, String username, String password, String address, String tel){
         //Optional part for http request.
-        String address = txtRegisterCustomerCode.getText().toString().equals("")? null : txtRegisterCustomerCode.getText().toString();
-        String tel = txtRegisterCustomerNumber.getText().toString().equals("")? null : txtRegisterCustomerNumber.getText().toString();
+        address = address.equals("")? null : address;
+        tel = tel.equals("")? null : tel;
 
         PublicMethodApi httpApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
-        httpApi.customerRegister(
-                        txtRegisterCustomerEmail.getText().toString(), txtRegisterCustomerName.getText().toString(),
-                        txtRegisterCustomerPassword1.getText().toString(), address, tel)
+        httpApi.customerRegister(email, username, password, address, tel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<LoginData>>() {
