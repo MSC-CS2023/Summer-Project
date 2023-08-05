@@ -29,25 +29,29 @@
 
 
     <ImageButton
+        android:id="@+id/AS_username"
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_username"
-        android:backgroundTint="@android:color/transparent"></ImageButton>
+        android:backgroundTint="@android:color/transparent" />
 
     <ImageButton
+        android:id="@+id/AS_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_phone"
         android:backgroundTint="@android:color/transparent"></ImageButton>
 
     <ImageButton
+        android:id="@+id/AS_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_email"
         android:backgroundTint="@android:color/transparent"></ImageButton>
 
     <ImageButton
+        android:id="@+id/AS_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_password"
