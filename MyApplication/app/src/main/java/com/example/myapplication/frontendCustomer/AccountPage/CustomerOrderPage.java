@@ -1,6 +1,7 @@
 package com.example.myapplication.frontendCustomer.AccountPage;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class CustomerOrderPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_order_page);
 
+        setToolBar();
+
         initialTopBar();
 
         //test
@@ -47,6 +50,17 @@ public class CustomerOrderPage extends AppCompatActivity {
 
         updateViewByList(orderCards);
 
+    }
+
+    public void setToolBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed(); // back to previous page
+            }
+        });
     }
 
     void initialTopBar(){
