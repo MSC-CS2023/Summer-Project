@@ -58,20 +58,6 @@ public class CustomerHomePageFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_customer_home_page, container, false);
 
-//        View ServiceDetail = rootView.findViewById(R.id.service);
-
-
-
-//        ServiceDetail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (view.getId() == ServiceDetail.getId()){
-//                    startActivity(new Intent(getContext(), CustomerServiceDetailPage.class));
-//                }
-//            }
-//        });
-
-
 
         //5 top icons action here
 

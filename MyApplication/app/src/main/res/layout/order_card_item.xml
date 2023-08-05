@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,44 +69,49 @@
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/orderPrice"
-                android:gravity="right"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:gravity="start"
                 android:text="price : 200"
-                android:textSize="15dp"
+                android:paddingLeft="10dp"
                 android:textColor="@color/grey"
-                ></TextView>
+                android:textSize="15dp"></TextView>
 
             <LinearLayout
                 app:layout_constraintTop_toBottomOf="@+id/orderPrice"
                 android:gravity="right"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="5"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:src="@drawable/btn_cancel"
                     android:backgroundTint="@android:color/transparent"></ImageButton>
 
                 <ImageButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:src="@drawable/btn_reorder"
                     android:backgroundTint="@android:color/transparent"></ImageButton>
 
                 <ImageButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:src="@drawable/btn_refund"
                     android:backgroundTint="@android:color/transparent"></ImageButton>
@@ -116,7 +120,7 @@
             </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
     </LinearLayout>
