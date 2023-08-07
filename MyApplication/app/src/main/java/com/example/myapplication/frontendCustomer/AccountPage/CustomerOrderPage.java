@@ -2,8 +2,11 @@ package com.example.myapplication.frontendCustomer.AccountPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +21,7 @@ import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendCustomer.CustomerServiceDetailPage;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 import com.google.android.material.tabs.TabLayout;
@@ -30,7 +34,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerOrderPage extends AppCompatActivity {
-
 
 
     @Override
@@ -89,6 +92,46 @@ public class CustomerOrderPage extends AppCompatActivity {
         TabLayout.Tab tab6 = tabLayout.newTab();
         tab6.setText("Refund");
         tabLayout.addTab(tab6);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                switch (position){
+                    case 0: //all
+                        Toast.makeText(CustomerOrderPage.this, "select all", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1: // unpaid
+                        Toast.makeText(CustomerOrderPage.this, "select unpaid", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2: // unconfirmed
+                        Toast.makeText(CustomerOrderPage.this, "select unconfirmed", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3: // processing
+                        Toast.makeText(CustomerOrderPage.this, "select processing", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 4: // review
+                        Toast.makeText(CustomerOrderPage.this, "select review", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 5: // refund
+                        Toast.makeText(CustomerOrderPage.this, "select refund", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+//  refresh
+            }
+        });
+
+
     }
 
     @SuppressLint("CheckResult")
@@ -125,18 +168,26 @@ public class CustomerOrderPage extends AppCompatActivity {
         return null;
     }
 
-    private void updateViewByList(List<OrderCard> orderCards){
-        //listView down here
-        ListView listView = findViewById(R.id.orderCardList);
+    private void updateViewByList(List<OrderCard> orderCards, View view) {
+        //RecyclerView down here
+        RecyclerView recyclerView = view.findViewById(R.id.homepageRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
-        OrderCardAdapter orderCardAdapter = new OrderCardAdapter(orderCards, getApplicationContext());
-        listView.setAdapter(orderCardAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        OrderCardAdapter orderCardAdapter = new OrderCardAdapter(orderCards);
+
+        serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), "xxxxxx", Toast.LENGTH_SHORT).show();
+            public void onItemClick(int position) {
+                if (position == 0){
+                    startActivity(new Intent(getContext(), CustomerServiceDetailPage.class));
+                } else if (position == 1) {
+                    // 还没想好怎么把position和数据库里面的id绑定起来，现在这样只能根据index来确定点击了哪一个
+                }
             }
         });
+
+        recyclerView.setAdapter(serviceCardAdapter);
     }
 
 }

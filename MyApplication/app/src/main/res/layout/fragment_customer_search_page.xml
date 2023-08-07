@@ -38,6 +38,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -58,78 +59,12 @@
     </LinearLayout>
 
 
-
-
-    <!--    <LinearLayout-->
-<!--        android:id="@+id/nav_bar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        >-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/btnCustomerHomepage2"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:backgroundTint="@android:color/transparent"-->
-<!--            android:src="@drawable/btn_home" />-->
-
-<!--        <Space-->
-<!--            android:layout_width="8dp"-->
-<!--            android:layout_height="wrap_content" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/btnCustomerSearch2"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:backgroundTint="@android:color/transparent"-->
-<!--            android:src="@drawable/btn_search" />-->
-
-<!--        <Space-->
-<!--            android:layout_width="8dp"-->
-<!--            android:layout_height="wrap_content" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/btnCustomerMessage2"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:backgroundTint="@android:color/transparent"-->
-<!--            android:src="@drawable/btn_message" />-->
-
-<!--        <Space-->
-<!--            android:layout_width="8dp"-->
-<!--            android:layout_height="wrap_content" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/btnCustomerCollection2"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:backgroundTint="@android:color/transparent"-->
-<!--            android:src="@drawable/btn_emptyheart" />-->
-
-<!--        <Space-->
-<!--            android:layout_width="8dp"-->
-<!--            android:layout_height="wrap_content" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/btnCustomerAccount2"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:backgroundTint="@android:color/transparent"-->
-<!--            android:src="@drawable/btn_user" />-->
-
-<!--        <Space-->
-<!--            android:layout_width="8dp"-->
-<!--            android:layout_height="wrap_content" />-->
-
-
-<!--    </LinearLayout>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homepageRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/service_card_item"></androidx.recyclerview.widget.RecyclerView>
 
 
 

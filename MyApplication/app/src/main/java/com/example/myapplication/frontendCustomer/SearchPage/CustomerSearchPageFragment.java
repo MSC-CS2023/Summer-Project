@@ -1,9 +1,11 @@
 package com.example.myapplication.frontendCustomer.SearchPage;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import com.example.myapplication.Bean.Httpdata.ServiceShort;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 import com.example.myapplication.Constant;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendCustomer.CustomerServiceDetailPage;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 
@@ -35,6 +38,8 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 
 public class CustomerSearchPageFragment extends Fragment {
+
+    private RecyclerView recyclerView;
 
     private String token;
 
@@ -111,6 +116,25 @@ public class CustomerSearchPageFragment extends Fragment {
             }
         });
 
+        // Create a demo data list
+        List<ServiceCard> demoDataList = new ArrayList<>();
+
+        ServiceCard serviceCard1 = new ServiceCard("Eric", "Repair Air conditioner", "100", "available tomorrow");
+        ServiceCard serviceCard2 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+        ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today");
+        ServiceCard serviceCard4 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+        ServiceCard serviceCard5 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+        ServiceCard serviceCard6 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+
+        demoDataList.add(serviceCard1);
+        demoDataList.add(serviceCard2);
+        demoDataList.add(serviceCard3);
+        demoDataList.add(serviceCard4);
+        demoDataList.add(serviceCard5);
+        demoDataList.add(serviceCard6);
+
+        updateViewByList(demoDataList, rootView);
+
         return rootView;
     }
 
@@ -156,6 +180,29 @@ public class CustomerSearchPageFragment extends Fragment {
             serviceCards.add(serviceCard);
         }
         return serviceCards;
+    }
+
+
+    private void updateViewByList(List<ServiceCard> serviceCards, View view) {
+        //RecyclerView down here
+        RecyclerView recyclerView = view.findViewById(R.id.homepageRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        // Create an Adapter and set it to the ListView
+        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards);
+
+        serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0){
+                    startActivity(new Intent(getContext(), CustomerServiceDetailPage.class));
+                } else if (position == 1) {
+                    // 还没想好怎么把position和数据库里面的id绑定起来，现在这样只能根据index来确定点击了哪一个
+                }
+            }
+        });
+
+        recyclerView.setAdapter(serviceCardAdapter);
     }
 
     //Use adapter data list to update view.

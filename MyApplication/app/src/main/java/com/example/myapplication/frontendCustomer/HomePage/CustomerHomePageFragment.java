@@ -38,7 +38,6 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerHomePageFragment extends Fragment {
 
-    private RecyclerView recyclerView;
 
     private static final Integer DEFAULT_RECOMMEND_NUMBER = 5;
     private String token;
