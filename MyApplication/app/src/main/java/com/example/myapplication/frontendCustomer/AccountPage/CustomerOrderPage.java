@@ -47,9 +47,9 @@ public class CustomerOrderPage extends AppCompatActivity {
 
         //test
         List<OrderCard> orderCards = new ArrayList<>();
-        orderCards.add(new OrderCard("yes", "123", "ok", "200", "2"));
-        orderCards.add(new OrderCard("no", "12352", "ok", "200", "2"));
-        orderCards.add(new OrderCard("yes", "123", "ok", "200", "2"));
+        orderCards.add(new OrderCard("yes", "123", "ok", "200", 2));
+        orderCards.add(new OrderCard("no", "12352", "ok", "200", 2));
+        orderCards.add(new OrderCard("yes", "123", "ok", "200", 2));
 
         updateViewByList(orderCards);
 
@@ -168,26 +168,28 @@ public class CustomerOrderPage extends AppCompatActivity {
         return null;
     }
 
-    private void updateViewByList(List<OrderCard> orderCards, View view) {
+    private void updateViewByList(List<OrderCard> orderCards) {
         //RecyclerView down here
-        RecyclerView recyclerView = view.findViewById(R.id.homepageRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
         OrderCardAdapter orderCardAdapter = new OrderCardAdapter(orderCards);
 
-        serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 if (position == 0){
-                    startActivity(new Intent(getContext(), CustomerServiceDetailPage.class));
+                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
                 } else if (position == 1) {
-                    // 还没想好怎么把position和数据库里面的id绑定起来，现在这样只能根据index来确定点击了哪一个
+                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
+                }else if (position == 2) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        recyclerView.setAdapter(serviceCardAdapter);
+        recyclerView.setAdapter(orderCardAdapter);
     }
 
 }

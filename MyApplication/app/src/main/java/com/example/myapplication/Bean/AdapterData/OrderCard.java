@@ -7,16 +7,7 @@ public class OrderCard {
     private String orderId;
     private String orderTitle;
     private String orderPrice;
-    private String orderPictureSrc;
-
-
-    public OrderCard(String orderSate, String orderId, String orderTitle, String orderPrice, String orderPictureSrc){
-        this.orderSate = orderSate;
-        this.orderId = orderId;
-        this.orderTitle = orderTitle;
-        this.orderPrice = orderPrice;
-        this.orderPictureSrc = orderPictureSrc;
-    }
+    private int orderPictureSrc;
 
     public String getOrderSate() {
         return orderSate;
@@ -50,11 +41,19 @@ public class OrderCard {
         this.orderPrice = orderPrice;
     }
 
-    public String getOrderPictureSrc() {
+    public int getOrderPictureSrc() {
         return orderPictureSrc;
     }
 
-    public void setOrderPictureSrc(String orderPictureSrc) {
+    public void setOrderPictureSrc(int orderPictureSrc) {
+        this.orderPictureSrc = orderPictureSrc;
+    }
+
+    public OrderCard(String orderSate, String orderId, String orderTitle, String orderPrice, int orderPictureSrc) {
+        this.orderSate = orderSate;
+        this.orderId = orderId;
+        this.orderTitle = orderTitle;
+        this.orderPrice = orderPrice;
         this.orderPictureSrc = orderPictureSrc;
     }
 }
