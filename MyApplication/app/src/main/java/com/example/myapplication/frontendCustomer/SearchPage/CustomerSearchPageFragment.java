@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -126,7 +127,8 @@ public class CustomerSearchPageFragment extends Fragment {
                         if(serviceShortListDataHttpBaseBean.getSuccess()){
                             List<ServiceCard> serviceCards = getServiceCardList(
                                     serviceShortListDataHttpBaseBean.getData().getServices());
-                            updateViewByList(serviceCards, view);
+
+//                            updateViewByList(serviceCards, view);
                         }else {
                             //test
                         }
@@ -157,19 +159,16 @@ public class CustomerSearchPageFragment extends Fragment {
     }
 
     //Use adapter data list to update view.
-    private void updateViewByList(List<ServiceCard> serviceCards, View view){
-        //listView down here
-        ListView listView = view.findViewById(R.id.homepageListView);
-        // Create an Adapter and set it to the ListView
-        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards,getContext());
-        listView.setAdapter(serviceCardAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(), "xxxxxx", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-    }
+
+//    private void updateViewByList(List<ServiceCard> serviceCards, View view){
+//        //listView down here
+//        RecyclerView recyclerView = view.findViewById(R.id.homepageRecyclerView);
+//        // Create an Adapter and set it to the ListView
+//        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards,new );
+//        recyclerView.setAdapter(serviceCardAdapter);
+//
+//
+//    }
 
 }

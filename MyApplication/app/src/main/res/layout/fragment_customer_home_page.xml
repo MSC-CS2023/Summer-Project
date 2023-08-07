@@ -18,6 +18,27 @@
                 android:columnCount="5"
                 android:rowCount="1">
 
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/others"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/btn_more" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="All" />
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -38,7 +59,6 @@
                         android:layout_gravity="center_horizontal"
                         android:text="Cleaning" />
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,41 +119,19 @@
                         android:layout_gravity="center_horizontal"
                         android:text="Landscaping" />
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical">
 
-                    <ImageButton
-                        android:id="@+id/others"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/btn_more" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Others" />
-                </LinearLayout>
 
             </GridLayout>
 
 
     <!--   scroll content in the middle -->
-    <ListView
-        android:id="@+id/homepageListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homepageRecyclerView"
         android:layout_marginTop="75dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/service_card_item"></ListView>
+        tools:listitem="@layout/service_card_item"></androidx.recyclerview.widget.RecyclerView>
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
 
 
 
