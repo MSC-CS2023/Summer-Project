@@ -2,6 +2,7 @@ package com.example.myapplication.network;
 
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
+import com.example.myapplication.Bean.Httpdata.data.MarkData;
 import com.example.myapplication.Bean.Httpdata.data.PictureListData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
@@ -45,8 +46,8 @@ public interface PublicMethodApi {
     @GET("search")
     Flowable<HttpBaseBean<ServiceShortListData>> search(
             @Query("keywords") String searchKeyword, @Query("sort_by") String sortType,
-            @Query("descending") Boolean isDescending, @Query("start") Integer startPosition,
-            @Query("num") Integer displayNumber, @Query("or") Boolean isOr);
+            @Query("descending") String isDescending, @Query("start") Integer startPosition,
+            @Query("num") Integer displayNumber, @Query("or") String isOr);
 
     @GET("get_random")
     Flowable<HttpBaseBean<ServiceShortListData>> recommendServicesRandomly(@Query("num") Integer recommendNumber);
@@ -72,5 +73,9 @@ public interface PublicMethodApi {
             @Part("email") String email, @Part("username") String username,
             @Part("password") String password, @Part("address") String address,
             @Part("tel") String tel);
+
+    //New
+    @GET("get_mark")
+    Flowable<HttpBaseBean<MarkData>> getMark(@Query("id") Long providerId);
 
 }

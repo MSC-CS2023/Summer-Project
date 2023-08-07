@@ -10,6 +10,7 @@ import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Service;
 import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
 import com.example.myapplication.R;
+import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.PublicMethodApi;
 import com.example.myapplication.network.RetrofitClient;
 import com.google.errorprone.annotations.RestrictedApi;
@@ -29,12 +30,13 @@ public class CustomerServiceDetailPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_service_detail_page);
+//        getServiceDetail(this.token, serviceId);
     }
 
     @SuppressLint("CheckResult")
-    private void getServiceDetail(Long serviceId){
-        PublicMethodApi publicMethodApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
-        publicMethodApi.getServiceDetail(serviceId)
+    private void getServiceDetail(String token, Long serviceId){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.customerGetServiceDetail(token, serviceId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceDetailData>>() {
@@ -61,5 +63,6 @@ public class CustomerServiceDetailPage extends AppCompatActivity {
     }
 
     private void updateView(Service service){
+
     }
 }

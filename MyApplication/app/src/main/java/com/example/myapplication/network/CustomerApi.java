@@ -11,10 +11,15 @@ import com.example.myapplication.Bean.Httpdata.data.OrderData;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
 import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
 import com.example.myapplication.Bean.Httpdata.data.SendMessageData;
+import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 import com.example.myapplication.Bean.Httpdata.data.TimeStampData;
+import com.google.api.Http;
+
+import java.util.function.BooleanSupplier;
 
 import io.reactivex.rxjava3.core.Flowable;
+import kotlinx.coroutines.flow.Flow;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -128,12 +133,23 @@ public interface CustomerApi {
     @DELETE("customer/delete_account")
     Flowable<HttpBaseBean<Object>> deleteCustomerAccount(@Header("Authorization") String authorization);
 
-    //TO do
+
+    //New
     @GET("customer/get_rec")
     Flowable<HttpBaseBean<ServiceShortListData>> randomlyRecommend(
             @Header("Authorization") String authorization, @Query("num") Integer recommendNum, @Query("type") String type);
 
-    @POST("re_login")
+    @GET("customer/renew_token")
     Flowable<HttpBaseBean<LoginData>> customerReLogin(@Header("Authorization") String authorization);
+
+    @GET("customer/search")
+    Flowable<HttpBaseBean<ServiceShortListData>> search(@Header("Authorization") String authorization,
+            @Query("keywords") String searchKeyword, @Query("sort_by") String sortType,
+            @Query("descending") String isDescending, @Query("start") Integer startPosition,
+            @Query("num") Integer displayNumber, @Query("or") String isOr);
+
+    @GET("customer/get_service")
+    Flowable<HttpBaseBean<ServiceDetailData>> customerGetServiceDetail(
+            @Header("Authorization") String authorization, @Query("id") Long serviceId);
 
 }
