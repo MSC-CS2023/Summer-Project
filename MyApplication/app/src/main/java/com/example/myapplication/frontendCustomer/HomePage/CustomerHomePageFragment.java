@@ -1,6 +1,7 @@
 package com.example.myapplication.frontendCustomer.HomePage;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ import com.example.myapplication.Bean.Httpdata.ServiceShort;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 import com.example.myapplication.Constant;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendCustomer.CustomerServiceDetailPage;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.PublicMethodApi;
 import com.example.myapplication.network.RetrofitClient;
@@ -195,6 +197,18 @@ public class CustomerHomePageFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
         ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards);
+
+        serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0){
+                    startActivity(new Intent(getContext(), CustomerServiceDetailPage.class));
+                } else if (position == 1) {
+                    // 还没想好怎么把position和数据库里面的id绑定起来，现在这样只能根据index来确定点击了哪一个
+                }
+            }
+        });
+
         recyclerView.setAdapter(serviceCardAdapter);
     }
 

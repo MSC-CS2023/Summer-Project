@@ -16,10 +16,11 @@ import com.example.myapplication.R;
 
 import java.util.List;
 
-public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter.ViewHolder>{
+public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter.ViewHolder> {
+
 
     private List<ServiceCard> serviceCards;
-    private AdapterView.OnItemClickListener clickListener;
+    private OnItemClickListener myOnItemClickListener;
 
     public ServiceCardAdapter(List<ServiceCard> serviceCards) {
         this.serviceCards = serviceCards;
@@ -29,7 +30,7 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_card_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_card_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -37,6 +38,9 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ServiceCard serviceCard = serviceCards.get(position);
+
+        holder.bindData(position);
+
         holder.avatar.setImageResource(serviceCard.getAvatarSrcId());
         holder.username.setText(serviceCard.getUsername());
         holder.serviceTitle.setText(serviceCard.getServiceTitle());
@@ -45,6 +49,7 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
         holder.collection.setImageResource(serviceCard.getCollectionSrcId());
         holder.serviceImg.setImageResource(serviceCard.getServiceImgSrcId());
         holder.serviceState.setText(serviceCard.getState());
+
     }
 
     @Override
@@ -52,12 +57,16 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
         return serviceCards.size();
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.myOnItemClickListener = listener;
+    }
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         ImageView avatar;
         TextView username;
         TextView serviceInfo;
@@ -66,6 +75,8 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
         TextView serviceTitle;
         TextView servicePrice;
         TextView serviceState;
+
+        private int myPosition;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -78,18 +89,24 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
             this.servicePrice = itemView.findViewById(R.id.servicePrice);
             this.serviceState = itemView.findViewById(R.id.serviceState);
 
-//            avatar.setOnClickListener(this);
-//            username.setOnClickListener(this);
-//            serviceInfo.setOnClickListener(this);
-//            collection.setOnClickListener(this);
-//            serviceImg.setOnClickListener(this);
-//            serviceTitle.setOnClickListener(this);
-//            servicePrice.setOnClickListener(this);
-//            serviceState.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (myOnItemClickListener != null) {
+                        myOnItemClickListener.onItemClick(myPosition);
+                    }
+                }
+            });
 
 
         }
+
+        public void bindData(int position) {
+            myPosition = position;
+        }
     }
+
+}
 
 
 //    private Context context;
@@ -155,4 +172,4 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
 //    }
 
 
-}
+
