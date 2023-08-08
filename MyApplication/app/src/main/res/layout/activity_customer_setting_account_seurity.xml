@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/acLinearLayout"
 
     tools:context=".frontendCustomer.AccountPage.CustomerSettingAccountSecurity">
 
@@ -28,34 +29,76 @@
         android:background="@color/black"></View>
 
 
-    <ImageButton
-        android:id="@+id/AS_username"
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/btn_username"
-        android:backgroundTint="@android:color/transparent" />
+<Button
+    android:id="@+id/edit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Edit"
+    android:textColor="@color/black"
+    android:textSize="20dp"
+    android:layout_gravity="right"></Button>
 
-    <ImageButton
-        android:id="@+id/AS_phone"
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/btn_phone"
-        android:backgroundTint="@android:color/transparent"></ImageButton>
+        android:layout_height="20dp"></Space>
 
-    <ImageButton
-        android:id="@+id/AS_email"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/txtOldUsername"
+        android:padding="15dp"
+        android:layout_margin="20dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/btn_email"
-        android:backgroundTint="@android:color/transparent"></ImageButton>
+        android:layout_gravity="center_horizontal"
+        android:textSize="25dp"
+        android:text="   Username"
+        android:elevation="5dp"
+        android:inputType="text"
+        android:background="@drawable/edit_text_rounded_corner"
+        />
 
-    <ImageButton
-        android:id="@+id/AS_password"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/txtOldEmail"
+        android:padding="15dp"
+        android:layout_margin="20dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/btn_password"
-        android:backgroundTint="@android:color/transparent"></ImageButton>
+        android:layout_gravity="center_horizontal"
+        android:textSize="25dp"
+        android:text="   Email"
+        android:elevation="5dp"
+        android:inputType="text"
+        android:background="@drawable/edit_text_rounded_corner"
+        />
+
+    <TextView
+        android:id="@+id/txtOldPhone"
+        android:padding="15dp"
+        android:layout_margin="20dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25dp"
+        android:text="   Phone"
+        android:elevation="5dp"
+        android:inputType="text"
+        android:background="@drawable/edit_text_rounded_corner"
+        />
+
+    <TextView
+        android:id="@+id/txtOldPassword"
+        android:padding="15dp"
+        android:layout_margin="20dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25dp"
+        android:text="   Password"
+        android:elevation="5dp"
+        android:inputType="text"
+        android:background="@drawable/edit_text_rounded_corner"
+        />
+
+
 
 
 
