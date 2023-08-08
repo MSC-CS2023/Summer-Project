@@ -61,7 +61,7 @@
             android:name=".frontendCustomer.MessagePage.CustomerChatPage"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.CustomerServiceDetailPage"
+            android:name=".frontendCustomer.HomePage.CustomerServiceDetailPage"
             android:exported="false" />
         <activity
             android:name=".frontendCustomer.AccountPage.CustomerSettingAccountSecurity"

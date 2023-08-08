@@ -6,22 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.myapplication.Adapter.OrderCardAdapter;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
 import com.example.myapplication.Bean.AdapterData.OrderCard;
-import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer.CustomerServiceDetailPage;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 import com.google.android.material.tabs.TabLayout;

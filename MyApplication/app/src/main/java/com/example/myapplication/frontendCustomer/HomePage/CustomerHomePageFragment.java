@@ -11,10 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.myapplication.Bean.AdapterData.ServiceCard;
@@ -24,9 +21,7 @@ import com.example.myapplication.Bean.Httpdata.ServiceShort;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 import com.example.myapplication.Constant;
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer.CustomerServiceDetailPage;
 import com.example.myapplication.network.CustomerApi;
-import com.example.myapplication.network.PublicMethodApi;
 import com.example.myapplication.network.RetrofitClient;
 
 import java.util.ArrayList;
