@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -31,6 +32,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
     ImageButton collection;
 
     TextView amount;
+    TextView balance;
+    View view;
 
     boolean isCollection = false;
 
@@ -122,8 +125,9 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
 
     void paymentAlert(){
         AlertDialog.Builder builder = new AlertDialog.Builder(CustomerServiceDetailPage.this);
+
         builder.setTitle("Are you sure to pay ?")
-               .setMessage("you need to pay" + amount.getText().toString())
+               .setMessage("You need to pay" + amount.getText().toString())
                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
