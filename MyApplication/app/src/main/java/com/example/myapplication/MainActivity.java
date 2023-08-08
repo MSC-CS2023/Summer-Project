@@ -15,7 +15,7 @@ import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
 import com.example.myapplication.frontendCustomer.CustomerMainActivity;
 import com.example.myapplication.frontendCustomer.loginPage.CustomerLogin;
-import com.example.myapplication.frontendProvider.ProviderLogin;
+import com.example.myapplication.frontendProvider.loginPages.ProviderLogin;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (view.getId() == R.id.btnProvider) {
             Intent intentProvider = new Intent(MainActivity.this, ProviderLogin.class);
             startActivity(intentProvider);
-            finish();
         }
     }
 

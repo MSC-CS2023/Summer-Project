@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Gig Pairs</string>
     <string name="title_activity_customer_login">CustomerLogin</string>
+    <string name="title_activity_provider_login">Provider Login</string>
+    <string name="title_activity_provider_sign_up">Provider Sign Up</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
