@@ -1,5 +1,6 @@
 package com.example.myapplication.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.R;
 
@@ -21,11 +23,12 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
 
     private List<ServiceCard> serviceCards;
     private OnItemClickListener myOnItemClickListener;
+    private Context context;
 
-    public ServiceCardAdapter(List<ServiceCard> serviceCards) {
+    public ServiceCardAdapter(List<ServiceCard> serviceCards, Context context) {
         this.serviceCards = serviceCards;
+        this.context = context;
     }
-
 
     @NonNull
     @Override
@@ -40,11 +43,11 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
         ServiceCard serviceCard = serviceCards.get(position);
 
         holder.bindData(position);
-
+//        Glide.with(this.context).load(serviceCard.getProviderAvatarSrc()).into(holder.avatar);
         holder.avatar.setImageResource(serviceCard.getAvatarSrcId());
         holder.username.setText(serviceCard.getUsername());
         holder.serviceTitle.setText(serviceCard.getServiceTitle());
-        holder.servicePrice.setText(serviceCard.getServicePrice());
+        holder.servicePrice.setText("￡" + serviceCard.getServicePrice());
         holder.serviceInfo.setText(serviceCard.getServiceInfo());
         holder.collection.setImageResource(serviceCard.getCollectionSrcId());
         holder.serviceImg.setImageResource(serviceCard.getServiceImgSrcId());
@@ -108,13 +111,6 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
 
 }
 
-
-//    private Context context;
-//    private List<ServiceCard> serviceCards;
-//    public ServiceCardAdapter(List<ServiceCard> serviceCards, Context context) {
-//        this.serviceCards = serviceCards;
-//        this.context = context;
-//    }
 //
 //    @Override
 //    public int getCount() {

@@ -30,6 +30,8 @@ public class Service {
      */
     private String title;
 
+    private String username;
+
     public String getDescription() { return description; }
     public void setDescription(String value) { this.description = value; }
 
@@ -50,4 +52,12 @@ public class Service {
 
     public String getTitle() { return title; }
     public void setTitle(String value) { this.title = value; }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

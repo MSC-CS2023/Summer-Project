@@ -118,13 +118,13 @@
 
 
                 <EditText
-                    android:id="@+id/txtRegisterCustomerCode"
+                    android:id="@+id/txtRegisterCustomerAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
                     android:ems="10"
-                    android:hint="   OPT"
+                    android:hint="   Address"
                     android:inputType="text"
                     android:background="@drawable/edit_text_rounded_corner"
                     android:elevation="5dp"
@@ -159,20 +159,6 @@
                     android:elevation="5dp"
                     tools:layout_editor_absoluteX="109dp"
                     tools:layout_editor_absoluteY="567dp" />
-
-
-                <EditText
-                    android:layout_width="210dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/edit_text_rounded_corner"
-                    android:elevation="5dp"
-                    android:hint="   About me">
-
-                </EditText>
-
-
 
 
             </LinearLayout>

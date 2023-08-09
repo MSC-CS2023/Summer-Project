@@ -18,6 +18,8 @@ public class ServiceShort {
      */
     private String title;
 
+    private String username;
+
     public Double getFee() { return fee; }
     public void setFee(Double value) { this.fee = value; }
 
@@ -29,4 +31,12 @@ public class ServiceShort {
 
     public String getTitle() { return title; }
     public void setTitle(String value) { this.title = value; }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

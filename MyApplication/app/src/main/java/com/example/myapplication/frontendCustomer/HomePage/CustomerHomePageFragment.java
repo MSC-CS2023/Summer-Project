@@ -34,7 +34,7 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 public class CustomerHomePageFragment extends Fragment {
 
 
-    private static final Integer DEFAULT_RECOMMEND_NUMBER = 5;
+    private static final Integer DEFAULT_RECOMMEND_NUMBER = 6;
     private String token;
 
 
@@ -142,7 +142,7 @@ public class CustomerHomePageFragment extends Fragment {
     @SuppressLint("CheckResult")
     private void randomlyRecommend(String recommendType, View view) {
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.randomlyRecommend(this.token, DEFAULT_RECOMMEND_NUMBER, recommendType)
+        customerApi.randomlyRecommend(this.token, DEFAULT_RECOMMEND_NUMBER)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {
@@ -176,7 +176,7 @@ public class CustomerHomePageFragment extends Fragment {
         ServiceCard serviceCard;
         for (ServiceShort serviceShort : serviceShorts) {
             String Link = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
-            serviceCard = new ServiceCard(serviceShort.getId().toString(), serviceShort.getFee().toString(),
+            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
                     serviceShort.getTitle(), Link);
             serviceCards.add(serviceCard);
         }
@@ -190,7 +190,7 @@ public class CustomerHomePageFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
-        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards);
+        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards, getContext());
 
         serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
@@ -205,5 +205,6 @@ public class CustomerHomePageFragment extends Fragment {
 
         recyclerView.setAdapter(serviceCardAdapter);
     }
+
 
 }

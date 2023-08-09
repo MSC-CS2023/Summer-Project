@@ -78,7 +78,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:glide:4.15.1'
 
 
-
     //Internet
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'

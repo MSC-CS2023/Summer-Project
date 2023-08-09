@@ -30,12 +30,6 @@ public class CustomerMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
 
-        //        Intent intent = getIntent();
-//        User user = (User) intent.getSerializableExtra("User");
-//        String token = intent.getStringExtra("token");
-//        Long exp = intent.getLongExtra("exp",0);
-//        Toast.makeText(this, token, Toast.LENGTH_LONG).show();
-
         customerHomePageFragment = new CustomerHomePageFragment();
         customerSearchPageFragment = new CustomerSearchPageFragment();
         customerMessageListFragment = new CustomerMessageListFragment();
@@ -43,7 +37,6 @@ public class CustomerMainActivity extends AppCompatActivity {
         customerAccountFragment =new CustomerAccountFragment();
 
         bottomNavigationView = findViewById(R.id.nav_bar);
-
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

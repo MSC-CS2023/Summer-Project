@@ -91,8 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             sp.edit().putString("userType", "customer").apply();
                             sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
                             sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-                            startActivity(new Intent(MainActivity.this, CustomerMainActivity.class)
-                                    .putExtra("User", loginDataHttpBaseBean.getData().getUser()));
+                            startActivity(new Intent(MainActivity.this, CustomerMainActivity.class));
                             finish();
                         }else{
                             Toast.makeText(getApplicationContext(),

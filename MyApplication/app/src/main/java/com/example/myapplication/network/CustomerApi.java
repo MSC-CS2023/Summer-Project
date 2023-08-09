@@ -115,6 +115,14 @@ public interface CustomerApi {
     @GET("customer/get_avatar_timestamp")
     Flowable<HttpBaseBean<TimeStampData>> getCustomerAvatarTimeStamp(@Header("Authorization") String authorization);
 
+    @GET("customer/get_service")
+    Flowable<HttpBaseBean<ServiceDetailData>> customerGetServiceDetail(
+            @Header("Authorization") String authorization, @Query("id") Long serviceId);
+
+    @GET("customer/get_rec")
+    Flowable<HttpBaseBean<ServiceShortListData>> randomlyRecommend(
+            @Header("Authorization") String authorization, @Query("num") Integer recommendNum);
+
     @POST("customer/modify_detail")
     @Multipart
     Flowable<HttpBaseBean<ModifyDetailData>> modifyCustomerDetail(@Header("Authorization") String authorization
@@ -135,9 +143,7 @@ public interface CustomerApi {
 
 
     //New
-    @GET("customer/get_rec")
-    Flowable<HttpBaseBean<ServiceShortListData>> randomlyRecommend(
-            @Header("Authorization") String authorization, @Query("num") Integer recommendNum, @Query("type") String type);
+
 
     @GET("customer/renew_token")
     Flowable<HttpBaseBean<LoginData>> customerReLogin(@Header("Authorization") String authorization);
@@ -148,8 +154,5 @@ public interface CustomerApi {
             @Query("descending") String isDescending, @Query("start") Integer startPosition,
             @Query("num") Integer displayNumber, @Query("or") String isOr);
 
-    @GET("customer/get_service")
-    Flowable<HttpBaseBean<ServiceDetailData>> customerGetServiceDetail(
-            @Header("Authorization") String authorization, @Query("id") Long serviceId);
 
 }

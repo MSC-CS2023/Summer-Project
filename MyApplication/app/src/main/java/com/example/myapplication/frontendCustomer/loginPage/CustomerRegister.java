@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -32,7 +33,7 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
     EditText txtRegisterCustomerEmail;
     EditText txtRegisterCustomerPassword1;
     EditText txtRegisterCustomerPassword2;
-    EditText txtRegisterCustomerCode;
+    EditText txtRegisterCustomerAddress;
 
     //No About me now.
 
@@ -49,9 +50,10 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
         txtRegisterCustomerEmail = findViewById(R.id.txtRegisterCustomerEmail);
         txtRegisterCustomerPassword1 = findViewById(R.id.txtRegisterCustomerPassword1);
         txtRegisterCustomerPassword2 = findViewById(R.id.txtRegisterCustomerPassword2);
-        txtRegisterCustomerCode = findViewById(R.id.txtRegisterCustomerCode);
+        txtRegisterCustomerAddress = findViewById(R.id.txtRegisterCustomerAddress);
 
     }
+
 
     @Override
     public void onClick(View view) {
@@ -60,7 +62,7 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
             if(checkRegisterDetail()){
                 customerRegister(
                         txtRegisterCustomerEmail.getText().toString(), txtRegisterCustomerName.getText().toString(),
-                        txtRegisterCustomerPassword1.getText().toString(), txtRegisterCustomerCode.getText().toString(),
+                        txtRegisterCustomerPassword1.getText().toString(), txtRegisterCustomerAddress.getText().toString(),
                         txtRegisterCustomerNumber.getText().toString());
             }
         }
@@ -111,8 +113,7 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
                             sp.edit().putString("userType", "customer").apply();
                             sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
                             sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-                            startActivity(new Intent(CustomerRegister.this, CustomerMainActivity.class)
-                                    .putExtra("User", loginDataHttpBaseBean.getData().getUser()));
+                            startActivity(new Intent(CustomerRegister.this, CustomerMainActivity.class));
                         }else{
                             Toast.makeText(getApplicationContext(),
                                     loginDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();

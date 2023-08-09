@@ -188,7 +188,7 @@ public class CustomerSearchPageFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
-        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards);
+        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards, getContext());
 
         serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
