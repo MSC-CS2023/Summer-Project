@@ -53,17 +53,17 @@ public interface CustomerApi {
 
     @GET("customer/favourite/check")
     Flowable<HttpBaseBean<Object>> checkIfInFavourite(
-            @Header("Authorization") String authorization, @Query("id") String serviceId);
+            @Header("Authorization") String authorization, @Query("id") Long serviceId);
 
     @PUT("customer/favourite/add")
     @Multipart
     Flowable<HttpBaseBean<FavouriteData>> addToFavourite(
-            @Header("Authorization") String authorization, @Part("id") String serviceId);
+            @Header("Authorization") String authorization, @Part("id") Long serviceId);
 
     @DELETE("customer/favourite/delete")
     @Multipart
     Flowable<HttpBaseBean<Object>> removeFromFavourite(
-            @Header("Authorization") String authorization, @Part("id") String serviceId);
+            @Header("Authorization") String authorization, @Part("id") Long serviceId);
 
 
     //BOOKING ORDER

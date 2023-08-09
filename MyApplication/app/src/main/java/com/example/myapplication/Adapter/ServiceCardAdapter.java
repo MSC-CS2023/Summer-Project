@@ -1,5 +1,6 @@
 package com.example.myapplication.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
         return viewHolder;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ServiceCard serviceCard = serviceCards.get(position);

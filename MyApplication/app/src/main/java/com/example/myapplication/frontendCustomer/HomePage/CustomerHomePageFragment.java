@@ -109,12 +109,12 @@ public class CustomerHomePageFragment extends Fragment {
         // Create a demo data list
         List<ServiceCard> demoDataList = new ArrayList<>();
 
-        ServiceCard serviceCard1 = new ServiceCard("Eric", "Repair Air conditioner", "100", "available tomorrow");
-        ServiceCard serviceCard2 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
-        ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today");
-        ServiceCard serviceCard4 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
-        ServiceCard serviceCard5 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
-        ServiceCard serviceCard6 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",  "available tomorrow");
+        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",  "available today");
+        ServiceCard serviceCard3 = new ServiceCard("Alice", "150","Clean gutter",  "available today");
+        ServiceCard serviceCard4 = new ServiceCard("Alice", "150","Clean gutter", "available today");
+        ServiceCard serviceCard5 = new ServiceCard("Alice", "150","Clean gutter", "available today");
+        ServiceCard serviceCard6 = new ServiceCard("Alice", "150","Clean gutter","available today");
 
         demoDataList.add(serviceCard1);
         demoDataList.add(serviceCard2);

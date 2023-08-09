@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Service;
+import com.example.myapplication.Bean.Httpdata.data.FavouriteData;
+import com.example.myapplication.Bean.Httpdata.data.OrderData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
 import com.example.myapplication.Constant;
 import com.example.myapplication.R;
@@ -42,6 +44,7 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
     TextView serviceDescribe;
     TextView addressDetail;
     TextView amount;
+
     TextView balance;
     View view;
 
@@ -61,55 +64,11 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         //add serviceId later!
         this.serviceId = Long.valueOf(1235);
         initializeView();
-        //                getServiceDetail(this.token, this.serviceId);
+//        getServiceDetail(this.token, this.serviceId);
+//        checkIfIsFavourite(this.token, this.serviceId);
     }
 
-    @SuppressLint("CheckResult")
-    private void getServiceDetail(String token, Long serviceId){
-        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.customerGetServiceDetail(token, serviceId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceDetailData>>() {
-                    @Override
-                    public void onNext(HttpBaseBean<ServiceDetailData> serviceDetailDataHttpBaseBean) {
-                        if(serviceDetailDataHttpBaseBean.getSuccess()){
-                            updateView(serviceDetailDataHttpBaseBean.getData().getService());
-                        }else{
-                            //test
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        Toast.makeText(getApplicationContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-
-
-
-
-    private void updateView(Service service){
-        serviceTitle.setText(service.getTitle());
-        providerName.setText(service.getUsername());
-        serviceDescribe.setText(service.getDetail());
-        amount.setText("￡" + service.getFee().toString());
-        Glide.with(getApplicationContext()).load(Constant.BASE_URL
-                + "public/service_provider/avatar?id=" + service.getProviderId().toString()).into(avatar);
-//        Don't have address img and userInfo
-//        addressDetail.setText("");
-//        Glide.with(getApplicationContext()).load("").into(serviceImg);
-    }
-
-    void initializeView(){
+    private void initializeView(){
         this.pay = findViewById(R.id.pay);
         this.avatar = findViewById(R.id.providerAvatar);
         this.collection = findViewById(R.id.collection);
@@ -142,11 +101,16 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
             }else {
                 collection.setImageResource(R.drawable.btn_emptyheart);
             }
+//            if(isCollection){
+//                removeFromFavourite(token, serviceId);
+//            }else {
+//                addToFavourite(token, serviceId);
+//            }
         }
 
     }
 
-    void paymentAlert(){
+    private void paymentAlert(){
         AlertDialog.Builder builder = new AlertDialog.Builder(CustomerServiceDetailPage.this);
 
         builder.setTitle("Are you sure to pay ?")
@@ -155,6 +119,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
                        //update money
+//                       createCustomerOrder(token, serviceId, System.currentTimeMillis(),
+//                               System.currentTimeMillis() + 360000);
                    }
                })
                .setNegativeButton("Cancel", null);
@@ -174,6 +140,179 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         });
 
         alertDialog.show();
+    }
+
+
+    @SuppressLint("CheckResult")
+    private void getServiceDetail(String token, Long serviceId){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.customerGetServiceDetail(token, serviceId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceDetailData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<ServiceDetailData> serviceDetailDataHttpBaseBean) {
+                        if(serviceDetailDataHttpBaseBean.getSuccess()){
+                            updateView(serviceDetailDataHttpBaseBean.getData().getService());
+                        }else{
+                            //test
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void updateView(Service service){
+        serviceTitle.setText(service.getTitle());
+        providerName.setText(service.getUsername());
+        serviceDescribe.setText(service.getDetail());
+        amount.setText("￡" + service.getFee().toString());
+        Glide.with(getApplicationContext()).load(Constant.BASE_URL +
+                "public/service_provider/avatar?id=" + service.getProviderId().toString()).into(avatar);
+//        Don't have address img and userInfo
+//        addressDetail.setText("");
+//        Glide.with(getApplicationContext()).load("").into(serviceImg);
+    }
+
+
+
+    //create new order.
+    @SuppressLint("CheckResult")
+    private void createCustomerOrder(String token, Long serviceId, Long startTime, Long endTime){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.createCustomerOrder(token, serviceId, startTime, endTime)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderData> orderDataHttpBaseBean) {
+                        if(orderDataHttpBaseBean.getSuccess()){
+                            Toast.makeText(getApplicationContext(),
+                                    "Book service successfully!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else{
+                            //test
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    private void checkIfIsFavourite(String token, Long serviceId){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.checkIfInFavourite(token, serviceId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<Object>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<Object> objectHttpBaseBean) {
+                        if(objectHttpBaseBean.getSuccess()){
+                            isCollection = true;
+                            collection.setImageResource(R.drawable.btn_redheart);
+                        }else{
+                            isCollection = false;
+                            collection.setImageResource(R.drawable.btn_emptyheart);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //add service to favourite list
+    @SuppressLint("CheckResult")
+    private void addToFavourite(String token, Long serviceId){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.addToFavourite(token, serviceId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<FavouriteData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<FavouriteData> favouriteDataHttpBaseBean) {
+                        if(favouriteDataHttpBaseBean.getSuccess()){
+                            isCollection = true;
+                            collection.setImageResource(R.drawable.btn_redheart);
+                            Toast.makeText(getApplicationContext(),
+                                    "Add to favourites successfully!", Toast.LENGTH_SHORT).show();
+                        }else{
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //remove service from favourite list
+    @SuppressLint("CheckResult")
+    private void removeFromFavourite(String token, Long serviceId){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.removeFromFavourite(token, serviceId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<Object>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<Object> objectHttpBaseBean) {
+                        if(objectHttpBaseBean.getSuccess()){
+                            isCollection = false;
+                            collection.setImageResource(R.drawable.btn_emptyheart);
+                            Toast.makeText(getApplicationContext(),
+                                    "Remove from favourites successfully!", Toast.LENGTH_SHORT).show();
+                        }else{
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 }
