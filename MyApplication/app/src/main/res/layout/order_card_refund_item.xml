@@ -95,23 +95,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/btn_cancel"
-                    android:backgroundTint="@android:color/transparent"></ImageButton>
 
                 <ImageButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/btn_confirm"
-                    android:backgroundTint="@android:color/transparent"></ImageButton>
-
-                <ImageButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/btn_refund"
                     android:backgroundTint="@android:color/transparent"></ImageButton>
