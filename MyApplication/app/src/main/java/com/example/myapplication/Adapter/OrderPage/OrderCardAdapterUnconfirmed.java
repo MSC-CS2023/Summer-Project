@@ -1,38 +1,35 @@
-package com.example.myapplication.Adapter;
+package com.example.myapplication.Adapter.OrderPage;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.myapplication.Adapter.ServiceCardAdapter;
 import com.example.myapplication.Bean.AdapterData.OrderCard;
-import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.R;
 
 import java.util.List;
 
-public class OrderCardAdapter extends RecyclerView.Adapter <OrderCardAdapter.ViewHolder> {
+public class OrderCardAdapterUnconfirmed extends RecyclerView.Adapter <OrderCardAdapterUnconfirmed.ViewHolder> {
 
     private List<OrderCard> orderCards;
     private ServiceCardAdapter.OnItemClickListener myOnItemClickListener;
 
 
-    public OrderCardAdapter(List<OrderCard> orderCards) {
+    public OrderCardAdapterUnconfirmed(List<OrderCard> orderCards) {
         this.orderCards = orderCards;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card_all_item, parent, false);
-        OrderCardAdapter.ViewHolder viewHolder = new OrderCardAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card_unconfirmed_item, parent, false);
+        OrderCardAdapterUnconfirmed.ViewHolder viewHolder = new OrderCardAdapterUnconfirmed.ViewHolder(view);
         return viewHolder;
     }
 
@@ -66,11 +63,11 @@ public class OrderCardAdapter extends RecyclerView.Adapter <OrderCardAdapter.Vie
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-    TextView orderSate;
-    TextView orderId;
-    TextView orderTitle;
-    TextView orderPrice;
-    ImageView orderPicture;
+        TextView orderSate;
+        TextView orderId;
+        TextView orderTitle;
+        TextView orderPrice;
+        ImageView orderPicture;
 
         private int myPosition;
 
@@ -98,53 +95,3 @@ public class OrderCardAdapter extends RecyclerView.Adapter <OrderCardAdapter.Vie
         }
     }
 }
-
-
-//    @Override
-//    public int getCount() {
-//        return orderCards.size();
-//    }
-//
-//    @Override
-//    public Object getItem(int i) {
-//        return orderCards.get(i);
-//    }
-//
-//    @Override
-//    public long getItemId(int i) {
-//        return i;
-//    }
-//
-//    @Override
-//    public View getView(int i, View view, ViewGroup viewGroup) {
-//        ViewHolder viewHolder;
-//        if(view == null){
-//            viewHolder = new ViewHolder();
-//            view = LayoutInflater.from(context).inflate(R.layout.order_card_item, viewGroup, false);
-//
-//            viewHolder.orderSate = view.findViewById(R.id.orderState);
-//            viewHolder.orderId = view.findViewById(R.id.orderNum);
-//            viewHolder.orderTitle = view.findViewById(R.id.orderTitle);
-//            viewHolder.orderPrice = view.findViewById(R.id.orderPrice);
-//
-//            viewHolder.orderPicture = view.findViewById(R.id.serviceImg);
-//
-//            view.setTag(viewHolder);
-//        }else{
-//            viewHolder = (ViewHolder) view.getTag();
-//        }
-//
-//        OrderCard orderCard = orderCards.get(i);
-//
-//        viewHolder.orderSate.setText(orderCard.getOrderSate());
-//        viewHolder.orderId.setText("Order NUmber: " + orderCard.getOrderId());
-//        viewHolder.orderTitle.setText(orderCard.getOrderTitle());
-//        viewHolder.orderPrice.setText(orderCard.getOrderPrice());
-//
-//        viewHolder.orderPicture.setImageResource(R.drawable.img_sample1);
-////        Glide.with(this.context).load(orderCards.get(i).getOrderPictureSrc()).into(viewHolder.orderPicture);
-//
-//        return view;
-//    }
-
-

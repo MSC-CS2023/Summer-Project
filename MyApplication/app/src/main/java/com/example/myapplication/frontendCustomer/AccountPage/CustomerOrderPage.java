@@ -10,7 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.myapplication.Adapter.OrderCardAdapter;
+import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterAll;
+import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterProcessing;
+import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterRefund;
+import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterReview;
+import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterUnconfirmed;
+import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterUnpaid;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
 import com.example.myapplication.Bean.AdapterData.OrderCard;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
@@ -30,6 +35,8 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerOrderPage extends AppCompatActivity {
 
+    List<OrderCard> orderCards = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +48,12 @@ public class CustomerOrderPage extends AppCompatActivity {
         initialTopBar();
 
         //test
-        List<OrderCard> orderCards = new ArrayList<>();
+
         orderCards.add(new OrderCard("yes", "123", "ok", "200", 2));
         orderCards.add(new OrderCard("no", "12352", "ok", "200", 2));
         orderCards.add(new OrderCard("yes", "123", "ok", "200", 2));
 
-        updateViewByList(orderCards);
+//        updateViewByList_all(orderCards);
 
     }
 
@@ -95,21 +102,27 @@ public class CustomerOrderPage extends AppCompatActivity {
                 switch (position){
                     case 0: //all
                         Toast.makeText(CustomerOrderPage.this, "select all", Toast.LENGTH_SHORT).show();
+                        updateViewByList_all(orderCards);
                         break;
                     case 1: // unpaid
                         Toast.makeText(CustomerOrderPage.this, "select unpaid", Toast.LENGTH_SHORT).show();
+                        updateViewByList_unpaid(orderCards);
                         break;
                     case 2: // unconfirmed
                         Toast.makeText(CustomerOrderPage.this, "select unconfirmed", Toast.LENGTH_SHORT).show();
+                        updateViewByList_unconfirmed(orderCards);
                         break;
                     case 3: // processing
                         Toast.makeText(CustomerOrderPage.this, "select processing", Toast.LENGTH_SHORT).show();
+                        updateViewByList_processing(orderCards);
                         break;
                     case 4: // review
                         Toast.makeText(CustomerOrderPage.this, "select review", Toast.LENGTH_SHORT).show();
+                        updateViewByList_review(orderCards);
                         break;
                     case 5: // refund
                         Toast.makeText(CustomerOrderPage.this, "select refund", Toast.LENGTH_SHORT).show();
+                        updateViewByList_refund(orderCards);
                         break;
                 }
 
@@ -141,7 +154,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                         if(orderListDataHttpBaseBean.getSuccess()){
                             List<OrderCard> orderCards =
                                     getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                updateViewByList(orderCards);
+                                updateViewByList_all(orderCards);
                         }else{
                             //test
                         }
@@ -163,13 +176,13 @@ public class CustomerOrderPage extends AppCompatActivity {
         return null;
     }
 
-    private void updateViewByList(List<OrderCard> orderCards) {
+    private void updateViewByList_all(List<OrderCard> orderCards) {
         //RecyclerView down here
         RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
-        OrderCardAdapter orderCardAdapter = new OrderCardAdapter(orderCards);
+        OrderCardAdapterAll orderCardAdapter = new OrderCardAdapterAll(orderCards);
 
         orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
@@ -186,5 +199,122 @@ public class CustomerOrderPage extends AppCompatActivity {
 
         recyclerView.setAdapter(orderCardAdapter);
     }
+
+    private void updateViewByList_processing(List<OrderCard> orderCards) {
+        //RecyclerView down here
+        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        // Create an Adapter and set it to the ListView
+        OrderCardAdapterProcessing orderCardAdapter = new OrderCardAdapterProcessing(orderCards);
+
+        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0){
+                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
+                } else if (position == 1) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
+                }else if (position == 2) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        recyclerView.setAdapter(orderCardAdapter);
+    }
+    private void updateViewByList_unconfirmed(List<OrderCard> orderCards) {
+        //RecyclerView down here
+        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        // Create an Adapter and set it to the ListView
+        OrderCardAdapterUnconfirmed orderCardAdapter = new OrderCardAdapterUnconfirmed(orderCards);
+
+        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0){
+                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
+                } else if (position == 1) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
+                }else if (position == 2) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        recyclerView.setAdapter(orderCardAdapter);
+    }
+    private void updateViewByList_unpaid(List<OrderCard> orderCards) {
+        //RecyclerView down here
+        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        // Create an Adapter and set it to the ListView
+        OrderCardAdapterUnpaid orderCardAdapter = new OrderCardAdapterUnpaid(orderCards);
+
+        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0){
+                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
+                } else if (position == 1) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
+                }else if (position == 2) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        recyclerView.setAdapter(orderCardAdapter);
+    }
+    private void updateViewByList_review(List<OrderCard> orderCards) {
+        //RecyclerView down here
+        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        // Create an Adapter and set it to the ListView
+        OrderCardAdapterReview orderCardAdapter = new OrderCardAdapterReview(orderCards);
+
+        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0){
+                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
+                } else if (position == 1) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
+                }else if (position == 2) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        recyclerView.setAdapter(orderCardAdapter);
+    }
+    private void updateViewByList_refund(List<OrderCard> orderCards) {
+        //RecyclerView down here
+        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        // Create an Adapter and set it to the ListView
+        OrderCardAdapterRefund orderCardAdapter = new OrderCardAdapterRefund(orderCards);
+
+        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0){
+                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
+                } else if (position == 1) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
+                }else if (position == 2) {
+                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        recyclerView.setAdapter(orderCardAdapter);
+    }
+
 
 }
