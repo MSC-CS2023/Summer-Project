@@ -78,6 +78,11 @@ public class CustomerSettingPage extends AppCompatActivity implements View.OnCli
         sp.edit().putString("userType", "none").apply();
         sp.edit().putString("token", null).apply();
         sp.edit().putLong("exp", 0).apply();
-        startActivity(new Intent(this, CustomerLogin.class));
+
+
+        Intent intent = new Intent(this, CustomerLogin.class);
+        //finish the other activities
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 }
