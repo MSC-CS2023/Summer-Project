@@ -67,14 +67,17 @@
             android:name=".frontendCustomer.AccountPage.CustomerSettingAccountSecurity"
             android:exported="false" />
         <activity
-            android:name=".frontendProvider.ProviderRegister"
+            android:name=".frontendProvider.loginPages.ProviderRegister"
             android:exported="false" />
         <activity
             android:name=".frontendCustomer.loginPage.CustomerRegister"
             android:exported="false" />
         <activity
-            android:name=".frontendProvider.ProviderLogin"
+            android:name=".frontendProvider.loginPages.ProviderLogin"
             android:exported="true" />
+        <activity
+            android:name=".frontendProvider.ProviderMain"
+            android:exported="false" />
         <activity
             android:name=".frontendCustomer.loginPage.CustomerLogin"
             android:exported="true"
