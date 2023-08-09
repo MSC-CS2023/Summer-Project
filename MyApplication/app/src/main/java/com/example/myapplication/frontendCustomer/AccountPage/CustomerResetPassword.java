@@ -63,6 +63,8 @@ public class CustomerResetPassword extends AppCompatActivity implements View.OnC
             Toast.makeText(this, "submit click", Toast.LENGTH_SHORT).show();
         }
     }
+
+
     @SuppressLint("CheckResult")
     private void resetCustomerPassword(String token, String oldPassword, String newPassWord){
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);

@@ -153,31 +153,31 @@ public class CustomerSettingAccountSecurity extends AppCompatActivity {
                 });
     }
 
-    public void alertDialog(){
-        AlertDialog alertDialog= new AlertDialog.Builder(this)
-                .setIcon(R.drawable.btn_redheart)
-                .setTitle("title")
-                .setMessage("message")
-                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(CustomerSettingAccountSecurity.this, "sssss", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                })
-                .create();
-        alertDialog.show();
-
-        Button btnPos = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        btnPos.setTextColor(Color.RED);
-        Button btnNeg = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        btnNeg.setTextColor(Color.BLACK);
-    }
+//    public void alertDialog(){
+//        AlertDialog alertDialog= new AlertDialog.Builder(this)
+//                .setIcon(R.drawable.btn_redheart)
+//                .setTitle("title")
+//                .setMessage("message")
+//                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Toast.makeText(CustomerSettingAccountSecurity.this, "sssss", Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                    }
+//                })
+//                .create();
+//        alertDialog.show();
+//
+//        Button btnPos = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+//        btnPos.setTextColor(Color.RED);
+//        Button btnNeg = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+//        btnNeg.setTextColor(Color.BLACK);
+//    }
 
 }
 

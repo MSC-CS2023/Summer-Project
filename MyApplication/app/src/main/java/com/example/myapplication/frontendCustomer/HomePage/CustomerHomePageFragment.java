@@ -1,7 +1,9 @@
 package com.example.myapplication.frontendCustomer.HomePage;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -56,7 +58,8 @@ public class CustomerHomePageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_customer_home_page, container, false);
-
+        SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+        this.token = sp.getString("token", "");
 
         //5 top icons action here
 
@@ -104,7 +107,7 @@ public class CustomerHomePageFragment extends Fragment {
             });
         }
 
-//        randomlyRecommend(null, rootView);
+//        randomlyRecommend(this.token, rootView);
 
         // Create a demo data list
         List<ServiceCard> demoDataList = new ArrayList<>();
@@ -140,9 +143,9 @@ public class CustomerHomePageFragment extends Fragment {
 
     //Http request and change view after getting response.
     @SuppressLint("CheckResult")
-    private void randomlyRecommend(String recommendType, View view) {
+    private void randomlyRecommend(String token, View view) {
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.randomlyRecommend(this.token, DEFAULT_RECOMMEND_NUMBER)
+        customerApi.randomlyRecommend(token, DEFAULT_RECOMMEND_NUMBER)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {

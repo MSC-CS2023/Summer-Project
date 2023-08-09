@@ -26,6 +26,7 @@ import com.example.myapplication.Constant;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.HomePage.CustomerServiceDetailPage;
 import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.PublicMethodApi;
 import com.example.myapplication.network.RetrofitClient;
 
 import java.util.ArrayList;
@@ -39,8 +40,6 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 public class CustomerSearchPageFragment extends Fragment {
 
     private RecyclerView recyclerView;
-
-    private String token;
 
     private String sortType;
     private String isDescending;
@@ -139,9 +138,9 @@ public class CustomerSearchPageFragment extends Fragment {
 
 
     @SuppressLint("CheckResult")
-    private void searchByKeyword(String token, String keyword, String sortType, String isDescending, View view){
-        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.search(token, keyword, sortType, isDescending, 0, 10, "false")
+    private void searchByKeyword(String keyword, String sortType, String isDescending, View view){
+        PublicMethodApi publicMethodApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
+        publicMethodApi.search(keyword, sortType, isDescending, 0, 10, "false")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {
@@ -151,7 +150,7 @@ public class CustomerSearchPageFragment extends Fragment {
                             List<ServiceCard> serviceCards = getServiceCardList(
                                     serviceShortListDataHttpBaseBean.getData().getServices());
 
-//                            updateViewByList(serviceCards, view);
+                            updateViewByList(serviceCards, view);
                         }else {
                             //test
                         }
