@@ -123,6 +123,9 @@ public interface CustomerApi {
     Flowable<HttpBaseBean<ServiceShortListData>> randomlyRecommend(
             @Header("Authorization") String authorization, @Query("num") Integer recommendNum);
 
+    @GET("customer/renew_token")
+    Flowable<HttpBaseBean<LoginData>> customerReLogin(@Header("Authorization") String authorization);
+
     @POST("customer/modify_detail")
     @Multipart
     Flowable<HttpBaseBean<ModifyDetailData>> modifyCustomerDetail(@Header("Authorization") String authorization
@@ -143,10 +146,6 @@ public interface CustomerApi {
 
 
     //New
-
-
-    @GET("customer/renew_token")
-    Flowable<HttpBaseBean<LoginData>> customerReLogin(@Header("Authorization") String authorization);
 
     @GET("customer/search")
     Flowable<HttpBaseBean<ServiceShortListData>> search(@Header("Authorization") String authorization,

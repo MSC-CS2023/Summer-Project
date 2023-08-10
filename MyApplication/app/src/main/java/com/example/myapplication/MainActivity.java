@@ -17,6 +17,7 @@ import com.example.myapplication.frontendCustomer.CustomerMainActivity;
 import com.example.myapplication.frontendCustomer.loginPage.CustomerLogin;
 import com.example.myapplication.frontendProvider.loginPages.ProviderLogin;
 import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.RetrofitClient;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -112,7 +113,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
+    @SuppressLint("CheckResult")
     private void providerReLogin(String token){
+        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
+        providerApi.providerReLogin(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<LoginData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<LoginData> loginDataHttpBaseBean) {
+                        if(loginDataHttpBaseBean.getSuccess()){
+                            Toast.makeText(getApplicationContext(),
+                                    loginDataHttpBaseBean.getData().getUser().getUsername() + " login successfully",
+                                    Toast.LENGTH_SHORT).show();
+                            SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+                            sp.edit().putBoolean("isLoggedIn", true).apply();
+                            sp.edit().putString("userType", "provider").apply();
+                            sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
+                            sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
+                            startActivity(new Intent(MainActivity.this, CustomerMainActivity.class));
+                            finish();
+                        }else{
+                            Toast.makeText(getApplicationContext(),
+                                    "Please Login again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
     }
 
