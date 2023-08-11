@@ -1,5 +1,8 @@
 package com.example.myapplication.frontendProvider.homePages;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,12 +16,22 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.ServiceShort;
+import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendProvider.loginPages.ProviderLogin;
+import com.example.myapplication.network.ProviderApi;
+import com.example.myapplication.network.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +47,7 @@ public class ProviderServicesFragment extends Fragment{
     // TODO: Rename and change types of parameters
     private String mText;
     private View rootView;
+    private String token;
 
     private List<ProviderServiceCardData> data = new ArrayList<>();
 
@@ -63,6 +77,8 @@ public class ProviderServicesFragment extends Fragment{
         if (getArguments() != null) {
             mText = getArguments().getString(ARG_TEXT);
         }
+        SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+        this.token = sp.getString("token", "");
     }
 
     @Override
@@ -81,7 +97,14 @@ public class ProviderServicesFragment extends Fragment{
         title.setText(mText);
 
         //Set data and adaptor and item click event
+        data.add(new ProviderServiceCardData("Cleaning", "Some short description...",
+                "100", "img_sample1"));
+        data.add(new ProviderServiceCardData("Maintenance", "Some short description.....",
+                "200", "img_sample2"));
+        data.add(new ProviderServiceCardData("Laundry", "Some short description......",
+                "300", "img_sample1"));
         setAdapter();
+//        getProviderService(this.token);
 
         //Click on something
         setClick();
@@ -90,13 +113,6 @@ public class ProviderServicesFragment extends Fragment{
 
 
     private void setAdapter() {
-        data.add(new ProviderServiceCardData("Cleaning", "Some short description...",
-                "100", "img_sample1"));
-        data.add(new ProviderServiceCardData("Maintenance", "Some short description.....",
-                "200", "img_sample2"));
-        data.add(new ProviderServiceCardData("Laundry", "Some short description......",
-                "300", "img_sample1"));
-
         RecyclerView recyclerView = rootView.findViewById(R.id.rv_provider_services);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -172,6 +188,48 @@ public class ProviderServicesFragment extends Fragment{
 
             }
         });
+    }
+
+    @SuppressLint("CheckResult")
+    private void getProviderService(String token){
+        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
+        providerApi.getProviderServices(token, 0, 10)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<ServiceShortListData> serviceShortListDataHttpBaseBean) {
+                        if(serviceShortListDataHttpBaseBean.getSuccess()){
+                            data = getServiceCards(serviceShortListDataHttpBaseBean.getData().getServices());
+                            setAdapter();
+                        }else{
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private List<ProviderServiceCardData> getServiceCards(List<ServiceShort> serviceShorts){
+        List<ProviderServiceCardData> providerServiceCardDataList = new ArrayList<>();
+        ProviderServiceCardData providerServiceCardData;
+        for(ServiceShort serviceShort : serviceShorts){
+            providerServiceCardData = new ProviderServiceCardData(
+                    serviceShort.getTitle(), serviceShort.getDescription(),
+                    serviceShort.getFee().toString(), "img_sample1");
+            providerServiceCardDataList.add(providerServiceCardData);
+        }
+        return providerServiceCardDataList;
     }
 
 }

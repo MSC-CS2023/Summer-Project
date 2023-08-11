@@ -4,11 +4,11 @@ public class ProviderOderCardData {
 
     private String title;
     private Long orderNum;
-    private Double price;
+    private String price;
     private String imageSrc;
     private String state;
 
-    public ProviderOderCardData(String title, Long orderNum, Double price, String imageSrc, String state) {
+    public ProviderOderCardData(String title, Long orderNum, String price, String imageSrc, String state) {
         this.title = title;
         this.orderNum = orderNum;
         this.price = price;
@@ -32,11 +32,11 @@ public class ProviderOderCardData {
         this.orderNum = orderNum;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

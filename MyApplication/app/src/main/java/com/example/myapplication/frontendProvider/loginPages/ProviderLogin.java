@@ -72,7 +72,6 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
             } else if (view.getId() == R.id.txt_forget_password) {
                 Toast.makeText(getApplicationContext(),"click forget password", Toast.LENGTH_SHORT).show();
             }
-
         }
 
         @SuppressLint("CheckResult")
