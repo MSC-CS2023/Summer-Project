@@ -20,6 +20,8 @@ public class ServiceShort {
 
     private String username;
 
+    private String description;
+
     public Double getFee() { return fee; }
     public void setFee(Double value) { this.fee = value; }
 
@@ -39,4 +41,7 @@ public class ServiceShort {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getDescription() { return description; }
+    public void setDescription(String value) { this.description = value; }
 }

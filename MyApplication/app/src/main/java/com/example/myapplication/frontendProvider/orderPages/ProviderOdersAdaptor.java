@@ -37,7 +37,7 @@ public class ProviderOdersAdaptor extends RecyclerView.Adapter<ProviderOdersAdap
     public void onBindViewHolder(@NonNull ProviderOdersAdaptor.ViewHolder holder, int position) {
         holder.title.setText(data.get(position).getTitle());
         holder.orderNum.setText(data.get(position).getOrderNum().toString());
-        holder.price.setText(data.get(position).getPrice().toString());
+        holder.price.setText(data.get(position).getPrice());
         holder.image.setImageResource(context.getResources().getIdentifier(data.get(position).getImageSrc(),
                 "drawable", context.getPackageName()));
         holder.state.setText(data.get(position).getState());

@@ -2,6 +2,7 @@ package com.example.myapplication.network;
 
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.GetMessageData;
+import com.example.myapplication.Bean.Httpdata.data.LoginData;
 import com.example.myapplication.Bean.Httpdata.data.ModifyDetailData;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
@@ -107,6 +108,9 @@ public interface ProviderApi {
 
     @GET("service_provider/get_avatar_timestamp")
     Flowable<HttpBaseBean<TimeStampData>> getProviderAvatarTimeStamp(@Header("Authorization") String authorization);
+
+    @GET("service_provider/renew_token")
+    Flowable<HttpBaseBean<LoginData>> providerReLogin(@Header("Authorization") String authorization);
 
     @POST("service_provider/modify_detail")
     @Multipart
