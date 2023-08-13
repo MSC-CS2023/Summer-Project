@@ -1,6 +1,6 @@
 package com.example.myapplication.frontendProvider.orderPages;
 
-public class ProviderOderCardData {
+public class ProviderOrderCardData {
 
     private String title;
     private Long orderNum;
@@ -8,7 +8,7 @@ public class ProviderOderCardData {
     private String imageSrc;
     private String state;
 
-    public ProviderOderCardData(String title, Long orderNum, String price, String imageSrc, String state) {
+    public ProviderOrderCardData(String title, Long orderNum, String price, String imageSrc, String state) {
         this.title = title;
         this.orderNum = orderNum;
         this.price = price;

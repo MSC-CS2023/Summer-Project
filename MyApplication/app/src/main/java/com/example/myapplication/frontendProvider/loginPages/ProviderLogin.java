@@ -30,7 +30,6 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
     ImageButton btnBackMain;
     ImageButton btnProviderLogin;
     TextView txtProviderRegister;
-    TextView txtProviderForgetPassword;
     EditText txtUsername;
     EditText txtPassword;
     
@@ -45,8 +44,6 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
         btnProviderLogin.setOnClickListener(this);
         txtProviderRegister = findViewById(R.id.txt_sign_up);
         txtProviderRegister.setOnClickListener(this);
-        txtProviderForgetPassword = findViewById(R.id.txt_forget_password);
-        txtProviderForgetPassword.setOnClickListener(this);
 
         txtUsername = findViewById(R.id.edtxt_username);
         txtPassword = findViewById(R.id.edtxt_password);
@@ -69,8 +66,6 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
             } else if (view.getId() == R.id.txt_sign_up) {
                 Intent intentToProviderRegisterPage = new Intent(ProviderLogin.this, ProviderRegister.class);
                 startActivity(intentToProviderRegisterPage);
-            } else if (view.getId() == R.id.txt_forget_password) {
-                Toast.makeText(getApplicationContext(),"click forget password", Toast.LENGTH_SHORT).show();
             }
         }
 

@@ -17,17 +17,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/avatar"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/circular_background"
                 android:scaleType="centerCrop"
-                android:src="@drawable/btn_avatar1"></ImageButton>
+                android:src="@drawable/btn_avatar3" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -41,13 +45,14 @@
                     android:layout_height="wrap_content"
                     android:text="username"
                     android:textSize="20dp"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/serviceInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="user information, clarify what kind of service "
+                    android:maxLines="1"
+                    android:text="user information, clarify what kind of service dsdsfsfdsfdsfsdfsefewew "
                     android:textColor="#333232"></TextView>
 
             </LinearLayout>

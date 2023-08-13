@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class CustomerOrderPage extends AppCompatActivity {
 
     List<OrderCard> orderCards = new ArrayList<>();
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class CustomerOrderPage extends AppCompatActivity {
 
         initialTopBar();
 
+        swipeDown();
+
         //test
 
         orderCards.add(new OrderCard("yes", "123", "ok", "200", 2));
@@ -55,6 +60,19 @@ public class CustomerOrderPage extends AppCompatActivity {
 
         updateViewByList_all(orderCards);
 
+    }
+
+    private void swipeDown() {
+        swipeRefreshLayout = findViewById(R.id.swipeOrderPage);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //add refresh action here
+                Toast.makeText(CustomerOrderPage.this, "refresh action", Toast.LENGTH_SHORT).show();
+                //stop refresh
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     public void setToolBar() {
@@ -198,6 +216,25 @@ public class CustomerOrderPage extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(orderCardAdapter);
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void updateViewByList_processing(List<OrderCard> orderCards) {
@@ -222,6 +259,26 @@ public class CustomerOrderPage extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(orderCardAdapter);
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
     private void updateViewByList_unconfirmed(List<OrderCard> orderCards) {
         //RecyclerView down here
@@ -245,6 +302,26 @@ public class CustomerOrderPage extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(orderCardAdapter);
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
     private void updateViewByList_unpaid(List<OrderCard> orderCards) {
         //RecyclerView down here
@@ -268,6 +345,26 @@ public class CustomerOrderPage extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(orderCardAdapter);
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
     private void updateViewByList_review(List<OrderCard> orderCards) {
         //RecyclerView down here
@@ -291,6 +388,26 @@ public class CustomerOrderPage extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(orderCardAdapter);
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
     private void updateViewByList_refund(List<OrderCard> orderCards) {
         //RecyclerView down here
@@ -314,6 +431,26 @@ public class CustomerOrderPage extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(orderCardAdapter);
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
 

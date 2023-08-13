@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.myapplication.R;
-import com.example.myapplication.frontendProvider.ProviderProfileFragment.ProviderProfileFragment;
+import com.example.myapplication.frontendProvider.profilePages.ProviderProfileFragment;
 import com.example.myapplication.frontendProvider.homePages.ProviderServicesFragment;
 import com.example.myapplication.frontendProvider.messagePages.ProviderMessageFragment;
 import com.example.myapplication.frontendProvider.orderPages.ProviderOrdersFragment;

@@ -4,11 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +43,8 @@ public class CustomerHomePageFragment extends Fragment {
     private static final Integer DEFAULT_RECOMMEND_NUMBER = 6;
     private String token;
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
 
     List<ImageButton> buttonList = new ArrayList<>();
     ImageButton buttonCleaning;
@@ -61,8 +67,35 @@ public class CustomerHomePageFragment extends Fragment {
         SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
 
-        //5 top icons action here
 
+        //5 top icons action here
+        topIconAction(rootView);
+
+//        randomlyRecommend(this.token, rootView);
+
+        // Create a demo data list
+        createDemoDate(rootView);
+
+        //set swipe refresh
+        swipeDown(rootView);
+
+        return rootView;
+    }
+
+    private void swipeDown(View rootView) {
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeHomePage);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //add refresh action here
+                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
+                //stop refresh
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+    }
+
+    private void topIconAction(View rootView) {
         buttonCleaning = rootView.findViewById(R.id.cleaning);
         buttonMaintain = rootView.findViewById(R.id.maintain);
         buttonLaundry = rootView.findViewById(R.id.laundry);
@@ -106,10 +139,9 @@ public class CustomerHomePageFragment extends Fragment {
                 }
             });
         }
+    }
 
-//        randomlyRecommend(this.token, rootView);
-
-        // Create a demo data list
+    private void createDemoDate(View rootView) {
         List<ServiceCard> demoDataList = new ArrayList<>();
 
         ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",  "available tomorrow");
@@ -127,11 +159,7 @@ public class CustomerHomePageFragment extends Fragment {
         demoDataList.add(serviceCard6);
 
         updateViewByList(demoDataList, rootView);
-
-
-        return rootView;
     }
-
 
     private void resetButton() {
         buttonCleaning.setImageResource(R.drawable.btn_cleaning);
@@ -194,7 +222,6 @@ public class CustomerHomePageFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
         ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards, getContext());
-
         serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -203,10 +230,58 @@ public class CustomerHomePageFragment extends Fragment {
                 } else if (position == 1) {
                     // 还没想好怎么把position和数据库里面的id绑定起来，现在这样只能根据index来确定点击了哪一个
                 }
+
+
+
             }
         });
 
         recyclerView.setAdapter(serviceCardAdapter);
+
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
+
+
+
+    }
+
+
+    private Bitmap getRoundedBitmap(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int radius = Math.min(width, height) / 2;
+
+        Bitmap output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        android.graphics.Canvas canvas = new android.graphics.Canvas(output);
+
+        android.graphics.Path path = new android.graphics.Path();
+        path.addCircle(width / 2, height / 2, radius, android.graphics.Path.Direction.CW);
+
+        canvas.clipPath(path);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+
+        return output;
     }
 
 

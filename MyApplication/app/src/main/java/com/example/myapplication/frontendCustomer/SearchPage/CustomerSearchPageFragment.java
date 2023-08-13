@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,7 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerSearchPageFragment extends Fragment {
 
-    private RecyclerView recyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private String sortType;
     private String isDescending;
@@ -57,37 +58,52 @@ public class CustomerSearchPageFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_customer_search_page, container, false);
 
+        spinnerForSort(rootView);
 
-        //spinner for sort
-        Spinner sort = rootView.findViewById(R.id.sort);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),R.array.sort, android.R.layout.simple_spinner_item);
-        adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        sort.setAdapter(adapter1);
+        spinnerForDistance(rootView);
 
-        sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        createDemoData(rootView);
+
+        swipeDown(rootView);
+
+
+        return rootView;
+    }
+
+    private void swipeDown(View rootView) {
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeSearchPage);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
-                if (index == 0){
-                    Toast.makeText(getContext(), "select Comprehensive", Toast.LENGTH_SHORT).show();
-                } else if (index == 1) {
-                    Toast.makeText(getContext(), "select By Rating", Toast.LENGTH_SHORT).show();
-                }else if (index == 2) {
-                    Toast.makeText(getContext(), "select Price Ascending", Toast.LENGTH_SHORT).show();
-                }else if (index == 3) {
-                    Toast.makeText(getContext(), "select Price Descending", Toast.LENGTH_SHORT).show();
-                }else if (index == 4) {
-                    Toast.makeText(getContext(), "select Credit", Toast.LENGTH_SHORT).show();
-                }
-            }
+            public void onRefresh() {
+                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+                //stop refresh
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
 
+    private void createDemoData(View rootView) {
+        List<ServiceCard> demoDataList = new ArrayList<>();
 
-//   spinner for distance
+        ServiceCard serviceCard1 = new ServiceCard("Eric", "Repair Air conditioner", "100", "available tomorrow");
+        ServiceCard serviceCard2 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+        ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today");
+        ServiceCard serviceCard4 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+        ServiceCard serviceCard5 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+        ServiceCard serviceCard6 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+
+        demoDataList.add(serviceCard1);
+        demoDataList.add(serviceCard2);
+        demoDataList.add(serviceCard3);
+        demoDataList.add(serviceCard4);
+        demoDataList.add(serviceCard5);
+        demoDataList.add(serviceCard6);
+
+        updateViewByList(demoDataList, rootView);
+    }
+
+    private void spinnerForDistance(View rootView) {
         Spinner distance = rootView.findViewById(R.id.distance);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),R.array.distance, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -113,27 +129,39 @@ public class CustomerSearchPageFragment extends Fragment {
 
             }
         });
+    }
 
-        // Create a demo data list
-        List<ServiceCard> demoDataList = new ArrayList<>();
+    private void spinnerForSort(View rootView) {
+        Spinner sort = rootView.findViewById(R.id.sort);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),R.array.sort, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        sort.setAdapter(adapter1);
 
-        ServiceCard serviceCard1 = new ServiceCard("Eric", "Repair Air conditioner", "100", "available tomorrow");
-        ServiceCard serviceCard2 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
-        ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today");
-        ServiceCard serviceCard4 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
-        ServiceCard serviceCard5 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
-        ServiceCard serviceCard6 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+        sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
+                if (index == 0){
+                    Toast.makeText(getContext(), "select Price Ascending", Toast.LENGTH_SHORT).show();
+                } else if (index == 1) {
+                    Toast.makeText(getContext(), "select Price Descending", Toast.LENGTH_SHORT).show();
+                }else if (index == 2) {
+                    Toast.makeText(getContext(), "select Time Ascending", Toast.LENGTH_SHORT).show();
+                }else if (index == 3) {
+                    Toast.makeText(getContext(), "select Time Descending", Toast.LENGTH_SHORT).show();
+                }else if (index == 4) {
+                    Toast.makeText(getContext(), "select Comprehensive", Toast.LENGTH_SHORT).show();
+                }else if (index == 5) {
+                    Toast.makeText(getContext(), "select By Rating", Toast.LENGTH_SHORT).show();
+                }else if (index == 6) {
+                    Toast.makeText(getContext(), "select Credit", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        demoDataList.add(serviceCard1);
-        demoDataList.add(serviceCard2);
-        demoDataList.add(serviceCard3);
-        demoDataList.add(serviceCard4);
-        demoDataList.add(serviceCard5);
-        demoDataList.add(serviceCard6);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-        updateViewByList(demoDataList, rootView);
-
-        return rootView;
+            }
+        });
     }
 
 
@@ -183,7 +211,7 @@ public class CustomerSearchPageFragment extends Fragment {
 
     private void updateViewByList(List<ServiceCard> serviceCards, View view) {
         //RecyclerView down here
-        RecyclerView recyclerView = view.findViewById(R.id.homepageRecyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.searchPageRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
@@ -201,6 +229,34 @@ public class CustomerSearchPageFragment extends Fragment {
         });
 
         recyclerView.setAdapter(serviceCardAdapter);
+
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    // load action
+                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
+
+
+
     }
 
     //Use adapter data list to update view.

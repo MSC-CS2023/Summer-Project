@@ -49,10 +49,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="sort">
-        <item>Comprehensive</item>
-        <item>By Rating</item>
         <item>Price Ascending</item>
         <item>Price Descending</item>
+        <item>Time Ascending</item>
+        <item>Time Descending</item>
+        <item>Comprehensive</item>
+        <item>By Rating</item>
         <item>Credit</item>
 
     </string-array>

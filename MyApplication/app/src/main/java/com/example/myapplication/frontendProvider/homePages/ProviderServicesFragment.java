@@ -1,5 +1,7 @@
 package com.example.myapplication.frontendProvider.homePages;
 
+
+import android.content.Intent;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -123,6 +125,10 @@ public class ProviderServicesFragment extends Fragment{
             @Override
             public void onRecyclerItemClick(int position) {
                 Toast.makeText(getContext(),"Item" + position + "clicked.", Toast.LENGTH_SHORT).show();
+
+                //在此处从fragment传数据给详情的activity
+                Intent intentToDetail = new Intent(getContext(), ProviderServiceDetailActivity.class);
+                startActivity(intentToDetail);
             }
         });
     }
@@ -135,7 +141,9 @@ public class ProviderServicesFragment extends Fragment{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Create new services", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Create new service", Toast.LENGTH_SHORT).show();
+                Intent intentAddService = new Intent(getContext(), ProviderCreateServiceActivity.class);
+                startActivity(intentAddService);
             }
         });
 

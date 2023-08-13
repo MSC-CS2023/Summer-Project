@@ -125,12 +125,19 @@
 
 
     <!--   scroll content in the middle -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeHomePage"
+        android:layout_width="match_parent"
+        android:layout_marginTop="75dp"
+        android:layout_height="match_parent">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homepageRecyclerView"
-        android:layout_marginTop="75dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/service_card_item"></androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 

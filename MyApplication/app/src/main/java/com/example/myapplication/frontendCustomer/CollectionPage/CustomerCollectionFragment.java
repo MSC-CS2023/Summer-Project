@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,8 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 public class CustomerCollectionFragment extends Fragment {
     String token;
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
 
     public CustomerCollectionFragment() {
     }
@@ -55,6 +58,29 @@ public class CustomerCollectionFragment extends Fragment {
 
 //        getCustomerFavourites(this.token, rootView);
         //test
+        createDemoData(rootView);
+
+
+        swipeDown(rootView);
+
+        return rootView;
+    }
+
+
+    private void swipeDown(View rootView) {
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeCollectionPage);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
+
+                //stop refresh
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+    }
+
+    private void createDemoData(View rootView) {
         List<ServiceCard> demoDataList = new ArrayList<>();
 
         ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",  "available tomorrow");
@@ -73,7 +99,6 @@ public class CustomerCollectionFragment extends Fragment {
 
         updateViewByList(demoDataList, rootView);
 
-        return rootView;
     }
 
     @SuppressLint("CheckResult")
@@ -142,6 +167,27 @@ public class CustomerCollectionFragment extends Fragment {
         });
 
         recyclerView.setAdapter(serviceCardAdapter);
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    // load action
+                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.myapplication.frontendProvider.orderPages;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.CaseMap;
 import android.os.Bundle;
@@ -51,7 +52,7 @@ public class ProviderOrdersFragment extends Fragment {
     private View rootView;
     private String token;
 
-    private List<ProviderOderCardData> data = new ArrayList<>();
+    private List<ProviderOrderCardData> data = new ArrayList<>();
 
     public ProviderOrdersFragment() {
         // Required empty public constructor
@@ -100,11 +101,11 @@ public class ProviderOrdersFragment extends Fragment {
         title.setText(mTitle);
 
         //Set data and adaptor
-        data.add(new ProviderOderCardData("Cleaning", 382789574L, "100",
+        data.add(new ProviderOrderCardData("Cleaning", 382789574L, "100",
                 "img_sample2", "Unpaid"));
-        data.add(new ProviderOderCardData("Cleaning", 382723474L, "200",
+        data.add(new ProviderOrderCardData("Maintenance", 382723474L, "200",
                 "img_sample1", "Unconfirmed"));
-        data.add(new ProviderOderCardData("Cleaning", 384389574L, "300",
+        data.add(new ProviderOrderCardData("Laundry", 384389574L, "300",
                 "img_sample2", "Processing"));
         setAdaptor();
 //        getProviderOrder(this.token);
@@ -116,13 +117,20 @@ public class ProviderOrdersFragment extends Fragment {
     private void setAdaptor() {
         RecyclerView recyclerView = rootView.findViewById(R.id.rv_provider_orders);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        ProviderOdersAdaptor providerOdersAdaptor = new ProviderOdersAdaptor(data, getContext());
-        recyclerView.setAdapter(providerOdersAdaptor);
+        ProviderOrdersAdaptor providerOrdersAdaptor = new ProviderOrdersAdaptor(data, getContext());
+        recyclerView.setAdapter(providerOrdersAdaptor);
 
-        providerOdersAdaptor.setRecyclerItemClickListener(new ProviderServicesAdaptor.OnRecyclerItemClickListener() {
+        //监听每一个item的点击
+        providerOrdersAdaptor.setRecyclerItemClickListener(new ProviderServicesAdaptor.OnRecyclerItemClickListener() {
             @Override
             public void onRecyclerItemClick(int position) {
-                Toast.makeText(getContext(),"Item" + position + "clicked.", Toast.LENGTH_SHORT).show();
+                Intent intentToUnconfirmedOrder = new Intent(getContext(), ProviderOrderDetailUnconfirmedActivity.class);
+                Intent intentToProcessingOrder = new Intent(getContext(), ProviderOrderDetailProcessingActivity.class);
+                Intent intentToRejectedOrder = new Intent(getContext(), ProviderOrderDetailRejectedActivity.class);
+                Intent intentToFinishedOrder = new Intent(getContext(), ProviderOrderDetailFinishedActivity.class);
+
+                //先判断订单是什么状态，然后跳转到对应的activity（区别布局内的按钮）
+                startActivity(intentToUnconfirmedOrder);
             }
         });
     }
@@ -150,19 +158,19 @@ public class ProviderOrdersFragment extends Fragment {
 //                        getProviderOrder(token);
                         break;
                     case 1:
-                        Toast.makeText(getContext(), "Unpaid clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Unconfirmed clicked", Toast.LENGTH_SHORT).show();
 //                        getProviderOrderByType(token, "is_confirmed");
                         break;
                     case 2:
-                        Toast.makeText(getContext(), "Unconfirmed clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Processing clicked", Toast.LENGTH_SHORT).show();
 //                        getProviderOrderByType(token, "is_finished");
                         break;
                     case 3:
-                        Toast.makeText(getContext(), "Processing clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Rejected clicked", Toast.LENGTH_SHORT).show();
 //                        getProviderOrderByType(token, "is_canceled");
                         break;
                     case 4:
-                        Toast.makeText(getContext(), "Done clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Finished clicked", Toast.LENGTH_SHORT).show();
 //                        getProviderOrderByType(token, "is_rejected");
                         break;
                     default:
@@ -238,10 +246,10 @@ public class ProviderOrdersFragment extends Fragment {
                 });
     }
 
-    private List<ProviderOderCardData> getOrderList(List<Order> orders){
-        List<ProviderOderCardData> providerOderCardList = new ArrayList<>();
+    private List<ProviderOrderCardData> getOrderList(List<Order> orders){
+        List<ProviderOrderCardData> providerOderCardList = new ArrayList<>();
         String state;
-        ProviderOderCardData providerOderCardData;
+        ProviderOrderCardData providerOrderCardData;
         for(Order order : orders){
             if(order.getIsCanceled()){
                 state = "Canceled";
@@ -254,10 +262,10 @@ public class ProviderOrdersFragment extends Fragment {
             }else{
                 state = "null";
             }
-            providerOderCardData = new ProviderOderCardData(
+            providerOrderCardData = new ProviderOrderCardData(
                     "Title to add", order.getId(),
                     "Price to add", "img_sample2", state);
-            providerOderCardList.add(providerOderCardData);
+            providerOderCardList.add(providerOrderCardData);
         }
         return providerOderCardList;
     }

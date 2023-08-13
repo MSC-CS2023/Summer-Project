@@ -15,26 +15,26 @@ import com.example.myapplication.frontendProvider.homePages.ProviderServicesAdap
 
 import java.util.List;
 
-public class ProviderOdersAdaptor extends RecyclerView.Adapter<ProviderOdersAdaptor.ViewHolder> {
+public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAdaptor.ViewHolder> {
 
-    private List<ProviderOderCardData> data;
+    private List<ProviderOrderCardData> data;
     private Context context;
 
-    public ProviderOdersAdaptor(List<ProviderOderCardData> data, Context context) {
+    public ProviderOrdersAdaptor(List<ProviderOrderCardData> data, Context context) {
         this.data = data;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ProviderOdersAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProviderOrdersAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.recyclerview_item_provider_order, null);
         return new ViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")    //help toString method below
     @Override
-    public void onBindViewHolder(@NonNull ProviderOdersAdaptor.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProviderOrdersAdaptor.ViewHolder holder, int position) {
         holder.title.setText(data.get(position).getTitle());
         holder.orderNum.setText(data.get(position).getOrderNum().toString());
         holder.price.setText(data.get(position).getPrice());

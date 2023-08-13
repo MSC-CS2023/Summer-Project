@@ -1,5 +1,6 @@
 package com.example.myapplication.frontendProvider.messagePages;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -100,6 +101,9 @@ public class ProviderMessageFragment extends Fragment {
             @Override
             public void onRecyclerItemClick(int position) {
                 Toast.makeText(getContext(),"Item" + position + "clicked.", Toast.LENGTH_SHORT).show();
+                //需要从当前fragment传数据给消息详情页activity
+                Intent intentToMessageDetail = new Intent(getContext(), ProviderMessageDetailActivity.class);
+                startActivity(intentToMessageDetail);
             }
         });
     }

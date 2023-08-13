@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -30,6 +31,8 @@ public class CustomerWalletPage extends AppCompatActivity {
     ImageButton recharge;
     List<TransactionCard> transactionCards = new ArrayList<>();
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,8 @@ public class CustomerWalletPage extends AppCompatActivity {
 
         setToolBar();
 
+        swipeDown();
+
         //test
         transactionCards.add(new TransactionCard("Alice", "receive", "08/09/2023", "200"));
         transactionCards.add(new TransactionCard("Pete", "pay", "05/09/2023", "300"));
@@ -52,6 +57,19 @@ public class CustomerWalletPage extends AppCompatActivity {
 
         updateView(transactionCards);
 
+    }
+
+    private void swipeDown() {
+        swipeRefreshLayout = findViewById(R.id.swipeTransaction);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //add refresh action here
+                Toast.makeText(CustomerWalletPage.this, "refresh action", Toast.LENGTH_SHORT).show();
+                //stop refresh
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
 
@@ -123,6 +141,26 @@ public class CustomerWalletPage extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(transactionCardAdapter);
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    Toast.makeText(CustomerWalletPage.this, "load more", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
 

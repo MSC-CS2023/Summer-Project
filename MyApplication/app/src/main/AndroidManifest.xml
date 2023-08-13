@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,6 +18,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+        <activity
+            android:name=".frontendProvider.profilePages.ProviederWalletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frontendProvider.profilePages.ProviderMapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frontendProvider.profilePages.ProviderTimetableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frontendProvider.orderPages.ProviderOrderDetailFinishedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frontendProvider.orderPages.ProviderOrderDetailRejectedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frontendProvider.orderPages.ProviderOrderDetailProcessingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frontendProvider.orderPages.ProviderOrderDetailUnconfirmedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frontendProvider.messagePages.ProviderMessageDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frontendProvider.homePages.ProviderCreateServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frontendProvider.homePages.ProviderServiceDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- add choose activity -->
+        <activity
+            android:name=".ChooseActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".frontendCustomer.AccountPage.CustomerResetPassword"
             android:exported="false" />
@@ -83,15 +125,6 @@
             android:exported="true"
             android:label="@string/title_activity_customer_login"
             android:theme="@style/Theme.MyApplication" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

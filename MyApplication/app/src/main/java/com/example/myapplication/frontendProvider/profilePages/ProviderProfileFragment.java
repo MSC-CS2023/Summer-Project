@@ -1,5 +1,6 @@
-package com.example.myapplication.frontendProvider.ProviderProfileFragment;
+package com.example.myapplication.frontendProvider.profilePages;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 
@@ -16,7 +19,7 @@ import com.example.myapplication.R;
  * Use the {@link ProviderProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProviderProfileFragment extends Fragment {
+public class ProviderProfileFragment extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +28,10 @@ public class ProviderProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mTitle;
     private View rootView;
+    private ImageButton wallet;
+    private ImageButton timetable;
+    private ImageButton map;
+    private ImageButton setting;
 
     public ProviderProfileFragment() {
         // Required empty public constructor
@@ -68,5 +75,29 @@ public class ProviderProfileFragment extends Fragment {
     private void initView() {
         TextView title = rootView.findViewById(R.id.title);
         title.setText(mTitle);
+
+        wallet = rootView.findViewById(R.id.btn_wallet);
+        wallet.setOnClickListener(this);
+        timetable = rootView.findViewById(R.id.btn_timetable);
+        timetable.setOnClickListener(this);
+        map = rootView.findViewById(R.id.btn_map);
+        map.setOnClickListener(this);
+        setting = rootView.findViewById(R.id.btn_setting);
+        setting.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.btn_wallet) {
+            Toast.makeText(getContext(), "Wallet clicked", Toast.LENGTH_SHORT).show();
+        } else if(view.getId() == R.id.btn_timetable) {
+            Intent intentToTimetable = new Intent(getContext(), ProviderTimetableActivity.class);
+            startActivity(intentToTimetable);
+        } else if(view.getId() == R.id.btn_map) {
+            Intent intentToMap = new Intent(getContext(), ProviderMapActivity.class);
+            startActivity(intentToMap);
+        } else if(view.getId() == R.id.btn_setting) {
+            Toast.makeText(getContext(), "Setting clicked", Toast.LENGTH_SHORT).show();
+        }
     }
 }

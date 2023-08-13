@@ -2,6 +2,8 @@ package com.example.myapplication.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,12 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
         holder.serviceImg.setImageResource(serviceCard.getServiceImgSrcId());
         holder.serviceState.setText(serviceCard.getState());
 
+        //set avatar circular  Import a square image and automatically crop it into a circle
+        //R.drawable.btn_avatar3 can be replaced by serviceCard.getAvatarSrcId()
+        Bitmap originalBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.btn_avatar3);
+        Bitmap circularBitmap = getRoundedBitmap(originalBitmap);
+        holder.avatar.setImageBitmap(circularBitmap);
+
     }
 
     @Override
@@ -68,6 +76,23 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+    }
+
+    private Bitmap getRoundedBitmap(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int radius = Math.min(width, height) / 2;
+
+        Bitmap output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        android.graphics.Canvas canvas = new android.graphics.Canvas(output);
+
+        android.graphics.Path path = new android.graphics.Path();
+        path.addCircle(width / 2, height / 2, radius, android.graphics.Path.Direction.CW);
+
+        canvas.clipPath(path);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+
+        return output;
     }
 
 
@@ -105,6 +130,8 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
 
 
         }
+
+
 
         public void bindData(int position) {
             myPosition = position;
