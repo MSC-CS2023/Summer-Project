@@ -3,26 +3,33 @@ package com.example.myapplication.Bean.AdapterData;
 import com.example.myapplication.R;
 
 public class ServiceCard {
+    private Long serviceId;
+
     private String username;
     private String providerAvatarSrc;
     private String serviceTitle;
     private String servicePrice;
+    private String serviceInfo;
+
+    private String servicePictureSrc;
 
     //to add
-    private String serviceInfo;
     private int collectionSrcId;
     private int serviceImgSrcId;
     private String state;
     private int avatarSrcId;
 
-    public ServiceCard(String username, String servicePrice, String serviceTitle, String providerAvatarSrc){
+    public ServiceCard(String username, String servicePrice, String serviceTitle,
+                       String providerAvatarSrc, String serviceInfo, String servicePictureSrc, Long serviceId){
         this.username = username;
         this.servicePrice = servicePrice;
         this.serviceTitle = serviceTitle;
         this.providerAvatarSrc = providerAvatarSrc;
+        this.serviceInfo = serviceInfo;
+        this.servicePictureSrc = servicePictureSrc;
+        this.serviceId = serviceId;
 
         //to add
-        this.serviceInfo = "some info balabalabala";
         this.state = "available tomorrow";
         this.serviceImgSrcId = R.drawable.img_sample1;
         this.collectionSrcId = R.drawable.btn_emptyheart;
@@ -102,5 +109,21 @@ public class ServiceCard {
 
     public void setAvatarSrcId(int setAvatarSrcId) {
         this.state = state;
+    }
+
+    public String getServicePictureSrc() {
+        return servicePictureSrc;
+    }
+
+    public void setServicePictureSrc(String servicePictureSrc) {
+        this.servicePictureSrc = servicePictureSrc;
+    }
+
+    public Long getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
     }
 }

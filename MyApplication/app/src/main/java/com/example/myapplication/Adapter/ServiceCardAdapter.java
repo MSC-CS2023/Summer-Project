@@ -48,13 +48,14 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
 
         holder.bindData(position);
 //        Glide.with(this.context).load(serviceCard.getProviderAvatarSrc()).into(holder.avatar);
+//        Glide.with(this.context).load(serviceCard.getServicePictureSrc()).into(holder.serviceImg);
         holder.avatar.setImageResource(serviceCard.getAvatarSrcId());
+        holder.serviceImg.setImageResource(serviceCard.getServiceImgSrcId());
         holder.username.setText(serviceCard.getUsername());
         holder.serviceTitle.setText(serviceCard.getServiceTitle());
         holder.servicePrice.setText("￡" + serviceCard.getServicePrice());
         holder.serviceInfo.setText(serviceCard.getServiceInfo());
         holder.collection.setImageResource(serviceCard.getCollectionSrcId());
-        holder.serviceImg.setImageResource(serviceCard.getServiceImgSrcId());
         holder.serviceState.setText(serviceCard.getState());
 
         //set avatar circular  Import a square image and automatically crop it into a circle

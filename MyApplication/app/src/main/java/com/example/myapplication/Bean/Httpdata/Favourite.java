@@ -4,15 +4,15 @@ public class Favourite {
     /**
      * The customer id.
      */
-    private long customerId;
+    private Long customerId;
     /**
      * The favourite id.
      */
-    private long id;
+    private Long id;
     /**
      * The service id.
      */
-    private long serviceId;
+    private Long serviceId;
     /**
      * A short service of the id.
      */
@@ -20,20 +20,20 @@ public class Favourite {
     /**
      * The time when it is added to the favourite.
      */
-    private long timestamp;
+    private Long timestamp;
 
-    public long getCustomerId() { return customerId; }
-    public void setCustomerId(long value) { this.customerId = value; }
+    public Long getCustomerId() { return customerId; }
+    public void setCustomerId(Long value) { this.customerId = value; }
 
-    public long getId() { return id; }
-    public void setId(long value) { this.id = value; }
+    public Long getId() { return id; }
+    public void setId(Long value) { this.id = value; }
 
-    public long getServiceId() { return serviceId; }
-    public void setServiceId(long value) { this.serviceId = value; }
+    public Long getServiceId() { return serviceId; }
+    public void setServiceId(Long value) { this.serviceId = value; }
 
     public ServiceShort getServiceShort() { return serviceShort; }
     public void setServiceShort(ServiceShort value) { this.serviceShort = value; }
 
-    public long getTimestamp() { return timestamp; }
-    public void setTimestamp(long value) { this.timestamp = value; }
+    public Long getTimestamp() { return timestamp; }
+    public void setTimestamp(Long value) { this.timestamp = value; }
 }

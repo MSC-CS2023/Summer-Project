@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,8 @@ public class CustomerHomePageFragment extends Fragment {
     private static final Integer DEFAULT_RECOMMEND_NUMBER = 6;
     private String token;
 
+    List<ServiceCard> dataList;
+
     SwipeRefreshLayout swipeRefreshLayout;
 
 
@@ -71,10 +74,10 @@ public class CustomerHomePageFragment extends Fragment {
         //5 top icons action here
         topIconAction(rootView);
 
-//        randomlyRecommend(this.token, rootView);
-
         // Create a demo data list
         createDemoDate(rootView);
+//        randomlyRecommend(this.token, rootView, false);
+
 
         //set swipe refresh
         swipeDown(rootView);
@@ -88,7 +91,9 @@ public class CustomerHomePageFragment extends Fragment {
             @Override
             public void onRefresh() {
                 //add refresh action here
+                createDemoDate(rootView);
                 Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
+//                randomlyRecommend(token, rootView, false);
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -142,23 +147,24 @@ public class CustomerHomePageFragment extends Fragment {
     }
 
     private void createDemoDate(View rootView) {
-        List<ServiceCard> demoDataList = new ArrayList<>();
+        List<ServiceCard> serviceCards = new ArrayList<>();
+        dataList = serviceCards;
 
-        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",  "available tomorrow");
-        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",  "available today");
-        ServiceCard serviceCard3 = new ServiceCard("Alice", "150","Clean gutter",  "available today");
-        ServiceCard serviceCard4 = new ServiceCard("Alice", "150","Clean gutter", "available today");
-        ServiceCard serviceCard5 = new ServiceCard("Alice", "150","Clean gutter", "available today");
-        ServiceCard serviceCard6 = new ServiceCard("Alice", "150","Clean gutter","available today");
+        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
+                "available tomorrow", "balabala", "picSrc", 213L);
+        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
+                "available today", "balabala", "picSrc", 213L);
+        ServiceCard serviceCard3 = new ServiceCard("Alice", "150","Clean gutter",
+                "available today", "balabala", "picSrc",213L);
+        ServiceCard serviceCard4 = new ServiceCard("Alice", "150","Clean gutter",
+                "available today", "balabala", "picSrc",213L);
 
-        demoDataList.add(serviceCard1);
-        demoDataList.add(serviceCard2);
-        demoDataList.add(serviceCard3);
-        demoDataList.add(serviceCard4);
-        demoDataList.add(serviceCard5);
-        demoDataList.add(serviceCard6);
+        dataList.add(serviceCard1);
+        dataList.add(serviceCard2);
+        dataList.add(serviceCard3);
+        dataList.add(serviceCard4);
 
-        updateViewByList(demoDataList, rootView);
+        updateViewByList(dataList, rootView);
     }
 
     private void resetButton() {
@@ -171,7 +177,7 @@ public class CustomerHomePageFragment extends Fragment {
 
     //Http request and change view after getting response.
     @SuppressLint("CheckResult")
-    private void randomlyRecommend(String token, View view) {
+    private void randomlyRecommend(String token, View view, Boolean isAdd) {
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
         customerApi.randomlyRecommend(token, DEFAULT_RECOMMEND_NUMBER)
                 .subscribeOn(Schedulers.io())
@@ -180,9 +186,14 @@ public class CustomerHomePageFragment extends Fragment {
                     @Override
                     public void onNext(HttpBaseBean<ServiceShortListData> serviceShortListDataHttpBaseBean) {
                         if (serviceShortListDataHttpBaseBean.getSuccess()) {
-                            List<ServiceCard> serviceCards = getServiceCardList(
-                                    serviceShortListDataHttpBaseBean.getData().getServices());
-                            updateViewByList(serviceCards, view);
+                            if(isAdd){
+                                dataList.addAll(getServiceCardList(
+                                        serviceShortListDataHttpBaseBean.getData().getServices()));
+                            }else{
+                                dataList = getServiceCardList(
+                                        serviceShortListDataHttpBaseBean.getData().getServices());
+                                updateViewByList(dataList, view);
+                            }
                         } else {
                             //test
                         }
@@ -196,7 +207,6 @@ public class CustomerHomePageFragment extends Fragment {
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }
@@ -206,9 +216,11 @@ public class CustomerHomePageFragment extends Fragment {
         List<ServiceCard> serviceCards = new ArrayList<>();
         ServiceCard serviceCard;
         for (ServiceShort serviceShort : serviceShorts) {
-            String Link = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
+            String avatarLink = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
+            String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
             serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
-                    serviceShort.getTitle(), Link);
+                    serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
+                    pictureLink, serviceShort.getId());
             serviceCards.add(serviceCard);
         }
         return serviceCards;
@@ -225,14 +237,9 @@ public class CustomerHomePageFragment extends Fragment {
         serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                if (position == 0){
-                    startActivity(new Intent(getContext(), CustomerServiceDetailPage.class));
-                } else if (position == 1) {
-                    // 还没想好怎么把position和数据库里面的id绑定起来，现在这样只能根据index来确定点击了哪一个
-                }
-
-
-
+                startActivity(new Intent(getContext(), CustomerServiceDetailPage.class)
+                        .putExtra("serviceId", dataList.get(position).getServiceId()));
+                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -253,17 +260,15 @@ public class CustomerHomePageFragment extends Fragment {
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
+                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
+                            "Repair Air conditioner", "available tomorrow",
+                            "balabala", "picSrc", 213L));
                     Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+//                    randomlyRecommend(token, view, true);
+                    serviceCardAdapter.notifyDataSetChanged();
                 }
             }
         });
-
-
-
-
-
-
-
     }
 
 

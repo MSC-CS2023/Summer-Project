@@ -133,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(MainActivity.this,ChooseActivity.class));
                         finish();
                     }

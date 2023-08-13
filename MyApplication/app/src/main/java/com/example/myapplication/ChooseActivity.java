@@ -39,8 +39,6 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         btnCustomer.setOnClickListener(this);
         btnProvider = findViewById(R.id.btnProvider);
         btnProvider.setOnClickListener(this);
-
-//        accountInitializer();
     }
 
     @Override
@@ -55,101 +53,4 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(intentProvider);
         }
     }
-
-//    //Auto login function
-//    private void accountInitializer(){
-//        SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
-//        if(sp.getBoolean("isLoggedIn", false)){
-//            switch (sp.getString("userType", "none")){
-//                case "customer" :
-//                    customerReLogin(sp.getString("token", null));
-//                    break;
-//                case "provider" :
-//                    providerReLogin(sp.getString("token", null));
-//                    break;
-//                default:
-//                    Toast.makeText(getApplicationContext(), "Please Login again.", Toast.LENGTH_SHORT).show();
-//                    break;
-//            }
-//        }
-//    }
-//
-//    @SuppressLint("CheckResult")
-//    private void customerReLogin(String token){
-//        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-//        customerApi.customerReLogin(token)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeWith(new ResourceSubscriber<HttpBaseBean<LoginData>>() {
-//                    @Override
-//                    public void onNext(HttpBaseBean<LoginData> loginDataHttpBaseBean) {
-//                        if(loginDataHttpBaseBean.getSuccess()){
-//                            Toast.makeText(getApplicationContext(),
-//                                    loginDataHttpBaseBean.getData().getUser().getUsername() + " login successfully",
-//                                    Toast.LENGTH_SHORT).show();
-//                            SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
-//                            sp.edit().putBoolean("isLoggedIn", true).apply();
-//                            sp.edit().putString("userType", "customer").apply();
-//                            sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
-//                            sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-//                            startActivity(new Intent(ChooseActivity.this, CustomerMainActivity.class));
-//                            finish();
-//                        }else{
-//                            Toast.makeText(getApplicationContext(),
-//                                    "Please Login again.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable t) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
-//    }
-//
-//    @SuppressLint("CheckResult")
-//    private void providerReLogin(String token){
-//        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
-//        providerApi.providerReLogin(token)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeWith(new ResourceSubscriber<HttpBaseBean<LoginData>>() {
-//                    @Override
-//                    public void onNext(HttpBaseBean<LoginData> loginDataHttpBaseBean) {
-//                        if(loginDataHttpBaseBean.getSuccess()){
-//                            Toast.makeText(getApplicationContext(),
-//                                    loginDataHttpBaseBean.getData().getUser().getUsername() + " login successfully",
-//                                    Toast.LENGTH_SHORT).show();
-//                            SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
-//                            sp.edit().putBoolean("isLoggedIn", true).apply();
-//                            sp.edit().putString("userType", "provider").apply();
-//                            sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
-//                            sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-//                            startActivity(new Intent(ChooseActivity.this, CustomerMainActivity.class));
-//                            finish();
-//                        }else{
-//                            Toast.makeText(getApplicationContext(),
-//                                    "Please Login again.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable t) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
-//
-//    }
-
 }

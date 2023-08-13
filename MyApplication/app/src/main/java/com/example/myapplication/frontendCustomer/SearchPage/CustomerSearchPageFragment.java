@@ -86,12 +86,18 @@ public class CustomerSearchPageFragment extends Fragment {
     private void createDemoData(View rootView) {
         List<ServiceCard> demoDataList = new ArrayList<>();
 
-        ServiceCard serviceCard1 = new ServiceCard("Eric", "Repair Air conditioner", "100", "available tomorrow");
-        ServiceCard serviceCard2 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
-        ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today");
-        ServiceCard serviceCard4 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
-        ServiceCard serviceCard5 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
-        ServiceCard serviceCard6 = new ServiceCard("Alice", "Clean gutter", "150", "available today");
+        ServiceCard serviceCard1 = new ServiceCard("Eric", "Repair Air conditioner", "100", "available tomorrow",
+                "balabala", "picSrc",213L);
+        ServiceCard serviceCard2 = new ServiceCard("Alice", "Clean gutter", "150", "available today",
+                "balabala", "picSrc",213L);
+        ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today",
+                "balabala", "picSrc",213L);
+        ServiceCard serviceCard4 = new ServiceCard("Alice", "Clean gutter", "150", "available today",
+                "balabala", "picSrc",213L);
+        ServiceCard serviceCard5 = new ServiceCard("Alice", "Clean gutter", "150", "available today",
+                "balabala", "picSrc",213L);
+        ServiceCard serviceCard6 = new ServiceCard("Alice", "Clean gutter", "150", "available today",
+                "balabala", "picSrc",213L);
 
         demoDataList.add(serviceCard1);
         demoDataList.add(serviceCard2);
@@ -200,9 +206,11 @@ public class CustomerSearchPageFragment extends Fragment {
         List<ServiceCard> serviceCards = new ArrayList<>();
         ServiceCard serviceCard;
         for(ServiceShort serviceShort : serviceShorts){
-            String Link = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
-            serviceCard = new ServiceCard(serviceShort.getId().toString(), serviceShort.getFee().toString(),
-                    serviceShort.getTitle(), Link);
+            String avatarLink = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
+            String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
+            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
+                    serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
+                    pictureLink, serviceShort.getId());
             serviceCards.add(serviceCard);
         }
         return serviceCards;

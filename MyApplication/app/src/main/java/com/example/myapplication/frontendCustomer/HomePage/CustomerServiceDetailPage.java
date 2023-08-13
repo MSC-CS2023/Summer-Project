@@ -62,7 +62,7 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
         //add serviceId later!
-        this.serviceId = Long.valueOf(1235);
+        this.serviceId = getIntent().getLongExtra("serviceId", 123);
         initializeView();
 //        getServiceDetail(this.token, this.serviceId);
 //        checkIfIsFavourite(this.token, this.serviceId);
