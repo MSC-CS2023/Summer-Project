@@ -89,7 +89,8 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btn_wallet) {
-            Toast.makeText(getContext(), "Wallet clicked", Toast.LENGTH_SHORT).show();
+            Intent intentToWallet = new Intent(getContext(), ProviderWalletActivity.class);
+            startActivity(intentToWallet);
         } else if(view.getId() == R.id.btn_timetable) {
             Intent intentToTimetable = new Intent(getContext(), ProviderTimetableActivity.class);
             startActivity(intentToTimetable);
@@ -97,7 +98,8 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
             Intent intentToMap = new Intent(getContext(), ProviderMapActivity.class);
             startActivity(intentToMap);
         } else if(view.getId() == R.id.btn_setting) {
-            Toast.makeText(getContext(), "Setting clicked", Toast.LENGTH_SHORT).show();
+            Intent intentToSetting = new Intent(getContext(), ProviderSettingActivity.class);
+            startActivity(intentToSetting);
         }
     }
 }

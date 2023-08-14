@@ -61,7 +61,7 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
 //                providerLogin(txtUsername.getText().toString(), txtPassword.getText().toString());
                 Intent intentToProviderMainPage = new Intent(this, ProviderMain.class);
                 startActivity(intentToProviderMainPage);
-                finish();
+                finishAffinity();
                 Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
             } else if (view.getId() == R.id.txt_sign_up) {
                 Intent intentToProviderRegisterPage = new Intent(ProviderLogin.this, ProviderRegister.class);
