@@ -40,7 +40,7 @@ public class OrderCardAdapterAll extends RecyclerView.Adapter <OrderCardAdapterA
 
         holder.bindData(position);
 
-        holder.orderSate.setText(orderCard.getOrderSate());
+//        holder.orderSate.setText(orderCard.getOrderSate());
         holder.orderId.setText(orderCard.getOrderId());
         holder.orderTitle.setText(orderCard.getOrderTitle());
         holder.orderPrice.setText(orderCard.getOrderPrice());
@@ -63,7 +63,7 @@ public class OrderCardAdapterAll extends RecyclerView.Adapter <OrderCardAdapterA
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-    TextView orderSate;
+//    TextView orderSate;
     TextView orderId;
     TextView orderTitle;
     TextView orderPrice;
@@ -74,7 +74,7 @@ public class OrderCardAdapterAll extends RecyclerView.Adapter <OrderCardAdapterA
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.orderSate = itemView.findViewById(R.id.orderState);
+//            this.orderSate = itemView.findViewById(R.id.orderState);
             this.orderId = itemView.findViewById(R.id.orderNum);
             this.orderTitle = itemView.findViewById(R.id.orderTitle);
             this.orderPrice = itemView.findViewById(R.id.orderPrice);
@@ -95,53 +95,5 @@ public class OrderCardAdapterAll extends RecyclerView.Adapter <OrderCardAdapterA
         }
     }
 }
-
-
-//    @Override
-//    public int getCount() {
-//        return orderCards.size();
-//    }
-//
-//    @Override
-//    public Object getItem(int i) {
-//        return orderCards.get(i);
-//    }
-//
-//    @Override
-//    public long getItemId(int i) {
-//        return i;
-//    }
-//
-//    @Override
-//    public View getView(int i, View view, ViewGroup viewGroup) {
-//        ViewHolder viewHolder;
-//        if(view == null){
-//            viewHolder = new ViewHolder();
-//            view = LayoutInflater.from(context).inflate(R.layout.order_card_item, viewGroup, false);
-//
-//            viewHolder.orderSate = view.findViewById(R.id.orderState);
-//            viewHolder.orderId = view.findViewById(R.id.orderNum);
-//            viewHolder.orderTitle = view.findViewById(R.id.orderTitle);
-//            viewHolder.orderPrice = view.findViewById(R.id.orderPrice);
-//
-//            viewHolder.orderPicture = view.findViewById(R.id.serviceImg);
-//
-//            view.setTag(viewHolder);
-//        }else{
-//            viewHolder = (ViewHolder) view.getTag();
-//        }
-//
-//        OrderCard orderCard = orderCards.get(i);
-//
-//        viewHolder.orderSate.setText(orderCard.getOrderSate());
-//        viewHolder.orderId.setText("Order NUmber: " + orderCard.getOrderId());
-//        viewHolder.orderTitle.setText(orderCard.getOrderTitle());
-//        viewHolder.orderPrice.setText(orderCard.getOrderPrice());
-//
-//        viewHolder.orderPicture.setImageResource(R.drawable.img_sample1);
-////        Glide.with(this.context).load(orderCards.get(i).getOrderPictureSrc()).into(viewHolder.orderPicture);
-//
-//        return view;
-//    }
 
 

@@ -49,8 +49,8 @@ public class OrderCard {
         this.orderPictureSrc = orderPictureSrc;
     }
 
-    public OrderCard(String orderSate, String orderId, String orderTitle, String orderPrice, int orderPictureSrc) {
-        this.orderSate = orderSate;
+    public OrderCard(String orderId, String orderTitle, String orderPrice, int orderPictureSrc) {
+//        this.orderSate = orderSate;
         this.orderId = orderId;
         this.orderTitle = orderTitle;
         this.orderPrice = orderPrice;

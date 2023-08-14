@@ -30,7 +30,7 @@
                     android:id="@+id/orderState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Order State"
+                    android:text="Order Processing"
                     android:textSize="20dp"
                     android:textStyle="bold"></TextView>
 
@@ -87,23 +87,6 @@
                 android:textColor="@color/grey"
                 android:textSize="15dp"></TextView>
 
-            <LinearLayout
-                app:layout_constraintTop_toBottomOf="@+id/orderPrice"
-                android:gravity="right"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/btn_finish"
-                    android:backgroundTint="@android:color/transparent"></ImageButton>
-
-
-            </LinearLayout>
 
 
         </LinearLayout>

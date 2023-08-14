@@ -65,9 +65,9 @@ public class CustomerOrderPage extends AppCompatActivity {
 
         //test
 
-        orderCards.add(new OrderCard("yes", "123", "ok", "200", 2));
-        orderCards.add(new OrderCard("no", "12352", "ok", "200", 2));
-        orderCards.add(new OrderCard("yes", "123", "ok", "200", 2));
+        orderCards.add(new OrderCard( "123", "ok", "200", 2));
+        orderCards.add(new OrderCard("12352", "ok", "200", 2));
+        orderCards.add(new OrderCard( "123", "ok", "200", 2));
 
         updateViewByList_all(orderCards);
 

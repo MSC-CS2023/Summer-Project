@@ -40,7 +40,7 @@ public class OrderCardAdapterReview extends RecyclerView.Adapter <OrderCardAdapt
 
         holder.bindData(position);
 
-        holder.orderSate.setText(orderCard.getOrderSate());
+//        holder.orderSate.setText(orderCard.getOrderSate());
         holder.orderId.setText(orderCard.getOrderId());
         holder.orderTitle.setText(orderCard.getOrderTitle());
         holder.orderPrice.setText(orderCard.getOrderPrice());
@@ -63,7 +63,7 @@ public class OrderCardAdapterReview extends RecyclerView.Adapter <OrderCardAdapt
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView orderSate;
+//        TextView orderSate;
         TextView orderId;
         TextView orderTitle;
         TextView orderPrice;
@@ -74,7 +74,7 @@ public class OrderCardAdapterReview extends RecyclerView.Adapter <OrderCardAdapt
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.orderSate = itemView.findViewById(R.id.orderState);
+//            this.orderSate = itemView.findViewById(R.id.orderState);
             this.orderId = itemView.findViewById(R.id.orderNum);
             this.orderTitle = itemView.findViewById(R.id.orderTitle);
             this.orderPrice = itemView.findViewById(R.id.orderPrice);
