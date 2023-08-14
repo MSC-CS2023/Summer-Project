@@ -48,7 +48,7 @@ public interface ProviderApi {
     @Multipart
     Flowable<HttpBaseBean<ServiceDetailData>> modifyService(
             @Header("Authorization") String authorization, @Part("service_id") Long serviceId,
-            @Part("key") String modifyItem, @Part("value") String ModifyConte);
+            @Part("key") String modifyItem, @Part("value") String modifyContent);
 
     @POST("service_provider/service/add_pic")
     @Multipart
@@ -60,8 +60,7 @@ public interface ProviderApi {
     @Multipart
     Flowable<HttpBaseBean<ServiceDetailData>> addService(
             @Header("Authorization") String authorization, @Part("title") String serviceTitle,
-            @Part("description") String serviceDescription, @Part("detail") String serviceDetail,
-            @Part("fee") Double serviceFee);
+            @Part("description") String serviceDescription, @Part("fee") Double serviceFee);
 
     @DELETE("service_provider/service/delete")
     @Multipart

@@ -54,18 +54,16 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
         public void onClick(View view) {
 
             if (view.getId() == R.id.btn_back_main){
-                Intent intentToMainPage = new Intent(ProviderLogin.this, MainActivity.class);
-                startActivity(intentToMainPage);
+                startActivity(new Intent(ProviderLogin.this, MainActivity.class));
                 finish();
             } else if (view.getId() ==  R.id.btn_provider_login) {
 //                providerLogin(txtUsername.getText().toString(), txtPassword.getText().toString());
-                Intent intentToProviderMainPage = new Intent(this, ProviderMain.class);
-                startActivity(intentToProviderMainPage);
                 finishAffinity();
                 Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                finishAffinity();
+                startActivity(new Intent(this, ProviderMain.class));
             } else if (view.getId() == R.id.txt_sign_up) {
-                Intent intentToProviderRegisterPage = new Intent(ProviderLogin.this, ProviderRegister.class);
-                startActivity(intentToProviderRegisterPage);
+                startActivity(new Intent(ProviderLogin.this, ProviderRegister.class));
             }
         }
 

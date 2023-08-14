@@ -10,7 +10,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +20,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.ServiceShort;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
+import com.example.myapplication.Constant;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendCustomer.HomePage.CustomerServiceDetailPage;
 import com.example.myapplication.frontendProvider.loginPages.ProviderLogin;
 import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.RetrofitClient;
@@ -45,13 +50,15 @@ public class ProviderServicesFragment extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_TEXT = "param1";
+    private List<ProviderServiceCardData> data;
+    private String token;
+    Integer currentShowPosition;
+    static final Integer DEFAULT_SHOW_NUMBER = 5;
 
     // TODO: Rename and change types of parameters
     private String mText;
     private View rootView;
-    private String token;
-
-    private List<ProviderServiceCardData> data = new ArrayList<>();
+    SwipeRefreshLayout swipeRefreshLayout;
 
     public ProviderServicesFragment() {
         // Required empty public constructor
@@ -79,8 +86,11 @@ public class ProviderServicesFragment extends Fragment{
         if (getArguments() != null) {
             mText = getArguments().getString(ARG_TEXT);
         }
+
         SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
+        currentShowPosition = 0;
+
     }
 
     @Override
@@ -90,7 +100,9 @@ public class ProviderServicesFragment extends Fragment{
         if(rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_provider_services, container, false);
         }
+
         initView();
+
         return rootView;
     }
 
@@ -99,20 +111,40 @@ public class ProviderServicesFragment extends Fragment{
         title.setText(mText);
 
         //Set data and adaptor and item click event
-        data.add(new ProviderServiceCardData("Cleaning", "Some short description...",
-                "100", "img_sample1"));
-        data.add(new ProviderServiceCardData("Maintenance", "Some short description.....",
-                "200", "img_sample2"));
-        data.add(new ProviderServiceCardData("Laundry", "Some short description......",
-                "300", "img_sample1"));
-        setAdapter();
-//        getProviderService(this.token);
+        createDemoData();
+//        getProviderService(this.token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+        swipeDown();
 
         //Click on something
         setClick();
 
     }
 
+    private void createDemoData() {
+        data = new ArrayList<>();
+        data.add(new ProviderServiceCardData("Cleaning", "Some short description...",
+                "1020", "img_sample1",123L));
+        data.add(new ProviderServiceCardData("Maintenance", "Some short description.....",
+                "200", "img_sample2",123L));
+        data.add(new ProviderServiceCardData("Laundry", "Some short description......",
+                "300", "img_sample1",123L));
+        setAdapter();
+    }
+
+    private void swipeDown() {
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeCollectionPage);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                createDemoData();
+                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
+//                currentShowPosition = 0;
+//                getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                //stop refresh
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+    }
 
     private void setAdapter() {
         RecyclerView recyclerView = rootView.findViewById(R.id.rv_provider_services);
@@ -124,11 +156,32 @@ public class ProviderServicesFragment extends Fragment{
         providerServicesAdaptor.setRecyclerItemClickListener(new ProviderServicesAdaptor.OnRecyclerItemClickListener() {
             @Override
             public void onRecyclerItemClick(int position) {
-                Toast.makeText(getContext(),"Item" + position + "clicked.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), ProviderServiceDetailActivity.class)
+                        .putExtra("serviceId", data.get(position).getServiceId()));
+                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
-                //在此处从fragment传数据给详情的activity
-                Intent intentToDetail = new Intent(getContext(), ProviderServiceDetailActivity.class);
-                startActivity(intentToDetail);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    data.add(new ProviderServiceCardData("Laundry", "Some short description......",
+                            "300" + SystemClock.currentThreadTimeMillis(), "img_sample1", 123L));
+                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+//                    getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                    providerServicesAdaptor.notifyDataSetChanged();
+                }
             }
         });
     }
@@ -199,17 +252,22 @@ public class ProviderServicesFragment extends Fragment{
     }
 
     @SuppressLint("CheckResult")
-    private void getProviderService(String token){
+    private void getProviderService(String token, Integer start, Integer number){
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
-        providerApi.getProviderServices(token, 0, 10)
+        providerApi.getProviderServices(token, start, number)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {
                     @Override
                     public void onNext(HttpBaseBean<ServiceShortListData> serviceShortListDataHttpBaseBean) {
                         if(serviceShortListDataHttpBaseBean.getSuccess()){
-                            data = getServiceCards(serviceShortListDataHttpBaseBean.getData().getServices());
-                            setAdapter();
+                            if(start == 0){
+                                data = getServiceCards(serviceShortListDataHttpBaseBean.getData().getServices());
+                                setAdapter();
+                            }else{
+                                data.addAll(getServiceCards(serviceShortListDataHttpBaseBean.getData().getServices()));
+                            }
+
                         }else{
 
                         }
@@ -232,9 +290,10 @@ public class ProviderServicesFragment extends Fragment{
         List<ProviderServiceCardData> providerServiceCardDataList = new ArrayList<>();
         ProviderServiceCardData providerServiceCardData;
         for(ServiceShort serviceShort : serviceShorts){
+            String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
             providerServiceCardData = new ProviderServiceCardData(
                     serviceShort.getTitle(), serviceShort.getDescription(),
-                    serviceShort.getFee().toString(), "img_sample1");
+                    serviceShort.getFee().toString(), pictureLink, serviceShort.getId());
             providerServiceCardDataList.add(providerServiceCardData);
         }
         return providerServiceCardDataList;

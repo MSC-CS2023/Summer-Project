@@ -19,6 +19,7 @@ public class ProviderServicesAdaptor extends RecyclerView.Adapter<ProviderServic
 
     private List<ProviderServiceCardData> data;
     private Context context;
+    private OnRecyclerItemClickListener mOnItemClickListener;
 
     public ProviderServicesAdaptor(List<ProviderServiceCardData> data, Context context) {
         this.data = data;
@@ -34,6 +35,7 @@ public class ProviderServicesAdaptor extends RecyclerView.Adapter<ProviderServic
 
     @Override
     public void onBindViewHolder(@NonNull ProviderServicesAdaptor.ViewHolder holder, int position) {
+        holder.bindData(position);
         holder.title.setText(data.get(position).getTitle());
         holder.description.setText(data.get(position).getDescription());
         holder.price.setText(data.get(position).getPrice());
@@ -46,11 +48,22 @@ public class ProviderServicesAdaptor extends RecyclerView.Adapter<ProviderServic
         return data == null ? 0 : data.size();
     }
 
+
+    public void setRecyclerItemClickListener(OnRecyclerItemClickListener listener) {
+        mOnItemClickListener = listener;
+    }
+
+    public interface OnRecyclerItemClickListener {
+        void onRecyclerItemClick(int position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private TextView description;
         private TextView price;
         private ImageView image;
+
+        private int myPosition;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.service_card_title);
@@ -62,20 +75,17 @@ public class ProviderServicesAdaptor extends RecyclerView.Adapter<ProviderServic
                 @Override
                 public void onClick(View view) {
                     if(mOnItemClickListener != null) {
-                        mOnItemClickListener.onRecyclerItemClick(getAbsoluteAdapterPosition());
+                        mOnItemClickListener.onRecyclerItemClick(myPosition);
                     }
                 }
             });
         }
+
+        public void bindData(int position) {
+            myPosition = position;
+        }
+
     }
 
-    private OnRecyclerItemClickListener mOnItemClickListener;
 
-    public void setRecyclerItemClickListener(OnRecyclerItemClickListener listener) {
-        mOnItemClickListener = listener;
-    }
-
-    public interface OnRecyclerItemClickListener {
-        void onRecyclerItemClick(int position);
-    }
 }

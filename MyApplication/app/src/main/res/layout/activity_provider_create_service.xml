@@ -95,7 +95,8 @@
                     android:layout_gravity="center"
                     android:hint="0.0"
                     android:textSize="25sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:inputType="numberDecimal"/>
 
             </LinearLayout>
 

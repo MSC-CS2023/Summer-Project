@@ -32,7 +32,7 @@ public class Order {
      */
     private Long id;
     /**
-     * Is the order canceled by the creator.
+     * Is the order canceled by the creater.
      */
     private Boolean isCanceled;
     /**
@@ -59,6 +59,7 @@ public class Order {
      * The id of the service related to the order.
      */
     private Long serviceId;
+    private ServiceShort serviceShort;
     /**
      * The time when the service start.
      */
@@ -105,6 +106,9 @@ public class Order {
 
     public Long getServiceId() { return serviceId; }
     public void setServiceId(Long value) { this.serviceId = value; }
+
+    public ServiceShort getServiceShort() { return serviceShort; }
+    public void setServiceShort(ServiceShort value) { this.serviceShort = value; }
 
     public Long getStartTimestamp() { return startTimestamp; }
     public void setStartTimestamp(Long value) { this.startTimestamp = value; }

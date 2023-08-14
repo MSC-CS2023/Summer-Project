@@ -19,6 +19,7 @@ import com.example.myapplication.R;
  * Use the {@link ProviderProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class ProviderProfileFragment extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
