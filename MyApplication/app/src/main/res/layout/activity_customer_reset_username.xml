@@ -27,48 +27,60 @@
         android:layout_height="1dp"
         android:background="@color/black"></View>
 
-    <LinearLayout
+    <Space
+        android:id="@+id/space"
         app:layout_constraintTop_toBottomOf="@+id/spaceLine"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"></Space>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@+id/space"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/txtOldUsername"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="65dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="5dp"
-            android:hint="    Enter your old Username"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/txtNewUsername"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="65dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="5dp"
-            android:hint="    Enter your new Username"
-            android:inputType="text" />
-
-        <ImageButton
-            android:id="@+id/btnSubmit"
-            android:layout_marginTop="80dp"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/btn_submit"
+            android:text="After you change your username, you will be able to log in to this account with the new username."
+            android:textSize="30dp"
+            android:textColor="@color/grey"
+            android:textStyle="italic"
+            android:padding="20dp"
+            android:gravity="center_horizontal"></TextView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:text="New Username :"></TextView>
+
+            <EditText
+                android:id="@+id/txtNewUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:hint="enter your new Username"></EditText>
+
+        </LinearLayout>
+
+
+
+
+        <ImageButton
+            android:id="@+id/btnSave"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_save"
             android:backgroundTint="@android:color/transparent"
             android:layout_gravity="center"
             >

@@ -14,9 +14,9 @@ import com.example.myapplication.R;
 public class CustomerResetUsername extends AppCompatActivity implements View.OnClickListener {
 
 
-    EditText oldName;
+
     EditText newName;
-    ImageButton submit;
+    ImageButton save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +42,8 @@ public class CustomerResetUsername extends AppCompatActivity implements View.OnC
     }
 
     void initializeViews(){
-        submit = findViewById(R.id.btnSubmit);
-        submit.setOnClickListener(this);
-        oldName = findViewById(R.id.txtNewUsername);
+        save = findViewById(R.id.btnSave);
+        save.setOnClickListener(this);
 
         newName = findViewById(R.id.txtNewUsername);
     }
@@ -52,7 +51,7 @@ public class CustomerResetUsername extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
 
-        if (view.getId() == R.id.btnSubmit){
+        if (view.getId() == R.id.btnSave){
             Toast.makeText(this, "submit click", Toast.LENGTH_SHORT).show();
         }
 
