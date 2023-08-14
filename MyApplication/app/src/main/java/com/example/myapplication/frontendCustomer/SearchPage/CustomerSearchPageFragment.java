@@ -66,6 +66,14 @@ public class CustomerSearchPageFragment extends Fragment {
         currentShowPosition = 0;
 
         keyword = rootView.findViewById(R.id.txtCustomerSearchBar);
+        btnSearch = rootView.findViewById(R.id.btnCustomerSearchButton);
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "click search button", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         spinnerForSort(rootView);
 
@@ -178,7 +186,6 @@ public class CustomerSearchPageFragment extends Fragment {
             }
         });
     }
-
 
     @SuppressLint("CheckResult")
     private void searchByKeyword(String keyword, String sortType, Boolean isDescending, View view, Integer start, Integer number){
