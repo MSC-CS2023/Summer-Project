@@ -4,7 +4,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -29,18 +31,20 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerSettingAccountSecurity extends AppCompatActivity {
 
+    boolean isEditMode = false;
+    private String token;
 
     Button edit;
     Button save;
     LinearLayout acLayout;
-    boolean isEditMode = false;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_setting_account_seurity);
+
+        SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+        this.token = sp.getString("token", "");
 
         setToolBar();
 
@@ -121,8 +125,6 @@ public class CustomerSettingAccountSecurity extends AppCompatActivity {
         });
     }
 
-
-    //For future use.
     @SuppressLint("CheckResult")
     private void modifyPersonalDetail(String token, String modifiedItem, String modifiedContent){
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
@@ -143,7 +145,8 @@ public class CustomerSettingAccountSecurity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable t) {
-
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -152,32 +155,6 @@ public class CustomerSettingAccountSecurity extends AppCompatActivity {
                     }
                 });
     }
-
-//    public void alertDialog(){
-//        AlertDialog alertDialog= new AlertDialog.Builder(this)
-//                .setIcon(R.drawable.btn_redheart)
-//                .setTitle("title")
-//                .setMessage("message")
-//                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        Toast.makeText(CustomerSettingAccountSecurity.this, "sssss", Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                    }
-//                })
-//                .create();
-//        alertDialog.show();
-//
-//        Button btnPos = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-//        btnPos.setTextColor(Color.RED);
-//        Button btnNeg = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-//        btnNeg.setTextColor(Color.BLACK);
-//    }
 
 }
 

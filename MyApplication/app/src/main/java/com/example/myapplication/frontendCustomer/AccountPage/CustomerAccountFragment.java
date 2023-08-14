@@ -1,6 +1,10 @@
 package com.example.myapplication.frontendCustomer.AccountPage;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.icu.lang.UScript;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,18 +14,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.User;
+import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
+import com.example.myapplication.Constant;
 import com.example.myapplication.R;
+import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.RetrofitClient;
+
+import org.w3c.dom.Text;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 
 public class CustomerAccountFragment extends Fragment implements View.OnClickListener {
+
+    private String token;
 
     ImageButton setting;
     ImageButton order;
     ImageButton wallet;
     ImageButton timetable;
-
-
+    ImageView avatar;
+    TextView username;
 
 
     public CustomerAccountFragment() {
@@ -34,17 +55,27 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_customer_account, container, false);
 
+        SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+        this.token = sp.getString("token", "");
+
+        initialView(rootView);
+//        getCustomerDetail(this.token);
+
+        return rootView;
+    }
+
+    private void initialView(View rootView){
         setting = rootView.findViewById(R.id.setting);
         order = rootView.findViewById(R.id.order);
         timetable =rootView.findViewById(R.id.timetable);
         wallet = rootView.findViewById(R.id.wallet);
+        avatar = rootView.findViewById(R.id.accountAvatar);
+        username = rootView.findViewById(R.id.accountUsername);
 
         setting.setOnClickListener(this);
         order.setOnClickListener(this);
         timetable.setOnClickListener(this);
         wallet.setOnClickListener(this);
-
-        return rootView;
     }
 
     @Override
@@ -58,5 +89,37 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
             startActivity(new Intent(getContext(), CustomerTimetablePage.class));
         }
 
+    }
+
+    @SuppressLint("CheckResult")
+    private void getCustomerDetail(String token){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.getCustomerDetail(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<SelfDetailData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<SelfDetailData> selfDetailDataHttpBaseBean) {
+                        if(selfDetailDataHttpBaseBean.getSuccess()){
+                            updateView(selfDetailDataHttpBaseBean.getData().getUser());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void updateView(User user){
+        username.setText(user.getUsername());
+        Glide.with(getContext()).load(Constant.BASE_URL +
+                "public/service_provider/avatar?id=" + user.getId().toString()).into(avatar);
     }
 }

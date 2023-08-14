@@ -59,10 +59,11 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_service_detail_page);
+
         SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
-        //add serviceId later!
-        this.serviceId = getIntent().getLongExtra("serviceId", 123);
+        this.serviceId = getIntent().getLongExtra("serviceId", 0);
+
         initializeView();
 //        getServiceDetail(this.token, this.serviceId);
 //        checkIfIsFavourite(this.token, this.serviceId);
@@ -119,8 +120,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
                        //update money
-//                       createCustomerOrder(token, serviceId, System.currentTimeMillis(),
-//                               System.currentTimeMillis() + 360000);
+                       createCustomerOrder(token, serviceId, System.currentTimeMillis() + 36000000,
+                               System.currentTimeMillis() + 39600000);
                    }
                })
                .setNegativeButton("Cancel", null);
@@ -141,7 +142,6 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
 
         alertDialog.show();
     }
-
 
     @SuppressLint("CheckResult")
     private void getServiceDetail(String token, Long serviceId){
@@ -172,19 +172,18 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                 });
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateView(Service service){
         serviceTitle.setText(service.getTitle());
         providerName.setText(service.getUsername());
-        serviceDescribe.setText(service.getDetail());
+        serviceDescribe.setText(service.getDescription());
+        addressDetail.setText(service.getAddress());
         amount.setText("￡" + service.getFee().toString());
         Glide.with(getApplicationContext()).load(Constant.BASE_URL +
                 "public/service_provider/avatar?id=" + service.getProviderId().toString()).into(avatar);
-//        Don't have address img and userInfo
-//        addressDetail.setText("");
-//        Glide.with(getApplicationContext()).load("").into(serviceImg);
+        Glide.with(getApplicationContext()).load(Constant.BASE_URL +
+                "get_pic?id=" + service.getPictureId()).into(serviceImg);
     }
-
-
 
     //create new order.
     @SuppressLint("CheckResult")

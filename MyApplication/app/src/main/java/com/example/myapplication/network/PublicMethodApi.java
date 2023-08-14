@@ -46,8 +46,8 @@ public interface PublicMethodApi {
     @GET("search")
     Flowable<HttpBaseBean<ServiceShortListData>> search(
             @Query("keywords") String searchKeyword, @Query("sort_by") String sortType,
-            @Query("descending") String isDescending, @Query("start") Integer startPosition,
-            @Query("num") Integer displayNumber, @Query("or") String isOr);
+            @Query("descending") Boolean isDescending, @Query("start") Integer startPosition,
+            @Query("num") Integer displayNumber, @Query("or") Boolean isOr);
 
     @GET("get_random")
     Flowable<HttpBaseBean<ServiceShortListData>> recommendServicesRandomly(@Query("num") Integer recommendNumber);

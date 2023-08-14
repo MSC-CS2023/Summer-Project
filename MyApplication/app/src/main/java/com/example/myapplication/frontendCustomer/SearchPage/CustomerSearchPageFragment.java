@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -42,14 +44,18 @@ public class CustomerSearchPageFragment extends Fragment {
 
     SwipeRefreshLayout swipeRefreshLayout;
 
+    Integer currentShowPosition;
+    static final Integer DEFAULT_SHOW_NUMBER = 5;
     private String sortType;
-    private String isDescending;
+    private Boolean isDescending;
+
+
+    List<ServiceCard> dataList;
 
     private ImageButton btnSearch;
+    private EditText keyword;
 
     public CustomerSearchPageFragment() {
-        this.sortType = "fee";
-        this.isDescending = "true";
     }
 
     @Override
@@ -57,15 +63,15 @@ public class CustomerSearchPageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_customer_search_page, container, false);
+        currentShowPosition = 0;
+
+        keyword = rootView.findViewById(R.id.txtCustomerSearchBar);
 
         spinnerForSort(rootView);
 
         spinnerForDistance(rootView);
 
-        createDemoData(rootView);
-
         swipeDown(rootView);
-
 
         return rootView;
     }
@@ -75,8 +81,9 @@ public class CustomerSearchPageFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                createDemoData(rootView);
                 Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
-
+//                search(rootView);
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -92,21 +99,14 @@ public class CustomerSearchPageFragment extends Fragment {
                 "balabala", "picSrc",213L);
         ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today",
                 "balabala", "picSrc",213L);
-        ServiceCard serviceCard4 = new ServiceCard("Alice", "Clean gutter", "150", "available today",
-                "balabala", "picSrc",213L);
-        ServiceCard serviceCard5 = new ServiceCard("Alice", "Clean gutter", "150", "available today",
-                "balabala", "picSrc",213L);
-        ServiceCard serviceCard6 = new ServiceCard("Alice", "Clean gutter", "150", "available today",
-                "balabala", "picSrc",213L);
 
         demoDataList.add(serviceCard1);
         demoDataList.add(serviceCard2);
         demoDataList.add(serviceCard3);
-        demoDataList.add(serviceCard4);
-        demoDataList.add(serviceCard5);
-        demoDataList.add(serviceCard6);
 
-        updateViewByList(demoDataList, rootView);
+        dataList = demoDataList;
+
+        updateViewByList(dataList, rootView);
     }
 
     private void spinnerForDistance(View rootView) {
@@ -142,19 +142,28 @@ public class CustomerSearchPageFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),R.array.sort, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         sort.setAdapter(adapter1);
-
         sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
                 if (index == 0){
+                    sortType = "fee";
+                    isDescending = false;
                     Toast.makeText(getContext(), "select Price Ascending", Toast.LENGTH_SHORT).show();
                 } else if (index == 1) {
+                    sortType = "fee";
+                    isDescending = true;
                     Toast.makeText(getContext(), "select Price Descending", Toast.LENGTH_SHORT).show();
                 }else if (index == 2) {
+                    sortType = "time";
+                    isDescending = false;
                     Toast.makeText(getContext(), "select Time Ascending", Toast.LENGTH_SHORT).show();
                 }else if (index == 3) {
+                    sortType = "time";
+                    isDescending = true;
                     Toast.makeText(getContext(), "select Time Descending", Toast.LENGTH_SHORT).show();
                 }else if (index == 4) {
+                    sortType = "alphabet";
+                    isDescending = false;
                     Toast.makeText(getContext(), "select Comprehensive", Toast.LENGTH_SHORT).show();
                 }else if (index == 5) {
                     Toast.makeText(getContext(), "select By Rating", Toast.LENGTH_SHORT).show();
@@ -172,19 +181,23 @@ public class CustomerSearchPageFragment extends Fragment {
 
 
     @SuppressLint("CheckResult")
-    private void searchByKeyword(String keyword, String sortType, String isDescending, View view){
+    private void searchByKeyword(String keyword, String sortType, Boolean isDescending, View view, Integer start, Integer number){
         PublicMethodApi publicMethodApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
-        publicMethodApi.search(keyword, sortType, isDescending, 0, 10, "false")
+        publicMethodApi.search(keyword, sortType, isDescending, start, number, false)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {
                     @Override
                     public void onNext(HttpBaseBean<ServiceShortListData> serviceShortListDataHttpBaseBean) {
                         if(serviceShortListDataHttpBaseBean.getSuccess()){
-                            List<ServiceCard> serviceCards = getServiceCardList(
-                                    serviceShortListDataHttpBaseBean.getData().getServices());
-
-                            updateViewByList(serviceCards, view);
+                            if(start == 0){
+                                dataList = getServiceCardList(
+                                        serviceShortListDataHttpBaseBean.getData().getServices());
+                                updateViewByList(dataList, view);
+                            }else {
+                                dataList.addAll(getServiceCardList(
+                                        serviceShortListDataHttpBaseBean.getData().getServices()));
+                            }
                         }else {
                             //test
                         }
@@ -228,11 +241,9 @@ public class CustomerSearchPageFragment extends Fragment {
         serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                if (position == 0){
-                    startActivity(new Intent(getContext(), CustomerServiceDetailPage.class));
-                } else if (position == 1) {
-                    // 还没想好怎么把position和数据库里面的id绑定起来，现在这样只能根据index来确定点击了哪一个
-                }
+                startActivity(new Intent(getContext(), CustomerServiceDetailPage.class)
+                        .putExtra("serviceId", dataList.get(position).getServiceId()));
+                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -253,31 +264,24 @@ public class CustomerSearchPageFragment extends Fragment {
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    // load action
+                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
+                            "Repair Air conditioner", "available tomorrow",
+                            "balabala", "picSrc", 213L));
                     Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+//                    searchByKeyword(keyword.getText().toString(), sortType, isDescending, view, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                    serviceCardAdapter.notifyDataSetChanged();
                 }
             }
         });
 
-
-
-
-
-
-
     }
 
-    //Use adapter data list to update view.
 
+    public void search(View view) {
+        currentShowPosition = 0;
+        searchByKeyword(keyword.getText().toString(), sortType, isDescending, view, currentShowPosition, DEFAULT_SHOW_NUMBER);
+    }
 
-//    private void updateViewByList(List<ServiceCard> serviceCards, View view){
-//        //listView down here
-//        RecyclerView recyclerView = view.findViewById(R.id.homepageRecyclerView);
-//        // Create an Adapter and set it to the ListView
-//        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards,new );
-//        recyclerView.setAdapter(serviceCardAdapter);
-//
-//
-//    }
 
 }

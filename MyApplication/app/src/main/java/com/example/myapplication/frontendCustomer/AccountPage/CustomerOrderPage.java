@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -33,8 +35,13 @@ import java.util.List;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
+import kotlin.jvm.internal.PackageReference;
 
 public class CustomerOrderPage extends AppCompatActivity {
+
+    private String token;
+    Integer currentShowPosition;
+    static final Integer DEFAULT_SHOW_NUMBER = 5;
 
     List<OrderCard> orderCards = new ArrayList<>();
 
@@ -45,6 +52,10 @@ public class CustomerOrderPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_order_page);
+
+        SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+        this.token = sp.getString("token", "");
+        currentShowPosition = 0;
 
         setToolBar();
 
@@ -161,9 +172,9 @@ public class CustomerOrderPage extends AppCompatActivity {
     }
 
     @SuppressLint("CheckResult")
-    private void getOrders(String token){
+    private void getOrders(String token, Integer start, Integer number){
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.getCustomerOrders(token, null, null)
+        customerApi.getCustomerOrders(token, start, number)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
@@ -180,7 +191,37 @@ public class CustomerOrderPage extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable t) {
-                        //test
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    private void getCertainOrders(String token, String key, Integer start, Integer number, Boolean isOr, Boolean isNot){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.searchCustomerOrder(token, key, isOr, start, number, isNot)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
+                        if(orderListDataHttpBaseBean.getSuccess()){
+
+                        }else{
+                            //test
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

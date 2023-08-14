@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,9 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerCollectionFragment extends Fragment {
     String token;
+    Integer currentShowPosition;
+    static final Integer DEFAULT_SHOW_NUMBER = 5;
+    List<ServiceCard> dataList;
 
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -52,14 +56,13 @@ public class CustomerCollectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_customer_collection, container, false);
+
         SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
+        currentShowPosition = 0;
 
-
-//        getCustomerFavourites(this.token, rootView);
-        //test
         createDemoData(rootView);
-
+//        getCustomerFavourites(this.token, rootView, currentShowPosition, DEFAULT_SHOW_NUMBER);
 
         swipeDown(rootView);
 
@@ -72,8 +75,10 @@ public class CustomerCollectionFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                createDemoData(rootView);
                 Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
-
+//                currentShowPosition = 0;
+//                getCustomerFavourites(token, rootView, currentShowPosition, DEFAULT_SHOW_NUMBER);
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -82,7 +87,6 @@ public class CustomerCollectionFragment extends Fragment {
 
     private void createDemoData(View rootView) {
         List<ServiceCard> demoDataList = new ArrayList<>();
-
         ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",  "available tomorrow",
                 "balabala", "picSrc",213L);
         ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",  "available today",
@@ -97,23 +101,30 @@ public class CustomerCollectionFragment extends Fragment {
         demoDataList.add(serviceCard3);
         demoDataList.add(serviceCard4);
 
-        updateViewByList(demoDataList, rootView);
+        dataList = demoDataList;
+
+        updateViewByList(dataList, rootView);
 
     }
 
     @SuppressLint("CheckResult")
-    private void getCustomerFavourites(String token, View view){
+    private void getCustomerFavourites(String token, View view, Integer start, Integer number){
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.getCustomerFavourites(token, 0, 10)
+        customerApi.getCustomerFavourites(token, start, number)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<FavouriteListData>>() {
                     @Override
                     public void onNext(HttpBaseBean<FavouriteListData> favouriteListDataHttpBaseBean) {
                         if(favouriteListDataHttpBaseBean.getSuccess()){
-                            List<ServiceCard> serviceCards = getServiceCardList(
-                                    favouriteListDataHttpBaseBean.getData().getFavourites());
-                            updateViewByList(serviceCards, view);
+                            if(start == 0){
+                                dataList = getServiceCardList(
+                                        favouriteListDataHttpBaseBean.getData().getFavourites());
+                                updateViewByList(dataList, view);
+                            }else{
+                                dataList.addAll(getServiceCardList(
+                                        favouriteListDataHttpBaseBean.getData().getFavourites()));
+                            }
                         }else{
                             //test
                         }
@@ -160,11 +171,9 @@ public class CustomerCollectionFragment extends Fragment {
         serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                if (position == 0){
-                    startActivity(new Intent(getContext(), CustomerServiceDetailPage.class));
-                } else if (position == 1) {
-                    // 还没想好怎么把position和数据库里面的id绑定起来，现在这样只能根据index来确定点击了哪一个
-                }
+                startActivity(new Intent(getContext(), CustomerServiceDetailPage.class)
+                        .putExtra("serviceId", dataList.get(position).getServiceId()));
+                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -184,8 +193,13 @@ public class CustomerCollectionFragment extends Fragment {
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    // load action
+                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
+                            "Repair Air conditioner", "available tomorrow",
+                            "balabala", "picSrc", 213L));
                     Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+//                    getCustomerFavourites(token, view, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                    serviceCardAdapter.notifyDataSetChanged();
                 }
             }
         });

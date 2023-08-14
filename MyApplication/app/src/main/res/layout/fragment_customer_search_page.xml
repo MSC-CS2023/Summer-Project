@@ -23,6 +23,7 @@
             android:layout_weight="6"
             android:layout_marginStart="15dp"
             android:hint="search for information"
+            android:onClick="search"
             android:textColor="@color/white" />
 
         <ImageButton
