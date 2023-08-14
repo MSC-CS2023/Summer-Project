@@ -73,25 +73,25 @@
             android:name=".ChooseActivity"
             android:exported="true" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerResetPassword"
+            android:name=".frontendCustomer.AccountPage.Setting.CustomerResetPassword"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerResetEmail"
+            android:name=".frontendCustomer.AccountPage.Setting.CustomerResetEmail"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerResetPhone"
+            android:name=".frontendCustomer.AccountPage.Setting.CustomerResetPhone"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerResetUsername"
+            android:name=".frontendCustomer.AccountPage.Setting.CustomerResetUsername"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerSettingAbout"
+            android:name=".frontendCustomer.AccountPage.Setting.CustomerSettingAbout"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerSettingHelp"
+            android:name=".frontendCustomer.AccountPage.Setting.CustomerSettingHelp"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerSettingNotification"
+            android:name=".frontendCustomer.AccountPage.Setting.CustomerSettingNotification"
             android:exported="false" />
         <activity
             android:name=".frontendCustomer.AccountPage.CustomerWalletPage"
@@ -100,13 +100,10 @@
             android:name=".frontendCustomer.AccountPage.CustomerTimetablePage"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerOrderPage"
+            android:name=".frontendCustomer.AccountPage.Order.CustomerOrderPage"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerSettingPage"
-            android:exported="false" />
-        <activity
-            android:name=".frontendCustomer.CustomerPaymentDetail"
+            android:name=".frontendCustomer.AccountPage.Setting.CustomerSettingPage"
             android:exported="false" />
         <activity
             android:name=".frontendCustomer.CustomerMainActivity"
@@ -118,7 +115,7 @@
             android:name=".frontendCustomer.HomePage.CustomerServiceDetailPage"
             android:exported="false" />
         <activity
-            android:name=".frontendCustomer.AccountPage.CustomerSettingAccountSecurity"
+            android:name=".frontendCustomer.AccountPage.Setting.CustomerSettingAccountSecurity"
             android:exported="false" />
         <activity
             android:name=".frontendProvider.loginPages.ProviderRegister"

@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer.AccountPage;
+package com.example.myapplication.frontendCustomer.AccountPage.Setting;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

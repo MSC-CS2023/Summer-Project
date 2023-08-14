@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".frontendCustomer.AccountPage.CustomerSettingAccountSecurity">
+    tools:context=".frontendCustomer.AccountPage.Setting.CustomerSettingAccountSecurity">
 
 
     <androidx.appcompat.widget.Toolbar

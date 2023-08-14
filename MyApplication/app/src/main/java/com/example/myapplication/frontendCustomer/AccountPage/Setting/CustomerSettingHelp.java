@@ -1,4 +1,4 @@
-package com.example.myapplication.frontendCustomer.AccountPage;
+package com.example.myapplication.frontendCustomer.AccountPage.Setting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.myapplication.R;
 
-public class CustomerSettingAbout extends AppCompatActivity {
+public class CustomerSettingHelp extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_setting_about);
+        setContentView(R.layout.activity_customer_setting_help);
     }
 }

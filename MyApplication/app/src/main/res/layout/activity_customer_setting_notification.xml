@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".frontendCustomer.AccountPage.CustomerSettingNotification">
+    tools:context=".frontendCustomer.AccountPage.Setting.CustomerSettingNotification">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
