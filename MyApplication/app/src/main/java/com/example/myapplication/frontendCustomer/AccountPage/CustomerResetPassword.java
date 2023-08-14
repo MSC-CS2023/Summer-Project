@@ -24,8 +24,9 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 public class CustomerResetPassword extends AppCompatActivity implements View.OnClickListener {
 
     EditText oldPassword;
-    EditText newPassword;
-    ImageButton submit;
+    EditText newPassword1;
+    EditText newPassword2;
+    ImageButton save;
 
 
     @Override
@@ -50,16 +51,17 @@ public class CustomerResetPassword extends AppCompatActivity implements View.OnC
     }
 
     void initializeViews(){
-        submit = findViewById(R.id.btnSubmit);
-        submit.setOnClickListener(this);
-        oldPassword = findViewById(R.id.txtNewUsername);
+        save = findViewById(R.id.btnSave);
+        save.setOnClickListener(this);
 
-        newPassword = findViewById(R.id.txtNewUsername);
+        oldPassword = findViewById(R.id.txtOldPassword);
+        newPassword1 = findViewById(R.id.txtNewPassword1);
+        newPassword2 = findViewById(R.id.txtNewPassword2);
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btnSubmit){
+        if (view.getId() == R.id.btnSave){
             Toast.makeText(this, "submit click", Toast.LENGTH_SHORT).show();
         }
     }

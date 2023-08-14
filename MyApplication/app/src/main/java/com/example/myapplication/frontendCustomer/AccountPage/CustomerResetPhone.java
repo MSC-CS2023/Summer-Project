@@ -13,9 +13,8 @@ import com.example.myapplication.R;
 
 public class CustomerResetPhone extends AppCompatActivity implements View.OnClickListener {
 
-    EditText oldPhone;
     EditText newPhone;
-    ImageButton submit;
+    ImageButton save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +39,8 @@ public class CustomerResetPhone extends AppCompatActivity implements View.OnClic
     }
 
     void initializeViews(){
-        submit = findViewById(R.id.btnSubmit);
-        submit.setOnClickListener(this);
-        oldPhone = findViewById(R.id.txtNewPhone);
+        save = findViewById(R.id.btnSave);
+        save.setOnClickListener(this);
 
         newPhone = findViewById(R.id.txtNewPhone);
     }
@@ -50,7 +48,7 @@ public class CustomerResetPhone extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
 
-        if (view.getId() == R.id.btnSubmit){
+        if (view.getId() == R.id.btnSave){
             Toast.makeText(this, "submit click", Toast.LENGTH_SHORT).show();
         }
 

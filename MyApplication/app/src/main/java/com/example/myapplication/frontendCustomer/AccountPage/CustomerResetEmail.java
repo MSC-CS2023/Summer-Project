@@ -13,9 +13,9 @@ import com.example.myapplication.R;
 
 public class CustomerResetEmail extends AppCompatActivity implements View.OnClickListener {
 
-    EditText oldEmail;
+
     EditText newEmail;
-    ImageButton submit;
+    ImageButton save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +39,14 @@ public class CustomerResetEmail extends AppCompatActivity implements View.OnClic
     }
 
     void initializeViews(){
-        submit = findViewById(R.id.btnSubmit);
-        submit.setOnClickListener(this);
-        oldEmail = findViewById(R.id.txtNewUsername);
-
-        newEmail = findViewById(R.id.txtNewUsername);
+        save = findViewById(R.id.btnSave);
+        save.setOnClickListener(this);
+        newEmail = findViewById(R.id.txtNewEmail);
     }
 
     public void onClick(View view) {
 
-        if (view.getId() == R.id.btnSubmit){
+        if (view.getId() == R.id.btnSave){
             Toast.makeText(this, "submit click", Toast.LENGTH_SHORT).show();
         }
 
