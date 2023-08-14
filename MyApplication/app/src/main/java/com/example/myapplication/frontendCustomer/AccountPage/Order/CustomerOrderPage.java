@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -375,7 +376,8 @@ public class CustomerOrderPage extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 if (position == 0){
-                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(CustomerOrderPage.this,CustomerOrderPageUnpaid.class));
+//                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
                 } else if (position == 1) {
                     Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
                 }else if (position == 2) {

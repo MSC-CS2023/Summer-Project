@@ -102,6 +102,11 @@
         <activity
             android:name=".frontendCustomer.AccountPage.Order.CustomerOrderPage"
             android:exported="false" />
+<!--        add unpaid order activity here-->
+        <activity
+            android:name=".frontendCustomer.AccountPage.Order.CustomerOrderPageUnpaid"
+            android:exported="false" />
+
         <activity
             android:name=".frontendCustomer.AccountPage.Setting.CustomerSettingPage"
             android:exported="false" />
