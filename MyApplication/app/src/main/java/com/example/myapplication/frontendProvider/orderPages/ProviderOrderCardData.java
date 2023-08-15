@@ -7,13 +7,15 @@ public class ProviderOrderCardData {
     private String price;
     private String imageSrc;
     private String state;
+    private String imageLink;
 
-    public ProviderOrderCardData(String title, Long orderNum, String price, String imageSrc, String state) {
+    public ProviderOrderCardData(String title, Long orderNum, String price, String imageSrc, String state, String imageLink) {
         this.title = title;
         this.orderNum = orderNum;
         this.price = price;
         this.imageSrc = imageSrc;
         this.state = state;
+        this.imageLink = imageLink;
     }
 
     public String getTitle() {
@@ -54,5 +56,13 @@ public class ProviderOrderCardData {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 }

@@ -88,11 +88,20 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_provider_orders"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:listitem="@layout/recyclerview_item_provider_order"/>
+        android:layout_height="match_parent"
+        android:id="@+id/swipeCollectionPage">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_provider_orders"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:listitem="@layout/recyclerview_item_provider_order"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 </LinearLayout>

@@ -130,7 +130,7 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-//                        deleteService(token, serviceId);
+                        deleteService(token, serviceId);
                         Toast.makeText(getApplicationContext(), "Delete", Toast.LENGTH_SHORT).show();
                         finish();
                     }

@@ -10,7 +10,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.SystemClock;
 import android.text.method.ReplacementTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +24,9 @@ import android.widget.Toast;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
+import com.example.myapplication.Constant;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendProvider.homePages.ProviderServiceCardData;
 import com.example.myapplication.frontendProvider.homePages.ProviderServicesAdaptor;
 import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.RetrofitClient;
@@ -45,14 +49,23 @@ public class ProviderOrdersFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_TEXT = "param1";
+    private static final Integer DEFAULT_SHOW_NUMBER = 5;
+    private static final int ALL_TAB = 1;
+    private static final int UNCONFIRMED_TAB = 2;
+    private static final int PROCESSING_TAB = 3;
+    private static final int FINISHED_TAB = 4;
+    private static final int REJECTED_TAB = 5;
+    private static final int CANCELED_TAB = 6;
 
     // TODO: Rename and change types of parameters
     private String mTitle;
+    private String token;
+    private int currentTab;
+    private Integer currentShowPosition;
+    private List<ProviderOrderCardData> data = new ArrayList<>();
 
     private View rootView;
-    private String token;
-
-    private List<ProviderOrderCardData> data = new ArrayList<>();
+    SwipeRefreshLayout swipeRefreshLayout;
 
     public ProviderOrdersFragment() {
         // Required empty public constructor
@@ -80,8 +93,12 @@ public class ProviderOrdersFragment extends Fragment {
         if (getArguments() != null) {
             mTitle = getArguments().getString(ARG_TEXT);
         }
+
         SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
+        currentShowPosition = 0;
+        currentTab = ALL_TAB;
+
     }
 
     @Override
@@ -91,6 +108,7 @@ public class ProviderOrdersFragment extends Fragment {
         if(rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_provider_orders, container, false);
         }
+
         initView();
 
         return rootView;
@@ -101,17 +119,41 @@ public class ProviderOrdersFragment extends Fragment {
         title.setText(mTitle);
 
         //Set data and adaptor
-        data.add(new ProviderOrderCardData("Cleaning", 382789574L, "100",
-                "img_sample2", "Unpaid"));
-        data.add(new ProviderOrderCardData("Maintenance", 382723474L, "200",
-                "img_sample1", "Unconfirmed"));
-        data.add(new ProviderOrderCardData("Laundry", 384389574L, "300",
-                "img_sample2", "Processing"));
-        setAdaptor();
-//        getProviderOrder(this.token);
+        createDemoData();
 
+//        updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+        swipeDown();
         //Click on something
         setClick();
+    }
+
+    private void createDemoData(){
+        data = new ArrayList<>();
+        data.add(new ProviderOrderCardData("Cleaning", 382789574L, "100",
+                "img_sample2", "Unconfirmed", ""));
+        data.add(new ProviderOrderCardData("Maintenance", 382723474L, "200",
+                "img_sample1", "Finished", ""));
+        data.add(new ProviderOrderCardData("Laundry", 384389574L, "300",
+                "img_sample2", "Processing", ""));
+        data.add(new ProviderOrderCardData("Laundry", 384389574L, "300",
+                "img_sample2", "Rejected", ""));
+        setAdaptor();
+    }
+
+
+    private void swipeDown() {
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeCollectionPage);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                createDemoData();
+                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
+//                currentShowPosition = 0;
+//                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                //stop refresh
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void setAdaptor() {
@@ -124,13 +166,45 @@ public class ProviderOrdersFragment extends Fragment {
         providerOrdersAdaptor.setRecyclerItemClickListener(new ProviderServicesAdaptor.OnRecyclerItemClickListener() {
             @Override
             public void onRecyclerItemClick(int position) {
-                Intent intentToUnconfirmedOrder = new Intent(getContext(), ProviderOrderDetailUnconfirmedActivity.class);
-                Intent intentToProcessingOrder = new Intent(getContext(), ProviderOrderDetailProcessingActivity.class);
-                Intent intentToRejectedOrder = new Intent(getContext(), ProviderOrderDetailRejectedActivity.class);
-                Intent intentToFinishedOrder = new Intent(getContext(), ProviderOrderDetailFinishedActivity.class);
+                switch (data.get(position).getState()){
+                    case "Unconfirmed":
+                        startActivity(new Intent(getContext(), ProviderOrderDetailUnconfirmedActivity.class));
+                        break;
+                    case "Processing":
+                        startActivity(new Intent(getContext(), ProviderOrderDetailProcessingActivity.class));
+                        break;
+                    case "Finished":
+                        startActivity(new Intent(getContext(), ProviderOrderDetailRejectedActivity.class));
+                        break;
+                    case "Rejected":
+                        startActivity(new Intent(getContext(), ProviderOrderDetailFinishedActivity.class));
+                        break;
+                    case "Canceled":
+                    default:
+                        break;
+                }
+            }
+        });
 
-                //先判断订单是什么状态，然后跳转到对应的activity（区别布局内的按钮）
-                startActivity(intentToUnconfirmedOrder);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    data.add(new ProviderOrderCardData("Cleaning", SystemClock.currentThreadTimeMillis(),
+                            "300", "img_sample2", "Finished", ""));
+                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+//                    updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                    providerOrdersAdaptor.notifyDataSetChanged();
+                }
             }
         });
     }
@@ -153,29 +227,32 @@ public class ProviderOrdersFragment extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
                 switch (position) {
-                    case 0: //all
+                    case 0:
+                        currentTab = ALL_TAB;
                         Toast.makeText(getContext(), "All clicked", Toast.LENGTH_SHORT).show();
-//                        getProviderOrder(token);
                         break;
                     case 1:
+                        currentTab = UNCONFIRMED_TAB;
                         Toast.makeText(getContext(), "Unconfirmed clicked", Toast.LENGTH_SHORT).show();
-//                        getProviderOrderByType(token, "is_confirmed");
                         break;
                     case 2:
+                        currentTab = PROCESSING_TAB;
                         Toast.makeText(getContext(), "Processing clicked", Toast.LENGTH_SHORT).show();
-//                        getProviderOrderByType(token, "is_finished");
                         break;
                     case 3:
+                        currentTab = REJECTED_TAB;
                         Toast.makeText(getContext(), "Rejected clicked", Toast.LENGTH_SHORT).show();
-//                        getProviderOrderByType(token, "is_canceled");
                         break;
                     case 4:
+                        currentTab = FINISHED_TAB;
                         Toast.makeText(getContext(), "Finished clicked", Toast.LENGTH_SHORT).show();
-//                        getProviderOrderByType(token, "is_rejected");
                         break;
                     default:
                         break;
                 }
+                createDemoData();
+                currentShowPosition = 0;
+                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
             }
 
             @Override
@@ -190,18 +267,45 @@ public class ProviderOrdersFragment extends Fragment {
         });
     }
 
+    private void updateOrderData(String token, Integer start, Integer number){
+        switch (currentTab){
+            case ALL_TAB:
+                getProviderOrder(token, start, number);
+                break;
+            case UNCONFIRMED_TAB:
+                getProviderOrderByType(token, "is_confirmed", start, number, true, true);
+                break;
+            case PROCESSING_TAB:
+                getProviderOrderByType(token, "is_finished", start, number, true, true);
+                break;
+            case FINISHED_TAB:
+                getProviderOrderByType(token, "is_finished", start, number, true, false);
+                break;
+            case REJECTED_TAB:
+                getProviderOrderByType(token, "is_rejected", start, number, true, false);
+                break;
+            case CANCELED_TAB:
+            default:
+                break;
+        }
+    }
+
     @SuppressLint("CheckResult")
-    private void getProviderOrder(String token){
+    private void getProviderOrder(String token, Integer start, Integer number){
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
-        providerApi.getProviderOrders(token, 0, 10)
+        providerApi.getProviderOrders(token, start, number)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
                     @Override
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
-                            data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                            setAdaptor();
+                            if(start == 0){
+                                data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                setAdaptor();
+                            }else {
+                                data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                            }
                         }
                     }
 
@@ -219,17 +323,22 @@ public class ProviderOrdersFragment extends Fragment {
     }
 
     @SuppressLint("CheckResult")
-    private void getProviderOrderByType(String token, String keyword){
+    private void getProviderOrderByType(String token, String keyword, Integer start,
+                                        Integer number, Boolean isOr, Boolean isNot){
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
-        providerApi.searchProviderOrder(token, keyword,null, 0, 10, null)
+        providerApi.searchProviderOrder(token, keyword,isOr, start, number, isNot)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
                     @Override
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
-                            data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                            setAdaptor();
+                            if(start == 0){
+                                data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                setAdaptor();
+                            }else {
+                                data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                            }
                         }
                     }
 
@@ -262,11 +371,13 @@ public class ProviderOrdersFragment extends Fragment {
             }else{
                 state = "null";
             }
+            String link = Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId();
             providerOrderCardData = new ProviderOrderCardData(
-                    "Title to add", order.getId(),
-                    "Price to add", "img_sample2", state);
+                    order.getServiceShort().getTitle(), order.getId(),
+                    order.getServiceShort().getFee().toString(), "img_sample2", state, link);
             providerOderCardList.add(providerOrderCardData);
         }
         return providerOderCardList;
     }
+
 }

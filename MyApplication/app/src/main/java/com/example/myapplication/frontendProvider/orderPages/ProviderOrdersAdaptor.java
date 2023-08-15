@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendProvider.homePages.ProviderServicesAdaptor;
 
@@ -40,6 +41,7 @@ public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAd
         holder.price.setText(data.get(position).getPrice());
         holder.image.setImageResource(context.getResources().getIdentifier(data.get(position).getImageSrc(),
                 "drawable", context.getPackageName()));
+//        Glide.with(this.context).load(data.get(position).getImageLink()).into(holder.image);
         holder.state.setText(data.get(position).getState());
 
     }
