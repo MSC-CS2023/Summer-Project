@@ -1,5 +1,6 @@
-package com.example.myapplication.Adapter.OrderPage;
+package com.example.myapplication.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,27 +10,30 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Adapter.ServiceCardAdapter;
+import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.AdapterData.OrderCard;
+import com.example.myapplication.Constant;
 import com.example.myapplication.R;
 
 import java.util.List;
 
-public class OrderCardAdapterCancel extends RecyclerView.Adapter <OrderCardAdapterCancel.ViewHolder> {
+public class OrderCardAdapterAll extends RecyclerView.Adapter <OrderCardAdapterAll.ViewHolder> {
 
     private List<OrderCard> orderCards;
     private ServiceCardAdapter.OnItemClickListener myOnItemClickListener;
+    private Context context;
 
 
-    public OrderCardAdapterCancel(List<OrderCard> orderCards) {
+    public OrderCardAdapterAll(List<OrderCard> orderCards, Context context) {
         this.orderCards = orderCards;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card_cancel_item, parent, false);
-        OrderCardAdapterCancel.ViewHolder viewHolder = new OrderCardAdapterCancel.ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card_all_item, parent, false);
+        OrderCardAdapterAll.ViewHolder viewHolder = new OrderCardAdapterAll.ViewHolder(view);
         return viewHolder;
     }
 
@@ -40,10 +44,11 @@ public class OrderCardAdapterCancel extends RecyclerView.Adapter <OrderCardAdapt
 
         holder.bindData(position);
 
-//        holder.orderSate.setText(orderCard.getOrderSate());
-        holder.orderId.setText(orderCard.getOrderId());
+        holder.orderState.setText(orderCard.getOrderSate());
+        holder.orderId.setText(orderCard.getOrderId().toString());
         holder.orderTitle.setText(orderCard.getOrderTitle());
         holder.orderPrice.setText(orderCard.getOrderPrice());
+//        Glide.with(this.context).load(orderCard.getPictureLink()).into(holder.orderPicture);
 //        holder.orderPicture.setImageResource(orderCard.getOrderPictureSrc());
         //没弄明白为什么加添加图片会报错
 
@@ -63,11 +68,12 @@ public class OrderCardAdapterCancel extends RecyclerView.Adapter <OrderCardAdapt
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-//        TextView orderSate;
-        TextView orderId;
-        TextView orderTitle;
-        TextView orderPrice;
-        ImageView orderPicture;
+//    TextView orderSate;
+    TextView orderId;
+    TextView orderTitle;
+    TextView orderPrice;
+    TextView orderState;
+    ImageView orderPicture;
 
         private int myPosition;
 
@@ -79,6 +85,7 @@ public class OrderCardAdapterCancel extends RecyclerView.Adapter <OrderCardAdapt
             this.orderTitle = itemView.findViewById(R.id.orderTitle);
             this.orderPrice = itemView.findViewById(R.id.orderPrice);
             this.orderPicture = itemView.findViewById(R.id.serviceImg);
+            this.orderState = itemView.findViewById(R.id.orderState);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,3 +102,5 @@ public class OrderCardAdapterCancel extends RecyclerView.Adapter <OrderCardAdapt
         }
     }
 }
+
+

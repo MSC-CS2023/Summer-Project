@@ -16,10 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterAll;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
 import com.example.myapplication.Adapter.TransactionsCard;
-import com.example.myapplication.Bean.AdapterData.OrderCard;
 import com.example.myapplication.Bean.AdapterData.TransactionCard;
 import com.example.myapplication.R;
 

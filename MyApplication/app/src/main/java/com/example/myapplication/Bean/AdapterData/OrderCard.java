@@ -4,10 +4,20 @@ import com.example.myapplication.Bean.Httpdata.Order;
 
 public class OrderCard {
     private String orderSate;
-    private String orderId;
+    private Long orderId;
     private String orderTitle;
     private String orderPrice;
+
+    private String pictureLink;
     private int orderPictureSrc;
+
+    public OrderCard(Long orderId, String orderTitle, String orderPrice, String pictureLink, String orderSate) {
+        this.orderSate = orderSate;
+        this.orderId = orderId;
+        this.orderTitle = orderTitle;
+        this.orderPrice = orderPrice;
+        this.pictureLink = pictureLink;
+    }
 
     public String getOrderSate() {
         return orderSate;
@@ -17,11 +27,11 @@ public class OrderCard {
         this.orderSate = orderSate;
     }
 
-    public String getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -49,11 +59,11 @@ public class OrderCard {
         this.orderPictureSrc = orderPictureSrc;
     }
 
-    public OrderCard(String orderId, String orderTitle, String orderPrice, int orderPictureSrc) {
-//        this.orderSate = orderSate;
-        this.orderId = orderId;
-        this.orderTitle = orderTitle;
-        this.orderPrice = orderPrice;
-        this.orderPictureSrc = orderPictureSrc;
+    public String getPictureLink() {
+        return pictureLink;
+    }
+
+    public void setPictureLink(String pictureLink) {
+        this.pictureLink = pictureLink;
     }
 }

@@ -179,7 +179,9 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         providerName.setText(service.getUsername());
         serviceDescribe.setText(service.getDescription());
         addressDetail.setText(service.getAddress());
-        amount.setText("￡" + service.getFee().toString());
+        if(service.getFee() != null){
+            amount.setText("￡" + service.getFee().toString());
+        }
         Glide.with(getApplicationContext()).load(Constant.BASE_URL +
                 "public/service_provider/avatar?id=" + service.getProviderId().toString()).into(avatar);
         Glide.with(getApplicationContext()).load(Constant.BASE_URL +

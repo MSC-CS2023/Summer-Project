@@ -11,21 +11,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterAll;
-import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterCancel;
-import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterFinish;
-import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterProcessing;
-import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterUnconfirmed;
-import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterUnpaid;
+import com.example.myapplication.Adapter.OrderCardAdapterAll;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
 import com.example.myapplication.Bean.AdapterData.OrderCard;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendProvider.orderPages.ProviderOrderCardData;
+import com.example.myapplication.frontendProvider.orderPages.ProviderOrderDetailFinishedActivity;
+import com.example.myapplication.frontendProvider.orderPages.ProviderOrderDetailProcessingActivity;
+import com.example.myapplication.frontendProvider.orderPages.ProviderOrderDetailRejectedActivity;
+import com.example.myapplication.frontendProvider.orderPages.ProviderOrderDetailUnconfirmedActivity;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 import com.google.android.material.tabs.TabLayout;
@@ -39,10 +40,16 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerOrderPage extends AppCompatActivity {
 
+    static final Integer DEFAULT_SHOW_NUMBER = 5;
+    private static final int ALL_TAB = 1;
+    private static final int UNCONFIRMED_TAB = 2;
+    private static final int PROCESSING_TAB = 3;
+    private static final int FINISHED_TAB = 4;
+    private static final int REJECTED_TAB = 5;
+    private static final int CANCELED_TAB = 6;
     private String token;
     Integer currentShowPosition;
-    static final Integer DEFAULT_SHOW_NUMBER = 5;
-
+    private int currentTab;
     List<OrderCard> orderCards = new ArrayList<>();
 
     SwipeRefreshLayout swipeRefreshLayout;
@@ -56,6 +63,7 @@ public class CustomerOrderPage extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
         currentShowPosition = 0;
+        currentTab = ALL_TAB;
 
         setToolBar();
 
@@ -63,14 +71,17 @@ public class CustomerOrderPage extends AppCompatActivity {
 
         swipeDown();
 
-        //test
+        createDemo();
+//        updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+    }
 
-        orderCards.add(new OrderCard( "123", "ok", "200", 2));
-        orderCards.add(new OrderCard("12352", "ok", "200", 2));
-        orderCards.add(new OrderCard( "123", "ok", "200", 2));
-
-        updateViewByList_all(orderCards);
-
+    private void createDemo(){
+        orderCards = new ArrayList<>();
+        orderCards.add(new OrderCard(122313343L, "name1", "200", "link", "Unconfirmed"));
+        orderCards.add(new OrderCard(121133L, "name1213", "200", "link", "Processing"));
+        orderCards.add(new OrderCard( 12212313L, "name3", "200", "link", "Finished"));
+        orderCards.add(new OrderCard( 12212313L, "name2", "200", "link", "Canceled"));
+        updateViewByList(orderCards);
     }
 
     private void swipeDown() {
@@ -79,7 +90,10 @@ public class CustomerOrderPage extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 //add refresh action here
+                createDemo();
                 Toast.makeText(CustomerOrderPage.this, "refresh action", Toast.LENGTH_SHORT).show();
+//                currentShowPosition = 0;
+//                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -113,11 +127,11 @@ public class CustomerOrderPage extends AppCompatActivity {
         tabLayout.addTab(tab3);
 
         TabLayout.Tab tab4 = tabLayout.newTab();
-        tab4.setText("Finish");
+        tab4.setText("Finished");
         tabLayout.addTab(tab4);
 
         TabLayout.Tab tab5 = tabLayout.newTab();
-        tab5.setText("Cancel");
+        tab5.setText("Canceled");
         tabLayout.addTab(tab5);
 
 //        TabLayout.Tab tab6 = tabLayout.newTab();
@@ -129,29 +143,32 @@ public class CustomerOrderPage extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
                 switch (position){
-                    case 0: //all
+                    case 0: //
+                        currentTab = ALL_TAB;
                         Toast.makeText(CustomerOrderPage.this, "select all", Toast.LENGTH_SHORT).show();
-                        updateViewByList_all(orderCards);
                         break;
-
                     case 1: // unconfirmed
+                        currentTab = UNCONFIRMED_TAB;
                         Toast.makeText(CustomerOrderPage.this, "select unconfirmed", Toast.LENGTH_SHORT).show();
-                        updateViewByList_unconfirmed(orderCards);
                         break;
                     case 2: // processing
+                        currentTab = PROCESSING_TAB;
                         Toast.makeText(CustomerOrderPage.this, "select processing", Toast.LENGTH_SHORT).show();
-                        updateViewByList_processing(orderCards);
                         break;
                     case 3: // Finish
-                        Toast.makeText(CustomerOrderPage.this, "select Finish", Toast.LENGTH_SHORT).show();
-                        updateViewByList_finish(orderCards);
+                        currentTab = FINISHED_TAB;
+                        Toast.makeText(CustomerOrderPage.this, "select Finished", Toast.LENGTH_SHORT).show();
                         break;
                     case 4: // Cancel
-                        Toast.makeText(CustomerOrderPage.this, "select Cancel", Toast.LENGTH_SHORT).show();
-                        updateViewByList_cancel(orderCards);
+                        currentTab = CANCELED_TAB;
+                        Toast.makeText(CustomerOrderPage.this, "select Canceled", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
                         break;
                 }
-
+                createDemo();
+//                currentShowPosition = 0;
+//                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
             }
 
             @Override
@@ -164,8 +181,90 @@ public class CustomerOrderPage extends AppCompatActivity {
 //  refresh
             }
         });
+    }
 
+    private void updateViewByList(List<OrderCard> orderCards) {
+        //RecyclerView down here
+        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        // Create an Adapter and set it to the ListView
+        OrderCardAdapterAll orderCardAdapter = new OrderCardAdapterAll(orderCards, getApplicationContext());
 
+        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                switch (orderCards.get(position).getOrderSate()){
+                    case "Unconfirmed":
+                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageUnconfirmed.class)
+                                .putExtra("orderId", orderCards.get(position).getOrderId()));
+                        break;
+                    case "Processing":
+                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageUnconfirmed.class)
+                                .putExtra("orderId", orderCards.get(position).getOrderId()));
+                        break;
+                    case "Finished":
+                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageUnconfirmed.class)
+                                .putExtra("orderId", orderCards.get(position).getOrderId()));
+                        break;
+                    case "Canceled":
+                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageUnconfirmed.class)
+                                .putExtra("orderId", orderCards.get(position).getOrderId()));
+                        break;
+                    case "Rejected":
+                    default:
+                        break;
+                }
+            }
+        });
+
+        recyclerView.setAdapter(orderCardAdapter);
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
+                    orderCards.add(new OrderCard(121133L, "name1213",
+                            "~"+ SystemClock.currentThreadTimeMillis(),
+                            "link", "Processing"));
+                    orderCards.add(new OrderCard(121133L, "name1213",
+                            "~"+ SystemClock.currentThreadTimeMillis(),
+                            "link", "Finish"));
+//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+//                    updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                    orderCardAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
+    private void updateOrderData(String token, Integer start, Integer number){
+        switch (currentTab){
+            case ALL_TAB:
+                break;
+            case UNCONFIRMED_TAB:
+                break;
+            case PROCESSING_TAB:
+                break;
+            case FINISHED_TAB:
+                break;
+            case REJECTED_TAB:
+                break;
+            case CANCELED_TAB:
+            default:
+                break;
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -180,7 +279,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                         if(orderListDataHttpBaseBean.getSuccess()){
                             List<OrderCard> orderCards =
                                     getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                updateViewByList_all(orderCards);
+                                updateViewByList(orderCards);
                         }else{
                             //test
                         }
@@ -230,266 +329,6 @@ public class CustomerOrderPage extends AppCompatActivity {
 
     private List<OrderCard> getOrderCardList(List<Order> orders){
         return null;
-    }
-
-    private void updateViewByList_all(List<OrderCard> orderCards) {
-        //RecyclerView down here
-        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        // Create an Adapter and set it to the ListView
-        OrderCardAdapterAll orderCardAdapter = new OrderCardAdapterAll(orderCards);
-
-        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (position == 0){
-                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
-                } else if (position == 1) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
-                }else if (position == 2) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        recyclerView.setAdapter(orderCardAdapter);
-
-        //Load more when the interface reaches the bottom
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                // Determine whether to slide to the bottom and perform loading more operations
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0) {
-                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void updateViewByList_processing(List<OrderCard> orderCards) {
-        //RecyclerView down here
-        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        // Create an Adapter and set it to the ListView
-        OrderCardAdapterProcessing orderCardAdapter = new OrderCardAdapterProcessing(orderCards);
-
-        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (position == 0){
-                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
-                } else if (position == 1) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
-                }else if (position == 2) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        recyclerView.setAdapter(orderCardAdapter);
-
-        //Load more when the interface reaches the bottom
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                // Determine whether to slide to the bottom and perform loading more operations
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0) {
-                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }
-    private void updateViewByList_unconfirmed(List<OrderCard> orderCards) {
-        //RecyclerView down here
-        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        // Create an Adapter and set it to the ListView
-        OrderCardAdapterUnconfirmed orderCardAdapter = new OrderCardAdapterUnconfirmed(orderCards);
-
-        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (position == 0){
-                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
-                } else if (position == 1) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
-                }else if (position == 2) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        recyclerView.setAdapter(orderCardAdapter);
-
-        //Load more when the interface reaches the bottom
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                // Determine whether to slide to the bottom and perform loading more operations
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0) {
-                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }
-    private void updateViewByList_unpaid(List<OrderCard> orderCards) {
-        //RecyclerView down here
-        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        // Create an Adapter and set it to the ListView
-        OrderCardAdapterUnpaid orderCardAdapter = new OrderCardAdapterUnpaid(orderCards);
-
-        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (position == 0){
-                    startActivity(new Intent(CustomerOrderPage.this,CustomerOrderPageUnpaid.class));
-//                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
-                } else if (position == 1) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
-                }else if (position == 2) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        recyclerView.setAdapter(orderCardAdapter);
-
-        //Load more when the interface reaches the bottom
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                // Determine whether to slide to the bottom and perform loading more operations
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0) {
-                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }
-    private void updateViewByList_finish(List<OrderCard> orderCards) {
-        //RecyclerView down here
-        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        // Create an Adapter and set it to the ListView
-        OrderCardAdapterFinish orderCardAdapter = new OrderCardAdapterFinish(orderCards);
-
-        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (position == 0){
-                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
-                } else if (position == 1) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
-                }else if (position == 2) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        recyclerView.setAdapter(orderCardAdapter);
-
-        //Load more when the interface reaches the bottom
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                // Determine whether to slide to the bottom and perform loading more operations
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0) {
-                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }
-    private void updateViewByList_cancel(List<OrderCard> orderCards) {
-        //RecyclerView down here
-        RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        // Create an Adapter and set it to the ListView
-        OrderCardAdapterCancel orderCardAdapter = new OrderCardAdapterCancel(orderCards);
-
-        orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (position == 0){
-                    Toast.makeText(CustomerOrderPage.this, "Click the first one", Toast.LENGTH_SHORT).show();
-                } else if (position == 1) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 2nd one", Toast.LENGTH_SHORT).show();
-                }else if (position == 2) {
-                    Toast.makeText(CustomerOrderPage.this, "Click the 3rd one", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        recyclerView.setAdapter(orderCardAdapter);
-
-        //Load more when the interface reaches the bottom
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                // Determine whether to slide to the bottom and perform loading more operations
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0) {
-                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
     }
 
 
