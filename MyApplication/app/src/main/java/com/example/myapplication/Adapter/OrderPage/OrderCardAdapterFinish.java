@@ -15,21 +15,21 @@ import com.example.myapplication.R;
 
 import java.util.List;
 
-public class OrderCardAdapterReview extends RecyclerView.Adapter <OrderCardAdapterReview.ViewHolder> {
+public class OrderCardAdapterFinish extends RecyclerView.Adapter <OrderCardAdapterFinish.ViewHolder> {
 
     private List<OrderCard> orderCards;
     private ServiceCardAdapter.OnItemClickListener myOnItemClickListener;
 
 
-    public OrderCardAdapterReview(List<OrderCard> orderCards) {
+    public OrderCardAdapterFinish(List<OrderCard> orderCards) {
         this.orderCards = orderCards;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card_review_item, parent, false);
-        OrderCardAdapterReview.ViewHolder viewHolder = new OrderCardAdapterReview.ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card_finish_item, parent, false);
+        OrderCardAdapterFinish.ViewHolder viewHolder = new OrderCardAdapterFinish.ViewHolder(view);
         return viewHolder;
     }
 

@@ -15,21 +15,21 @@ import com.example.myapplication.R;
 
 import java.util.List;
 
-public class OrderCardAdapterRefund extends RecyclerView.Adapter <OrderCardAdapterRefund.ViewHolder> {
+public class OrderCardAdapterCancel extends RecyclerView.Adapter <OrderCardAdapterCancel.ViewHolder> {
 
     private List<OrderCard> orderCards;
     private ServiceCardAdapter.OnItemClickListener myOnItemClickListener;
 
 
-    public OrderCardAdapterRefund(List<OrderCard> orderCards) {
+    public OrderCardAdapterCancel(List<OrderCard> orderCards) {
         this.orderCards = orderCards;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card_refund_item, parent, false);
-        OrderCardAdapterRefund.ViewHolder viewHolder = new OrderCardAdapterRefund.ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card_cancel_item, parent, false);
+        OrderCardAdapterCancel.ViewHolder viewHolder = new OrderCardAdapterCancel.ViewHolder(view);
         return viewHolder;
     }
 

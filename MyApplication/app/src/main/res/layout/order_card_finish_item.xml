@@ -30,7 +30,7 @@
                     android:id="@+id/orderState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Order Review"
+                    android:text="Order Finish"
                     android:textSize="20dp"
                     android:textStyle="bold"></TextView>
 
