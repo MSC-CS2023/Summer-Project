@@ -51,7 +51,6 @@ public class CustomerSettingPage extends AppCompatActivity implements View.OnCli
             }
         });
 
-
     }
 
     @Override

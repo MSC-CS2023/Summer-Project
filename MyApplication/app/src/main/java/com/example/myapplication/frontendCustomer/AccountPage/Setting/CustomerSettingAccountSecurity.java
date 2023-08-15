@@ -36,8 +36,6 @@ public class CustomerSettingAccountSecurity extends AppCompatActivity implements
     ImageButton AS_email;
     ImageButton As_password;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,8 +125,6 @@ public class CustomerSettingAccountSecurity extends AppCompatActivity implements
 //    }
 
 
-
-
     public void setToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -138,37 +134,6 @@ public class CustomerSettingAccountSecurity extends AppCompatActivity implements
                 onBackPressed(); // back to previous page
             }
         });
-    }
-
-    @SuppressLint("CheckResult")
-    private void modifyPersonalDetail(String token, String modifiedItem, String modifiedContent){
-        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.modifyCustomerDetail(token, modifiedItem, modifiedContent)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ModifyDetailData>>() {
-                    @Override
-                    public void onNext(HttpBaseBean<ModifyDetailData> modifyDetailDataHttpBaseBean) {
-                        if(modifyDetailDataHttpBaseBean.getSuccess()){
-                            Toast.makeText(getApplicationContext(),
-                                    "Account detail modified successfully.", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getApplicationContext(),
-                                    modifyDetailDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        Toast.makeText(getApplicationContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
 
     @Override
@@ -183,5 +148,6 @@ public class CustomerSettingAccountSecurity extends AppCompatActivity implements
             startActivity(new Intent(CustomerSettingAccountSecurity.this, CustomerResetPassword.class));
         }
     }
+
 }
 
