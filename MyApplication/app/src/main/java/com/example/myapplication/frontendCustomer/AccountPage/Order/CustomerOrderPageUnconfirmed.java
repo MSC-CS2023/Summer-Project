@@ -11,30 +11,28 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer.HomePage.CustomerServiceDetailPage;
 
-public class CustomerOrderPageUnpaid extends AppCompatActivity {
+public class CustomerOrderPageUnconfirmed extends AppCompatActivity {
 
-    ImageButton pay;
+    ImageButton confirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_order_page_unpaid);
+        setContentView(R.layout.activity_customer_order_page_unconfirmed);
 
-        pay = findViewById(R.id.btn_pay);
-        pay.setOnClickListener(new View.OnClickListener() {
+        confirm = findViewById(R.id.btn_CustomerConfirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 paymentAlert();
             }
         });
 
-
     }
 
     private void paymentAlert(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(CustomerOrderPageUnpaid.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(CustomerOrderPageUnconfirmed.this);
 
         builder.setTitle("Are you sure to pay ?")
                 .setMessage("You need to pay" )
@@ -64,6 +62,5 @@ public class CustomerOrderPageUnpaid extends AppCompatActivity {
 
         alertDialog.show();
     }
-
 
 }

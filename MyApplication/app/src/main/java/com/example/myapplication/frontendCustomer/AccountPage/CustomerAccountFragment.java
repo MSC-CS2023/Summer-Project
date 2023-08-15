@@ -79,6 +79,7 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
         order.setOnClickListener(this);
         timetable.setOnClickListener(this);
         wallet.setOnClickListener(this);
+        avatar.setOnClickListener(this);
     }
 
     @Override
@@ -90,6 +91,8 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
             startActivity(new Intent(getContext(), CustomerWalletPage.class));
         } else if (view.getId() == R.id.timetable) {
             startActivity(new Intent(getContext(), CustomerTimetablePage.class));
+        }else if (view.getId() == R.id.accountAvatar) {
+            startActivity(new Intent(getContext(), PersonalDetailPage.class));
         }
     }
 

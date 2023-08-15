@@ -19,6 +19,12 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".frontendCustomer.AccountPage.PersonalDetailPage"
+            android:exported="false" />
+        <activity
+            android:name=".frontendCustomer.AccountPage.Order.CustomerOrderPageUnconfirmed"
+            android:exported="false" />
+        <activity
             android:name=".frontendProvider.profilePages.ProviderResetPasswordActivity"
             android:exported="false" />
         <activity
@@ -101,12 +107,10 @@
             android:exported="false" />
         <activity
             android:name=".frontendCustomer.AccountPage.Order.CustomerOrderPage"
-            android:exported="false" />
-<!--        add unpaid order activity here-->
+            android:exported="false" /> <!-- add unpaid order activity here -->
         <activity
             android:name=".frontendCustomer.AccountPage.Order.CustomerOrderPageUnpaid"
             android:exported="false" />
-
         <activity
             android:name=".frontendCustomer.AccountPage.Setting.CustomerSettingPage"
             android:exported="false" />
