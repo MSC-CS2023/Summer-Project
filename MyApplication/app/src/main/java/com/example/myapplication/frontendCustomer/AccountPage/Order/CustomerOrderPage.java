@@ -15,9 +15,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterAll;
+import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterCancel;
+import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterFinish;
 import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterProcessing;
-import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterRefund;
-import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterReview;
 import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterUnconfirmed;
 import com.example.myapplication.Adapter.OrderPage.OrderCardAdapterUnpaid;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
@@ -105,24 +105,24 @@ public class CustomerOrderPage extends AppCompatActivity {
         tabLayout.addTab(tab1);
 
         TabLayout.Tab tab2 = tabLayout.newTab();
-        tab2.setText("Unpaid");
+        tab2.setText("Unconfirmed");
         tabLayout.addTab(tab2);
 
         TabLayout.Tab tab3 = tabLayout.newTab();
-        tab3.setText("Unconfirmed");
+        tab3.setText("Processing");
         tabLayout.addTab(tab3);
 
         TabLayout.Tab tab4 = tabLayout.newTab();
-        tab4.setText("Processing");
+        tab4.setText("Finish");
         tabLayout.addTab(tab4);
 
         TabLayout.Tab tab5 = tabLayout.newTab();
-        tab5.setText("Review");
+        tab5.setText("Cancel");
         tabLayout.addTab(tab5);
 
-        TabLayout.Tab tab6 = tabLayout.newTab();
-        tab6.setText("Refund");
-        tabLayout.addTab(tab6);
+//        TabLayout.Tab tab6 = tabLayout.newTab();
+//        tab6.setText("Refund");
+//        tabLayout.addTab(tab6);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -133,25 +133,22 @@ public class CustomerOrderPage extends AppCompatActivity {
                         Toast.makeText(CustomerOrderPage.this, "select all", Toast.LENGTH_SHORT).show();
                         updateViewByList_all(orderCards);
                         break;
-                    case 1: // unpaid
-                        Toast.makeText(CustomerOrderPage.this, "select unpaid", Toast.LENGTH_SHORT).show();
-                        updateViewByList_unpaid(orderCards);
-                        break;
-                    case 2: // unconfirmed
+
+                    case 1: // unconfirmed
                         Toast.makeText(CustomerOrderPage.this, "select unconfirmed", Toast.LENGTH_SHORT).show();
                         updateViewByList_unconfirmed(orderCards);
                         break;
-                    case 3: // processing
+                    case 2: // processing
                         Toast.makeText(CustomerOrderPage.this, "select processing", Toast.LENGTH_SHORT).show();
                         updateViewByList_processing(orderCards);
                         break;
-                    case 4: // review
-                        Toast.makeText(CustomerOrderPage.this, "select review", Toast.LENGTH_SHORT).show();
-                        updateViewByList_review(orderCards);
+                    case 3: // Finish
+                        Toast.makeText(CustomerOrderPage.this, "select Finish", Toast.LENGTH_SHORT).show();
+                        updateViewByList_finish(orderCards);
                         break;
-                    case 5: // refund
-                        Toast.makeText(CustomerOrderPage.this, "select refund", Toast.LENGTH_SHORT).show();
-                        updateViewByList_refund(orderCards);
+                    case 4: // Cancel
+                        Toast.makeText(CustomerOrderPage.this, "select Cancel", Toast.LENGTH_SHORT).show();
+                        updateViewByList_cancel(orderCards);
                         break;
                 }
 
@@ -408,13 +405,13 @@ public class CustomerOrderPage extends AppCompatActivity {
         });
 
     }
-    private void updateViewByList_review(List<OrderCard> orderCards) {
+    private void updateViewByList_finish(List<OrderCard> orderCards) {
         //RecyclerView down here
         RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
-        OrderCardAdapterReview orderCardAdapter = new OrderCardAdapterReview(orderCards);
+        OrderCardAdapterFinish orderCardAdapter = new OrderCardAdapterFinish(orderCards);
 
         orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
@@ -451,13 +448,13 @@ public class CustomerOrderPage extends AppCompatActivity {
         });
 
     }
-    private void updateViewByList_refund(List<OrderCard> orderCards) {
+    private void updateViewByList_cancel(List<OrderCard> orderCards) {
         //RecyclerView down here
         RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
-        OrderCardAdapterRefund orderCardAdapter = new OrderCardAdapterRefund(orderCards);
+        OrderCardAdapterCancel orderCardAdapter = new OrderCardAdapterCancel(orderCards);
 
         orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
