@@ -37,7 +37,7 @@ public class ProviderOrderDetailProcessingActivity extends AppCompatActivity imp
         state = findViewById(R.id.order_detail_state);
         finish = findViewById(R.id.btn_confirm);
         finish.setOnClickListener(this);
-        cancel = findViewById(R.id.btn_cancel);
+        cancel = findViewById(R.id.btn_finish);
         cancel.setOnClickListener(this);
 
         toolbar = findViewById(R.id.toolbar);

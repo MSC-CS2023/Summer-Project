@@ -130,6 +130,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:text="Address:  "
             android:textSize="25sp"
             android:textStyle="bold"/>
@@ -138,8 +139,7 @@
             android:id="@+id/edtxt_Address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:hint="ABC Court, DEF Road, Bristol"
+            android:hint="ABC Court,\nDEF Road,\nBristol,\nBS1 ABC"
             android:background="#00000000"
             android:textSize="25sp"/>
 
