@@ -7,7 +7,7 @@
     android:padding="10dp"
     tools:context=".frontendCustomer.AccountPage.Order.CustomerOrderPageProcessing">
 
-    <!--    welcome title-->
+<!--    welcome title-->
     <LinearLayout
         android:id="@+id/OrderSort"
         android:layout_width="match_parent"
@@ -18,13 +18,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Waiting for Confirm"
+            android:text="Order in Process"
             android:textSize="30dp"
             android:textStyle="bold"></TextView>
 
 
+
     </LinearLayout>
-    <!--    customer info-->
+<!--    customer info-->
     <LinearLayout
         android:layout_marginTop="30dp"
         android:id="@+id/CustomerInfo"
@@ -71,7 +72,7 @@
 
 
     </LinearLayout>
-    <!--order info -->
+<!--order info -->
     <LinearLayout
         android:background="@drawable/border_background"
         android:id="@+id/OrderInfo"
@@ -116,10 +117,10 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/btn_cancel"
+        android:id="@+id/btn_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/btn_cancel"
+        android:src="@drawable/btn_finish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@android:color/transparent"

@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/light_blue" /> <!-- 圆球的颜色 -->
+    <size android:width="40dp" android:height="40dp" /> <!-- 圆球的大小 -->
+    <corners android:radius="20dp" /> <!-- 圆球的圆角半径，以使其成为一个圆 -->
+</shape>

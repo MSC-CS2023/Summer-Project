@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".frontendCustomer.AccountPage.Order.CustomerOrderPageUnpaid">
+    tools:context=".frontendCustomer.AccountPage.Order.CustomerOrderPageProcessing">
 
-<!--    welcome title-->
+    <!--    welcome title-->
     <LinearLayout
         android:id="@+id/OrderSort"
         android:layout_width="match_parent"
@@ -18,22 +18,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Waiting for Payment"
+            android:text="Waiting for Mark"
             android:textSize="30dp"
             android:textStyle="bold"></TextView>
 
-        <TextView
-            android:id="@+id/countdown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:text="order will close in XXX minutes"
-            android:textColor="@color/grey"
-            android:textSize="20dp"></TextView>
 
     </LinearLayout>
-<!--    customer info-->
+    <!--    customer info-->
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:id="@+id/CustomerInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +71,7 @@
 
 
     </LinearLayout>
-<!--order info -->
+    <!--order info -->
     <LinearLayout
         android:background="@drawable/border_background"
         android:id="@+id/OrderInfo"
@@ -122,11 +115,44 @@
             android:textSize="20dp"></TextView>
     </LinearLayout>
 
+
+<!--    mark part-->
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:id="@+id/orderMark"
+        app:layout_constraintTop_toBottomOf="@+id/OrderInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="  Drag the controls below to rate ~~"
+            android:textSize="20dp"></TextView>
+
+        <SeekBar
+            android:padding="10dp"
+            android:id="@+id/ratingSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="0" />
+
+    </LinearLayout>
+
+
+
+
+
     <ImageButton
-        android:id="@+id/btn_pay"
+        android:id="@+id/btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/btn_pay2"
+        android:src="@drawable/btn_submit_black"
+        app:layout_constraintTop_toBottomOf="@+id/orderMark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@android:color/transparent"

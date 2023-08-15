@@ -13,26 +13,29 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 
-public class CustomerOrderPageUnconfirmed extends AppCompatActivity {
+public class CustomerOrderPageProcessing extends AppCompatActivity {
 
-    ImageButton cancel;
+    ImageButton finish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_order_page_unconfirmed);
+        setContentView(R.layout.activity_customer_order_page_processing);
 
-        cancel = findViewById(R.id.btn_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
+        finish = findViewById(R.id.btn_finish);
+        finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //add this order to cancel list
-                Toast.makeText(CustomerOrderPageUnconfirmed.this, "add this order to cancel list", Toast.LENGTH_SHORT).show();
+
+                //add this order to finish list
+                Toast.makeText(CustomerOrderPageProcessing.this, "add this order to finish list", Toast.LENGTH_SHORT).show();
 
             }
         });
 
+
     }
+
 
 
 }

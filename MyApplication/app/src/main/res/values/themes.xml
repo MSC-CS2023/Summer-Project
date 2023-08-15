@@ -5,5 +5,8 @@
          <item name="colorPrimary">@color/light_blue</item>
     </style>
 
-    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
+    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" >
+        <item name="android:seekBarStyle">@style/CustomSeekBarStyle</item>
+
+    </style>
 </resources>

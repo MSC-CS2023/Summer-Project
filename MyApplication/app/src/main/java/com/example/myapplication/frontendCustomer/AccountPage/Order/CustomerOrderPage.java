@@ -200,14 +200,16 @@ public class CustomerOrderPage extends AppCompatActivity {
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;
                     case "Processing":
-                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageUnconfirmed.class)
+                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageProcessing.class)
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;
                     case "Finished":
-                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageUnconfirmed.class)
+                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageFinished.class)
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;
                     case "Canceled":
+
+                        // dont jump to another page
                         startActivity(new Intent(getApplicationContext(), CustomerOrderPageUnconfirmed.class)
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;

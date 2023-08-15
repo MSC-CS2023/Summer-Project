@@ -6,10 +6,15 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-
     //not bounce when selected
     <style name="AppBottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="itemHorizontalTranslationEnabled">false</item>
+    </style>
+
+    //edit seek bar style
+    <style name="CustomSeekBarStyle" parent="Widget.AppCompat.SeekBar">
+        <item name="android:progressDrawable">@drawable/seekbar_progress</item>
+        <item name="android:thumb">@drawable/seekbar_thumb</item>
     </style>
 
 
