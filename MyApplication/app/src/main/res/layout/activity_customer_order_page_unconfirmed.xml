@@ -7,7 +7,7 @@
     android:padding="10dp"
     tools:context=".frontendCustomer.AccountPage.Order.CustomerOrderPageUnpaid">
 
-<!--    welcome title-->
+    <!--    welcome title-->
     <LinearLayout
         android:id="@+id/OrderSort"
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:textSize="20dp"></TextView>
 
     </LinearLayout>
-<!--    customer info-->
+    <!--    customer info-->
     <LinearLayout
         android:id="@+id/CustomerInfo"
         android:layout_width="match_parent"
@@ -78,7 +78,7 @@
 
 
     </LinearLayout>
-<!--order info -->
+    <!--order info -->
     <LinearLayout
         android:background="@drawable/border_background"
         android:id="@+id/OrderInfo"
@@ -123,10 +123,10 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/btn_pay"
+        android:id="@+id/btn_CustomerConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/btn_pay2"
+        android:src="@drawable/btn_confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@android:color/transparent"

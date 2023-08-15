@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".frontendCustomer.loginPage.CustomerRegister">
+
+    <ImageButton
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/btn_avatar2"></ImageButton>
+
+
+    <TextView
+        android:id="@+id/txtRegisterCustomerName"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:elevation="5dp"
+        android:text="Jeremy Allen White"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:id="@+id/txtRegisterCustomerNumber"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="about me this part for personal introduction,scscsalkhcaklchalkchalschalschslchalshclachlaschsahclascsalch;salc"
+        android:maxLines="3"
+        android:textSize="20dp"
+        android:textColor="@color/grey"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message Me"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"></Button>
+
+
+</LinearLayout>
