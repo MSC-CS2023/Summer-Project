@@ -63,14 +63,12 @@ public interface ProviderApi {
             @Part("description") String serviceDescription, @Part("fee") Double serviceFee);
 
     @DELETE("service_provider/service/delete")
-    @Multipart
     Flowable<HttpBaseBean<Object>> deleteService(
-            @Header("Authorization") String authorization, @Part("service_id") Long serviceId);
+            @Header("Authorization") String authorization, @Query("service_id") Long serviceId);
 
     @DELETE("service_provider/service/delete_pic")
-    @Multipart
     Flowable<HttpBaseBean<Object>> deleteServicePicture(
-            @Header("Authorization") String authorization, @Part("id") Long pictureId);
+            @Header("Authorization") String authorization, @Query("id") Long pictureId);
 
     //ORDER
     @GET("service_provider/booking_order/get")

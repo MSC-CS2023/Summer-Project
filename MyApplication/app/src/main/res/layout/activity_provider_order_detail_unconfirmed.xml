@@ -77,11 +77,11 @@
         android:paddingRight="10dp">
 
         <Button
-            android:id="@+id/btn_cancel"
+            android:id="@+id/btn_reject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="CANCEL"
+            android:text="REJECT"
             android:backgroundTint="@color/grey"/>
 
         <Button

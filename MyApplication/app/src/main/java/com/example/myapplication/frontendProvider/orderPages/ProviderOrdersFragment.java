@@ -168,16 +168,20 @@ public class ProviderOrdersFragment extends Fragment {
             public void onRecyclerItemClick(int position) {
                 switch (data.get(position).getState()){
                     case "Unconfirmed":
-                        startActivity(new Intent(getContext(), ProviderOrderDetailUnconfirmedActivity.class));
+                        startActivity(new Intent(getContext(), ProviderOrderDetailUnconfirmedActivity.class)
+                                .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
                     case "Processing":
-                        startActivity(new Intent(getContext(), ProviderOrderDetailProcessingActivity.class));
+                        startActivity(new Intent(getContext(), ProviderOrderDetailProcessingActivity.class)
+                                .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
                     case "Finished":
-                        startActivity(new Intent(getContext(), ProviderOrderDetailRejectedActivity.class));
+                        startActivity(new Intent(getContext(), ProviderOrderDetailRejectedActivity.class)
+                                .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
                     case "Rejected":
-                        startActivity(new Intent(getContext(), ProviderOrderDetailFinishedActivity.class));
+                        startActivity(new Intent(getContext(), ProviderOrderDetailFinishedActivity.class)
+                                .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
                     case "Canceled":
                     default:
@@ -360,17 +364,7 @@ public class ProviderOrdersFragment extends Fragment {
         String state;
         ProviderOrderCardData providerOrderCardData;
         for(Order order : orders){
-            if(order.getIsCanceled()){
-                state = "Canceled";
-            }else if(order.getIsConfirmed()){
-                state = "Confirmed";
-            }else if(order.getIsFinished()){
-                state = "Finished";
-            }else if(order.getIsRejected()){
-                state = "Rejected";
-            }else{
-                state = "null";
-            }
+            state = "Confirmed";
             String link = Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId();
             providerOrderCardData = new ProviderOrderCardData(
                     order.getServiceShort().getTitle(), order.getId(),

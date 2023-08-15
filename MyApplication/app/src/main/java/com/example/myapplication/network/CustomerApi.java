@@ -61,9 +61,8 @@ public interface CustomerApi {
             @Header("Authorization") String authorization, @Part("id") Long serviceId);
 
     @DELETE("customer/favourite/delete")
-    @Multipart
     Flowable<HttpBaseBean<Object>> removeFromFavourite(
-            @Header("Authorization") String authorization, @Part("id") Long serviceId);
+            @Header("Authorization") String authorization, @Query("id") Long serviceId);
 
 
     //BOOKING ORDER
