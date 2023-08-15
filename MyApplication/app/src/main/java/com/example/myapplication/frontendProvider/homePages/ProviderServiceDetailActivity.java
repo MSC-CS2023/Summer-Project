@@ -35,7 +35,7 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
 
     private String token;
     private Long serviceId;
-    private Service service;
+    private Service service = new Service();
 
     private Toolbar toolbar;
     private ImageButton edit;
@@ -57,7 +57,6 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
         this.token = sp.getString("token", "");
         this.serviceId = getIntent().getLongExtra("serviceId", 0);
 
-//        service = new Service();
 //        service.setTitle("123");
 //        service.setDescription("sadafaafas");
 //        service.setFee(5.0);
@@ -91,16 +90,18 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
         if(view.getId() == R.id.btn_edit) {
             setContentView(R.layout.activity_provider_service_detail_editable);
             initEditView();
-//            updateView();
+            updateView();
         } else if(view.getId() == R.id.btn_delete) {
             deleteAlert();
         } else if(view.getId() == R.id.btn_save) {
-//            modifyService();
-            Toast.makeText(this, "save clicked", Toast.LENGTH_SHORT).show();
-            finish();
+            modifyService();
+            setContentView(R.layout.activity_provider_service_detail);
+            initView();
+            getServiceDetail();
         } else if(view.getId() == R.id.btn_cancel) {
             setContentView(R.layout.activity_provider_service_detail);
             initView();
+            updateView();
         }
     }
 
@@ -130,7 +131,7 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 //                        deleteService(token, serviceId);
-                        Toast.makeText(getApplicationContext(), "delete", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Delete", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 })
@@ -155,23 +156,25 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
     private void updateView(){
         title.setText(service.getTitle());
         description.setText(service.getDescription());
-        price.setText(service.getFee().toString());
+        if(service.getFee() != null){
+            price.setText(service.getFee().toString());
+        }
         address.setText(service.getAddress());
         Glide.with(getApplicationContext()).load(Constant.BASE_URL +
                 "get_pic?id=" + service.getPictureId()).into(serviceImg);
     }
 
     private void modifyService(){
-        if(!service.getTitle().equals(title.getText().toString())){
+        if(service.getTitle() == null || !service.getTitle().equals(title.getText().toString())){
             modifyServiceDetail(token, serviceId, "title", title.getText().toString());
         }
-        if(!service.getDescription().equals(description.getText().toString())){
+        if(service.getDescription() == null || !service.getDescription().equals(description.getText().toString())){
             modifyServiceDetail(token, serviceId, "description", description.getText().toString());
         }
-        if(!service.getAddress().equals(address.getText().toString())){
+        if(service.getAddress() == null || !service.getAddress().equals(address.getText().toString())){
             modifyServiceDetail(token, serviceId, "address", address.getText().toString());
         }
-        if(!service.getFee().toString().equals(price.getText().toString())){
+        if(service.getFee() == null || !service.getFee().toString().equals(price.getText().toString())){
             modifyServiceDetail(token, serviceId, "fee", price.getText().toString());
         }
     }

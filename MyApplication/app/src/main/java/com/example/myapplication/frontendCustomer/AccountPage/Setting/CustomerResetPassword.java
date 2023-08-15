@@ -97,6 +97,7 @@ public class CustomerResetPassword extends AppCompatActivity implements View.OnC
                     public void onNext(HttpBaseBean<Object> objectHttpBaseBean) {
                         if(objectHttpBaseBean.getSuccess()){
                             Toast.makeText(getApplicationContext(), "Password reset successfully", Toast.LENGTH_SHORT).show();
+                            finish();
                         }else{
                             Toast.makeText(getApplicationContext(),
                                     objectHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();

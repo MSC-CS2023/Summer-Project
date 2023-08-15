@@ -1,6 +1,9 @@
 package com.example.myapplication.frontendProvider.profilePages;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +12,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.User;
+import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
+import com.example.myapplication.Constant;
 import com.example.myapplication.R;
+import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.ProviderApi;
+import com.example.myapplication.network.RetrofitClient;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +41,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_TITLE = "param1";
-
+    private String token;
     // TODO: Rename and change types of parameters
     private String mTitle;
     private View rootView;
@@ -33,6 +49,9 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
     private ImageButton timetable;
     private ImageButton map;
     private ImageButton setting;
+
+    ImageView avatar;
+    TextView username;
 
     public ProviderProfileFragment() {
         // Required empty public constructor
@@ -69,7 +88,11 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
         if(rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_provider_profile, container, false);
         }
+        SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+        this.token = sp.getString("token", "");
+
         initView();
+        getProviderDetail(token);
         return rootView;
     }
 
@@ -85,6 +108,10 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
         map.setOnClickListener(this);
         setting = rootView.findViewById(R.id.btn_setting);
         setting.setOnClickListener(this);
+
+        username = rootView.findViewById(R.id.txt_username);
+        avatar = rootView.findViewById(R.id.img_avatar);
+
     }
 
     @Override
@@ -103,4 +130,37 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
             startActivity(intentToSetting);
         }
     }
+
+    @SuppressLint("CheckResult")
+    private void getProviderDetail(String token){
+        ProviderApi providerApi= RetrofitClient.getInstance().getService(ProviderApi.class);
+        providerApi.getProviderDetail(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<SelfDetailData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<SelfDetailData> selfDetailDataHttpBaseBean) {
+                        if(selfDetailDataHttpBaseBean.getSuccess()){
+                            updateView(selfDetailDataHttpBaseBean.getData().getUser());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void updateView(User user){
+        username.setText(user.getUsername());
+        Glide.with(getContext()).load(Constant.BASE_URL +
+                "public/service_provider/avatar?id=" + user.getId().toString()).into(avatar);
+    }
+
 }

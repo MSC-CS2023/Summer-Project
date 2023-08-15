@@ -47,7 +47,6 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
     ImageView avatar;
     TextView username;
 
-
     public CustomerAccountFragment() {
 
     }
@@ -125,6 +124,6 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
     private void updateView(User user){
         username.setText(user.getUsername());
         Glide.with(getContext()).load(Constant.BASE_URL +
-                "public/service_provider/avatar?id=" + user.getId().toString()).into(avatar);
+                "public/customer/avatar?id=" + user.getId().toString()).into(avatar);
     }
 }
