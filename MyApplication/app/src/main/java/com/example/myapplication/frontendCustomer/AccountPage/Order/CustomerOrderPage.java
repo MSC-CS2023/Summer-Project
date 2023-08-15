@@ -21,6 +21,7 @@ import com.example.myapplication.Bean.AdapterData.OrderCard;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
+import com.example.myapplication.Constant;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendProvider.orderPages.ProviderOrderCardData;
 import com.example.myapplication.frontendProvider.orderPages.ProviderOrderDetailFinishedActivity;
@@ -53,7 +54,6 @@ public class CustomerOrderPage extends AppCompatActivity {
     List<OrderCard> orderCards = new ArrayList<>();
 
     SwipeRefreshLayout swipeRefreshLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,7 +242,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                             "link", "Processing"));
                     orderCards.add(new OrderCard(121133L, "name1213",
                             "~"+ SystemClock.currentThreadTimeMillis(),
-                            "link", "Finish"));
+                            "link", "Finished"));
 //                    currentShowPosition += DEFAULT_SHOW_NUMBER;
 //                    updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                     orderCardAdapter.notifyDataSetChanged();
@@ -254,6 +254,7 @@ public class CustomerOrderPage extends AppCompatActivity {
     private void updateOrderData(String token, Integer start, Integer number){
         switch (currentTab){
             case ALL_TAB:
+                getOrders(token, start, number);
                 break;
             case UNCONFIRMED_TAB:
                 break;
@@ -279,9 +280,12 @@ public class CustomerOrderPage extends AppCompatActivity {
                     @Override
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
-                            List<OrderCard> orderCards =
-                                    getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                            if(start == 0){
+                                orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
                                 updateViewByList(orderCards);
+                            }else{
+                                orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                            }
                         }else{
                             //test
                         }
@@ -310,7 +314,12 @@ public class CustomerOrderPage extends AppCompatActivity {
                     @Override
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
-
+                            if(start == 0){
+                                orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                updateViewByList(orderCards);
+                            }else{
+                                orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                            }
                         }else{
                             //test
                         }
@@ -330,8 +339,17 @@ public class CustomerOrderPage extends AppCompatActivity {
     }
 
     private List<OrderCard> getOrderCardList(List<Order> orders){
-        return null;
+        List<OrderCard> orderCardList = new ArrayList<>();
+        OrderCard orderCard;
+        String state;
+        for(Order order : orders){
+            state = "";
+            String link = Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId();
+            orderCard = new OrderCard(order.getId(), order.getServiceShort().getTitle(),
+                    order.getServiceShort().getFee().toString(), link, state);
+            orderCardList.add(orderCard);
+        }
+        return orderCardList;
     }
-
 
 }
