@@ -16,6 +16,7 @@ import com.example.myapplication.R;
 public class CustomerOrderPageUnconfirmed extends AppCompatActivity {
 
     ImageButton cancel;
+    ImageButton message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +24,21 @@ public class CustomerOrderPageUnconfirmed extends AppCompatActivity {
         setContentView(R.layout.activity_customer_order_page_unconfirmed);
 
         cancel = findViewById(R.id.btn_cancel);
+        message = findViewById(R.id.btn_message);
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //add this order to cancel list
                 Toast.makeText(CustomerOrderPageUnconfirmed.this, "add this order to cancel list", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(CustomerOrderPageUnconfirmed.this, "click message", Toast.LENGTH_SHORT).show();
             }
         });
 

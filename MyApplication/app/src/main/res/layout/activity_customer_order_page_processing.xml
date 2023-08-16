@@ -25,95 +25,131 @@
 
 
     </LinearLayout>
-<!--    customer info-->
+    <!--order info -->
     <LinearLayout
-        android:layout_marginTop="30dp"
-        android:id="@+id/CustomerInfo"
+        app:layout_constraintTop_toBottomOf="@+id/OrderSort"
+        android:id="@+id/OrderInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_background"
-        android:orientation="vertical"
-
-        app:layout_constraintTop_toBottomOf="@+id/OrderSort">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_avatar"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:padding="5dp"
+                    android:src="@drawable/btn_avatar2"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/txt_provider_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Username"
+                        android:textStyle="bold"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/txt_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="abcdef@gmail.com"
+                        android:textColor="@color/dark_grey"/>
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btn_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/message"/>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/customerName"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Username"
-                android:textSize="20dp"></TextView>
+                android:text="Address:"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/customerEmail"
-                android:layout_width="0dp"
+                android:id="@+id/txt_address"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2.5"
-                android:maxLines="1"
-                android:text="ThisIsAnEmail@gigCustomer.com"
-                android:textSize="15dp"></TextView>
+                android:text="ABC Court,\nDEF Road,\nBristol,\nBS1 GH2"/>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/customerAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:paddingLeft="20dp"
-            android:text="address info xxxxxxxxxxxxxx postcode xxxxxx"
-            android:textSize="20dp"></TextView>
-
-
-    </LinearLayout>
-<!--order info -->
-    <LinearLayout
-        android:background="@drawable/border_background"
-        android:id="@+id/OrderInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CustomerInfo">
-
-        <TextView
-            android:id="@+id/orderNum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Order Number : 123456789"
-            android:textColor="#333232"></TextView>
-
         <ImageView
-            android:id="@+id/serviceImg"
+            android:id="@+id/order_detail_image"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_sample2"></ImageView>
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/img_sample1"
+            android:scaleType="centerCrop"/>
 
         <TextView
-            android:id="@+id/orderTitle"
+            android:id="@+id/order_detail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Order Title"
-            android:textSize="30dp"
-            android:textStyle="bold"></TextView>
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:text="Title"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/orderPrice"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Order Price : 200"
-            android:textColor="@color/red"
-            android:textSize="20dp"></TextView>
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order number: "
+                android:textStyle="italic"/>
+
+            <TextView
+                android:id="@+id/order_detail_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="12345576392"
+                android:paddingEnd="5dp"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:id="@+id/order_detail_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order state"
+                android:textColor="@color/theme"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <ImageButton

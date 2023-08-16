@@ -134,9 +134,9 @@ public class CustomerOrderPage extends AppCompatActivity {
         tab5.setText("Canceled");
         tabLayout.addTab(tab5);
 
-//        TabLayout.Tab tab6 = tabLayout.newTab();
-//        tab6.setText("Refund");
-//        tabLayout.addTab(tab6);
+        TabLayout.Tab tab6 = tabLayout.newTab();
+        tab6.setText("Rejected");
+        tabLayout.addTab(tab6);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -162,6 +162,10 @@ public class CustomerOrderPage extends AppCompatActivity {
                     case 4: // Cancel
                         currentTab = CANCELED_TAB;
                         Toast.makeText(CustomerOrderPage.this, "select Canceled", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 5: // Rejected
+//                        currentTab = CANCELED_TAB;
+                        Toast.makeText(CustomerOrderPage.this, "select Rejected", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
@@ -208,12 +212,13 @@ public class CustomerOrderPage extends AppCompatActivity {
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;
                     case "Canceled":
-
-                        // dont jump to another page
-                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageUnconfirmed.class)
+                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageCancel.class)
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;
                     case "Rejected":
+                        startActivity(new Intent(getApplicationContext(), CustomerOrderPageRejected.class)
+                                .putExtra("orderId", orderCards.get(position).getOrderId()));
+                        break;
                     default:
                         break;
                 }

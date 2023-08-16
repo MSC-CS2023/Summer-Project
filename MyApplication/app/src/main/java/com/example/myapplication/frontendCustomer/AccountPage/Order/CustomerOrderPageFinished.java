@@ -15,6 +15,8 @@ public class CustomerOrderPageFinished extends AppCompatActivity {
     ImageButton submit;
     private SeekBar ratingSeekBar;
 
+    ImageButton message;
+
     int mark;
 
 
@@ -53,6 +55,14 @@ public class CustomerOrderPageFinished extends AppCompatActivity {
             public void onClick(View v) {
                 //transfer mark to DB, you can get mark here
                 Toast.makeText(CustomerOrderPageFinished.this, "you choose" + mark , Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        message = findViewById(R.id.btn_message);
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(CustomerOrderPageFinished.this, "click message", Toast.LENGTH_SHORT).show();
             }
         });
 
