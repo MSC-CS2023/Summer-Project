@@ -23,7 +23,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageButton
-        android:id="@+id/accountSecurity"
+        android:id="@+id/personalDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -39,6 +39,14 @@
         android:src="@drawable/btn_notification_setting"/>
 
     <ImageButton
+        android:id="@+id/reset_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/btn_reset_password"/>
+
+    <ImageButton
         android:id="@+id/help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,21 +55,13 @@
         android:src="@drawable/btn_help"/>
 
     <ImageButton
-        android:id="@+id/about"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/btn_about"/>
-
-    <ImageButton
-        android:id="@+id/reset_password"
+        android:id="@+id/delete_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/transparent"
-        android:src="@drawable/btn_reset_password"/>
+        android:src="@drawable/btn_delete_account"/>
 
     <ImageButton
         android:id="@+id/logout"

@@ -90,7 +90,7 @@
         </activity> <!-- add choose activity -->
         <activity
             android:name=".ChooseActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".frontendCustomer.AccountPage.Setting.CustomerResetPassword"
             android:exported="false" />

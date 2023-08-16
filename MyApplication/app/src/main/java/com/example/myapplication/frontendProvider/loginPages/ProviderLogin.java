@@ -27,7 +27,6 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class ProviderLogin extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton btnBackMain;
     ImageButton btnProviderLogin;
     TextView txtProviderRegister;
     EditText txtUsername;
@@ -38,8 +37,6 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_login);
 
-        btnBackMain = findViewById(R.id.btn_back_main);
-        btnBackMain.setOnClickListener(this);
         btnProviderLogin = findViewById(R.id.btn_provider_login);
         btnProviderLogin.setOnClickListener(this);
         txtProviderRegister = findViewById(R.id.txt_sign_up);
@@ -53,10 +50,7 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
 
         public void onClick(View view) {
 
-            if (view.getId() == R.id.btn_back_main){
-                startActivity(new Intent(ProviderLogin.this, MainActivity.class));
-                finish();
-            } else if (view.getId() ==  R.id.btn_provider_login) {
+            if (view.getId() ==  R.id.btn_provider_login) {
 //                providerLogin(txtUsername.getText().toString(), txtPassword.getText().toString());
                 finishAffinity();
                 Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();

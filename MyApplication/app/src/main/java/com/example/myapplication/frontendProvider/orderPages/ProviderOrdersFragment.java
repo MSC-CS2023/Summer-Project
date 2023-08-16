@@ -176,11 +176,11 @@ public class ProviderOrdersFragment extends Fragment {
                                 .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
                     case "Finished":
-                        startActivity(new Intent(getContext(), ProviderOrderDetailRejectedActivity.class)
+                        startActivity(new Intent(getContext(), ProviderOrderDetailFinishedActivity.class)
                                 .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
                     case "Rejected":
-                        startActivity(new Intent(getContext(), ProviderOrderDetailFinishedActivity.class)
+                        startActivity(new Intent(getContext(), ProviderOrderDetailRejectedActivity.class)
                                 .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
                     case "Canceled":
@@ -244,12 +244,16 @@ public class ProviderOrdersFragment extends Fragment {
                         Toast.makeText(getContext(), "Processing clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
+                        currentTab = FINISHED_TAB;
+                        Toast.makeText(getContext(), "Finished clicked", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 4:
                         currentTab = REJECTED_TAB;
                         Toast.makeText(getContext(), "Rejected clicked", Toast.LENGTH_SHORT).show();
                         break;
-                    case 4:
-                        currentTab = FINISHED_TAB;
-                        Toast.makeText(getContext(), "Finished clicked", Toast.LENGTH_SHORT).show();
+                    case 5:
+                        currentTab = CANCELED_TAB;
+                        Toast.makeText(getContext(), "Cancelled clicked", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;

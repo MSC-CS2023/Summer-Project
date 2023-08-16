@@ -67,5 +67,13 @@
 
     </string-array>
 
+    <string-array name="service_type">
+        <item>Cleaning</item>
+        <item>Maintenance</item>
+        <item>Laundry</item>
+        <item>Landscaping</item>
+        <item>Others</item>
+    </string-array>
+
 
 </resources>

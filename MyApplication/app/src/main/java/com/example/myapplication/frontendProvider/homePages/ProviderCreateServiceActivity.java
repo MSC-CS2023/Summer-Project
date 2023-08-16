@@ -8,10 +8,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.manager.RequestTracker;
@@ -32,6 +35,7 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
     private Toolbar toolbar;
     private ImageButton save;
     private EditText title;
+    private Spinner serviceType;
     private EditText description;
     private EditText price;
     private EditText address;
@@ -60,12 +64,50 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
         uploadImage = findViewById(R.id.btn_upload_image);
         uploadImage.setOnClickListener(this);
 
+        //服务类型的选择点击事件
+        serviceType = findViewById(R.id.spinner);
+        setSpinner();
+
         //这个image目前的visibility是gone,上传之后要改成visible
         image = findViewById(R.id.img_uploaded);
 
         //click on back button
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(view -> finish());
+    }
+
+    private void setSpinner() {
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.service_type, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        serviceType.setAdapter(spinnerAdapter);
+
+        serviceType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                if(position == 0) {
+                    //设置service data里的类型属性为Cleaning
+                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type cleaning selected", Toast.LENGTH_SHORT).show();
+                } else if (position == 1) {
+                    //同理类型属性为Maintenance
+                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type maintenance selected", Toast.LENGTH_SHORT).show();
+                } else if (position == 2) {
+                    //同理类型属性为Laundry
+                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type laundry selected", Toast.LENGTH_SHORT).show();
+                } else if (position == 3) {
+                    //同理类型属性为Landscaping
+                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type landscaping selected", Toast.LENGTH_SHORT).show();
+                } else if (position == 4) {
+                    //同理类型属性为Others
+                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type others selected", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     @Override

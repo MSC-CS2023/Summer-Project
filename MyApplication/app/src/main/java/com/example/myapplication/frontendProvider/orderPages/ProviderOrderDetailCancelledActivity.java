@@ -29,8 +29,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
-public class ProviderOrderDetailRejectedActivity extends AppCompatActivity implements View.OnClickListener{
-
+public class ProviderOrderDetailCancelledActivity extends AppCompatActivity implements View.OnClickListener{
     private String token;
     private Long orderId;
     private Order order = new Order();
