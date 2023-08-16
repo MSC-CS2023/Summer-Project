@@ -5,8 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,8 @@ import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
 import com.example.myapplication.Constant;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendProvider.ProviderVisitOtherUserActivity;
+import com.example.myapplication.frontendProvider.messagePages.ProviderMessageDetailActivity;
 import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.RetrofitClient;
 
@@ -24,7 +29,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
-public class ProviderOrderDetailFinishedActivity extends AppCompatActivity {
+public class ProviderOrderDetailFinishedActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String token;
     private Long orderId;
@@ -34,6 +39,13 @@ public class ProviderOrderDetailFinishedActivity extends AppCompatActivity {
     ImageView image;
     TextView orderNumber;
     TextView state;
+
+    //下单客户的信息相关View属性
+    ImageView avatar;
+    TextView username;
+    TextView email;
+    TextView address;
+    ImageButton message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +66,28 @@ public class ProviderOrderDetailFinishedActivity extends AppCompatActivity {
         orderNumber = findViewById(R.id.order_detail_number);
         state = findViewById(R.id.order_detail_state);
 
+        //用户信息相关
+        avatar = findViewById(R.id.img_avatar);
+        avatar.setOnClickListener(this);
+        username = findViewById(R.id.txt_customer_name);
+        email = findViewById(R.id.txt_email);
+        address = findViewById(R.id.txt_address);
+        message = findViewById(R.id.btn_message);
+        message.setOnClickListener(this);
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(view -> finish());
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.img_avatar) {
+            Intent intentToOtherUser = new Intent(this, ProviderVisitOtherUserActivity.class);
+            startActivity(intentToOtherUser);
+        } else if(view.getId() == R.id.btn_message) {
+            Intent intentToMessage = new Intent(this, ProviderMessageDetailActivity.class);
+            startActivity(intentToMessage);
+        }
     }
 
     private void updateView(){

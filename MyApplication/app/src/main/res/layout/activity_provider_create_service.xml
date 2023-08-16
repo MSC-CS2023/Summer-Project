@@ -49,6 +49,7 @@
                 android:paddingRight="5dp"
                 android:layout_marginTop="5dp"
                 android:hint="Title"
+                android:inputType="text"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 
@@ -65,12 +66,14 @@
             <EditText
                 android:id="@+id/edtxt_description"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
+                android:minHeight="300dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:layout_marginTop="5dp"
                 android:gravity="start"
-                android:hint="Write something nice to attract more potential customers. :)" />
+                android:inputType="textMultiLine"
+                android:hint="Type something nice to attract more potential customers. :)" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,7 +88,8 @@
                     android:layout_gravity="center"
                     android:text="Price: ￡"
                     android:textSize="25sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:inputType="number"/>
 
                 <EditText
                     android:id="@+id/edtxt_price"
@@ -116,6 +120,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
+                android:inputType="textMultiLine"
                 android:hint="Please type your address." />
 
             <ImageView

@@ -64,7 +64,7 @@ public class ProviderProfileInformationActivity extends AppCompatActivity implem
         username = findViewById(R.id.txt_username);
         email = findViewById(R.id.txt_email);
         phone = findViewById(R.id.txt_phone);
-        address = findViewById(R.id.txt_Address);
+        address = findViewById(R.id.txt_address);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(view -> finish());
@@ -97,7 +97,7 @@ public class ProviderProfileInformationActivity extends AppCompatActivity implem
         username = findViewById(R.id.edtxt_username);
         email = findViewById(R.id.edtxt_email);
         phone = findViewById(R.id.edtxt_phone);
-        address = findViewById(R.id.edtxt_Address);
+        address = findViewById(R.id.edtxt_address);
 
 
         toolbar = findViewById(R.id.toolbar);

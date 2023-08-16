@@ -19,6 +19,9 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".frontendProvider.ProviderVisitOtherUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".frontendCustomer.AccountPage.Order.CustomerOrderPageFinished"
             android:exported="false" />
         <activity
@@ -71,7 +74,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
