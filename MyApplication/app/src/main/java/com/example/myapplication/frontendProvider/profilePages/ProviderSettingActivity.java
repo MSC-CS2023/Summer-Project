@@ -19,8 +19,8 @@ public class ProviderSettingActivity extends AppCompatActivity implements View.O
     private ImageButton notification;
     private ImageButton help;
     private ImageButton about;
-    private Button resetPassword;
-    private Button logout;
+    private ImageButton resetPassword;
+    private ImageButton logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

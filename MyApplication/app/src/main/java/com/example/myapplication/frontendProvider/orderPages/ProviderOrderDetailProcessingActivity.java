@@ -5,10 +5,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,8 @@ import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
 import com.example.myapplication.Constant;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendProvider.ProviderVisitOtherUserActivity;
+import com.example.myapplication.frontendProvider.messagePages.ProviderMessageDetailActivity;
 import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.RetrofitClient;
 
@@ -38,6 +42,13 @@ public class ProviderOrderDetailProcessingActivity extends AppCompatActivity imp
     TextView state;
     Button finish;
     Button cancel;
+
+    //下单客户的信息相关View属性
+    ImageView avatar;
+    TextView username;
+    TextView email;
+    TextView address;
+    ImageButton message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +73,15 @@ public class ProviderOrderDetailProcessingActivity extends AppCompatActivity imp
         cancel = findViewById(R.id.btn_cancel);
         cancel.setOnClickListener(this);
 
+        //用户信息相关
+        avatar = findViewById(R.id.img_avatar);
+        avatar.setOnClickListener(this);
+        username = findViewById(R.id.txt_customer_name);
+        email = findViewById(R.id.txt_email);
+        address = findViewById(R.id.txt_address);
+        message = findViewById(R.id.btn_message);
+        message.setOnClickListener(this);
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(view -> finish());
     }
@@ -76,6 +96,12 @@ public class ProviderOrderDetailProcessingActivity extends AppCompatActivity imp
             //改变订单状态to be done
             Toast.makeText(this, "Cancel clicked", Toast.LENGTH_SHORT).show();
             finish();
+        } else if(view.getId() == R.id.img_avatar) {
+            Intent intentToOtherUser = new Intent(this, ProviderVisitOtherUserActivity.class);
+            startActivity(intentToOtherUser);
+        } else if(view.getId() == R.id.btn_message) {
+            Intent intentToMessage = new Intent(this, ProviderMessageDetailActivity.class);
+            startActivity(intentToMessage);
         }
     }
 

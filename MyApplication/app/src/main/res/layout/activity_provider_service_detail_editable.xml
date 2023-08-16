@@ -50,7 +50,8 @@
             <ImageView
                 android:id="@+id/ed_image"
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
+                android:layout_height="wrap_content"
+                android:maxHeight="200sp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_sample1" />
 
@@ -61,8 +62,9 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:layout_marginTop="5dp"
+                android:text="Title"
+                android:inputType="text"
                 android:hint="Title"
-                android:textColorHint="@color/black"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 
@@ -83,6 +85,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5.0"
+                    android:inputType="number"
+                    android:hint="Null"
                     android:textStyle="italic"/>
 
             </LinearLayout>
@@ -101,11 +105,14 @@
                 android:id="@+id/edtxt_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="300dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:layout_marginTop="5dp"
-                android:hint="@string/lorem_ipsum"
-                android:textColorHint="@color/black"/>
+                android:text="@string/lorem_ipsum"
+                android:inputType="textMultiLine"
+                android:gravity="start"
+                android:hint="Null" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -128,10 +135,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:hint="100"
-                    android:textColorHint="@color/black"
+                    android:text="100.00"
+                    android:hint="Null"
                     android:textSize="25sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:inputType="number"/>
 
             </LinearLayout>
 
@@ -151,8 +159,9 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:hint="Flat 1E, DDCB\nMarry Lane\nBristol\nBS1 2FJ"
-                android:textColorHint="@color/black"/>
+                android:inputType="textMultiLine"
+                android:text="Flat 1E, DDCB\nMarry Lane\nBristol\nBS1 2FJ"
+                android:hint="Null" />
 
         </LinearLayout>
 

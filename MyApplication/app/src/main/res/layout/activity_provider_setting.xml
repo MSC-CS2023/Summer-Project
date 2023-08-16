@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/btn_account_security"/>
+        android:src="@drawable/btn_personal_detail"/>
 
     <ImageButton
         android:id="@+id/notification"
@@ -54,24 +54,22 @@
         android:backgroundTint="@android:color/transparent"
         android:src="@drawable/btn_about"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/reset_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal"
-        android:text="Reset password"
-        android:textSize="25sp"
-        android:backgroundTint="@color/theme"/>
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/btn_reset_password"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/logout"
-        android:layout_width="230dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
-        android:text="Log out"
-        android:textSize="25sp"
-        android:backgroundTint="@color/theme"/>
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/btn_logout"/>
 
 </LinearLayout>
