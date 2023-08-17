@@ -8,19 +8,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.ModifyDetailData;
 import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
-import com.example.myapplication.Constant;
 import com.example.myapplication.R;
-import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.RetrofitClient;
 

@@ -20,14 +20,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.ServiceShort;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
-import com.example.myapplication.Constant;
+import com.example.myapplication.network.Constant;
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer.HomePage.CustomerServiceDetailPage;
-import com.example.myapplication.frontendProvider.loginPages.ProviderLogin;
 import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

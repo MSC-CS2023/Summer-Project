@@ -21,13 +21,8 @@ import com.example.myapplication.Bean.AdapterData.OrderCard;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
-import com.example.myapplication.Constant;
+import com.example.myapplication.network.Constant;
 import com.example.myapplication.R;
-import com.example.myapplication.frontendProvider.orderPages.ProviderOrderCardData;
-import com.example.myapplication.frontendProvider.orderPages.ProviderOrderDetailFinishedActivity;
-import com.example.myapplication.frontendProvider.orderPages.ProviderOrderDetailProcessingActivity;
-import com.example.myapplication.frontendProvider.orderPages.ProviderOrderDetailRejectedActivity;
-import com.example.myapplication.frontendProvider.orderPages.ProviderOrderDetailUnconfirmedActivity;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 import com.google.android.material.tabs.TabLayout;
@@ -48,6 +43,7 @@ public class CustomerOrderPage extends AppCompatActivity {
     private static final int FINISHED_TAB = 4;
     private static final int REJECTED_TAB = 5;
     private static final int CANCELED_TAB = 6;
+
     private String token;
     Integer currentShowPosition;
     private int currentTab;

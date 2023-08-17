@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
@@ -29,13 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         accountInitializer();
     }
-
-
-
 
     //Auto login function
     private void accountInitializer(){

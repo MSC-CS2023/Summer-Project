@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,7 +24,7 @@ import com.example.myapplication.Adapter.ServiceCardAdapter;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.ServiceShort;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
-import com.example.myapplication.Constant;
+import com.example.myapplication.network.Constant;
 import com.example.myapplication.R;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
@@ -42,7 +40,13 @@ public class CustomerHomePageFragment extends Fragment {
 
 
     private static final Integer DEFAULT_RECOMMEND_NUMBER = 6;
+    private static final Integer ALL_TAB = 0;
+    private static final Integer CLEANING_TAB = 1;
+    private static final Integer MAINTAIN_TAB = 2;
+    private static final Integer LAUNDRY_TAB = 3;
+    private static final Integer LANDSCAPE_TAB = 4;
     private String token;
+    private Integer currentTab;
 
     List<ServiceCard> dataList;
 
@@ -69,7 +73,7 @@ public class CustomerHomePageFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_customer_home_page, container, false);
         SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
-
+        currentTab = ALL_TAB;
 
         //5 top icons action here
         topIconAction(rootView);
@@ -175,6 +179,50 @@ public class CustomerHomePageFragment extends Fragment {
         buttonOthers.setImageResource(R.drawable.btn_more);
     }
 
+    private void updateViewByList(List<ServiceCard> serviceCards, View view) {
+        //RecyclerView down here
+        RecyclerView recyclerView = view.findViewById(R.id.homepageRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        // Create an Adapter and set it to the ListView
+        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards, getContext());
+        serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(getContext(), CustomerServiceDetailPage.class)
+                        .putExtra("serviceId", dataList.get(position).getServiceId()));
+                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        recyclerView.setAdapter(serviceCardAdapter);
+
+
+        //Load more when the interface reaches the bottom
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+
+                // Determine whether to slide to the bottom and perform loading more operations
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0) {
+                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
+                            "Repair Air conditioner", "available tomorrow",
+                            "balabala", "picSrc", 213L));
+                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+//                    randomlyRecommend(token, view, true);
+                    serviceCardAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
     //Http request and change view after getting response.
     @SuppressLint("CheckResult")
     private void randomlyRecommend(String token, View view, Boolean isAdd) {
@@ -227,50 +275,6 @@ public class CustomerHomePageFragment extends Fragment {
     }
 
     //Use adapter data list to update view.
-    private void updateViewByList(List<ServiceCard> serviceCards, View view) {
-        //RecyclerView down here
-        RecyclerView recyclerView = view.findViewById(R.id.homepageRecyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        // Create an Adapter and set it to the ListView
-        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards, getContext());
-        serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(getContext(), CustomerServiceDetailPage.class)
-                        .putExtra("serviceId", dataList.get(position).getServiceId()));
-                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        recyclerView.setAdapter(serviceCardAdapter);
-
-
-        //Load more when the interface reaches the bottom
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-
-                // Determine whether to slide to the bottom and perform loading more operations
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                        && firstVisibleItemPosition >= 0) {
-                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
-                            "Repair Air conditioner", "available tomorrow",
-                            "balabala", "picSrc", 213L));
-                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
-//                    randomlyRecommend(token, view, true);
-                    serviceCardAdapter.notifyDataSetChanged();
-                }
-            }
-        });
-    }
-
 
     private Bitmap getRoundedBitmap(Bitmap bitmap) {
         int width = bitmap.getWidth();
@@ -288,6 +292,4 @@ public class CustomerHomePageFragment extends Fragment {
 
         return output;
     }
-
-
 }

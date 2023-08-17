@@ -1,8 +1,5 @@
 package com.example.myapplication.network;
 
-import com.example.myapplication.Constant;
-import com.example.myapplication.R;
-
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

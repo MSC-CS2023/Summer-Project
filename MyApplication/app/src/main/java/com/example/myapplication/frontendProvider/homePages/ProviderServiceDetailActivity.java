@@ -23,7 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Service;
 import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
-import com.example.myapplication.Constant;
+import com.example.myapplication.network.Constant;
 import com.example.myapplication.R;
 import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.PublicMethodApi;
@@ -32,7 +32,6 @@ import com.example.myapplication.network.RetrofitClient;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
-import retrofit2.http.Part;
 
 public class ProviderServiceDetailActivity extends AppCompatActivity implements View.OnClickListener{
 

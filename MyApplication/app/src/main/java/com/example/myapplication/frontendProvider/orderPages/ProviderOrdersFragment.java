@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.text.CaseMap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.SystemClock;
-import android.text.method.ReplacementTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +22,8 @@ import android.widget.Toast;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.data.OrderListData;
-import com.example.myapplication.Constant;
+import com.example.myapplication.network.Constant;
 import com.example.myapplication.R;
-import com.example.myapplication.frontendProvider.homePages.ProviderServiceCardData;
 import com.example.myapplication.frontendProvider.homePages.ProviderServicesAdaptor;
 import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.RetrofitClient;
@@ -184,6 +181,8 @@ public class ProviderOrdersFragment extends Fragment {
                                 .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
                     case "canceled":
+                        startActivity(new Intent(getContext(), ProviderOrderDetailCancelledActivity.class)
+                                .putExtra("orderId", data.get(position).getOrderNum()));
                     default:
                         break;
                 }
@@ -365,14 +364,12 @@ public class ProviderOrdersFragment extends Fragment {
 
     private List<ProviderOrderCardData> getOrderList(List<Order> orders){
         List<ProviderOrderCardData> providerOderCardList = new ArrayList<>();
-        String state;
         ProviderOrderCardData providerOrderCardData;
         for(Order order : orders){
-            state = "Confirmed";
             String link = Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId();
             providerOrderCardData = new ProviderOrderCardData(
                     order.getServiceShort().getTitle(), order.getId(),
-                    order.getServiceShort().getFee().toString(), "img_sample2", state, link);
+                    order.getServiceShort().getFee().toString(), "img_sample2", order.getState(), link);
             providerOderCardList.add(providerOrderCardData);
         }
         return providerOderCardList;
