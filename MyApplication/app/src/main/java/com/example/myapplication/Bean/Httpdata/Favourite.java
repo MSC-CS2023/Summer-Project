@@ -22,6 +22,10 @@ public class Favourite {
      */
     private Long timestamp;
 
+    public Favourite(){
+        serviceShort = new ServiceShort();
+    }
+
     public Long getCustomerId() { return customerId; }
     public void setCustomerId(Long value) { this.customerId = value; }
 

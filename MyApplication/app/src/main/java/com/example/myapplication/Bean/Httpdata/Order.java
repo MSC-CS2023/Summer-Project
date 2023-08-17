@@ -64,6 +64,11 @@ public class Order {
      * The time when the service start.
      */
     private Long startTimestamp;
+    private String state;
+
+    public Order(){
+        serviceShort = new ServiceShort();
+    }
 
     public Long getCancelTimestamp() { return cancelTimestamp; }
     public void setCancelTimestamp(Long value) { this.cancelTimestamp = value; }
@@ -113,4 +118,6 @@ public class Order {
     public Long getStartTimestamp() { return startTimestamp; }
     public void setStartTimestamp(Long value) { this.startTimestamp = value; }
 
+    public String getState() { return state; }
+    public void setState(String value) { this.state = value; }
 }

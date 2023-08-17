@@ -198,24 +198,24 @@ public class CustomerOrderPage extends AppCompatActivity {
         orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                switch (orderCards.get(position).getOrderSate()){
-                    case "Unconfirmed":
+                switch (orderCards.get(position).getOrderSate().toLowerCase()){
+                    case "unconfirmed":
                         startActivity(new Intent(getApplicationContext(), CustomerOrderPageUnconfirmed.class)
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;
-                    case "Processing":
+                    case "processing":
                         startActivity(new Intent(getApplicationContext(), CustomerOrderPageProcessing.class)
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;
-                    case "Finished":
+                    case "finished":
                         startActivity(new Intent(getApplicationContext(), CustomerOrderPageFinished.class)
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;
-                    case "Canceled":
+                    case "canceled":
                         startActivity(new Intent(getApplicationContext(), CustomerOrderPageCancel.class)
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;
-                    case "Rejected":
+                    case "rejected":
                         startActivity(new Intent(getApplicationContext(), CustomerOrderPageRejected.class)
                                 .putExtra("orderId", orderCards.get(position).getOrderId()));
                         break;

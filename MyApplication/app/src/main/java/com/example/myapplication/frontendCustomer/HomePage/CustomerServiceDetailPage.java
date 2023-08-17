@@ -140,7 +140,6 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                 negativeButton.setTextColor(R.color.black);
             }
         });
-
         alertDialog.show();
     }
 

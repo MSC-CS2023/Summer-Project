@@ -166,24 +166,24 @@ public class ProviderOrdersFragment extends Fragment {
         providerOrdersAdaptor.setRecyclerItemClickListener(new ProviderServicesAdaptor.OnRecyclerItemClickListener() {
             @Override
             public void onRecyclerItemClick(int position) {
-                switch (data.get(position).getState()){
-                    case "Unconfirmed":
+                switch (data.get(position).getState().toLowerCase()){
+                    case "unconfirmed":
                         startActivity(new Intent(getContext(), ProviderOrderDetailUnconfirmedActivity.class)
                                 .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
-                    case "Processing":
+                    case "processing":
                         startActivity(new Intent(getContext(), ProviderOrderDetailProcessingActivity.class)
                                 .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
-                    case "Finished":
+                    case "finished":
                         startActivity(new Intent(getContext(), ProviderOrderDetailFinishedActivity.class)
                                 .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
-                    case "Rejected":
+                    case "rejected":
                         startActivity(new Intent(getContext(), ProviderOrderDetailRejectedActivity.class)
                                 .putExtra("orderId", data.get(position).getOrderNum()));
                         break;
-                    case "Canceled":
+                    case "canceled":
                     default:
                         break;
                 }

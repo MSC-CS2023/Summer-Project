@@ -30,6 +30,10 @@ public class Service {
     private String title;
     private String username;
 
+    public Service(){
+
+    }
+
     public String getAddress() { return address; }
     public void setAddress(String value) { this.address = value; }
 

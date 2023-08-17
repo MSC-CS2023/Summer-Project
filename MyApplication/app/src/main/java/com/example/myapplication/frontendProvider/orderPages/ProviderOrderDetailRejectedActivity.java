@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
+import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
 import com.example.myapplication.Constant;
 import com.example.myapplication.R;
@@ -34,6 +35,7 @@ public class ProviderOrderDetailRejectedActivity extends AppCompatActivity imple
     private String token;
     private Long orderId;
     private Order order = new Order();
+    private User customer = new User();
     Toolbar toolbar;
     TextView title;
     ImageView image;
@@ -58,6 +60,7 @@ public class ProviderOrderDetailRejectedActivity extends AppCompatActivity imple
 
         initView();
         updateOrder(token, orderId);
+        updateCustomer();
     }
 
     private void initView() {
@@ -101,6 +104,17 @@ public class ProviderOrderDetailRejectedActivity extends AppCompatActivity imple
                 .into(image);
     }
 
+    private void updateCustomerView(){
+        username.setText(customer.getUsername());
+        address.setText(customer.getAddress());
+        email.setText(customer.getEmail());
+        if(customer.getId() != null){
+            Glide.with(this)
+                    .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
+                    .into(avatar);
+        }
+    }
+
     @SuppressLint("CheckResult")
     private void updateOrder(String token, Long orderId){
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
@@ -127,6 +141,10 @@ public class ProviderOrderDetailRejectedActivity extends AppCompatActivity imple
 
                     }
                 });
+    }
+
+    private void updateCustomer(){
+
     }
 
 }

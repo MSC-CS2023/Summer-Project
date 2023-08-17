@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,9 +20,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
+import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
 import com.example.myapplication.Constant;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendCustomer.AccountPage.Order.CustomerOrderPageProcessing;
 import com.example.myapplication.frontendProvider.ProviderVisitOtherUserActivity;
 import com.example.myapplication.frontendProvider.messagePages.ProviderMessageDetailActivity;
 import com.example.myapplication.network.ProviderApi;
@@ -35,6 +39,7 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
     private String token;
     private Long orderId;
     private Order order = new Order();
+    private User customer = new User();
 
     Toolbar toolbar;
     TextView title;
@@ -62,6 +67,7 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
 
         initView();
         updateOrder(token, orderId);
+        updateCustomer();
     }
 
     private void initView() {
@@ -92,7 +98,7 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
         if(view.getId() == R.id.btn_confirm) {
             confirmOrder(token, orderId);
         } else if(view.getId() == R.id.btn_reject) {
-            rejectOrder(token, orderId);
+            alertDialog();
         } else if(view.getId() == R.id.img_avatar) {
             Intent intentToOtherUser = new Intent(this, ProviderVisitOtherUserActivity.class);
             startActivity(intentToOtherUser);
@@ -100,6 +106,34 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
             Intent intentToMessage = new Intent(this, ProviderMessageDetailActivity.class);
             startActivity(intentToMessage);
         }
+    }
+
+    private void alertDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProviderOrderDetailUnconfirmedActivity.this);
+
+        builder.setTitle("Are you sure to reject?")
+                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        rejectOrder(token, orderId);
+                    }
+                })
+                .setNegativeButton("Cancel", null);
+
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                Button negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+
+                positiveButton.setTextColor(R.color.black);
+                negativeButton.setTextColor(R.color.black);
+            }
+        });
+        alertDialog.show();
     }
 
     private void updateView(){
@@ -111,6 +145,17 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
         Glide.with(this)
                 .load(Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId())
                 .into(image);
+    }
+
+    private void updateCustomerView(){
+        username.setText(customer.getUsername());
+        address.setText(customer.getAddress());
+        email.setText(customer.getEmail());
+        if(customer.getId() != null){
+            Glide.with(this)
+                    .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
+                    .into(avatar);
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -205,6 +250,10 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
 
                     }
                 });
+    }
+
+    private void updateCustomer(){
+
     }
 
 }

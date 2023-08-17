@@ -24,6 +24,10 @@ public class ServiceShort {
      */
     private String username;
 
+    public ServiceShort(){
+
+    }
+
     public String getDescription() { return description; }
     public void setDescription(String value) { this.description = value; }
 

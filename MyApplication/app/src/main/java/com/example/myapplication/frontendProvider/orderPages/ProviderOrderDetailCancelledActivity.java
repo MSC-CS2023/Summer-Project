@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
+import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
 import com.example.myapplication.Constant;
 import com.example.myapplication.R;
@@ -33,6 +34,8 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
     private String token;
     private Long orderId;
     private Order order = new Order();
+    private User customer = new User();
+
     Toolbar toolbar;
     TextView title;
     ImageView image;
@@ -44,6 +47,7 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
     TextView username;
     TextView email;
     TextView address;
+
     ImageButton message;
 
     @Override
@@ -57,6 +61,7 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
 
         initView();
         updateOrder(token, orderId);
+        updateCustomer();
     }
 
     private void initView() {
@@ -71,6 +76,7 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
         username = findViewById(R.id.txt_customer_name);
         email = findViewById(R.id.txt_email);
         address = findViewById(R.id.txt_address);
+
         message = findViewById(R.id.btn_message);
         message.setOnClickListener(this);
 
@@ -95,9 +101,22 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
             orderNumber.setText(order.getId().toString());
         }
         state.setText("");
-        Glide.with(this)
-                .load(Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId())
-                .into(image);
+        if(order.getServiceShort().getPictureId() != null){
+            Glide.with(this)
+                    .load(Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId())
+                    .into(image);
+        }
+    }
+
+    private void updateCustomerView(){
+        username.setText(customer.getUsername());
+        address.setText(customer.getAddress());
+        email.setText(customer.getEmail());
+        if(customer.getId() != null){
+            Glide.with(this)
+                    .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
+                    .into(avatar);
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -128,4 +147,7 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
                 });
     }
 
+    private void updateCustomer(){
+
+    }
 }
