@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Adapter.ServiceCardAdapter;
@@ -27,6 +28,7 @@ import java.util.List;
 public class CustomerWalletPage extends AppCompatActivity {
 
     ImageButton recharge;
+    TextView balance;
     List<TransactionCard> transactionCards = new ArrayList<>();
 
     SwipeRefreshLayout swipeRefreshLayout;
@@ -37,6 +39,8 @@ public class CustomerWalletPage extends AppCompatActivity {
         setContentView(R.layout.activity_customer_wallet_page);
 
         recharge = findViewById(R.id.btnRecharge);
+        balance = findViewById(R.id.balanceAmount);
+
         recharge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

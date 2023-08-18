@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Adapter.ServiceCardAdapter;
@@ -31,6 +32,8 @@ public class ProviderWalletActivity extends AppCompatActivity {
 
     SwipeRefreshLayout swipeRefreshLayout;
 
+    TextView balance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,7 @@ public class ProviderWalletActivity extends AppCompatActivity {
 //                openInputDialog();
 //            }
 //        });
+        balance = findViewById(R.id.balanceAmount);
 
         setToolBar();
 
