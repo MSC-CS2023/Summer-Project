@@ -116,6 +116,7 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
         price = findViewById(R.id.edtxt_price);
         address = findViewById(R.id.edtxt_address);
         serviceImg = findViewById(R.id.ed_image);
+        serviceType = findViewById(R.id.service_type);
 
         //click on back button
         toolbar = findViewById(R.id.toolbar);
