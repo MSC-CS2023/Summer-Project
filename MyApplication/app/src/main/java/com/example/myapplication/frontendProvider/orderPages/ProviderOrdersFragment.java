@@ -116,7 +116,7 @@ public class ProviderOrdersFragment extends Fragment {
         title.setText(mTitle);
 
         //Set data and adaptor
-        createDemoData();
+//        createDemoData();
 
         updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
         swipeDown();
@@ -143,7 +143,7 @@ public class ProviderOrdersFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                createDemoData();
+//                createDemoData();
                 Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
                 currentShowPosition = 0;
                 updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
@@ -257,7 +257,7 @@ public class ProviderOrdersFragment extends Fragment {
                     default:
                         break;
                 }
-                createDemoData();
+//                createDemoData();
                 currentShowPosition = 0;
                 updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
             }
