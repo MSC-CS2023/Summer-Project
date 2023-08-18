@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 
 import com.example.myapplication.ChooseActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer.loginPage.CustomerLogin;
 
 public class CustomerSettingPage extends AppCompatActivity implements View.OnClickListener {
 

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,22 +104,22 @@ public class CustomerSearchPageFragment extends Fragment {
         });
     }
 
-    private void createDemoData() {
-        dataList = new ArrayList<>();
-
-        ServiceCard serviceCard1 = new ServiceCard("Eric", "Repair Air conditioner", "100", "available tomorrow",
-                "balabala", "picSrc",213L);
-        ServiceCard serviceCard2 = new ServiceCard("Alice", "Clean gutter", "150", "available today",
-                "balabala", "picSrc",213L);
-        ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today",
-                "balabala", "picSrc",213L);
-
-        dataList.add(serviceCard1);
-        dataList.add(serviceCard2);
-        dataList.add(serviceCard3);
-
-        updateViewByList(dataList);
-    }
+//    private void createDemoData() {
+//        dataList = new ArrayList<>();
+//
+//        ServiceCard serviceCard1 = new ServiceCard("Eric", "Repair Air conditioner", "100", "available tomorrow",
+//                "balabala", "picSrc",213L);
+//        ServiceCard serviceCard2 = new ServiceCard("Alice", "Clean gutter", "150", "available today",
+//                "balabala", "picSrc",213L);
+//        ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today",
+//                "balabala", "picSrc",213L);
+//
+//        dataList.add(serviceCard1);
+//        dataList.add(serviceCard2);
+//        dataList.add(serviceCard3);
+//
+//        updateViewByList(dataList);
+//    }
 
     private void spinnerForDistance() {
         Spinner distance = rootView.findViewById(R.id.distance);

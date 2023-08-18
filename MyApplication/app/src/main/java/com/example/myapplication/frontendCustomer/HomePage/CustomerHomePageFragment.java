@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,12 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
@@ -98,7 +95,7 @@ public class CustomerHomePageFragment extends Fragment {
             @Override
             public void onRefresh() {
                 //refresh action
-                createDemoData();
+//                createDemoData();
 
                 currentShowPosition = 0;
                 updatePage();
@@ -151,7 +148,7 @@ public class CustomerHomePageFragment extends Fragment {
                         }
                     }
 
-                    createDemoData();
+//                    createDemoData();
 
                     currentShowPosition = 0;
                     updatePage();                }
@@ -159,25 +156,25 @@ public class CustomerHomePageFragment extends Fragment {
         }
     }
 
-    private void createDemoData() {
-        dataList = new ArrayList<>();
-
-        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
-                "available tomorrow", "balabala", "picSrc", 213L);
-        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
-                "available today", "balabala", "picSrc", 213L);
-        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
-                "available today", "balabala", "picSrc",213L);
-        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
-                "available today", "balabala", "picSrc",213L);
-
-        dataList.add(serviceCard1);
-        dataList.add(serviceCard2);
-        dataList.add(serviceCard3);
-        dataList.add(serviceCard4);
-
-        updateViewByList(dataList);
-    }
+//    private void createDemoData() {
+//        dataList = new ArrayList<>();
+//
+//        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
+//                "available tomorrow", "balabala", "picSrc", 213L);
+//        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
+//                "available today", "balabala", "picSrc", 213L);
+//        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
+//                "available today", "balabala", "picSrc",213L);
+//        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
+//                "available today", "balabala", "picSrc",213L);
+//
+//        dataList.add(serviceCard1);
+//        dataList.add(serviceCard2);
+//        dataList.add(serviceCard3);
+//        dataList.add(serviceCard4);
+//
+//        updateViewByList(dataList);
+//    }
 
     private void resetButton() {
         buttonCleaning.setImageResource(R.drawable.btn_cleaning);

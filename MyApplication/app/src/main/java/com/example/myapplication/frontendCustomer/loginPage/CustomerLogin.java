@@ -1,7 +1,5 @@
 package com.example.myapplication.frontendCustomer.loginPage;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -10,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,9 +16,8 @@ import android.widget.Toast;
 
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
-import com.example.myapplication.MainActivity;
-import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.CustomerMainActivity;
+import com.example.myapplication.R;
 import com.example.myapplication.network.PublicMethodApi;
 import com.example.myapplication.network.RetrofitClient;
 

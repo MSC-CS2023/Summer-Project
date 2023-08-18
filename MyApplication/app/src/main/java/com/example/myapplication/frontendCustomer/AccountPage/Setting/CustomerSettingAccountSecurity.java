@@ -2,26 +2,16 @@ package com.example.myapplication.frontendCustomer.AccountPage.Setting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
-import com.example.myapplication.Bean.Httpdata.data.ModifyDetailData;
 import com.example.myapplication.R;
-import com.example.myapplication.network.CustomerApi;
-import com.example.myapplication.network.RetrofitClient;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerSettingAccountSecurity extends AppCompatActivity implements View.OnClickListener{
 

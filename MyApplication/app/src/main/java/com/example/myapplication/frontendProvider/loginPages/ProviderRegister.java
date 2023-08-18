@@ -1,7 +1,5 @@
 package com.example.myapplication.frontendProvider.loginPages;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -14,7 +12,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,10 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
-import com.example.myapplication.Bean.Httpdata.data.TimeStampData;
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer.CustomerMainActivity;
-import com.example.myapplication.frontendCustomer.loginPage.CustomerRegister;
 import com.example.myapplication.frontendProvider.ProviderMain;
 import com.example.myapplication.network.Constant;
 import com.example.myapplication.network.ProviderApi;
@@ -46,7 +40,6 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.http.Multipart;
 
 public class ProviderRegister extends AppCompatActivity implements View.OnClickListener {
 

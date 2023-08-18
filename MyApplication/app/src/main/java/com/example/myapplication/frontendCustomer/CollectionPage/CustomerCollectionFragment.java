@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +77,7 @@ public class CustomerCollectionFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                createDemoData();
+//                createDemoData();
                 Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
 
                 currentShowPosition = 0;
@@ -90,25 +89,25 @@ public class CustomerCollectionFragment extends Fragment {
         });
     }
 
-    private void createDemoData() {
-        dataList = new ArrayList<>();
-
-        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
-                "available tomorrow", "balabala", "picSrc", 213L);
-        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
-                "available today", "balabala", "picSrc", 213L);
-        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
-                "available today", "balabala", "picSrc",213L);
-        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
-                "available today", "balabala", "picSrc",213L);
-
-        dataList.add(serviceCard1);
-        dataList.add(serviceCard2);
-        dataList.add(serviceCard3);
-        dataList.add(serviceCard4);
-
-        updateViewByList(dataList);
-    }
+//    private void createDemoData() {
+//        dataList = new ArrayList<>();
+//
+//        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
+//                "available tomorrow", "balabala", "picSrc", 213L);
+//        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
+//                "available today", "balabala", "picSrc", 213L);
+//        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
+//                "available today", "balabala", "picSrc",213L);
+//        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
+//                "available today", "balabala", "picSrc",213L);
+//
+//        dataList.add(serviceCard1);
+//        dataList.add(serviceCard2);
+//        dataList.add(serviceCard3);
+//        dataList.add(serviceCard4);
+//
+//        updateViewByList(dataList);
+//    }
 
     //Use adapter data list to update view.
     private void updateViewByList(List<ServiceCard> serviceCards) {

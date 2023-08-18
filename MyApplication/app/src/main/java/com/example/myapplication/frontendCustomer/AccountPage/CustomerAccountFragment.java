@@ -19,10 +19,10 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
+import com.example.myapplication.frontendCustomer.AccountPage.Setting.CustomerSettingPage;
 import com.example.myapplication.network.Constant;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.AccountPage.Order.CustomerOrderPage;
-import com.example.myapplication.frontendCustomer.AccountPage.Setting.CustomerSettingPage;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 

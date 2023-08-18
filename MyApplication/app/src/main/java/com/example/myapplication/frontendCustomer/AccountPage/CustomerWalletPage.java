@@ -49,9 +49,9 @@ public class CustomerWalletPage extends AppCompatActivity {
         swipeDown();
 
         //test
-        transactionCards.add(new TransactionCard("Alice", "receive", "08/09/2023", "200"));
-        transactionCards.add(new TransactionCard("Pete", "pay", "05/09/2023", "300"));
-        transactionCards.add(new TransactionCard("May", "receive", "08/06/2023", "1000"));
+//        transactionCards.add(new TransactionCard("Alice", "receive", "08/09/2023", "200"));
+//        transactionCards.add(new TransactionCard("Pete", "pay", "05/09/2023", "300"));
+//        transactionCards.add(new TransactionCard("May", "receive", "08/06/2023", "1000"));
 
         updateView(transactionCards);
 

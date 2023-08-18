@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.example.myapplication.ChooseActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.frontendCustomer.loginPage.CustomerLogin;
 
 public class ProviderSettingActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;

@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Toast;
 
@@ -69,18 +68,18 @@ public class CustomerOrderPage extends AppCompatActivity {
 
         swipeDown();
 
-        createDemo();
+//        createDemo();
         updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
     }
 
-    private void createDemo(){
-        orderCards = new ArrayList<>();
-        orderCards.add(new OrderCard(122313343L, "name1", "200", "link", "Unconfirmed"));
-        orderCards.add(new OrderCard(121133L, "name1213", "200", "link", "Processing"));
-        orderCards.add(new OrderCard( 12212313L, "name3", "200", "link", "Finished"));
-        orderCards.add(new OrderCard( 12212313L, "name2", "200", "link", "Canceled"));
-        updateViewByList(orderCards);
-    }
+//    private void createDemo(){
+//        orderCards = new ArrayList<>();
+//        orderCards.add(new OrderCard(122313343L, "name1", "200", "link", "Unconfirmed"));
+//        orderCards.add(new OrderCard(121133L, "name1213", "200", "link", "Processing"));
+//        orderCards.add(new OrderCard( 12212313L, "name3", "200", "link", "Finished"));
+//        orderCards.add(new OrderCard( 12212313L, "name2", "200", "link", "Canceled"));
+//        updateViewByList(orderCards);
+//    }
 
     private void swipeDown() {
         swipeRefreshLayout = findViewById(R.id.swipeOrderPage);
@@ -168,7 +167,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                     default:
                         break;
                 }
-                createDemo();
+//                createDemo();
 
                 currentShowPosition = 0;
                 updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
@@ -181,7 +180,7 @@ public class CustomerOrderPage extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                createDemo();
+//                createDemo();
 
                 currentShowPosition = 0;
                 updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);

@@ -6,12 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.myapplication.frontendCustomer.SearchPage.CustomerSearchPageFragment;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.AccountPage.CustomerAccountFragment;
 import com.example.myapplication.frontendCustomer.CollectionPage.CustomerCollectionFragment;
 import com.example.myapplication.frontendCustomer.HomePage.CustomerHomePageFragment;
 import com.example.myapplication.frontendCustomer.MessagePage.CustomerMessageListFragment;
-import com.example.myapplication.frontendCustomer.SearchPage.CustomerSearchPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
