@@ -113,7 +113,7 @@ public class ProviderServicesFragment extends Fragment{
         //Click on something
         setClick();
 
-        createDemoData();
+//        createDemoData();
 
         getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
         swipeDown();
