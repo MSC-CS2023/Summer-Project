@@ -59,6 +59,9 @@
             android:name=".frontendProvider.profilePages.ProviderTimetableActivity"
             android:exported="false" />
         <activity
+            android:name=".frontendProvider.orderPages.ProviderOrderDetailCancelledActivity"
+            android:exported="false" />
+        <activity
             android:name=".frontendProvider.orderPages.ProviderOrderDetailFinishedActivity"
             android:exported="false" />
         <activity
