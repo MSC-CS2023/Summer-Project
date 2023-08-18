@@ -223,9 +223,9 @@ public class CustomerSearchPageFragment extends Fragment {
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
-                            "Repair Air conditioner", "available tomorrow",
-                            "balabala", "picSrc", 213L));
+//                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
+//                            "Repair Air conditioner", "available tomorrow",
+//                            "balabala", "picSrc", 213L));
 
                     currentShowPosition += DEFAULT_SHOW_NUMBER;
                     searchByKeyword(searchKeyword, sortType, isDescending, currentShowPosition);
