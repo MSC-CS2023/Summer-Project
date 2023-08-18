@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -33,7 +34,7 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerServiceDetailPage extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton pay;
+    ImageButton order;
     CircleImageView avatar;
     ImageButton collection;
     ImageView serviceImg;
@@ -69,7 +70,7 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
     }
 
     private void initializeView(){
-        this.pay = findViewById(R.id.pay);
+        this.order = findViewById(R.id.order);
         this.avatar = findViewById(R.id.providerAvatar);
         this.collection = findViewById(R.id.collection);
         this.amount = findViewById(R.id.amount);
@@ -79,7 +80,7 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         this.addressDetail = findViewById(R.id.addressDetail);
         this.serviceImg = findViewById(R.id.serviceImg);
 
-        pay.setOnClickListener(this);
+        order.setOnClickListener(this);
         avatar.setOnClickListener(this);
         collection.setOnClickListener(this);
     }
@@ -87,9 +88,10 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == pay.getId()){
+        if (v.getId() == order.getId()){
             //alert to payment
-            paymentAlert();
+//            paymentAlert();
+//            startActivity(new Intent(CustomerServiceDetailPage.this, CustomerMakeOrderPage.class));
         } else if (v.getId() == avatar.getId()) {
             // jump to provider account page
         } else if (v.getId() == collection.getId()) {

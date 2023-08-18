@@ -24,6 +24,16 @@ public class ServiceShort {
      */
     private String username;
 
+    private double mark;
+
+    public double getMark() {
+        return mark;
+    }
+
+    public void setMark(double mark) {
+        this.mark = mark;
+    }
+
     public ServiceShort(){
 
     }

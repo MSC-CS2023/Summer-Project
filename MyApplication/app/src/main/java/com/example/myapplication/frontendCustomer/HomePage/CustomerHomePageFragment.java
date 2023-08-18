@@ -83,7 +83,7 @@ public class CustomerHomePageFragment extends Fragment {
         swipeDown();
 
         // Create a demo data list
-//        createDemoData();
+        createDemoData();
         updatePage();
 
         return rootView;
@@ -95,7 +95,7 @@ public class CustomerHomePageFragment extends Fragment {
             @Override
             public void onRefresh() {
                 //refresh action
-//                createDemoData();
+                createDemoData();
 
                 currentShowPosition = 0;
                 updatePage();
@@ -148,7 +148,7 @@ public class CustomerHomePageFragment extends Fragment {
                         }
                     }
 
-//                    createDemoData();
+                    createDemoData();
 
                     currentShowPosition = 0;
                     updatePage();                }
@@ -156,25 +156,25 @@ public class CustomerHomePageFragment extends Fragment {
         }
     }
 
-//    private void createDemoData() {
-//        dataList = new ArrayList<>();
-//
-//        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
-//                "available tomorrow", "balabala", "picSrc", 213L);
-//        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
-//                "available today", "balabala", "picSrc", 213L);
-//        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
-//                "available today", "balabala", "picSrc",213L);
-//        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
-//                "available today", "balabala", "picSrc",213L);
-//
-//        dataList.add(serviceCard1);
-//        dataList.add(serviceCard2);
-//        dataList.add(serviceCard3);
-//        dataList.add(serviceCard4);
-//
-//        updateViewByList(dataList);
-//    }
+    private void createDemoData() {
+        dataList = new ArrayList<>();
+
+        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
+                "available tomorrow", "balabala", "picSrc", 213L, 4.0);
+        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
+                "available today", "balabala", "picSrc", 213L, 4.0);
+        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
+                "available today", "balabala", "picSrc",213L, 4.0);
+        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
+                "available today", "balabala", "picSrc",213L, 4.0);
+
+        dataList.add(serviceCard1);
+        dataList.add(serviceCard2);
+        dataList.add(serviceCard3);
+        dataList.add(serviceCard4);
+
+        updateViewByList(dataList);
+    }
 
     private void resetButton() {
         buttonCleaning.setImageResource(R.drawable.btn_cleaning);
@@ -329,7 +329,7 @@ public class CustomerHomePageFragment extends Fragment {
             String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
             serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
                     serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
-                    pictureLink, serviceShort.getId());
+                    pictureLink, serviceShort.getId(),serviceShort.getMark());
             serviceCards.add(serviceCard);
         }
         return serviceCards;

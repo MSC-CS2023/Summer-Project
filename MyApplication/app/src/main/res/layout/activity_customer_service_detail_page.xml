@@ -202,11 +202,11 @@
     </LinearLayout>
 
         <ImageButton
-            android:id="@+id/pay"
+            android:id="@+id/order"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/btn_pay"
+            android:src="@drawable/btn_order"
             android:backgroundTint="@android:color/transparent">
 
         </ImageButton>

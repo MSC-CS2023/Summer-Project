@@ -276,7 +276,7 @@ public class CustomerSearchPageFragment extends Fragment {
             String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
             serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
                     serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
-                    pictureLink, serviceShort.getId());
+                    pictureLink, serviceShort.getId(),serviceShort.getMark());
             serviceCards.add(serviceCard);
         }
         return serviceCards;

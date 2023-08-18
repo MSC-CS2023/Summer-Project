@@ -57,13 +57,16 @@
 
             </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/ic_collection"
+            <TextView
+                android:id="@+id/mark"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/btn_redheart"></ImageButton>
+                android:text="4.0"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/light_blue"></TextView>
 
         </LinearLayout>
 
@@ -103,13 +106,13 @@
                     android:text="price info"
                     android:textSize="20dp"></TextView>
 
-                <TextView
-                    android:id="@+id/serviceState"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="available state"
-                    android:textSize="20dp"></TextView>
+<!--                <TextView-->
+<!--                    android:id="@+id/serviceState"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="available state"-->
+<!--                    android:textSize="20dp"></TextView>-->
 
             </LinearLayout>
 

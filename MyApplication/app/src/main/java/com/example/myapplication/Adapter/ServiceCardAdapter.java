@@ -55,8 +55,8 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
         holder.serviceTitle.setText(serviceCard.getServiceTitle());
         holder.servicePrice.setText("￡" + serviceCard.getServicePrice());
         holder.serviceInfo.setText(serviceCard.getServiceInfo());
-        holder.collection.setImageResource(serviceCard.getCollectionSrcId());
-        holder.serviceState.setText(serviceCard.getState());
+        holder.mark.setText(String.valueOf(serviceCard.getMark()));
+//        holder.serviceState.setText(serviceCard.getState());
 
         //set avatar circular  Import a square image and automatically crop it into a circle
         //R.drawable.btn_avatar3 can be replaced by serviceCard.getAvatarSrcId()
@@ -101,11 +101,11 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
         ImageView avatar;
         TextView username;
         TextView serviceInfo;
-        ImageButton collection;
+        TextView mark;
         ImageView serviceImg;
         TextView serviceTitle;
         TextView servicePrice;
-        TextView serviceState;
+
 
         private int myPosition;
 
@@ -114,11 +114,11 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
             this.avatar = itemView.findViewById(R.id.avatar);
             this.username = itemView.findViewById(R.id.username);
             this.serviceInfo = itemView.findViewById(R.id.serviceInfo);
-            this.collection = itemView.findViewById(R.id.ic_collection);
+            this.mark = itemView.findViewById(R.id.mark);
             this.serviceImg = itemView.findViewById(R.id.serviceImg);
             this.serviceTitle = itemView.findViewById(R.id.serviceTitle);
             this.servicePrice = itemView.findViewById(R.id.servicePrice);
-            this.serviceState = itemView.findViewById(R.id.serviceState);
+//            this.serviceState = itemView.findViewById(R.id.serviceState);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -139,61 +139,6 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
 
 }
 
-//
-//    @Override
-//    public int getCount() {
-//        return serviceCards.size();
-//    }
-//
-//    @Override
-//    public Object getItem(int i) {
-//        return serviceCards.get(i);
-//    }
-//
-//    @Override
-//    public long getItemId(int i) {
-//        return i;
-//    }
-//
-//    @Override
-//    public View getView(int i, View view, ViewGroup viewGroup) {
-//        ViewHolder viewHolder;
-//        if(view == null){
-//            viewHolder = new ViewHolder();
-//            view = LayoutInflater.from(context).inflate(R.layout.service_card_item, viewGroup, false);
-//
-//            viewHolder.serviceTitle = view.findViewById(R.id.serviceTitle);
-//            viewHolder.username = view.findViewById(R.id.username);
-//            viewHolder.servicePrice = view.findViewById(R.id.servicePrice);
-//            viewHolder.avatar = view.findViewById(R.id.avatar);
-//
-//            viewHolder.serviceInfo = view.findViewById(R.id.serviceInfo);
-//            viewHolder.collection = view.findViewById(R.id.ic_collection);
-//            viewHolder.serviceImg = view.findViewById(R.id.serviceImg);
-//            viewHolder.serviceState = view.findViewById(R.id.state);
-//
-//            view.setTag(viewHolder);
-//        }else{
-//            viewHolder = (ViewHolder) view.getTag();
-//        }
-//
-//        ServiceCard serviceCard =  serviceCards.get(i);
-//
-//        viewHolder.username.setText(serviceCard.getUsername());
-//        viewHolder.serviceTitle.setText(serviceCard.getServiceTitle());
-//        viewHolder.servicePrice.setText(serviceCard.getServicePrice());
-//
-//        viewHolder.avatar.setImageResource(serviceCard.getAvatarSrcId());
-////        Glide.with(this.context).load(serviceCards.get(i).getProviderAvatarSrc()).into(viewHolder.avatar);
-//
-//        viewHolder.serviceInfo.setText(serviceCard.getServiceInfo());
-//        viewHolder.collection.setImageResource(serviceCard.getCollectionSrcId());
-//        viewHolder.serviceImg.setImageResource(serviceCard.getServiceImgSrcId());
-//        viewHolder.serviceState.setText(serviceCard.getState());
-//
-//
-//        return view;
-//    }
 
 
 

@@ -13,26 +13,43 @@ public class ServiceCard {
     private String servicePictureSrc;
 
     //to add
-    private int collectionSrcId;
+//    private int collectionSrcId;
     private int serviceImgSrcId;
-    private String state;
+//    private String state;
+    private double mark;
+
     private int avatarSrcId;
 
+//    public ServiceCard(String username, String servicePrice, String serviceTitle,
+//                       String providerAvatarSrc, String serviceInfo, String servicePictureSrc, Long serviceId){
+//        this.username = username;
+//        this.servicePrice = servicePrice;
+//        this.serviceTitle = serviceTitle;
+//        this.providerAvatarSrc = providerAvatarSrc;
+//        this.serviceInfo = serviceInfo;
+//        this.servicePictureSrc = servicePictureSrc;
+//        this.serviceId = serviceId;
+//
+//        //to add
+//        this.mark = 4.0;
+//        this.serviceImgSrcId = R.drawable.img_sample1;
+//
+//    }
+
+
     public ServiceCard(String username, String servicePrice, String serviceTitle,
-                       String providerAvatarSrc, String serviceInfo, String servicePictureSrc, Long serviceId){
+                      String providerAvatarSrc, String serviceInfo, String servicePictureSrc, Long serviceId, Double mark) {
+        this.serviceId = serviceId;
         this.username = username;
-        this.servicePrice = servicePrice;
-        this.serviceTitle = serviceTitle;
         this.providerAvatarSrc = providerAvatarSrc;
+        this.serviceTitle = serviceTitle;
+        this.servicePrice = servicePrice;
         this.serviceInfo = serviceInfo;
         this.servicePictureSrc = servicePictureSrc;
-        this.serviceId = serviceId;
-
-        //to add
-        this.state = "available tomorrow";
         this.serviceImgSrcId = R.drawable.img_sample1;
-        this.collectionSrcId = R.drawable.btn_emptyheart;
-        this.avatarSrcId = R.drawable.btn_avatar1;
+//        this.avatarSrcId = R.drawable.btn_avatar1;
+        this.mark = mark;
+
     }
 
     public ServiceCard() {
@@ -62,13 +79,13 @@ public class ServiceCard {
         this.serviceInfo = serviceInfo;
     }
 
-    public int getCollectionSrcId() {
-        return collectionSrcId;
-    }
-
-    public void setCollectionSrcId(int collectionSrcId) {
-        this.collectionSrcId = collectionSrcId;
-    }
+//    public int getCollectionSrcId() {
+//        return collectionSrcId;
+//    }
+//
+//    public void setCollectionSrcId(int collectionSrcId) {
+//        this.collectionSrcId = collectionSrcId;
+//    }
 
     public int getServiceImgSrcId() {
         return serviceImgSrcId;
@@ -94,28 +111,46 @@ public class ServiceCard {
         this.servicePrice = servicePrice;
     }
 
-    public String getState() {
-        return state;
+//    public String getState() {
+//        return state;
+//    }
+//
+//    public void setState(String state) {
+//        this.state = state;
+//    }
+
+
+    public double getMark() {
+        return mark;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setMark(double mark) {
+        this.mark = mark;
     }
 
     public int getAvatarSrcId() {
         return avatarSrcId;
     }
 
-    public void setAvatarSrcId(int setAvatarSrcId) {
-        this.state = state;
-    }
+//    public void setAvatarSrcId(int setAvatarSrcId) {
+//        this.state = state;
+//    }
+//
+//    public String getServicePictureSrc() {
+//        return servicePictureSrc;
+//    }
 
-    public String getServicePictureSrc() {
-        return servicePictureSrc;
+
+    public void setAvatarSrcId(int avatarSrcId) {
+        this.avatarSrcId = avatarSrcId;
     }
 
     public void setServicePictureSrc(String servicePictureSrc) {
         this.servicePictureSrc = servicePictureSrc;
+    }
+
+    public String getServicePictureSrc() {
+        return servicePictureSrc;
     }
 
     public Long getServiceId() {
@@ -126,3 +161,4 @@ public class ServiceCard {
         this.serviceId = serviceId;
     }
 }
+
