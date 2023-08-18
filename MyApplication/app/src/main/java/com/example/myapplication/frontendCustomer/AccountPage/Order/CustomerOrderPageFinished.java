@@ -156,7 +156,7 @@ public class CustomerOrderPageFinished extends AppCompatActivity {
                             try {
                                 order = orderDataHttpBaseBean.getData().getBookingOrder();
                                 updateOrderView();
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 

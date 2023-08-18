@@ -166,7 +166,7 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                         if(serviceDetailDataHttpBaseBean.getSuccess()){
                             try {
                                 updateView(serviceDetailDataHttpBaseBean.getData().getService());
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 

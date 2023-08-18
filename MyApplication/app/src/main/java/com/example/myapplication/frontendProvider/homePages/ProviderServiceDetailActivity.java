@@ -235,7 +235,7 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
                             try {
                                 service = serviceDetailDataHttpBaseBean.getData().getService();
                                 updateView();
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
@@ -294,7 +294,7 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
                         if(serviceDetailDataHttpBaseBean.getSuccess()){
                             try {
                                 service = serviceDetailDataHttpBaseBean.getData().getService();
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }else {
 
                         }

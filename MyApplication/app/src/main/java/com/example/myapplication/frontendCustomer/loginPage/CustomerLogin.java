@@ -1,5 +1,7 @@
 package com.example.myapplication.frontendCustomer.loginPage;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -8,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -49,15 +52,14 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view.getId() ==  R.id.btnCustomerLogin) {
-//            customerLogin(txtCustomerUsername.getText().toString(),txtCustomerPassword.getText().toString());
-            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
+            customerLogin(txtCustomerUsername.getText().toString(),txtCustomerPassword.getText().toString());
+//            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
         }
         else if (view.getId() == R.id.txtCustomerRegister) {
             startActivity(new Intent(CustomerLogin.this, CustomerRegister.class));
         }
 
     }
-
 
     @SuppressLint("CheckResult")
     private void customerLogin(String username, String password){
@@ -80,7 +82,7 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
                                 sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
                                 startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
                                 finishAffinity();
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }else{
                             Toast.makeText(getApplicationContext(),
                                     loginDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();

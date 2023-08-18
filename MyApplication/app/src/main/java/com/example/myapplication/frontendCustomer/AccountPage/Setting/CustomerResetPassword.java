@@ -103,7 +103,7 @@ public class CustomerResetPassword extends AppCompatActivity implements View.OnC
                                         objectHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
 
                             }
-                        }catch (Exception ignored){}
+                        }catch (NullPointerException ignored){}
                     }
 
                     @Override

@@ -94,7 +94,7 @@ public class CustomerResetUsername extends AppCompatActivity implements View.OnC
                                 Toast.makeText(getApplicationContext(),
                                         modifyDetailDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        }catch (Exception ignored){}
+                        }catch (NullPointerException ignored){}
                     }
 
                     @Override

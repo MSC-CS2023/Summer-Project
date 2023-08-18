@@ -243,7 +243,7 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
                                 Toast.makeText(getApplicationContext(),
                                         "Create Successfully! ", Toast.LENGTH_SHORT).show();
                                 finish();
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }else {
                             Toast.makeText(getApplicationContext(),
                                     serviceDetailDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();

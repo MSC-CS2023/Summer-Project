@@ -300,7 +300,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
@@ -333,7 +333,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
@@ -366,7 +366,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
@@ -398,7 +398,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
@@ -430,7 +430,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
@@ -462,7 +462,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 

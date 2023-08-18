@@ -178,14 +178,14 @@ public class CustomerCollectionFragment extends Fragment {
                                             favouriteListDataHttpBaseBean.getData().getFavourites()));
                                     serviceCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
                     @Override
                     public void onError(Throwable t) {
                         Toast.makeText(getContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                "Network error! here" + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onComplete() {}

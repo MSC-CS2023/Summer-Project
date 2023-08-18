@@ -269,7 +269,7 @@ public class ProviderServicesFragment extends Fragment{
                                     data.addAll(getServiceCards(serviceShortListDataHttpBaseBean.getData().getServices()));
                                     providerServicesAdaptor.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }else{}
                     }
 

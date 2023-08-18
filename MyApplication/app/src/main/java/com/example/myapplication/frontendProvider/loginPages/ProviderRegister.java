@@ -143,9 +143,8 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
                 Uri uri = data.getData();
                 try {
                     bitmap = compressImage(uri);
-                } catch (IOException ignored) {
-                }
-                Glide.with(this).load(bitmap).into(btnRegisterProviderUploadPortrait);
+                } catch (IOException ignored) {}
+                Glide.with(this).load(bitmapToFile(bitmap)).into(btnRegisterProviderUploadPortrait);
             }
         }
     }
@@ -206,19 +205,17 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onNext(HttpBaseBean<LoginData> loginDataHttpBaseBean) {
                         if(loginDataHttpBaseBean.getSuccess()){
-                            try{
-                                SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
-                                sp.edit().putBoolean("isLoggedIn", true).apply();
-                                sp.edit().putString("userType", "provider").apply();
-                                sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
-                                sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-                                updateAvatar(loginDataHttpBaseBean.getData().getToken());
-                                Toast.makeText(getApplicationContext(),
-                                        loginDataHttpBaseBean.getData().getUser().getUsername() + "sign up successfully",
-                                        Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(ProviderRegister.this, CustomerMainActivity.class));
-                                finishAffinity();
-                            }catch (Exception ignored){}
+                            SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+                            sp.edit().putBoolean("isLoggedIn", true).apply();
+                            sp.edit().putString("userType", "provider").apply();
+                            sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
+                            sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
+                            updateAvatar(loginDataHttpBaseBean.getData().getToken());
+                            Toast.makeText(getApplicationContext(),
+                                    loginDataHttpBaseBean.getData().getUser().getUsername() + "sign up successfully",
+                                    Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(ProviderRegister.this, ProviderMain.class));
+                            finishAffinity();
                         }else{
                             Toast.makeText(getApplicationContext(),
                                     loginDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();

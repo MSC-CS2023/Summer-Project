@@ -134,7 +134,7 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
                     bitmap = compressImage(uri);
                 } catch (IOException ignored) {
                 }
-                Glide.with(this).load(bitmap).into(avatar);
+                Glide.with(this).load(bitmapToFile(bitmap)).into(avatar);
             }
         }
     }
@@ -196,19 +196,17 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onNext(HttpBaseBean<LoginData> loginDataHttpBaseBean) {
                         if(loginDataHttpBaseBean.getSuccess()){
-                            try{
                                 SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
                                 sp.edit().putBoolean("isLoggedIn", true).apply();
                                 sp.edit().putString("userType", "customer").apply();
                                 sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
                                 sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-                                updateAvatar(loginDataHttpBaseBean.getData().getToken());
+                                updateAvatar(loginDataHttpBaseBean.getData().getToken(), bitmapToFile(bitmap));
                                 Toast.makeText(getApplicationContext(),
                                         loginDataHttpBaseBean.getData().getUser().getUsername() + "sign up successfully",
                                         Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(CustomerRegister.this, CustomerMainActivity.class));
                                 finishAffinity();
-                            }catch (Exception ignored){}
                         }else{
                             Toast.makeText(getApplicationContext(),
                                     loginDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
@@ -226,13 +224,32 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
     }
 
     @SuppressLint("CheckResult")
-    private void updateAvatar(String token){
+    private void updateAvatar(String token, File file){
         if(bitmap == null){return;}
-        File file = bitmapToFile(bitmap);
         MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
                 RequestBody.create(MediaType.parse("application/octet-stream"), file));
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.updateCustomerAvatar(token, part);
+        customerApi.updateCustomerAvatar(token, part)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<TimeStampData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<TimeStampData> timeStampDataHttpBaseBean) {
+                        if(timeStampDataHttpBaseBean.getSuccess()){
+                            Log.i(TAG, "update successfully");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 }

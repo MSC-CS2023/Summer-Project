@@ -118,7 +118,7 @@ public class ProviderOrdersFragment extends Fragment {
         //Set data and adaptor
         createDemoData();
 
-//        updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+        updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
         swipeDown();
         //Click on something
         setClick();
@@ -145,8 +145,8 @@ public class ProviderOrdersFragment extends Fragment {
             public void onRefresh() {
                 createDemoData();
                 Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
-//                currentShowPosition = 0;
-//                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                currentShowPosition = 0;
+                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -204,8 +204,8 @@ public class ProviderOrdersFragment extends Fragment {
                     data.add(new ProviderOrderCardData("Cleaning", SystemClock.currentThreadTimeMillis(),
                             "300", "img_sample2", "Finished", ""));
                     Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
-//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-//                    updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+                    updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                     providerOrdersAdaptor.notifyDataSetChanged();
                 }
             }
@@ -307,12 +307,14 @@ public class ProviderOrdersFragment extends Fragment {
                     @Override
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
-                            if(start == 0){
-                                data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                setAdaptor();
-                            }else {
-                                data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
-                            }
+                            try{
+                                if(start == 0){
+                                    data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    setAdaptor();
+                                }else {
+                                    data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                }
+                            }catch (NullPointerException ignored){}
                         }
                     }
 

@@ -89,7 +89,7 @@ public class CustomerResetEmail extends AppCompatActivity implements View.OnClic
                                 Toast.makeText(getApplicationContext(),
                                         modifyDetailDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        }catch (Exception ignored){}
+                        }catch (NullPointerException ignored){}
                     }
 
                     @Override

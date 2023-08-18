@@ -147,7 +147,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
                         if(selfDetailDataHttpBaseBean.getSuccess()){
                             try {
                                 updateView(selfDetailDataHttpBaseBean.getData().getUser());
-                            }catch (Exception ignored){
+                            }catch (NullPointerException ignored){
                             }
 
                         }

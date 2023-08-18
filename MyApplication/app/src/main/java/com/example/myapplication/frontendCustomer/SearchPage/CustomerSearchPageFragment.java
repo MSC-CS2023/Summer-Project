@@ -255,7 +255,7 @@ public class CustomerSearchPageFragment extends Fragment {
                                             serviceShortListDataHttpBaseBean.getData().getServices()));
                                     serviceCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 

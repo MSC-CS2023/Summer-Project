@@ -274,7 +274,7 @@ public class CustomerHomePageFragment extends Fragment {
                                             serviceShortListDataHttpBaseBean.getData().getServices()));
                                     serviceCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         } else {
                             //test
                         }
@@ -310,7 +310,7 @@ public class CustomerHomePageFragment extends Fragment {
                                             serviceShortListDataHttpBaseBean.getData().getServices()));
                                     serviceCardAdapter.notifyDataSetChanged();
                                 }
-                            }catch (Exception ignored){}
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
