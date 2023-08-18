@@ -54,6 +54,7 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
     ImageButton btnRegisterProviderUploadPortrait;
     ImageButton btnRegisterProvider;
     Bitmap bitmap;
+    private Uri myUri;
 
 
     EditText txtRegisterProviderName;
@@ -141,10 +142,11 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
         if (requestCode == 1 && resultCode == RESULT_OK) {
             if (data != null) {
                 Uri uri = data.getData();
+                myUri = uri;
                 try {
                     bitmap = compressImage(uri);
                 } catch (IOException ignored) {}
-                Glide.with(this).load(bitmapToFile(bitmap)).into(btnRegisterProviderUploadPortrait);
+                Glide.with(this).load(uri).into(btnRegisterProviderUploadPortrait);
             }
         }
     }
@@ -237,7 +239,10 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
         if(bitmap == null){
             return;
         }
-        File file = bitmapToFile(bitmap);
+        File file = null;
+        try {
+            file = bitmapToFile(compressImage(myUri));
+        }catch (Exception ignored){}
         MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
                 RequestBody.create(MediaType.parse("application/octet-stream"), file));
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);

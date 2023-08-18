@@ -138,8 +138,8 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
             if(checkServiceDetail()){
                 createService(token, title.getText().toString(),
                         description.getText().toString(), Double.parseDouble(price.getText().toString()));
-                Toast.makeText(this, "Save clicked", Toast.LENGTH_SHORT).show();
-                finish();
+//                Toast.makeText(this, "Save clicked", Toast.LENGTH_SHORT).show();
+//                finish();
             }
         } else if(view.getId() == R.id.btn_upload_image) {
             //调用安卓内置上传图片控件来上传图片，image这个控件要把visibility属性改成visible

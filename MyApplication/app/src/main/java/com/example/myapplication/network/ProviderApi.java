@@ -56,7 +56,7 @@ public interface ProviderApi {
             @Header("Authorization") String authorization, @Part("service_id") Long serviceId,
             @Part MultipartBody.Part part);
 
-    @POST("service_provider/service/add")
+    @PUT("service_provider/service/add")
     @Multipart
     Flowable<HttpBaseBean<ServiceDetailData>> addService(
             @Header("Authorization") String authorization, @Part("title") String serviceTitle,
