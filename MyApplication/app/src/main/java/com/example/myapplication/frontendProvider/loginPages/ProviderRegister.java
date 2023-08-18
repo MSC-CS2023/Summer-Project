@@ -212,8 +212,7 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
                                 sp.edit().putString("userType", "provider").apply();
                                 sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
                                 sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-                                updateAvatar(loginDataHttpBaseBean.getData().getToken(),
-                                        loginDataHttpBaseBean.getData().getUser().getUsername());
+                                updateAvatar(loginDataHttpBaseBean.getData().getToken());
                                 Toast.makeText(getApplicationContext(),
                                         loginDataHttpBaseBean.getData().getUser().getUsername() + "sign up successfully",
                                         Toast.LENGTH_SHORT).show();
@@ -237,12 +236,12 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
     }
 
     @SuppressLint("CheckResult")
-    private void updateAvatar(String token, String username){
+    private void updateAvatar(String token){
         if(bitmap == null){
             return;
         }
         File file = bitmapToFile(bitmap);
-        MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", username + "Avatar.jpg",
+        MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
                 RequestBody.create(MediaType.parse("application/octet-stream"), file));
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
         providerApi.updateProviderAvatar(token, part);

@@ -266,7 +266,7 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
             return;
         }
         File file = bitmapToFile(bitmap);
-        MultipartBody.Part part = MultipartBody.Part.createFormData("picture", serviceId.toString() + "Picture.jpg",
+        MultipartBody.Part part = MultipartBody.Part.createFormData("picture", "Picture.jpg",
                 RequestBody.create(MediaType.parse("application/octet-stream"), file));
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
         providerApi.addPictureToService(token, serviceId, part);

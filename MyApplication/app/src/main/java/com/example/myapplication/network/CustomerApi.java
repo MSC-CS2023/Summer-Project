@@ -156,8 +156,8 @@ public interface CustomerApi {
             @Header("Authorization") String authorization,
             @Query("start") Integer start, @Query("num") Integer number);
 
-    @GET("customer/booking_order/get_cancelled")
-    Flowable<HttpBaseBean<OrderListData>> getCustomerCancelledOrders(
+    @GET("customer/booking_order/get_canceled")
+    Flowable<HttpBaseBean<OrderListData>> getCustomerCanceledOrders(
             @Header("Authorization") String authorization,
             @Query("start") Integer start, @Query("num") Integer number);
 

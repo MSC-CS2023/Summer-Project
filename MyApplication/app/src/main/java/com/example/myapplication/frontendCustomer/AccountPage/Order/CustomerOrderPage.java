@@ -276,7 +276,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                 getRejectedOrders(token, start, number);
                 break;
             case CANCELED_TAB:
-                getCancelledOrders(token, start, number);
+                getCanceledOrders(token, start, number);
             default:
                 break;
         }
@@ -381,9 +381,9 @@ public class CustomerOrderPage extends AppCompatActivity {
                 });
     }
     @SuppressLint("CheckResult")
-    private void getCancelledOrders(String token, Integer start, Integer number){
+    private void getCanceledOrders(String token, Integer start, Integer number){
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.getCustomerCancelledOrders(token, start, number)
+        customerApi.getCustomerCanceledOrders(token, start, number)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {

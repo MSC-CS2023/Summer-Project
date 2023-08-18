@@ -129,4 +129,31 @@ public interface ProviderApi {
     @DELETE("service_provider/delete_account")
     Flowable<HttpBaseBean<Object>> deleteProviderAccount(@Header("Authorization") String authorization);
 
+    //NEW
+    //ORDER
+    @GET("service_provider/booking_order/get_unconfirmed")
+    Flowable<HttpBaseBean<OrderListData>> getProviderUnconfirmedOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("service_provider/booking_order/get_rejected")
+    Flowable<HttpBaseBean<OrderListData>> getProviderRejectedOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("service_provider/booking_order/get_canceled")
+    Flowable<HttpBaseBean<OrderListData>> getProviderCanceledOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("service_provider/booking_order/get_finished")
+    Flowable<HttpBaseBean<OrderListData>> getProviderFinishedOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("service_provider/booking_order/get_processing")
+    Flowable<HttpBaseBean<OrderListData>> getProviderProcessingOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
 }
