@@ -86,7 +86,7 @@ public class CustomerHomePageFragment extends Fragment {
         swipeDown();
 
         // Create a demo data list
-        createDemoData();
+//        createDemoData();
         updatePage();
 
         return rootView;
