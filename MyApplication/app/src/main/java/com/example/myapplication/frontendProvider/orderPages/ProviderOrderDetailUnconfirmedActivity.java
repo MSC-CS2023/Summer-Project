@@ -1,5 +1,7 @@
 package com.example.myapplication.frontendProvider.orderPages;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -10,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -22,12 +25,15 @@ import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
+import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
 import com.example.myapplication.network.Constant;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendProvider.ProviderVisitOtherUserActivity;
 import com.example.myapplication.frontendProvider.messagePages.ProviderMessageDetailActivity;
 import com.example.myapplication.network.ProviderApi;
+import com.example.myapplication.network.PublicMethodApi;
 import com.example.myapplication.network.RetrofitClient;
+import com.google.gson.Gson;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -66,7 +72,6 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
 
         initView();
         updateOrder(token, orderId);
-        updateCustomer();
     }
 
     private void initView() {
@@ -251,8 +256,31 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
                 });
     }
 
+    @SuppressLint("CheckResult")
     private void updateCustomer(){
+        PublicMethodApi publicMethodApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
+        publicMethodApi.getCustomerDetail(order.getCustomerId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<SelfDetailData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<SelfDetailData> selfDetailDataHttpBaseBean) {
+                        if(selfDetailDataHttpBaseBean.getSuccess()){
+                            customer = selfDetailDataHttpBaseBean.getData().getUser();
+                            updateCustomer();
+                            updateCustomerView();
+                        }
+                    }
 
+                    @Override
+                    public void onError(Throwable t) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 }

@@ -17,9 +17,11 @@ import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
+import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
 import com.example.myapplication.network.Constant;
 import com.example.myapplication.R;
 import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.PublicMethodApi;
 import com.example.myapplication.network.RetrofitClient;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -137,6 +139,28 @@ public class CustomerOrderPageRejected extends AppCompatActivity {
                 });
     }
 
+    @SuppressLint("CheckResult")
     private void updateProvider(){
+        PublicMethodApi publicMethodApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
+        publicMethodApi.getProviderDetail(order.getServiceShort().getProviderId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<SelfDetailData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<SelfDetailData> selfDetailDataHttpBaseBean) {
+                        if(selfDetailDataHttpBaseBean.getSuccess()){
+                            provider = selfDetailDataHttpBaseBean.getData().getUser();
+                            updateProviderView();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {}
+                });
     }
 }

@@ -19,11 +19,13 @@ import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.Order;
 import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.OrderData;
+import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
 import com.example.myapplication.network.Constant;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendProvider.ProviderVisitOtherUserActivity;
 import com.example.myapplication.frontendProvider.messagePages.ProviderMessageDetailActivity;
 import com.example.myapplication.network.ProviderApi;
+import com.example.myapplication.network.PublicMethodApi;
 import com.example.myapplication.network.RetrofitClient;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -61,7 +63,6 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
 
         initView();
         updateOrder(token, orderId);
-        updateCustomer();
     }
 
     private void initView() {
@@ -130,6 +131,7 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
                     public void onNext(HttpBaseBean<OrderData> orderDataHttpBaseBean) {
                         if(orderDataHttpBaseBean.getSuccess()){
                             order = orderDataHttpBaseBean.getData().getBookingOrder();
+                            updateCustomer();
                             updateView();
                         }
                     }
@@ -147,7 +149,29 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
                 });
     }
 
+    @SuppressLint("CheckResult")
     private void updateCustomer(){
+        PublicMethodApi publicMethodApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
+        publicMethodApi.getCustomerDetail(order.getCustomerId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<SelfDetailData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<SelfDetailData> selfDetailDataHttpBaseBean) {
+                        if(selfDetailDataHttpBaseBean.getSuccess()){
+                            customer = selfDetailDataHttpBaseBean.getData().getUser();
+                            updateCustomerView();
+                        }
+                    }
 
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {}
+                });
     }
 }

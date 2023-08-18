@@ -4,8 +4,10 @@ import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
 import com.example.myapplication.Bean.Httpdata.data.MarkData;
 import com.example.myapplication.Bean.Httpdata.data.PictureListData;
+import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
 import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
+import com.google.firebase.firestore.core.UserData;
 
 import io.reactivex.rxjava3.core.Flowable;
 import okhttp3.ResponseBody;
@@ -82,4 +84,11 @@ public interface PublicMethodApi {
     Flowable<HttpBaseBean<ServiceShortListData>> getServiceByTag(
             @Query("tag") String tag, @Query("start") Integer startPosition,
             @Query("num") Integer displayNumber);
+
+    @GET("public/customer/get_detail")
+    Flowable<HttpBaseBean<SelfDetailData>> getCustomerDetail(@Query("id") Long customerId);
+
+    @GET("public/service_provider/get_detail")
+    Flowable<HttpBaseBean<SelfDetailData>> getProviderDetail(@Query("id") Long providerId);
+
 }
