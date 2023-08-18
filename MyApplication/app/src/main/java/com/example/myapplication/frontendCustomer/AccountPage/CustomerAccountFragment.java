@@ -26,6 +26,7 @@ import com.example.myapplication.frontendCustomer.AccountPage.Order.CustomerOrde
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
@@ -39,7 +40,7 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
     ImageButton order;
     ImageButton wallet;
     ImageButton timetable;
-    ImageView avatar;
+    CircleImageView avatar;
     TextView username;
 
     public CustomerAccountFragment() {}
