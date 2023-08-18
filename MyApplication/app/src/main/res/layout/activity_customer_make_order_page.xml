@@ -100,6 +100,12 @@
         android:layout_height="wrap_content"
         android:text="pay"></Button>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="元素都有了，还没来的及美化"
+        android:textSize="40dp"></TextView>
+
 
 
 
