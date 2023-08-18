@@ -69,7 +69,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="@android:color/transparent"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:src="@drawable/btn_avatar1" />
 
 
