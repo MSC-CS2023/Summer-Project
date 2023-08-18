@@ -50,16 +50,15 @@
                 android:orientation="horizontal"
                 android:background="@color/grey">
 
-                <ImageButton
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/providerAvatar"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:background="@drawable/circular_background"
                     android:scaleType="centerCrop"
                     android:src="@drawable/btn_avatar2"
                     >
-                </ImageButton>
+                </de.hdodenhof.circleimageview.CircleImageView>
 
                 <LinearLayout
                     android:layout_width="0dp"
