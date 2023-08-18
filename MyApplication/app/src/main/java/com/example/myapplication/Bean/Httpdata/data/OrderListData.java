@@ -5,8 +5,8 @@ import com.example.myapplication.Bean.Httpdata.Order;
 import java.util.List;
 
 public class OrderListData {
-    private List<Order> bookingOrders;
+    private List<Order> booking_orders;
 
-    public List<Order> getBookingOrders() { return bookingOrders; }
-    public void setBookingOrders(List<Order> value) { this.bookingOrders = value; }
+    public List<Order> getBookingOrders() { return booking_orders; }
+    public void setBookingOrders(List<Order> value) { this.booking_orders = value; }
 }

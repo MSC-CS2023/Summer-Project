@@ -219,7 +219,6 @@ public class CustomerHomePageFragment extends Fragment {
 //                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
 //                            "Repair Air conditioner", "available tomorrow",
 //                            "balabala", "picSrc", 213L));
-
                     currentShowPosition += DEFAULT_RECOMMEND_NUMBER;
                     updatePage();
                     serviceCardAdapter.notifyDataSetChanged();

@@ -1,5 +1,7 @@
 package com.example.myapplication.frontendCustomer.AccountPage.Order;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,7 +165,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                         Toast.makeText(CustomerOrderPage.this, "select Canceled", Toast.LENGTH_SHORT).show();
                         break;
                     case 5: // Rejected
-//                        currentTab = CANCELED_TAB;
+                        currentTab = CANCELED_TAB;
                         Toast.makeText(CustomerOrderPage.this, "select Rejected", Toast.LENGTH_SHORT).show();
                         break;
                     default:
@@ -175,13 +179,11 @@ public class CustomerOrderPage extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 //                createDemo();
-
                 currentShowPosition = 0;
                 updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
             }
@@ -292,6 +294,8 @@ public class CustomerOrderPage extends AppCompatActivity {
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
                             try{
+                                Gson gson = new Gson();
+                                Log.i(TAG,  "return" + gson.toJson(orderListDataHttpBaseBean));
                                 if(start == 0){
                                     orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
                                     updateViewByList(orderCards);
