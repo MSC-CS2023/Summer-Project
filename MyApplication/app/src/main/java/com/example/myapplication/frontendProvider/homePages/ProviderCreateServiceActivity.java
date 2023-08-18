@@ -109,16 +109,16 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 if(position == 0) {
-                    tag = "Cleaning";
+                    tag = "cleaning";
                     Toast.makeText(ProviderCreateServiceActivity.this, "Service type cleaning selected", Toast.LENGTH_SHORT).show();
                 } else if (position == 1) {
-                    tag = "Maintenance";
+                    tag = "maintenance";
                     Toast.makeText(ProviderCreateServiceActivity.this, "Service type maintenance selected", Toast.LENGTH_SHORT).show();
                 } else if (position == 2) {
-                    tag = "Laundry";
+                    tag = "laundry";
                     Toast.makeText(ProviderCreateServiceActivity.this, "Service type laundry selected", Toast.LENGTH_SHORT).show();
                 } else if (position == 3) {
-                    tag = "Landscaping";
+                    tag = "landscaping";
                     Toast.makeText(ProviderCreateServiceActivity.this, "Service type landscaping selected", Toast.LENGTH_SHORT).show();
                 } else if (position == 4) {
                     Toast.makeText(ProviderCreateServiceActivity.this, "Service type others selected", Toast.LENGTH_SHORT).show();
