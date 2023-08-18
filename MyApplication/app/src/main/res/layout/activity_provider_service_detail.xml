@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
-                    android:text="Cleaning"
+                    android:text="Default"
                     android:textSize="25sp"/>
 
             </LinearLayout>

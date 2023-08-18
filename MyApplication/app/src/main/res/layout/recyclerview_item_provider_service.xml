@@ -20,12 +20,16 @@
 
         <TextView
             android:id="@+id/service_card_description"
-            android:layout_width="0dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:singleLine="true"
             android:text="Some short Description..........."
             android:textStyle="italic"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
         <TextView
             android:layout_width="wrap_content"
