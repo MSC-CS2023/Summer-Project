@@ -486,10 +486,9 @@ public class CustomerOrderPage extends AppCompatActivity {
         OrderCard orderCard;
         String state;
         for(Order order : orders){
-            state = "";
             String link = Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId();
             orderCard = new OrderCard(order.getId(), order.getServiceShort().getTitle(),
-                    order.getServiceShort().getFee().toString(), link, state);
+                    order.getServiceShort().getFee().toString(), link, order.getState());
             orderCardList.add(orderCard);
         }
         return orderCardList;
