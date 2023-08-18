@@ -20,6 +20,9 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".frontendCustomer.HomePage.CustomerMakeOrderPage"
+            android:exported="false" />
+        <activity
             android:name=".frontendCustomer.AccountPage.Order.CustomerOrderPageRejected"
             android:exported="false" />
         <activity

@@ -7,4 +7,5 @@
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
         <item name="android:windowBackground">@color/off_white</item>
     </style>
+
 </resources>

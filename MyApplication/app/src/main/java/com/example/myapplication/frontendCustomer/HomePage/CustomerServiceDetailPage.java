@@ -91,7 +91,7 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         if (v.getId() == order.getId()){
             //alert to payment
 //            paymentAlert();
-//            startActivity(new Intent(CustomerServiceDetailPage.this, CustomerMakeOrderPage.class));
+            startActivity(new Intent(CustomerServiceDetailPage.this, CustomerMakeOrderPage.class));
         } else if (v.getId() == avatar.getId()) {
             // jump to provider account page
         } else if (v.getId() == collection.getId()) {
