@@ -280,18 +280,19 @@ public class ProviderOrdersFragment extends Fragment {
                 getProviderOrder(token, start, number);
                 break;
             case UNCONFIRMED_TAB:
-//                getProviderOrderByType(token, "is_confirmed", start, number, true, true);
+                getProviderUnconfirmedOrders(token, start, number);
                 break;
             case PROCESSING_TAB:
-//                getProviderOrderByType(token, "is_finished", start, number, true, true);
+                getProviderProcessingOrders(token, start, number);
                 break;
             case FINISHED_TAB:
-//                getProviderOrderByType(token, "is_finished", start, number, true, false);
+                getProviderFinishedOrders(token, start, number);
                 break;
             case REJECTED_TAB:
-//                getProviderOrderByType(token, "is_rejected", start, number, true, false);
+                getProviderRejectedOrders(token, start, number);
                 break;
             case CANCELED_TAB:
+                getProviderCanceledOrders(token, start, number);
             default:
                 break;
         }
@@ -332,22 +333,155 @@ public class ProviderOrdersFragment extends Fragment {
     }
 
     @SuppressLint("CheckResult")
-    private void getProviderOrderByType(String token, String keyword, Integer start,
-                                        Integer number, Boolean isOr, Boolean isNot){
+    private void getProviderRejectedOrders(String token, Integer start, Integer number){
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
-        providerApi.searchProviderOrder(token, keyword,isOr, start, number, isNot)
+        providerApi.getProviderRejectedOrders(token, start, number)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
                     @Override
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
-                            if(start == 0){
-                                data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                setAdaptor();
-                            }else {
-                                data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
-                            }
+                            try{
+                                if(start == 0){
+                                    data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    setAdaptor();
+                                }else {
+                                    data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                }
+                            }catch (NullPointerException ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    @SuppressLint("CheckResult")
+    private void getProviderCanceledOrders(String token, Integer start, Integer number){
+        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
+        providerApi.getProviderCanceledOrders(token, start, number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
+                        if(orderListDataHttpBaseBean.getSuccess()){
+                            try{
+                                if(start == 0){
+                                    data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    setAdaptor();
+                                }else {
+                                    data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                }
+                            }catch (NullPointerException ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    @SuppressLint("CheckResult")
+    private void getProviderFinishedOrders(String token, Integer start, Integer number){
+        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
+        providerApi.getProviderFinishedOrders(token, start, number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
+                        if(orderListDataHttpBaseBean.getSuccess()){
+                            try{
+                                if(start == 0){
+                                    data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    setAdaptor();
+                                }else {
+                                    data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                }
+                            }catch (NullPointerException ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    @SuppressLint("CheckResult")
+    private void getProviderProcessingOrders(String token, Integer start, Integer number){
+        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
+        providerApi.getProviderProcessingOrders(token, start, number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
+                        if(orderListDataHttpBaseBean.getSuccess()){
+                            try{
+                                if(start == 0){
+                                    data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    setAdaptor();
+                                }else {
+                                    data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                }
+                            }catch (NullPointerException ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    @SuppressLint("CheckResult")
+    private void getProviderUnconfirmedOrders(String token, Integer start, Integer number){
+        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
+        providerApi.getProviderUnconfirmedOrders(token, start, number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
+                        if(orderListDataHttpBaseBean.getSuccess()){
+                            try{
+                                if(start == 0){
+                                    data = getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    setAdaptor();
+                                }else {
+                                    data.addAll(getOrderList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                }
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
