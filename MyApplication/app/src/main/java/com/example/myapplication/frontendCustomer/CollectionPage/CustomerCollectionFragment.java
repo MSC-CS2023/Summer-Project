@@ -66,7 +66,7 @@ public class CustomerCollectionFragment extends Fragment {
 
         swipeDown();
 
-        createDemoData();
+//        createDemoData();
         getCustomerFavourites(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
 
         return rootView;

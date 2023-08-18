@@ -94,7 +94,7 @@ public class CustomerSearchPageFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                createDemoData();
+//                createDemoData();
 
                 searchKeyword = keyword.getText().toString();
                 currentShowPosition = 0;

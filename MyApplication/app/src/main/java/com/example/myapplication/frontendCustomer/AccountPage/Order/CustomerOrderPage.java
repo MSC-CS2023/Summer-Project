@@ -88,7 +88,7 @@ public class CustomerOrderPage extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 //add refresh action here
-                createDemo();
+//                createDemo();
 
                 currentShowPosition = 0;
                 updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
