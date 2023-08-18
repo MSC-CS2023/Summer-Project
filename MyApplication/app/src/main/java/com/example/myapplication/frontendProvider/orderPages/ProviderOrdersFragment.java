@@ -201,9 +201,9 @@ public class ProviderOrdersFragment extends Fragment {
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    data.add(new ProviderOrderCardData("Cleaning", SystemClock.currentThreadTimeMillis(),
-                            "300", "img_sample2", "Finished", ""));
-                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+//                    data.add(new ProviderOrderCardData("Cleaning", SystemClock.currentThreadTimeMillis(),
+//                            "300", "img_sample2", "Finished", ""));
+//                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
                     currentShowPosition += DEFAULT_SHOW_NUMBER;
                     updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                     providerOrdersAdaptor.notifyDataSetChanged();
@@ -280,16 +280,16 @@ public class ProviderOrdersFragment extends Fragment {
                 getProviderOrder(token, start, number);
                 break;
             case UNCONFIRMED_TAB:
-                getProviderOrderByType(token, "is_confirmed", start, number, true, true);
+//                getProviderOrderByType(token, "is_confirmed", start, number, true, true);
                 break;
             case PROCESSING_TAB:
-                getProviderOrderByType(token, "is_finished", start, number, true, true);
+//                getProviderOrderByType(token, "is_finished", start, number, true, true);
                 break;
             case FINISHED_TAB:
-                getProviderOrderByType(token, "is_finished", start, number, true, false);
+//                getProviderOrderByType(token, "is_finished", start, number, true, false);
                 break;
             case REJECTED_TAB:
-                getProviderOrderByType(token, "is_rejected", start, number, true, false);
+//                getProviderOrderByType(token, "is_rejected", start, number, true, false);
                 break;
             case CANCELED_TAB:
             default:

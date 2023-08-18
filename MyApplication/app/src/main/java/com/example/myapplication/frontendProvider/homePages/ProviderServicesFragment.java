@@ -175,9 +175,9 @@ public class ProviderServicesFragment extends Fragment{
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    data.add(new ProviderServiceCardData("Laundry", "Some short description......",
-                            "300" + SystemClock.currentThreadTimeMillis(), "img_sample1", 123L));
-                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+//                    data.add(new ProviderServiceCardData("Laundry", "Some short description......",
+//                            "300" + SystemClock.currentThreadTimeMillis(), "img_sample1", 123L));
+//                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
                     currentShowPosition += DEFAULT_SHOW_NUMBER;
                     getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                     providerServicesAdaptor.notifyDataSetChanged();

@@ -144,9 +144,9 @@ public class CustomerCollectionFragment extends Fragment {
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
-                            "Repair Air conditioner", "available tomorrow",
-                            "balabala", "picSrc", 213L));
+//                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
+//                            "Repair Air conditioner", "available tomorrow",
+//                            "balabala", "picSrc", 213L));
                     Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
 
                     currentShowPosition += DEFAULT_SHOW_NUMBER;

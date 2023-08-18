@@ -244,12 +244,12 @@ public class CustomerOrderPage extends AppCompatActivity {
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
                     Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
-                    orderCards.add(new OrderCard(121133L, "name1213",
-                            "~"+ SystemClock.currentThreadTimeMillis(),
-                            "link", "Processing"));
-                    orderCards.add(new OrderCard(121133L, "name1213",
-                            "~"+ SystemClock.currentThreadTimeMillis(),
-                            "link", "Finished"));
+//                    orderCards.add(new OrderCard(121133L, "name1213",
+//                            "~"+ SystemClock.currentThreadTimeMillis(),
+//                            "link", "Processing"));
+//                    orderCards.add(new OrderCard(121133L, "name1213",
+//                            "~"+ SystemClock.currentThreadTimeMillis(),
+//                            "link", "Finished"));
                     currentShowPosition += DEFAULT_SHOW_NUMBER;
                     updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                     orderCardAdapter.notifyDataSetChanged();

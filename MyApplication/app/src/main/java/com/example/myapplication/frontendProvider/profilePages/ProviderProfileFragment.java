@@ -158,9 +158,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
 
