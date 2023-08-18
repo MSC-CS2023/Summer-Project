@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "599960644306",
+    "project_id": "gig-chat-96e16",
+    "storage_bucket": "gig-chat-96e16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599960644306:android:d002e564ccaf6ee0331b0b",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599960644306-jkib62n09od8p22nit7da33012furdu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFQxhzG7j_NmIa28b5fQYWNo6C-aVcP0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599960644306-jkib62n09od8p22nit7da33012furdu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599960644306:android:dcbdea3ec75ddd3a331b0b",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599960644306-jkib62n09od8p22nit7da33012furdu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFQxhzG7j_NmIa28b5fQYWNo6C-aVcP0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599960644306-jkib62n09od8p22nit7da33012furdu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,7 +9,7 @@
 
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="700dp"
+    android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBaseline_toBottomOf="@id/btnRegisterCustomer">
     <LinearLayout
@@ -20,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
             android:orientation="vertical">
 
 
@@ -116,8 +116,6 @@
                     tools:layout_editor_absoluteY="2dp" />
 
 
-
-
                 <EditText
                     android:id="@+id/txtRegisterCustomerAddress"
                     android:layout_width="wrap_content"
@@ -149,6 +147,7 @@
 
                 <EditText
                     android:id="@+id/txtRegisterCustomerPassword2"
+                    android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
@@ -164,6 +163,10 @@
 
             </LinearLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="300dp"></Space>
+
 
 
     </LinearLayout>
@@ -174,11 +177,10 @@
 
     <ImageButton
         android:id="@+id/btnRegisterCustomer"
-        android:layout_width="322dp"
-        android:layout_height="91dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@android:color/transparent"
-        android:scaleType="fitCenter"
         android:src="@drawable/btn_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
