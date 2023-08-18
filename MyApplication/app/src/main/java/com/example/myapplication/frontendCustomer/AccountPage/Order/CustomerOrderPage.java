@@ -165,7 +165,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                         Toast.makeText(CustomerOrderPage.this, "select Canceled", Toast.LENGTH_SHORT).show();
                         break;
                     case 5: // Rejected
-                        currentTab = CANCELED_TAB;
+                        currentTab = REJECTED_TAB;
                         Toast.makeText(CustomerOrderPage.this, "select Rejected", Toast.LENGTH_SHORT).show();
                         break;
                     default:
