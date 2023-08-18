@@ -60,7 +60,7 @@ public interface ProviderApi {
     @Multipart
     Flowable<HttpBaseBean<ServiceDetailData>> addService(
             @Header("Authorization") String authorization, @Part("title") String serviceTitle,
-            @Part("description") String serviceDescription, @Part("fee") Double serviceFee);
+            @Part("description") String serviceDescription, @Part("fee") Double serviceFee, @Part("tag") String tag);
 
     @DELETE("service_provider/service/delete")
     Flowable<HttpBaseBean<Object>> deleteService(

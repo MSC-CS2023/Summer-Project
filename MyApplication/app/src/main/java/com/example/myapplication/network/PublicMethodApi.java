@@ -78,4 +78,8 @@ public interface PublicMethodApi {
     @GET("get_mark")
     Flowable<HttpBaseBean<MarkData>> getMark(@Query("id") Long providerId);
 
+    @GET("get_by_tag")
+    Flowable<HttpBaseBean<ServiceShortListData>> getServiceByTag(
+            @Query("tag") String tag, @Query("start") Integer startPosition,
+            @Query("num") Integer displayNumber);
 }

@@ -38,12 +38,16 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 
 public class CustomerCollectionFragment extends Fragment {
+
+
     String token;
     Integer currentShowPosition;
     static final Integer DEFAULT_SHOW_NUMBER = 5;
-    List<ServiceCard> dataList;
+    List<ServiceCard> dataList = new ArrayList<>();
 
     SwipeRefreshLayout swipeRefreshLayout;
+    View rootView;
+    ServiceCardAdapter serviceCardAdapter;
 
 
     public CustomerCollectionFragment() {
@@ -54,118 +58,66 @@ public class CustomerCollectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView =  inflater.inflate(R.layout.fragment_customer_collection, container, false);
+        rootView =  inflater.inflate(R.layout.fragment_customer_collection, container, false);
 
         SharedPreferences sp = getContext().getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
         currentShowPosition = 0;
 
-        createDemoData(rootView);
-//        getCustomerFavourites(this.token, rootView, currentShowPosition, DEFAULT_SHOW_NUMBER);
+        swipeDown();
 
-        swipeDown(rootView);
+        createDemoData();
+        getCustomerFavourites(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
 
         return rootView;
     }
 
 
-    private void swipeDown(View rootView) {
+    private void swipeDown() {
         swipeRefreshLayout = rootView.findViewById(R.id.swipeCollectionPage);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                createDemoData(rootView);
+                createDemoData();
                 Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
-//                currentShowPosition = 0;
-//                getCustomerFavourites(token, rootView, currentShowPosition, DEFAULT_SHOW_NUMBER);
+
+                currentShowPosition = 0;
+                getCustomerFavourites(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
-    private void createDemoData(View rootView) {
-        List<ServiceCard> demoDataList = new ArrayList<>();
-        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",  "available tomorrow",
-                "balabala", "picSrc",213L);
-        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",  "available today",
-                "balabala", "picSrc",213L);
-        ServiceCard serviceCard3 = new ServiceCard("Alice", "150","Clean gutter",  "available today",
-                "balabala", "picSrc",213L);
-        ServiceCard serviceCard4 = new ServiceCard("Alice", "150","Clean gutter", "available today",
-                "balabala", "picSrc",213L);
+    private void createDemoData() {
+        dataList = new ArrayList<>();
 
-        demoDataList.add(serviceCard1);
-        demoDataList.add(serviceCard2);
-        demoDataList.add(serviceCard3);
-        demoDataList.add(serviceCard4);
+        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
+                "available tomorrow", "balabala", "picSrc", 213L);
+        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
+                "available today", "balabala", "picSrc", 213L);
+        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
+                "available today", "balabala", "picSrc",213L);
+        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
+                "available today", "balabala", "picSrc",213L);
 
-        dataList = demoDataList;
+        dataList.add(serviceCard1);
+        dataList.add(serviceCard2);
+        dataList.add(serviceCard3);
+        dataList.add(serviceCard4);
 
-        updateViewByList(dataList, rootView);
-
-    }
-
-    @SuppressLint("CheckResult")
-    private void getCustomerFavourites(String token, View view, Integer start, Integer number){
-        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.getCustomerFavourites(token, start, number)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new ResourceSubscriber<HttpBaseBean<FavouriteListData>>() {
-                    @Override
-                    public void onNext(HttpBaseBean<FavouriteListData> favouriteListDataHttpBaseBean) {
-                        if(favouriteListDataHttpBaseBean.getSuccess()){
-                            if(start == 0){
-                                dataList = getServiceCardList(
-                                        favouriteListDataHttpBaseBean.getData().getFavourites());
-                                updateViewByList(dataList, view);
-                            }else{
-                                dataList.addAll(getServiceCardList(
-                                        favouriteListDataHttpBaseBean.getData().getFavourites()));
-                            }
-                        }else{
-                            //test
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        Toast.makeText(getContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    private List<ServiceCard> getServiceCardList(List<Favourite> favourites) {
-        List<ServiceCard> serviceCards = new ArrayList<>();
-        ServiceCard serviceCard;
-        ServiceShort serviceShort;
-        for (Favourite favourite : favourites) {
-            serviceShort = favourite.getServiceShort();
-            String avatarLink = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
-            String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
-            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
-                    serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
-                    pictureLink, serviceShort.getId());
-            serviceCards.add(serviceCard);
-        }
-        return serviceCards;
+        updateViewByList(dataList);
     }
 
     //Use adapter data list to update view.
-    private void updateViewByList(List<ServiceCard> serviceCards, View view) {
+    private void updateViewByList(List<ServiceCard> serviceCards) {
         //RecyclerView down here
-        RecyclerView recyclerView = view.findViewById(R.id.collectionRecyclerView);
+        RecyclerView recyclerView = rootView.findViewById(R.id.collectionRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
-        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards, getContext());
+        serviceCardAdapter = new ServiceCardAdapter(serviceCards, getContext());
 
         serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
@@ -196,13 +148,64 @@ public class CustomerCollectionFragment extends Fragment {
                             "Repair Air conditioner", "available tomorrow",
                             "balabala", "picSrc", 213L));
                     Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
-//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-//                    getCustomerFavourites(token, view, currentShowPosition, DEFAULT_SHOW_NUMBER);
+
+                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+                    getCustomerFavourites(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                     serviceCardAdapter.notifyDataSetChanged();
                 }
             }
         });
 
+    }
+
+    @SuppressLint("CheckResult")
+    private void getCustomerFavourites(String token, Integer start, Integer number){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.getCustomerFavourites(token, start, number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<FavouriteListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<FavouriteListData> favouriteListDataHttpBaseBean) {
+                        if(favouriteListDataHttpBaseBean.getSuccess()){
+                            try {
+                                if(start == 0){
+                                    dataList = getServiceCardList(
+                                            favouriteListDataHttpBaseBean.getData().getFavourites());
+                                    updateViewByList(dataList);
+                                }else{
+                                    dataList.addAll(getServiceCardList(
+                                            favouriteListDataHttpBaseBean.getData().getFavourites()));
+                                    serviceCardAdapter.notifyDataSetChanged();
+                                }
+                            }catch (Exception ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onComplete() {}
+                });
+    }
+
+    private List<ServiceCard> getServiceCardList(List<Favourite> favourites) {
+        List<ServiceCard> serviceCards = new ArrayList<>();
+        ServiceCard serviceCard;
+        ServiceShort serviceShort;
+        for (Favourite favourite : favourites) {
+            serviceShort = favourite.getServiceShort();
+            String avatarLink = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
+            String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
+            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
+                    serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
+                    pictureLink, serviceShort.getId());
+            serviceCards.add(serviceCard);
+        }
+        return serviceCards;
     }
 
 }

@@ -27,8 +27,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerLogin extends AppCompatActivity implements View.OnClickListener {
-
-
     ImageButton btnCustomerLogin;
     TextView txtCustomerRegister;
     EditText txtCustomerUsername;
@@ -47,8 +45,6 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
         txtCustomerPassword = findViewById(R.id.txtCustomerPassword);
 
     }
-
-
 
     @Override
     public void onClick(View view) {
@@ -73,16 +69,18 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onNext(HttpBaseBean<LoginData> loginDataHttpBaseBean) {
                         if(loginDataHttpBaseBean.getSuccess()){
-                            Toast.makeText(getApplicationContext(),
-                                    loginDataHttpBaseBean.getData().getUser().getUsername() + " login successfully",
-                                    Toast.LENGTH_SHORT).show();
-                            SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
-                            sp.edit().putBoolean("isLoggedIn", true).apply();
-                            sp.edit().putString("userType", "customer").apply();
-                            sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
-                            sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-                            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
-                            finish();
+                            try {
+                                Toast.makeText(getApplicationContext(),
+                                        loginDataHttpBaseBean.getData().getUser().getUsername() + " login successfully",
+                                        Toast.LENGTH_SHORT).show();
+                                SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+                                sp.edit().putBoolean("isLoggedIn", true).apply();
+                                sp.edit().putString("userType", "customer").apply();
+                                sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
+                                sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
+                                startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
+                                finishAffinity();
+                            }catch (Exception ignored){}
                         }else{
                             Toast.makeText(getApplicationContext(),
                                     loginDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
@@ -94,12 +92,8 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(getApplicationContext(),
                                 "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
-
 }

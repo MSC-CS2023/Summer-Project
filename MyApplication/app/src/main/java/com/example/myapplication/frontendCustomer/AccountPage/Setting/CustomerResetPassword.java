@@ -69,7 +69,6 @@ public class CustomerResetPassword extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         if (view.getId() == R.id.btnSave){
             resetPassword();
-            Toast.makeText(this, "submit click", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -95,14 +94,16 @@ public class CustomerResetPassword extends AppCompatActivity implements View.OnC
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<Object>>() {
                     @Override
                     public void onNext(HttpBaseBean<Object> objectHttpBaseBean) {
-                        if(objectHttpBaseBean.getSuccess()){
-                            Toast.makeText(getApplicationContext(), "Password reset successfully", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }else{
-                            Toast.makeText(getApplicationContext(),
-                                    objectHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
+                        try{
+                            if(objectHttpBaseBean.getSuccess()){
+                                Toast.makeText(getApplicationContext(), "Password reset successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }else{
+                                Toast.makeText(getApplicationContext(),
+                                        objectHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
 
-                        }
+                            }
+                        }catch (Exception ignored){}
                     }
 
                     @Override

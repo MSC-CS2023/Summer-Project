@@ -41,18 +41,20 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerSearchPageFragment extends Fragment {
 
-    SwipeRefreshLayout swipeRefreshLayout;
-
     Integer currentShowPosition;
     static final Integer DEFAULT_SHOW_NUMBER = 5;
     private String sortType;
     private Boolean isDescending;
-
-
+    private String searchKeyword;
     List<ServiceCard> dataList;
+
 
     private ImageButton btnSearch;
     private EditText keyword;
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    View rootView;
+    ServiceCardAdapter serviceCardAdapter;
 
     public CustomerSearchPageFragment() {
     }
@@ -61,8 +63,10 @@ public class CustomerSearchPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_customer_search_page, container, false);
+        rootView = inflater.inflate(R.layout.fragment_customer_search_page, container, false);
         currentShowPosition = 0;
+        sortType = "time";
+        isDescending = true;
 
         keyword = rootView.findViewById(R.id.txtCustomerSearchBar);
         btnSearch = rootView.findViewById(R.id.btnCustomerSearchButton);
@@ -70,35 +74,39 @@ public class CustomerSearchPageFragment extends Fragment {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "click search button", Toast.LENGTH_SHORT).show();
+                searchKeyword = keyword.getText().toString();
+                currentShowPosition = 0;
+                searchByKeyword(searchKeyword, sortType, isDescending, currentShowPosition);
             }
         });
 
-        spinnerForSort(rootView);
+        spinnerForSort();
 
-        spinnerForDistance(rootView);
+        spinnerForDistance();
 
-        swipeDown(rootView);
+        swipeDown();
 
         return rootView;
     }
 
-    private void swipeDown(View rootView) {
+    private void swipeDown() {
         swipeRefreshLayout = rootView.findViewById(R.id.swipeSearchPage);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                createDemoData(rootView);
-                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
-//                search(rootView);
+                createDemoData();
+
+                searchKeyword = keyword.getText().toString();
+                currentShowPosition = 0;
+                searchByKeyword(searchKeyword, sortType, isDescending, currentShowPosition);
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
-    private void createDemoData(View rootView) {
-        List<ServiceCard> demoDataList = new ArrayList<>();
+    private void createDemoData() {
+        dataList = new ArrayList<>();
 
         ServiceCard serviceCard1 = new ServiceCard("Eric", "Repair Air conditioner", "100", "available tomorrow",
                 "balabala", "picSrc",213L);
@@ -107,16 +115,14 @@ public class CustomerSearchPageFragment extends Fragment {
         ServiceCard serviceCard3 = new ServiceCard("Alice", "Clean gutter", "160", "available today",
                 "balabala", "picSrc",213L);
 
-        demoDataList.add(serviceCard1);
-        demoDataList.add(serviceCard2);
-        demoDataList.add(serviceCard3);
+        dataList.add(serviceCard1);
+        dataList.add(serviceCard2);
+        dataList.add(serviceCard3);
 
-        dataList = demoDataList;
-
-        updateViewByList(dataList, rootView);
+        updateViewByList(dataList);
     }
 
-    private void spinnerForDistance(View rootView) {
+    private void spinnerForDistance() {
         Spinner distance = rootView.findViewById(R.id.distance);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),R.array.distance, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -134,17 +140,15 @@ public class CustomerSearchPageFragment extends Fragment {
                 }else if (index == 3) {
                     Toast.makeText(getContext(), "select 5 miles+ ", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
     }
 
-    private void spinnerForSort(View rootView) {
+    private void spinnerForSort() {
         Spinner sort = rootView.findViewById(R.id.sort);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),R.array.sort, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -186,70 +190,19 @@ public class CustomerSearchPageFragment extends Fragment {
         });
     }
 
-    @SuppressLint("CheckResult")
-    private void searchByKeyword(String keyword, String sortType, Boolean isDescending, View view, Integer start, Integer number){
-        PublicMethodApi publicMethodApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
-        publicMethodApi.search(keyword, sortType, isDescending, start, number, false)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {
-                    @Override
-                    public void onNext(HttpBaseBean<ServiceShortListData> serviceShortListDataHttpBaseBean) {
-                        if(serviceShortListDataHttpBaseBean.getSuccess()){
-                            if(start == 0){
-                                dataList = getServiceCardList(
-                                        serviceShortListDataHttpBaseBean.getData().getServices());
-                                updateViewByList(dataList, view);
-                            }else {
-                                dataList.addAll(getServiceCardList(
-                                        serviceShortListDataHttpBaseBean.getData().getServices()));
-                            }
-                        }else {
-                            //test
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    private List<ServiceCard> getServiceCardList(List<ServiceShort> serviceShorts){
-        List<ServiceCard> serviceCards = new ArrayList<>();
-        ServiceCard serviceCard;
-        for(ServiceShort serviceShort : serviceShorts){
-            String avatarLink = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
-            String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
-            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
-                    serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
-                    pictureLink, serviceShort.getId());
-            serviceCards.add(serviceCard);
-        }
-        return serviceCards;
-    }
-
-
-    private void updateViewByList(List<ServiceCard> serviceCards, View view) {
+    private void updateViewByList(List<ServiceCard> serviceCards) {
         //RecyclerView down here
-        RecyclerView recyclerView = view.findViewById(R.id.searchPageRecyclerView);
+        RecyclerView recyclerView = rootView.findViewById(R.id.searchPageRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
-        ServiceCardAdapter serviceCardAdapter = new ServiceCardAdapter(serviceCards, getContext());
+        serviceCardAdapter = new ServiceCardAdapter(serviceCards, getContext());
 
         serviceCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 startActivity(new Intent(getContext(), CustomerServiceDetailPage.class)
                         .putExtra("serviceId", dataList.get(position).getServiceId()));
-                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -273,21 +226,60 @@ public class CustomerSearchPageFragment extends Fragment {
                     dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
                             "Repair Air conditioner", "available tomorrow",
                             "balabala", "picSrc", 213L));
-                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
-//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-//                    searchByKeyword(keyword.getText().toString(), sortType, isDescending, view, currentShowPosition, DEFAULT_SHOW_NUMBER);
+
+                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+                    searchByKeyword(searchKeyword, sortType, isDescending, currentShowPosition);
                     serviceCardAdapter.notifyDataSetChanged();
                 }
             }
         });
-
     }
 
+    @SuppressLint("CheckResult")
+    private void searchByKeyword(String keyword, String sortType, Boolean isDescending, Integer start){
+        PublicMethodApi publicMethodApi = RetrofitClient.getInstance().getService(PublicMethodApi.class);
+        publicMethodApi.search(keyword, sortType, isDescending, start, DEFAULT_SHOW_NUMBER, false)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<ServiceShortListData> serviceShortListDataHttpBaseBean) {
+                        if(serviceShortListDataHttpBaseBean.getSuccess()){
+                            try{
+                                if(start == 0){
+                                    dataList = getServiceCardList(
+                                            serviceShortListDataHttpBaseBean.getData().getServices());
+                                    updateViewByList(dataList);
+                                }else {
+                                    dataList.addAll(getServiceCardList(
+                                            serviceShortListDataHttpBaseBean.getData().getServices()));
+                                    serviceCardAdapter.notifyDataSetChanged();
+                                }
+                            }catch (Exception ignored){}
+                        }
+                    }
 
-    public void search(View view) {
-        currentShowPosition = 0;
-        searchByKeyword(keyword.getText().toString(), sortType, isDescending, view, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                    @Override
+                    public void onError(Throwable t) {
+//                        Toast.makeText(getContext(),
+//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onComplete() {}
+                });
     }
 
-
+    private List<ServiceCard> getServiceCardList(List<ServiceShort> serviceShorts) {
+        List<ServiceCard> serviceCards = new ArrayList<>();
+        ServiceCard serviceCard;
+        for (ServiceShort serviceShort : serviceShorts) {
+            String avatarLink = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
+            String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
+            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
+                    serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
+                    pictureLink, serviceShort.getId());
+            serviceCards.add(serviceCard);
+        }
+        return serviceCards;
+    }
 }

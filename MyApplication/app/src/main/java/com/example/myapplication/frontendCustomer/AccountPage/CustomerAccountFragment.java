@@ -42,9 +42,7 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
     ImageView avatar;
     TextView username;
 
-    public CustomerAccountFragment() {
-
-    }
+    public CustomerAccountFragment() {}
 
 
     @Override
@@ -56,7 +54,7 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
         this.token = sp.getString("token", "");
 
         initialView(rootView);
-//        getCustomerDetail(this.token);
+        getCustomerDetail(this.token);
 
         return rootView;
     }
@@ -100,7 +98,9 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
                     @Override
                     public void onNext(HttpBaseBean<SelfDetailData> selfDetailDataHttpBaseBean) {
                         if(selfDetailDataHttpBaseBean.getSuccess()){
-                            updateView(selfDetailDataHttpBaseBean.getData().getUser());
+                            try {
+                                updateView(selfDetailDataHttpBaseBean.getData().getUser());
+                            }catch (Exception ignored){}
                         }
                     }
 
@@ -108,11 +108,8 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
                     public void onError(Throwable t) {
 
                     }
-
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
 

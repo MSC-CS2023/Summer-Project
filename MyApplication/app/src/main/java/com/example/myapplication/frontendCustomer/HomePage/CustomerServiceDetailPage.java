@@ -32,7 +32,6 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerServiceDetailPage extends AppCompatActivity implements View.OnClickListener {
 
-
     ImageButton pay;
     ImageButton avatar;
     ImageButton collection;
@@ -64,8 +63,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         this.serviceId = getIntent().getLongExtra("serviceId", 0);
 
         initializeView();
-//        getServiceDetail(this.token, this.serviceId);
-//        checkIfIsFavourite(this.token, this.serviceId);
+        getServiceDetail(this.token, this.serviceId);
+        checkIfIsFavourite(this.token, this.serviceId);
     }
 
     private void initializeView(){
@@ -82,7 +81,6 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         pay.setOnClickListener(this);
         avatar.setOnClickListener(this);
         collection.setOnClickListener(this);
-
     }
 
     @Override
@@ -95,17 +93,17 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
             // jump to provider account page
         } else if (v.getId() == collection.getId()) {
             // add this service to collection list
-            isCollection = !isCollection;
-            if (isCollection){
-                collection.setImageResource(R.drawable.btn_redheart);
-            }else {
-                collection.setImageResource(R.drawable.btn_emptyheart);
-            }
-//            if(isCollection){
-//                removeFromFavourite(token, serviceId);
+//            isCollection = !isCollection;
+//            if (isCollection){
+//                collection.setImageResource(R.drawable.btn_redheart);
 //            }else {
-//                addToFavourite(token, serviceId);
+//                collection.setImageResource(R.drawable.btn_emptyheart);
 //            }
+            if(isCollection){
+                removeFromFavourite(token, serviceId);
+            }else {
+                addToFavourite(token, serviceId);
+            }
         }
 
     }
@@ -141,35 +139,6 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         alertDialog.show();
     }
 
-    @SuppressLint("CheckResult")
-    private void getServiceDetail(String token, Long serviceId){
-        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.customerGetServiceDetail(token, serviceId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceDetailData>>() {
-                    @Override
-                    public void onNext(HttpBaseBean<ServiceDetailData> serviceDetailDataHttpBaseBean) {
-                        if(serviceDetailDataHttpBaseBean.getSuccess()){
-                            updateView(serviceDetailDataHttpBaseBean.getData().getService());
-                        }else{
-                            //test
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        Toast.makeText(getApplicationContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
     @SuppressLint("SetTextI18n")
     private void updateView(Service service){
         serviceTitle.setText(service.getTitle());
@@ -183,6 +152,33 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                 "public/service_provider/avatar?id=" + service.getProviderId().toString()).into(avatar);
         Glide.with(getApplicationContext()).load(Constant.BASE_URL +
                 "get_pic?id=" + service.getPictureId()).into(serviceImg);
+    }
+
+    @SuppressLint("CheckResult")
+    private void getServiceDetail(String token, Long serviceId){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.customerGetServiceDetail(token, serviceId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceDetailData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<ServiceDetailData> serviceDetailDataHttpBaseBean) {
+                        if(serviceDetailDataHttpBaseBean.getSuccess()){
+                            try {
+                                updateView(serviceDetailDataHttpBaseBean.getData().getService());
+                            }catch (Exception ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+//                        Toast.makeText(getApplicationContext(),
+//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {}
+                });
     }
 
     //create new order.
@@ -199,21 +195,17 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                             Toast.makeText(getApplicationContext(),
                                     "Book service successfully!", Toast.LENGTH_SHORT).show();
                             finish();
-                        }else{
-                            //test
                         }
                     }
 
                     @Override
                     public void onError(Throwable t) {
-                        Toast.makeText(getApplicationContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(),
+//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
 
@@ -237,14 +229,11 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
 
                     @Override
                     public void onError(Throwable t) {
-                        Toast.makeText(getApplicationContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(),
+//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
 
@@ -263,21 +252,19 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                             collection.setImageResource(R.drawable.btn_redheart);
                             Toast.makeText(getApplicationContext(),
                                     "Add to favourites successfully!", Toast.LENGTH_SHORT).show();
-                        }else{
-
+                        }else {
+                            Toast.makeText(getApplicationContext(),
+                                    favouriteDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onError(Throwable t) {
-                        Toast.makeText(getApplicationContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(),
+//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
 
@@ -296,21 +283,19 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                             collection.setImageResource(R.drawable.btn_emptyheart);
                             Toast.makeText(getApplicationContext(),
                                     "Remove from favourites successfully!", Toast.LENGTH_SHORT).show();
-                        }else{
-
+                        }else {
+                            Toast.makeText(getApplicationContext(),
+                                    objectHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onError(Throwable t) {
-                        Toast.makeText(getApplicationContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(),
+//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
 

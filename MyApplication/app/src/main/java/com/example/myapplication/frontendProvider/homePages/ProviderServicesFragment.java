@@ -57,6 +57,8 @@ public class ProviderServicesFragment extends Fragment{
     private View rootView;
     SwipeRefreshLayout swipeRefreshLayout;
 
+    ProviderServicesAdaptor providerServicesAdaptor;
+
     public ProviderServicesFragment() {
         // Required empty public constructor
     }
@@ -108,12 +110,13 @@ public class ProviderServicesFragment extends Fragment{
         title.setText(mText);
 
         //Set data and adaptor and item click event
-        createDemoData();
-//        getProviderService(this.token, currentShowPosition, DEFAULT_SHOW_NUMBER);
-        swipeDown();
-
         //Click on something
         setClick();
+
+        createDemoData();
+
+        getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+        swipeDown();
 
     }
 
@@ -135,8 +138,8 @@ public class ProviderServicesFragment extends Fragment{
             public void onRefresh() {
                 createDemoData();
                 Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
-//                currentShowPosition = 0;
-//                getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                currentShowPosition = 0;
+                getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -147,7 +150,7 @@ public class ProviderServicesFragment extends Fragment{
         RecyclerView recyclerView = rootView.findViewById(R.id.rv_provider_services);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        ProviderServicesAdaptor providerServicesAdaptor = new ProviderServicesAdaptor(data, getContext());
+        providerServicesAdaptor = new ProviderServicesAdaptor(data, getContext());
         recyclerView.setAdapter(providerServicesAdaptor);
 
         providerServicesAdaptor.setRecyclerItemClickListener(new ProviderServicesAdaptor.OnRecyclerItemClickListener() {
@@ -175,8 +178,8 @@ public class ProviderServicesFragment extends Fragment{
                     data.add(new ProviderServiceCardData("Laundry", "Some short description......",
                             "300" + SystemClock.currentThreadTimeMillis(), "img_sample1", 123L));
                     Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
-//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-//                    getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+                    getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                     providerServicesAdaptor.notifyDataSetChanged();
                 }
             }
@@ -258,16 +261,16 @@ public class ProviderServicesFragment extends Fragment{
                     @Override
                     public void onNext(HttpBaseBean<ServiceShortListData> serviceShortListDataHttpBaseBean) {
                         if(serviceShortListDataHttpBaseBean.getSuccess()){
-                            if(start == 0){
-                                data = getServiceCards(serviceShortListDataHttpBaseBean.getData().getServices());
-                                setAdapter();
-                            }else{
-                                data.addAll(getServiceCards(serviceShortListDataHttpBaseBean.getData().getServices()));
-                            }
-
-                        }else{
-
-                        }
+                            try{
+                                if(start == 0){
+                                    data = getServiceCards(serviceShortListDataHttpBaseBean.getData().getServices());
+                                    setAdapter();
+                                }else{
+                                    data.addAll(getServiceCards(serviceShortListDataHttpBaseBean.getData().getServices()));
+                                    providerServicesAdaptor.notifyDataSetChanged();
+                                }
+                            }catch (Exception ignored){}
+                        }else{}
                     }
 
                     @Override

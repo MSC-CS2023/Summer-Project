@@ -52,10 +52,7 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
 
             if (view.getId() ==  R.id.btn_provider_login) {
 //                providerLogin(txtUsername.getText().toString(), txtPassword.getText().toString());
-                finishAffinity();
-                Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
-                finishAffinity();
-                startActivity(new Intent(this, ProviderMain.class));
+                startActivity(new Intent(ProviderLogin.this, ProviderMain.class));
             } else if (view.getId() == R.id.txt_sign_up) {
                 startActivity(new Intent(ProviderLogin.this, ProviderRegister.class));
             }
@@ -71,16 +68,18 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onNext(HttpBaseBean<LoginData> loginDataHttpBaseBean) {
                             if(loginDataHttpBaseBean.getSuccess()){
-                                Toast.makeText(getApplicationContext(),
-                                        loginDataHttpBaseBean.getData().getUser().getUsername() + " login successfully",
-                                        Toast.LENGTH_SHORT).show();
-                                SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
-                                sp.edit().putBoolean("isLoggedIn", true).apply();
-                                sp.edit().putString("userType", "provider").apply();
-                                sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
-                                sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-                                startActivity(new Intent(ProviderLogin.this, ProviderMain.class));
-                                finish();
+                                try {
+                                    Toast.makeText(getApplicationContext(),
+                                            loginDataHttpBaseBean.getData().getUser().getUsername() + " login successfully",
+                                            Toast.LENGTH_SHORT).show();
+                                    SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+                                    sp.edit().putBoolean("isLoggedIn", true).apply();
+                                    sp.edit().putString("userType", "provider").apply();
+                                    sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
+                                    sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
+                                    startActivity(new Intent(ProviderLogin.this, ProviderMain.class));
+                                    finishAffinity();
+                                }catch (Exception ignored){}
                             }else{
                                 Toast.makeText(getApplicationContext(),
                                         loginDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
@@ -92,12 +91,8 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(getApplicationContext(),
                                     "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-
                         @Override
-                        public void onComplete() {
-
-                        }
+                        public void onComplete() {}
                     });
-
         }
     }

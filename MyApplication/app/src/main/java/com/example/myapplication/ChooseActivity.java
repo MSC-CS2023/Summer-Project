@@ -47,7 +47,6 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         if (view.getId() == R.id.btnCustomer) {
             Intent intentCustomer = new Intent(ChooseActivity.this, CustomerLogin.class);
             startActivity(intentCustomer);
-            finish();
         } else if (view.getId() == R.id.btnProvider) {
             Intent intentProvider = new Intent(ChooseActivity.this, ProviderLogin.class);
             startActivity(intentProvider);

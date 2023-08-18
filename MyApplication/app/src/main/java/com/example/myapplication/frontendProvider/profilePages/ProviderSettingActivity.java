@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.ChooseActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.frontendCustomer.loginPage.CustomerLogin;
 
 public class ProviderSettingActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;
@@ -66,9 +69,7 @@ public class ProviderSettingActivity extends AppCompatActivity implements View.O
         } else if(view.getId() == R.id.delete_account) {
             deleteAlert();
         } else if(view.getId() == R.id.logout) {
-            finishAffinity();
-            Intent intentToStart = new Intent(this, ChooseActivity.class);
-            startActivity(intentToStart);
+            logout();
         }
     }
 
@@ -101,5 +102,17 @@ public class ProviderSettingActivity extends AppCompatActivity implements View.O
         });
 
         deleteAlert.show();
+    }
+
+    private void logout(){
+        SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+        sp.edit().putBoolean("isLoggedIn", false).apply();
+        sp.edit().putString("userType", "none").apply();
+        sp.edit().putString("token", null).apply();
+        sp.edit().putLong("exp", 0).apply();
+
+        finishAffinity();
+        Intent intentToStart = new Intent(this, ChooseActivity.class);
+        startActivity(intentToStart);
     }
 }

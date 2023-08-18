@@ -70,7 +70,6 @@ public class CustomerResetPhone extends AppCompatActivity implements View.OnClic
             }else{
                 modifyPersonalDetail(token, "tel", newPhone.getText().toString());
             }
-            Toast.makeText(this, "submit click", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -84,14 +83,17 @@ public class CustomerResetPhone extends AppCompatActivity implements View.OnClic
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<ModifyDetailData>>() {
                     @Override
                     public void onNext(HttpBaseBean<ModifyDetailData> modifyDetailDataHttpBaseBean) {
-                        if(modifyDetailDataHttpBaseBean.getSuccess()){
-                            Toast.makeText(getApplicationContext(),
-                                    "Account detail "+ modifiedItem + " modified successfully.", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }else{
-                            Toast.makeText(getApplicationContext(),
-                                    modifyDetailDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                        try{
+                            if(modifyDetailDataHttpBaseBean.getSuccess()){
+                                Toast.makeText(getApplicationContext(),
+                                        "Account detail "+ modifyDetailDataHttpBaseBean.getData().getKey() +
+                                                " modified successfully.", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }else{
+                                Toast.makeText(getApplicationContext(),
+                                        modifyDetailDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }catch (Exception ignored){}
                     }
 
                     @Override

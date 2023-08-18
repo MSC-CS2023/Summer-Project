@@ -47,6 +47,7 @@ public class ProviderResetPasswordActivity extends AppCompatActivity implements 
         newPassword = findViewById(R.id.edtxt_new_password);
         newPassword2 = findViewById(R.id.edtxt_new_password2);
         save = findViewById(R.id.btn_save);
+        save.setOnClickListener(this);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(view -> finish());

@@ -10,7 +10,6 @@ public class ServiceCard {
     private String serviceTitle;
     private String servicePrice;
     private String serviceInfo;
-
     private String servicePictureSrc;
 
     //to add

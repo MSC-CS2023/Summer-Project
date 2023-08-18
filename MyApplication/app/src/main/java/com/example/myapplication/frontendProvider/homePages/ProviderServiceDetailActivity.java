@@ -63,14 +63,8 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
         this.token = sp.getString("token", "");
         this.serviceId = getIntent().getLongExtra("serviceId", 0);
 
-//        service.setTitle("123");
-//        service.setDescription("sadafaafas");
-//        service.setFee(5.0);
-//        service.setAddress("bs1");
-//        service.setPictureId("1");
-
         initView();
-//        getServiceDetail();
+        getServiceDetail();
     }
 
     private void initView() {
@@ -238,8 +232,10 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
                     @Override
                     public void onNext(HttpBaseBean<ServiceDetailData> serviceDetailDataHttpBaseBean) {
                         if(serviceDetailDataHttpBaseBean.getSuccess()){
-                            service = serviceDetailDataHttpBaseBean.getData().getService();
-                            updateView();
+                            try {
+                                service = serviceDetailDataHttpBaseBean.getData().getService();
+                                updateView();
+                            }catch (Exception ignored){}
                         }
                     }
 
@@ -296,7 +292,9 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
                     @Override
                     public void onNext(HttpBaseBean<ServiceDetailData> serviceDetailDataHttpBaseBean) {
                         if(serviceDetailDataHttpBaseBean.getSuccess()){
-                            service = serviceDetailDataHttpBaseBean.getData().getService();
+                            try {
+                                service = serviceDetailDataHttpBaseBean.getData().getService();
+                            }catch (Exception ignored){}
                         }else {
 
                         }

@@ -145,12 +145,30 @@ public interface CustomerApi {
 
 
     //New
+    //NEW ORDER
+    @GET("customer/booking_order/get_unconfirmed")
+    Flowable<HttpBaseBean<OrderListData>> getCustomerUnconfirmedOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
 
-    @GET("customer/search")
-    Flowable<HttpBaseBean<ServiceShortListData>> search(@Header("Authorization") String authorization,
-            @Query("keywords") String searchKeyword, @Query("sort_by") String sortType,
-            @Query("descending") String isDescending, @Query("start") Integer startPosition,
-            @Query("num") Integer displayNumber, @Query("or") String isOr);
+    @GET("customer/booking_order/get_rejected")
+    Flowable<HttpBaseBean<OrderListData>> getCustomerRejectedOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
 
+    @GET("customer/booking_order/get_cancelled")
+    Flowable<HttpBaseBean<OrderListData>> getCustomerCancelledOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("customer/booking_order/get_finished")
+    Flowable<HttpBaseBean<OrderListData>> getCustomerFinishedOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("customer/booking_order/get_processing")
+    Flowable<HttpBaseBean<OrderListData>> getCustomerProcessingOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
 
 }

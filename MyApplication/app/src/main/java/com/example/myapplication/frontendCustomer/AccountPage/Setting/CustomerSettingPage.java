@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.myapplication.ChooseActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.loginPage.CustomerLogin;
 
@@ -78,10 +79,8 @@ public class CustomerSettingPage extends AppCompatActivity implements View.OnCli
         sp.edit().putString("token", null).apply();
         sp.edit().putLong("exp", 0).apply();
 
-
-        Intent intent = new Intent(this, CustomerLogin.class);
-        //finish the other activities
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        finishAffinity();
+        Intent intentToStart = new Intent(this, ChooseActivity.class);
+        startActivity(intentToStart);
     }
 }

@@ -117,8 +117,10 @@ public class CustomerOrderPageRejected extends AppCompatActivity {
                     @Override
                     public void onNext(HttpBaseBean<OrderData> orderDataHttpBaseBean) {
                         if(orderDataHttpBaseBean.getSuccess()){
-                            order = orderDataHttpBaseBean.getData().getBookingOrder();
-                            updateOrderView();
+                            try {
+                                order = orderDataHttpBaseBean.getData().getBookingOrder();
+                                updateOrderView();
+                            }catch (Exception ignored){}
                         }
                     }
 

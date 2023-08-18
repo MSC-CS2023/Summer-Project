@@ -51,6 +51,8 @@ public class CustomerOrderPage extends AppCompatActivity {
 
     SwipeRefreshLayout swipeRefreshLayout;
 
+    OrderCardAdapterAll orderCardAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +70,7 @@ public class CustomerOrderPage extends AppCompatActivity {
         swipeDown();
 
         createDemo();
-//        updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+        updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
     }
 
     private void createDemo(){
@@ -87,9 +89,9 @@ public class CustomerOrderPage extends AppCompatActivity {
             public void onRefresh() {
                 //add refresh action here
                 createDemo();
-                Toast.makeText(CustomerOrderPage.this, "refresh action", Toast.LENGTH_SHORT).show();
-//                currentShowPosition = 0;
-//                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+
+                currentShowPosition = 0;
+                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -167,8 +169,9 @@ public class CustomerOrderPage extends AppCompatActivity {
                         break;
                 }
                 createDemo();
-//                currentShowPosition = 0;
-//                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+
+                currentShowPosition = 0;
+                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
             }
 
             @Override
@@ -178,7 +181,10 @@ public class CustomerOrderPage extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-//  refresh
+                createDemo();
+
+                currentShowPosition = 0;
+                updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
             }
         });
     }
@@ -189,7 +195,7 @@ public class CustomerOrderPage extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         // Create an Adapter and set it to the ListView
-        OrderCardAdapterAll orderCardAdapter = new OrderCardAdapterAll(orderCards, getApplicationContext());
+        orderCardAdapter = new OrderCardAdapterAll(orderCards, getApplicationContext());
 
         orderCardAdapter.setOnItemClickListener(new ServiceCardAdapter.OnItemClickListener() {
             @Override
@@ -244,8 +250,8 @@ public class CustomerOrderPage extends AppCompatActivity {
                     orderCards.add(new OrderCard(121133L, "name1213",
                             "~"+ SystemClock.currentThreadTimeMillis(),
                             "link", "Finished"));
-//                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-//                    updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                    currentShowPosition += DEFAULT_SHOW_NUMBER;
+                    updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                     orderCardAdapter.notifyDataSetChanged();
                 }
             }
@@ -258,14 +264,19 @@ public class CustomerOrderPage extends AppCompatActivity {
                 getOrders(token, start, number);
                 break;
             case UNCONFIRMED_TAB:
+                getUnconfirmedOrders(token, start, number);
                 break;
             case PROCESSING_TAB:
+                getProcessingOrders(token, start, number);
                 break;
             case FINISHED_TAB:
+                getFinishedOrders(token, start, number);
                 break;
             case REJECTED_TAB:
+                getRejectedOrders(token, start, number);
                 break;
             case CANCELED_TAB:
+                getCancelledOrders(token, start, number);
             default:
                 break;
         }
@@ -281,14 +292,15 @@ public class CustomerOrderPage extends AppCompatActivity {
                     @Override
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
-                            if(start == 0){
-                                orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                updateViewByList(orderCards);
-                            }else{
-                                orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
-                            }
-                        }else{
-                            //test
+                            try{
+                                if(start == 0){
+                                    orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    updateViewByList(orderCards);
+                                }else{
+                                    orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                    orderCardAdapter.notifyDataSetChanged();
+                                }
+                            }catch (Exception ignored){}
                         }
                     }
 
@@ -299,30 +311,29 @@ public class CustomerOrderPage extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
 
     @SuppressLint("CheckResult")
-    private void getCertainOrders(String token, String key, Integer start, Integer number, Boolean isOr, Boolean isNot){
+    private void getUnconfirmedOrders(String token, Integer start, Integer number){
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.searchCustomerOrder(token, key, isOr, start, number, isNot)
+        customerApi.getCustomerUnconfirmedOrders(token, start, number)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
                     @Override
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
-                            if(start == 0){
-                                orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                updateViewByList(orderCards);
-                            }else{
-                                orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
-                            }
-                        }else{
-                            //test
+                            try{
+                                if(start == 0){
+                                    orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    updateViewByList(orderCards);
+                                }else{
+                                    orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                    orderCardAdapter.notifyDataSetChanged();
+                                }
+                            }catch (Exception ignored){}
                         }
                     }
 
@@ -333,11 +344,139 @@ public class CustomerOrderPage extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
+                    public void onComplete() {}
                 });
     }
+
+    @SuppressLint("CheckResult")
+    private void getRejectedOrders(String token, Integer start, Integer number){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.getCustomerRejectedOrders(token, start, number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
+                        if(orderListDataHttpBaseBean.getSuccess()){
+                            try{
+                                if(start == 0){
+                                    orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    updateViewByList(orderCards);
+                                }else{
+                                    orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                    orderCardAdapter.notifyDataSetChanged();
+                                }
+                            }catch (Exception ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {}
+                });
+    }
+    @SuppressLint("CheckResult")
+    private void getCancelledOrders(String token, Integer start, Integer number){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.getCustomerCancelledOrders(token, start, number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
+                        if(orderListDataHttpBaseBean.getSuccess()){
+                            try{
+                                if(start == 0){
+                                    orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    updateViewByList(orderCards);
+                                }else{
+                                    orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                    orderCardAdapter.notifyDataSetChanged();
+                                }
+                            }catch (Exception ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {}
+                });
+    }
+    @SuppressLint("CheckResult")
+    private void getFinishedOrders(String token, Integer start, Integer number){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.getCustomerFinishedOrders(token, start, number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
+                        if(orderListDataHttpBaseBean.getSuccess()){
+                            try{
+                                if(start == 0){
+                                    orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    updateViewByList(orderCards);
+                                }else{
+                                    orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                    orderCardAdapter.notifyDataSetChanged();
+                                }
+                            }catch (Exception ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {}
+                });
+    }
+    @SuppressLint("CheckResult")
+    private void getProcessingOrders(String token, Integer start, Integer number){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.getCustomerProcessingOrders(token, start, number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
+                        if(orderListDataHttpBaseBean.getSuccess()){
+                            try{
+                                if(start == 0){
+                                    orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
+                                    updateViewByList(orderCards);
+                                }else{
+                                    orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
+                                    orderCardAdapter.notifyDataSetChanged();
+                                }
+                            }catch (Exception ignored){}
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {}
+                });
+    }
+
 
     private List<OrderCard> getOrderCardList(List<Order> orders){
         List<OrderCard> orderCardList = new ArrayList<>();
