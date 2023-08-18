@@ -39,7 +39,7 @@ public interface ProviderApi {
             @Part("recipient_type") String recipientType, @Part("message") String message);
 
     //SERVICE
-    @GET("service_provider/services/get")
+    @GET("service_provider/service/get")
     Flowable<HttpBaseBean<ServiceShortListData>> getProviderServices(
             @Header("Authorization") String authorization,
             @Query("start") Integer start, @Query("num") Integer number);

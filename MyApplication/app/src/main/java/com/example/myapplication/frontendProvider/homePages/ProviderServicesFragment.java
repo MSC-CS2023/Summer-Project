@@ -136,8 +136,8 @@ public class ProviderServicesFragment extends Fragment{
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                createDemoData();
-                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
+//                createDemoData();
+//                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
                 currentShowPosition = 0;
                 getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                 //stop refresh
