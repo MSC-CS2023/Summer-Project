@@ -132,8 +132,6 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
 
         }
 
-
-
         public void bindData(int position) {
             myPosition = position;
         }

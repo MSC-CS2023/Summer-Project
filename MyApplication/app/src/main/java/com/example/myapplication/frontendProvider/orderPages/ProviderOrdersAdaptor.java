@@ -36,6 +36,8 @@ public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAd
     @SuppressLint("SetTextI18n")    //help toString method below
     @Override
     public void onBindViewHolder(@NonNull ProviderOrdersAdaptor.ViewHolder holder, int position) {
+
+        holder.bindData(position);
         holder.title.setText(data.get(position).getTitle());
         holder.orderNum.setText(data.get(position).getOrderNum().toString());
         holder.price.setText(data.get(position).getPrice());
@@ -58,6 +60,8 @@ public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAd
         ImageView image;
         TextView state;
 
+        private int myPosition;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.title = itemView.findViewById(R.id.order_card_title);
@@ -70,11 +74,16 @@ public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAd
                 @Override
                 public void onClick(View view) {
                     if(mOnItemClickListener != null) {
-                        mOnItemClickListener.onRecyclerItemClick(getAbsoluteAdapterPosition());
+                        mOnItemClickListener.onRecyclerItemClick(myPosition);
                     }
                 }
             });
         }
+
+        public void bindData(int position) {
+            myPosition = position;
+        }
+
     }
 
     private ProviderServicesAdaptor.OnRecyclerItemClickListener mOnItemClickListener;

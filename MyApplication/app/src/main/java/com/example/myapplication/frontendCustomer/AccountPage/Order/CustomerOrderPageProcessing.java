@@ -66,6 +66,7 @@ public class CustomerOrderPageProcessing extends AppCompatActivity {
 
         finish = findViewById(R.id.btn_finish);
         message = findViewById(R.id.btn_message);
+
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
