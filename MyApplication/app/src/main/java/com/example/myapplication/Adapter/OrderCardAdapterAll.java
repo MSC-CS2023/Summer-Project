@@ -43,9 +43,9 @@ public class OrderCardAdapterAll extends RecyclerView.Adapter <OrderCardAdapterA
         holder.bindData(position);
 
         holder.orderState.setText(orderCard.getOrderSate());
-        holder.orderId.setText(orderCard.getOrderId().toString());
+        holder.orderId.setText("orderID: " + orderCard.getOrderId().toString());
         holder.orderTitle.setText(orderCard.getOrderTitle());
-        holder.orderPrice.setText(orderCard.getOrderPrice());
+        holder.orderPrice.setText("￡" + orderCard.getOrderPrice());
 //        Glide.with(this.context).load(orderCard.getPictureLink()).into(holder.orderPicture);
 //        holder.orderPicture.setImageResource(orderCard.getOrderPictureSrc());
         //没弄明白为什么加添加图片会报错
