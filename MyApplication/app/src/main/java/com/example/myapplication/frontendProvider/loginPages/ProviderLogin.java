@@ -51,8 +51,8 @@ public class ProviderLogin extends AppCompatActivity implements View.OnClickList
         public void onClick(View view) {
 
             if (view.getId() ==  R.id.btn_provider_login) {
-//                providerLogin(txtUsername.getText().toString(), txtPassword.getText().toString());
-                startActivity(new Intent(ProviderLogin.this, ProviderMain.class));
+                providerLogin(txtUsername.getText().toString(), txtPassword.getText().toString());
+//                startActivity(new Intent(ProviderLogin.this, ProviderMain.class));
             } else if (view.getId() == R.id.txt_sign_up) {
                 startActivity(new Intent(ProviderLogin.this, ProviderRegister.class));
             }

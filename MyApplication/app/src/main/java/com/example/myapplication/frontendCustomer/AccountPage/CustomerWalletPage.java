@@ -73,7 +73,7 @@ public class CustomerWalletPage extends AppCompatActivity {
 //        transactionCards.add(new TransactionCard("Pete", "pay", "05/09/2023", "300"));
 //        transactionCards.add(new TransactionCard("May", "receive", "08/06/2023", "1000"));
 
-        updateView(transactionCards);
+//        updateView(transactionCards);
 
     }
 

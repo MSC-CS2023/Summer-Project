@@ -41,6 +41,8 @@ public class ProviderWalletActivity extends AppCompatActivity {
     private String token;
 
 //    ImageButton recharge;
+    ImageButton withdraw;
+
     List<TransactionCard> transactionCards = new ArrayList<>();
 
     SwipeRefreshLayout swipeRefreshLayout;
@@ -62,11 +64,21 @@ public class ProviderWalletActivity extends AppCompatActivity {
 //                openInputDialog();
 //            }
 //        });
+
+        withdraw = findViewById(R.id.btnWithdraw);
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInputDialog();
+            }
+        });
+
         balance = findViewById(R.id.balanceAmount);
 
         setToolBar();
 
         swipeDown();
+
         getBalance();
 
         //test
@@ -74,7 +86,7 @@ public class ProviderWalletActivity extends AppCompatActivity {
 //        transactionCards.add(new TransactionCard("Pete", "pay", "05/09/2023", "300"));
 //        transactionCards.add(new TransactionCard("May", "receive", "08/06/2023", "1000"));
 
-        updateView(transactionCards);
+//        updateView(transactionCards);
 
     }
 
@@ -105,18 +117,17 @@ public class ProviderWalletActivity extends AppCompatActivity {
 
     void openInputDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Input Data");
+        builder.setTitle("Please enter the withdraw amount:");
 
         // Inflate the layout for the dialog
-        View view = getLayoutInflater().inflate(R.layout.balance_charge_alter, null);
-        final EditText inputEditText = view.findViewById(R.id.inputBalance);
+        View view = getLayoutInflater().inflate(R.layout.balance_withdraw_alter, null);
+        final EditText inputEditText = view.findViewById(R.id.inputAmount);
         builder.setView(view);
 
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String inputData = inputEditText.getText().toString();
-                // update to database
+                withdrawBalance(Double.parseDouble(inputEditText.getText().toString()));
             }
         });
 
