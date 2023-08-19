@@ -27,7 +27,7 @@ import java.util.List;
 
 public class ProviderWalletActivity extends AppCompatActivity {
 
-//    ImageButton recharge;
+    ImageButton withdraw;
     List<TransactionCard> transactionCards = new ArrayList<>();
 
     SwipeRefreshLayout swipeRefreshLayout;
@@ -39,13 +39,13 @@ public class ProviderWalletActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_wallet);
 
-//        recharge = findViewById(R.id.btnRecharge);
-//        recharge.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openInputDialog();
-//            }
-//        });
+        withdraw = findViewById(R.id.btnWithdraw);
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInputDialog();
+            }
+        });
         balance = findViewById(R.id.balanceAmount);
 
         setToolBar();
@@ -91,8 +91,8 @@ public class ProviderWalletActivity extends AppCompatActivity {
         builder.setTitle("Input Data");
 
         // Inflate the layout for the dialog
-        View view = getLayoutInflater().inflate(R.layout.balance_charge_alter, null);
-        final EditText inputEditText = view.findViewById(R.id.inputBalance);
+        View view = getLayoutInflater().inflate(R.layout.balance_withdraw_alter, null);
+        final EditText inputEditText = view.findViewById(R.id.inputAmount);
         builder.setView(view);
 
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
