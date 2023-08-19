@@ -2,18 +2,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     >
 
     <LinearLayout
+        android:background="@drawable/border_background"
+        android:padding="10dp"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/startDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selected startDate: "
+            android:text="select your order date"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:layout_margin="10dp"
+            android:id="@+id/startDate"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             />
 
         <Button
@@ -21,21 +34,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select startDate"
+            android:layout_gravity="center_horizontal"
             />
 
 
     </LinearLayout>
 
     <LinearLayout
+        android:background="@drawable/border_background"
+        android:padding="10dp"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">>
 
         <TextView
-            android:id="@+id/startTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selected startTime: "
+            android:text="select your start time"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:layout_margin="10dp"
+            android:id="@+id/startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             />
 
         <Button
@@ -43,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select startTime"
+            android:layout_gravity="center_horizontal"
             />
 
 
@@ -50,38 +77,27 @@
 
 
     <LinearLayout
+        android:background="@drawable/border_background"
+        android:padding="10dp"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">>
 
         <TextView
-            android:id="@+id/endDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selected EndDate "
-            />
-
-        <Button
-            android:id="@+id/selectEndDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select EndDate"
-            />
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:text="selcet your end time"
+            android:textSize="20dp"></TextView>
 
         <TextView
+            android:layout_margin="10dp"
             android:id="@+id/endTime"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selected EndTime: "
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             />
 
         <Button
@@ -89,12 +105,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select EndTime"
+            android:layout_gravity="center_horizontal"
             />
 
 
     </LinearLayout>
 
     <Button
+        android:layout_marginTop="20dp"
         android:id="@+id/pay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

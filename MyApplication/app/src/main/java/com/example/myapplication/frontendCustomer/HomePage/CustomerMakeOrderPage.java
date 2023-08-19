@@ -22,12 +22,11 @@ public class CustomerMakeOrderPage extends AppCompatActivity implements View.OnC
 
     private TextView startDate;
     private TextView startTime;
-    private TextView endDate;
+
     private TextView endTime;
 
 
     Button selectStartDate;
-    Button selectEndDate;
     Button selectStartTime;
     Button selectEndTime;
     Button pay;
@@ -49,17 +48,14 @@ public class CustomerMakeOrderPage extends AppCompatActivity implements View.OnC
     private void initializeVIew() {
         startDate = findViewById(R.id.startDate);
         startTime = findViewById(R.id.startTime);
-        endDate = findViewById(R.id.endDate);
         endTime = findViewById(R.id.endTime);
 
         selectStartDate = findViewById(R.id.selectStartDate);
-        selectEndDate = findViewById(R.id.selectEndDate);
         selectStartTime = findViewById(R.id.selectStartTime);
         selectEndTime = findViewById(R.id.selectEndTime);
         pay = findViewById(R.id.pay);
 
         selectStartDate.setOnClickListener(this);
-        selectEndDate.setOnClickListener(this);
         selectStartTime.setOnClickListener(this);
         selectEndTime.setOnClickListener(this);
         pay.setOnClickListener(this);
@@ -73,8 +69,6 @@ public class CustomerMakeOrderPage extends AppCompatActivity implements View.OnC
             openDateDialog(startDate);
         } else if (v.getId() == R.id.selectStartTime) {
             openTimeDialog(startTime);
-        } else if (v.getId() == R.id.selectEndDate) {
-            openDateDialog(endDate);
         } else if (v.getId() == R.id.selectEndTime) {
             openTimeDialog(endTime);
         } else if (v.getId() == R.id.pay) {
