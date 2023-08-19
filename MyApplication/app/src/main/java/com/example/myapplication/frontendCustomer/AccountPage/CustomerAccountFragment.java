@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
@@ -107,7 +108,8 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
 
                     @Override
                     public void onError(Throwable t) {
-
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onComplete() {}

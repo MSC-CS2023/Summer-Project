@@ -111,6 +111,7 @@ public class ProviderOrdersFragment extends Fragment {
         return rootView;
     }
 
+
     private void initView() {
         TextView title = rootView.findViewById(R.id.title);
         title.setText(mTitle);

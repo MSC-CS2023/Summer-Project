@@ -260,8 +260,8 @@ public class CustomerSearchPageFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable t) {
-//                        Toast.makeText(getContext(),
-//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onComplete() {}

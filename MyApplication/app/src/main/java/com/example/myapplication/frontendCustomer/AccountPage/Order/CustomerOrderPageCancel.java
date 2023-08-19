@@ -59,7 +59,6 @@ public class CustomerOrderPageCancel extends AppCompatActivity {
         initialView();
 
         updateOrder(token, orderId);
-        updateProvider();
 
         message = findViewById(R.id.btn_message);
         message.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +118,7 @@ public class CustomerOrderPageCancel extends AppCompatActivity {
                             try {
                                 order = orderDataHttpBaseBean.getData().getBookingOrder();
                                 updateOrderView();
+                                updateProvider();
                             }catch (NullPointerException ignored){}
                         }
                     }
@@ -146,14 +146,17 @@ public class CustomerOrderPageCancel extends AppCompatActivity {
                         @Override
                         public void onNext(HttpBaseBean<SelfDetailData> selfDetailDataHttpBaseBean) {
                             if(selfDetailDataHttpBaseBean.getSuccess()){
-                                provider = selfDetailDataHttpBaseBean.getData().getUser();
-                                updateProviderView();
+                                try {
+                                    provider = selfDetailDataHttpBaseBean.getData().getUser();
+                                    updateProviderView();
+                                }catch (NullPointerException ignored){}
                             }
                         }
 
                         @Override
                         public void onError(Throwable t) {
-
+                            Toast.makeText(getApplicationContext(),
+                                    "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override

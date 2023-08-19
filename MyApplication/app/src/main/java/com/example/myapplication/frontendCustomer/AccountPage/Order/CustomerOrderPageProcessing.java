@@ -188,14 +188,17 @@ public class CustomerOrderPageProcessing extends AppCompatActivity {
                     @Override
                     public void onNext(HttpBaseBean<SelfDetailData> selfDetailDataHttpBaseBean) {
                         if(selfDetailDataHttpBaseBean.getSuccess()){
-                            provider = selfDetailDataHttpBaseBean.getData().getUser();
-                            updateProviderView();
+                            try {
+                                provider = selfDetailDataHttpBaseBean.getData().getUser();
+                                updateProviderView();
+                            }catch (NullPointerException ignored){}
                         }
                     }
 
                     @Override
                     public void onError(Throwable t) {
-
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

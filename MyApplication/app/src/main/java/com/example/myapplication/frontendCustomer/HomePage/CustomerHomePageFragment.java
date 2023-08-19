@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
@@ -151,7 +152,8 @@ public class CustomerHomePageFragment extends Fragment {
                     createDemoData();
 
                     currentShowPosition = 0;
-                    updatePage();                }
+                    updatePage();
+                }
             });
         }
     }
@@ -271,15 +273,13 @@ public class CustomerHomePageFragment extends Fragment {
                                     serviceCardAdapter.notifyDataSetChanged();
                                 }
                             }catch (NullPointerException ignored){}
-                        } else {
-                            //test
                         }
                     }
 
                     @Override
                     public void onError(Throwable t) {
-//                        Toast.makeText(getContext(),
-//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onComplete() {}
@@ -312,8 +312,8 @@ public class CustomerHomePageFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable t) {
-//                        Toast.makeText(getContext(),
-//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onComplete() {}

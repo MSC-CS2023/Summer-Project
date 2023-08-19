@@ -90,8 +90,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
 
         if (v.getId() == order.getId()){
             //alert to payment
-//            paymentAlert();
-            startActivity(new Intent(CustomerServiceDetailPage.this, CustomerMakeOrderPage.class));
+            startActivity(new Intent(CustomerServiceDetailPage.this, CustomerMakeOrderPage.class)
+                    .putExtra("serviceId", serviceId));
         } else if (v.getId() == avatar.getId()) {
             // jump to provider account page
         } else if (v.getId() == collection.getId()) {
@@ -109,37 +109,6 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
             }
         }
 
-    }
-
-    private void paymentAlert(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(CustomerServiceDetailPage.this);
-
-        builder.setTitle("Are you sure to pay ?")
-               .setMessage("You need to pay" + amount.getText().toString())
-               .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int which) {
-                       //update money
-                       createCustomerOrder(token, serviceId, System.currentTimeMillis() + 36000000,
-                               System.currentTimeMillis() + 39600000);
-                   }
-               })
-               .setNegativeButton("Cancel", null);
-
-        AlertDialog alertDialog = builder.create();
-
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onShow(DialogInterface dialog) {
-                Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                Button negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-
-                positiveButton.setTextColor(R.color.black);
-                negativeButton.setTextColor(R.color.black);
-            }
-        });
-        alertDialog.show();
     }
 
     @SuppressLint("SetTextI18n")
@@ -175,36 +144,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
 
                     @Override
                     public void onError(Throwable t) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onComplete() {}
-                });
-    }
-
-    //create new order.
-    @SuppressLint("CheckResult")
-    private void createCustomerOrder(String token, Long serviceId, Long startTime, Long endTime){
-        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.createCustomerOrder(token, serviceId, startTime, endTime)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderData>>() {
-                    @Override
-                    public void onNext(HttpBaseBean<OrderData> orderDataHttpBaseBean) {
-                        if(orderDataHttpBaseBean.getSuccess()){
-                            Toast.makeText(getApplicationContext(),
-                                    "Book service successfully!", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -232,8 +173,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
 
                     @Override
                     public void onError(Throwable t) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onComplete() {}
@@ -263,8 +204,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
 
                     @Override
                     public void onError(Throwable t) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onComplete() {}
@@ -294,8 +235,8 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
 
                     @Override
                     public void onError(Throwable t) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onComplete() {}

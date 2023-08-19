@@ -26,14 +26,6 @@ public class ServiceShort {
 
     private double mark;
 
-    public double getMark() {
-        return mark;
-    }
-
-    public void setMark(double mark) {
-        this.mark = mark;
-    }
-
     public ServiceShort(){
 
     }
@@ -58,4 +50,12 @@ public class ServiceShort {
 
     public String getUsername() { return username; }
     public void setUsername(String value) { this.username = value; }
+
+    public double getMark() {
+        return mark;
+    }
+
+    public void setMark(double mark) {
+        this.mark = mark;
+    }
 }

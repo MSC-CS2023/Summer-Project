@@ -40,6 +40,7 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 public class CustomerOrderPage extends AppCompatActivity {
 
     static final Integer DEFAULT_SHOW_NUMBER = 5;
+
     private static final int ALL_TAB = 1;
     private static final int UNCONFIRMED_TAB = 2;
     private static final int PROCESSING_TAB = 3;
@@ -84,6 +85,13 @@ public class CustomerOrderPage extends AppCompatActivity {
 //        orderCards.add(new OrderCard( 12212313L, "name2", "200", "link", "Canceled"));
 //        updateViewByList(orderCards);
 //    }
+
+    protected void onRestart() {
+        super.onRestart();
+
+        currentShowPosition = 0;
+        updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+    }
 
     private void swipeDown() {
         swipeRefreshLayout = findViewById(R.id.swipeOrderPage);
@@ -144,29 +152,29 @@ public class CustomerOrderPage extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
                 switch (position){
-                    case 0: //
+                    case 0: //all
                         currentTab = ALL_TAB;
-                        Toast.makeText(CustomerOrderPage.this, "select all", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CustomerOrderPage.this, "select all", Toast.LENGTH_SHORT).show();
                         break;
                     case 1: // unconfirmed
                         currentTab = UNCONFIRMED_TAB;
-                        Toast.makeText(CustomerOrderPage.this, "select unconfirmed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CustomerOrderPage.this, "select unconfirmed", Toast.LENGTH_SHORT).show();
                         break;
                     case 2: // processing
                         currentTab = PROCESSING_TAB;
-                        Toast.makeText(CustomerOrderPage.this, "select processing", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CustomerOrderPage.this, "select processing", Toast.LENGTH_SHORT).show();
                         break;
                     case 3: // Finish
                         currentTab = FINISHED_TAB;
-                        Toast.makeText(CustomerOrderPage.this, "select Finished", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CustomerOrderPage.this, "select Finished", Toast.LENGTH_SHORT).show();
                         break;
                     case 4: // Cancel
                         currentTab = CANCELED_TAB;
-                        Toast.makeText(CustomerOrderPage.this, "select Canceled", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CustomerOrderPage.this, "select Canceled", Toast.LENGTH_SHORT).show();
                         break;
                     case 5: // Rejected
                         currentTab = REJECTED_TAB;
-                        Toast.makeText(CustomerOrderPage.this, "select Rejected", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CustomerOrderPage.this, "select Rejected", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
@@ -184,6 +192,7 @@ public class CustomerOrderPage extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 //                createDemo();
+
                 currentShowPosition = 0;
                 updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
             }
@@ -251,6 +260,7 @@ public class CustomerOrderPage extends AppCompatActivity {
 //                    orderCards.add(new OrderCard(121133L, "name1213",
 //                            "~"+ SystemClock.currentThreadTimeMillis(),
 //                            "link", "Finished"));
+
                     currentShowPosition += DEFAULT_SHOW_NUMBER;
                     updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                     orderCardAdapter.notifyDataSetChanged();
@@ -294,8 +304,6 @@ public class CustomerOrderPage extends AppCompatActivity {
                     public void onNext(HttpBaseBean<OrderListData> orderListDataHttpBaseBean) {
                         if(orderListDataHttpBaseBean.getSuccess()){
                             try{
-                                Gson gson = new Gson();
-                                Log.i(TAG,  "return" + gson.toJson(orderListDataHttpBaseBean));
                                 if(start == 0){
                                     orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
                                     updateViewByList(orderCards);
@@ -484,7 +492,6 @@ public class CustomerOrderPage extends AppCompatActivity {
     private List<OrderCard> getOrderCardList(List<Order> orders){
         List<OrderCard> orderCardList = new ArrayList<>();
         OrderCard orderCard;
-        String state;
         for(Order order : orders){
             String link = Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId();
             orderCard = new OrderCard(order.getId(), order.getServiceShort().getTitle(),

@@ -78,7 +78,7 @@ public class CustomerCollectionFragment extends Fragment {
             @Override
             public void onRefresh() {
 //                createDemoData();
-                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
 
                 currentShowPosition = 0;
                 getCustomerFavourites(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
@@ -146,7 +146,7 @@ public class CustomerCollectionFragment extends Fragment {
 //                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
 //                            "Repair Air conditioner", "available tomorrow",
 //                            "balabala", "picSrc", 213L));
-                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
 
                     currentShowPosition += DEFAULT_SHOW_NUMBER;
                     getCustomerFavourites(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
