@@ -9,6 +9,7 @@
         android:id="@+id/inputBalance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="How much do you want to charge"/>
+        android:hint="How much do you want to charge"
+        android:inputType="numberDecimal"/>
 
 </LinearLayout>

@@ -8,7 +8,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,13 +22,22 @@ import android.widget.Toast;
 import com.example.myapplication.Adapter.ServiceCardAdapter;
 import com.example.myapplication.Adapter.TransactionsCard;
 import com.example.myapplication.Bean.AdapterData.TransactionCard;
+import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.data.BalanceData;
 import com.example.myapplication.R;
+import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
+
 public class CustomerWalletPage extends AppCompatActivity {
 
+    private String token;
     ImageButton recharge;
     TextView balance;
     List<TransactionCard> transactionCards = new ArrayList<>();
@@ -37,6 +48,9 @@ public class CustomerWalletPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_wallet_page);
+
+        SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
+        this.token = sp.getString("token", "");
 
         recharge = findViewById(R.id.btnRecharge);
         balance = findViewById(R.id.balanceAmount);
@@ -51,6 +65,8 @@ public class CustomerWalletPage extends AppCompatActivity {
         setToolBar();
 
         swipeDown();
+
+        getBalance();
 
         //test
 //        transactionCards.add(new TransactionCard("Alice", "receive", "08/09/2023", "200"));
@@ -88,18 +104,16 @@ public class CustomerWalletPage extends AppCompatActivity {
 
     void openInputDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Input Data");
+        builder.setTitle("Please enter the recharge amount:");
 
         // Inflate the layout for the dialog
         View view = getLayoutInflater().inflate(R.layout.balance_charge_alter, null);
         final EditText inputEditText = view.findViewById(R.id.inputBalance);
         builder.setView(view);
-
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String inputData = inputEditText.getText().toString();
-                // update to database
+                rechargeBalance(Double.parseDouble(inputEditText.getText().toString()));
             }
         });
 
@@ -165,5 +179,74 @@ public class CustomerWalletPage extends AppCompatActivity {
 
     }
 
+    @SuppressLint("CheckResult")
+    private void getBalance(){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.getCustomerBalance(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<BalanceData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<BalanceData> balanceDataHttpBaseBean) {
+                        if(balanceDataHttpBaseBean.getSuccess()){
+                            try {
+                                balance.setText(balanceDataHttpBaseBean.getData().getBalance().toString());
+                            }catch (NullPointerException ignored){}
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable t) {}
+                    @Override
+                    public void onComplete() {}
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    private void rechargeBalance(Double money){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.customerDeposit(token, money)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<BalanceData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<BalanceData> balanceDataHttpBaseBean) {
+                        if(balanceDataHttpBaseBean.getSuccess()){
+                            try {
+                                Toast.makeText(getApplicationContext(),
+                                        "Recharge successfully!", Toast.LENGTH_SHORT).show();
+                                balance.setText(balanceDataHttpBaseBean.getData().getBalance().toString());
+                            }catch (NullPointerException ignored){}
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable t) {}
+                    @Override
+                    public void onComplete() {}
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    private void withdrawBalance(Double money){
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.customerWithdraw(token, money)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<BalanceData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<BalanceData> balanceDataHttpBaseBean) {
+                        if(balanceDataHttpBaseBean.getSuccess()){
+                            try {
+                                Toast.makeText(getApplicationContext(),
+                                        "Withdraw successfully!", Toast.LENGTH_SHORT).show();
+                                balance.setText(balanceDataHttpBaseBean.getData().getBalance().toString());
+                            }catch (NullPointerException ignored){}
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable t) {}
+                    @Override
+                    public void onComplete() {}
+                });
+    }
 
 }

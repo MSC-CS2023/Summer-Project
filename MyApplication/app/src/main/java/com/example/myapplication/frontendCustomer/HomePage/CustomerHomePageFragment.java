@@ -337,7 +337,7 @@ public class CustomerHomePageFragment extends Fragment {
         for (ServiceShort serviceShort : serviceShorts) {
             String avatarLink = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
             String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
-            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getId().toString(),
+            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
                     serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
                     pictureLink, serviceShort.getId(),serviceShort.getMark());
             serviceCards.add(serviceCard);

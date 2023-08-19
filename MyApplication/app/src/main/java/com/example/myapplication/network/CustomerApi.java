@@ -2,6 +2,7 @@ package com.example.myapplication.network;
 
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.ServiceShort;
+import com.example.myapplication.Bean.Httpdata.data.BalanceData;
 import com.example.myapplication.Bean.Httpdata.data.FavouriteData;
 import com.example.myapplication.Bean.Httpdata.data.FavouriteListData;
 import com.example.myapplication.Bean.Httpdata.data.GetMessageData;
@@ -171,9 +172,23 @@ public interface CustomerApi {
     Flowable<HttpBaseBean<Object>> deleteCustomerAccount(@Header("Authorization") String authorization);
 
 
-    //New
+    //NEW
     @GET("customer/booking_order/get_by_date")
     Flowable<HttpBaseBean<OrderListData>> getCustomerOrdersByDate(
             @Header("Authorization") String authorization, @Query("timestamp") Long timestamp);
+
+    //NEW BALANCE
+    @GET("customer/balance/get")
+    Flowable<HttpBaseBean<BalanceData>> getCustomerBalance(@Header("Authorization") String authorization);
+
+    @POST("customer/balance/deposit")
+    @Multipart
+    Flowable<HttpBaseBean<BalanceData>> customerDeposit(
+            @Header("Authorization") String authorization, @Part("money") Double money);
+
+    @POST("customer/balance/witihdraw")
+    @Multipart
+    Flowable<HttpBaseBean<BalanceData>> customerWithdraw(
+            @Header("Authorization") String authorization, @Part("money") Double money);
 
 }

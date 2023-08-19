@@ -1,6 +1,7 @@
 package com.example.myapplication.network;
 
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
+import com.example.myapplication.Bean.Httpdata.data.BalanceData;
 import com.example.myapplication.Bean.Httpdata.data.GetMessageData;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
 import com.example.myapplication.Bean.Httpdata.data.ModifyDetailData;
@@ -159,4 +160,20 @@ public interface ProviderApi {
     Flowable<HttpBaseBean<OrderListData>> getProviderOrdersByDate(
             @Header("Authorization") String authorization,
             @Query("day") Integer day, @Query("month") Integer month, @Query("year") Integer year);
+
+    //NEW BALANCE
+    @GET("service_provider/balance/get")
+    Flowable<HttpBaseBean<BalanceData>> getProviderBalance(@Header("Authorization") String authorization);
+
+    @POST("service_provider/balance/deposit")
+    @Multipart
+    Flowable<HttpBaseBean<BalanceData>> providerDeposit(
+            @Header("Authorization") String authorization, @Part("money") Double money);
+
+
+    @POST("service_provider/balance/witihdraw")
+    @Multipart
+    Flowable<HttpBaseBean<BalanceData>> providerWithdraw(
+            @Header("Authorization") String authorization, @Part("money") Double money);
+
 }
