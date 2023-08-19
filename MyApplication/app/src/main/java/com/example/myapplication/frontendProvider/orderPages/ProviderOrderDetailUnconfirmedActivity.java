@@ -149,7 +149,7 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
         Glide.with(this)
                 .load(Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId())
                 .apply(Constant.pictureOptions)
-                .into(image);
+                .into(avatar);
     }
 
     private void updateCustomerView(){

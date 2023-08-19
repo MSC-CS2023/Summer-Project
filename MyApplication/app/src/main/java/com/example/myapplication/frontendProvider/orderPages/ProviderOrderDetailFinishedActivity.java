@@ -115,7 +115,7 @@ public class ProviderOrderDetailFinishedActivity extends AppCompatActivity imple
             Glide.with(this)
                     .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
                     .apply(Constant.avatarOptions)
-                    .into(image);
+                    .into(avatar);
         }
     }
 

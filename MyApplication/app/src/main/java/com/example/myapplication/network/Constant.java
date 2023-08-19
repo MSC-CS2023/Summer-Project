@@ -9,7 +9,7 @@ public class Constant {
     public static final Integer MAX_IMAGE_SIZE = 2 * 1024 * 1024;
 
     public static final RequestOptions avatarOptions = new RequestOptions()
-            .placeholder(R.drawable.btn_avatar1)
+            .placeholder(R.drawable.default_avatar)
             .override(64,64);
 
     public static final RequestOptions pictureOptions = new RequestOptions()

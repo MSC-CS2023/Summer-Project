@@ -118,7 +118,7 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
             Glide.with(this)
                     .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
                     .apply(Constant.avatarOptions)
-                    .into(image);
+                    .into(avatar);
         }
     }
 
