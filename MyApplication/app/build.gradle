@@ -5,6 +5,9 @@ plugins {
     // Add the Google services Gradle plugin
     id 'com.google.gms.google-services'
 
+    // Add the dependency for the Google secret gradle plugin in order to configure private key to
+    // Map in local properties.
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -96,7 +99,9 @@ dependencies {
 
 
 
-
+    //Google map
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
 
 
 
