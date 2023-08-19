@@ -96,6 +96,31 @@ public interface ProviderApi {
     Flowable<HttpBaseBean<OrderData>> rejectProviderOrder(
             @Header("Authorization") String authorization, @Part("id") Long orderId);
 
+    @GET("service_provider/booking_order/get_unconfirmed")
+    Flowable<HttpBaseBean<OrderListData>> getProviderUnconfirmedOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("service_provider/booking_order/get_rejected")
+    Flowable<HttpBaseBean<OrderListData>> getProviderRejectedOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("service_provider/booking_order/get_canceled")
+    Flowable<HttpBaseBean<OrderListData>> getProviderCanceledOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("service_provider/booking_order/get_finished")
+    Flowable<HttpBaseBean<OrderListData>> getProviderFinishedOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
+    @GET("service_provider/booking_order/get_processing")
+    Flowable<HttpBaseBean<OrderListData>> getProviderProcessingOrders(
+            @Header("Authorization") String authorization,
+            @Query("start") Integer start, @Query("num") Integer number);
+
     //NORMAL
     @GET("service_provider/self_details")
     Flowable<HttpBaseBean<SelfDetailData>> getProviderDetail(@Header("Authorization") String authorization);
@@ -130,30 +155,8 @@ public interface ProviderApi {
     Flowable<HttpBaseBean<Object>> deleteProviderAccount(@Header("Authorization") String authorization);
 
     //NEW
-    //ORDER
-    @GET("service_provider/booking_order/get_unconfirmed")
-    Flowable<HttpBaseBean<OrderListData>> getProviderUnconfirmedOrders(
+    @GET("service_provider/booking_order/get_by_date")
+    Flowable<HttpBaseBean<OrderListData>> getProviderOrdersByDate(
             @Header("Authorization") String authorization,
-            @Query("start") Integer start, @Query("num") Integer number);
-
-    @GET("service_provider/booking_order/get_rejected")
-    Flowable<HttpBaseBean<OrderListData>> getProviderRejectedOrders(
-            @Header("Authorization") String authorization,
-            @Query("start") Integer start, @Query("num") Integer number);
-
-    @GET("service_provider/booking_order/get_canceled")
-    Flowable<HttpBaseBean<OrderListData>> getProviderCanceledOrders(
-            @Header("Authorization") String authorization,
-            @Query("start") Integer start, @Query("num") Integer number);
-
-    @GET("service_provider/booking_order/get_finished")
-    Flowable<HttpBaseBean<OrderListData>> getProviderFinishedOrders(
-            @Header("Authorization") String authorization,
-            @Query("start") Integer start, @Query("num") Integer number);
-
-    @GET("service_provider/booking_order/get_processing")
-    Flowable<HttpBaseBean<OrderListData>> getProviderProcessingOrders(
-            @Header("Authorization") String authorization,
-            @Query("start") Integer start, @Query("num") Integer number);
-
+            @Query("day") Integer day, @Query("month") Integer month, @Query("year") Integer year);
 }

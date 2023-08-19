@@ -144,9 +144,13 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
             amount.setText("￡" + service.getFee().toString());
         }
         Glide.with(getApplicationContext()).load(Constant.BASE_URL +
-                "public/service_provider/avatar?id=" + service.getProviderId().toString()).into(avatar);
+                "public/service_provider/avatar?id=" + service.getProviderId().toString())
+                .apply(Constant.avatarOptions)
+                .into(avatar);
         Glide.with(getApplicationContext()).load(Constant.BASE_URL +
-                "get_pic?id=" + service.getPictureId()).into(serviceImg);
+                "get_pic?id=" + service.getPictureId())
+                .apply(Constant.pictureOptions)
+                .into(serviceImg);
     }
 
     @SuppressLint("CheckResult")

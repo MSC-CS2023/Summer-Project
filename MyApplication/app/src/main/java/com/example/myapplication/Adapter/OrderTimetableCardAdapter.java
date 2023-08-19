@@ -37,9 +37,9 @@ public class OrderTimetableCardAdapter extends RecyclerView.Adapter <OrderTimeta
         holder.bindData(position);
 
         holder.time.setText(orderTimetableCard.getTime());
-        holder.price.setText(orderTimetableCard.getPrice());
+        holder.price.setText("￡" + orderTimetableCard.getPrice());
         holder.title.setText(orderTimetableCard.getTitle());
-        holder.orderNum.setText(orderTimetableCard.getOrderNum());
+        holder.orderNum.setText("orderID: " + orderTimetableCard.getOrderNum());
 
     }
 

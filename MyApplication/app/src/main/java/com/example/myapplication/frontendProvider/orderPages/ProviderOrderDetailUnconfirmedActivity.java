@@ -148,6 +148,7 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
         state.setText("");
         Glide.with(this)
                 .load(Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId())
+                .apply(Constant.pictureOptions)
                 .into(image);
     }
 
@@ -158,7 +159,8 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
         if(customer.getId() != null){
             Glide.with(this)
                     .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
-                    .into(avatar);
+                    .apply(Constant.avatarOptions)
+                    .into(image);
         }
     }
 

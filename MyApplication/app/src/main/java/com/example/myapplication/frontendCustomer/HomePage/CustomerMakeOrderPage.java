@@ -24,6 +24,7 @@ import com.example.myapplication.network.CustomerApi;
 import com.example.myapplication.network.RetrofitClient;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -116,7 +117,6 @@ public class CustomerMakeOrderPage extends AppCompatActivity implements View.OnC
                     public void onClick(DialogInterface dialog, int which) {
                         //update money
                         createCustomerOrder(token, serviceId, startTimeMills, endTimeMills);
-                        finish();
                     }
                 })
                 .setNegativeButton("Cancel", null);
@@ -194,6 +194,7 @@ public class CustomerMakeOrderPage extends AppCompatActivity implements View.OnC
             return false;
         }
         calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getDefault());
         calendar.set(Calendar.YEAR, serviceYear);
         calendar.set(Calendar.MONTH, serviceMonth);
         calendar.set(Calendar.DAY_OF_MONTH, serviceDay);
@@ -209,8 +210,6 @@ public class CustomerMakeOrderPage extends AppCompatActivity implements View.OnC
                     "Please select correct service time.", Toast.LENGTH_SHORT).show();
             return false;
         }
-        Toast.makeText(getApplicationContext(),
-                "suc.", Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -228,6 +227,9 @@ public class CustomerMakeOrderPage extends AppCompatActivity implements View.OnC
                             Toast.makeText(getApplicationContext(),
                                     "Book service successfully!", Toast.LENGTH_SHORT).show();
                             finish();
+                        }else{
+                            Toast.makeText(getApplicationContext(),
+                                    orderDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
 

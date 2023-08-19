@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
@@ -55,7 +56,7 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
     EditText txtRegisterCustomerPassword2;
     EditText txtRegisterCustomerAddress;
 
-    ImageButton avatar;
+    CircleImageView avatar;
     Bitmap bitmap;
 
 
@@ -198,7 +199,9 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
                                 sp.edit().putString("userType", "customer").apply();
                                 sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
                                 sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-                                updateAvatar(loginDataHttpBaseBean.getData().getToken(), bitmapToFile(bitmap));
+                                try{
+                                    updateAvatar(loginDataHttpBaseBean.getData().getToken(), bitmapToFile(bitmap));
+                                }catch (Exception ignored){}
                                 Toast.makeText(getApplicationContext(),
                                         loginDataHttpBaseBean.getData().getUser().getUsername() + "sign up successfully",
                                         Toast.LENGTH_SHORT).show();

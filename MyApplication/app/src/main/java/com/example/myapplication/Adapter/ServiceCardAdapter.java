@@ -18,8 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.AdapterData.ServiceCard;
 import com.example.myapplication.R;
+import com.example.myapplication.network.Constant;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter.ViewHolder> {
 
@@ -47,22 +50,26 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
         ServiceCard serviceCard = serviceCards.get(position);
 
         holder.bindData(position);
-//        Glide.with(this.context).load(serviceCard.getProviderAvatarSrc()).into(holder.avatar);
-//        Glide.with(this.context).load(serviceCard.getServicePictureSrc()).into(holder.serviceImg);
-        holder.avatar.setImageResource(serviceCard.getAvatarSrcId());
-        holder.serviceImg.setImageResource(serviceCard.getServiceImgSrcId());
+        Glide.with(this.context).load(serviceCard.getProviderAvatarSrc())
+                .apply(Constant.avatarOptions)
+                .into(holder.avatar);
+        Glide.with(this.context).load(serviceCard.getServicePictureSrc())
+                .apply(Constant.pictureOptions)
+                .into(holder.serviceImg);
         holder.username.setText(serviceCard.getUsername());
         holder.serviceTitle.setText(serviceCard.getServiceTitle());
         holder.servicePrice.setText("￡" + serviceCard.getServicePrice());
         holder.serviceInfo.setText(serviceCard.getServiceInfo());
         holder.mark.setText(String.valueOf(serviceCard.getMark()));
+//        holder.avatar.setImageResource(serviceCard.getAvatarSrcId());
+//        holder.serviceImg.setImageResource(serviceCard.getServiceImgSrcId());
 //        holder.serviceState.setText(serviceCard.getState());
 
         //set avatar circular  Import a square image and automatically crop it into a circle
         //R.drawable.btn_avatar3 can be replaced by serviceCard.getAvatarSrcId()
-        Bitmap originalBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.btn_avatar3);
-        Bitmap circularBitmap = getRoundedBitmap(originalBitmap);
-        holder.avatar.setImageBitmap(circularBitmap);
+//        Bitmap originalBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.btn_avatar3);
+//        Bitmap circularBitmap = getRoundedBitmap(originalBitmap);
+//        holder.avatar.setImageBitmap(circularBitmap);
 
     }
 
@@ -98,7 +105,7 @@ public class ServiceCardAdapter extends RecyclerView.Adapter <ServiceCardAdapter
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView avatar;
+        CircleImageView avatar;
         TextView username;
         TextView serviceInfo;
         TextView mark;

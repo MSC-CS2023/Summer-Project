@@ -36,7 +36,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerHomePageFragment extends Fragment {
-    private static final Integer DEFAULT_RECOMMEND_NUMBER = 5;
+    private static final Integer DEFAULT_RECOMMEND_NUMBER = 10;
     private static final int ALL_TAB = 0;
     private static final int CLEANING_TAB = 1;
     private static final int MAINTAIN_TAB = 2;
@@ -46,7 +46,10 @@ public class CustomerHomePageFragment extends Fragment {
     private Integer currentShowPosition;
     private String token;
     private Integer currentTab;
-    List<ServiceCard> dataList;
+
+    List<ServiceCard> dataList = new ArrayList<>();
+
+    List<String> idList = new ArrayList<>();
 
 
     List<ImageButton> buttonList = new ArrayList<>();
@@ -84,7 +87,7 @@ public class CustomerHomePageFragment extends Fragment {
         swipeDown();
 
         // Create a demo data list
-        createDemoData();
+//        createDemoData();
         updatePage();
 
         return rootView;
@@ -96,7 +99,7 @@ public class CustomerHomePageFragment extends Fragment {
             @Override
             public void onRefresh() {
                 //refresh action
-                createDemoData();
+//                createDemoData();
 
                 currentShowPosition = 0;
                 updatePage();
@@ -149,7 +152,7 @@ public class CustomerHomePageFragment extends Fragment {
                         }
                     }
 
-                    createDemoData();
+//                    createDemoData();
 
                     currentShowPosition = 0;
                     updatePage();
@@ -158,25 +161,25 @@ public class CustomerHomePageFragment extends Fragment {
         }
     }
 
-    private void createDemoData() {
-        dataList = new ArrayList<>();
-
-        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
-                "available tomorrow", "balabala", "picSrc", 213L, 4.0);
-        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
-                "available today", "balabala", "picSrc", 213L, 4.0);
-        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
-                "available today", "balabala", "picSrc",213L, 4.0);
-        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
-                "available today", "balabala", "picSrc",213L, 4.0);
-
-        dataList.add(serviceCard1);
-        dataList.add(serviceCard2);
-        dataList.add(serviceCard3);
-        dataList.add(serviceCard4);
-
-        updateViewByList(dataList);
-    }
+//    private void createDemoData() {
+//        dataList = new ArrayList<>();
+//
+//        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
+//                "available tomorrow", "balabala", "picSrc", 213L, 4.0);
+//        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
+//                "available today", "balabala", "picSrc", 213L, 4.0);
+//        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
+//                "available today", "balabala", "picSrc",213L, 4.0);
+//        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
+//                "available today", "balabala", "picSrc",213L, 4.0);
+//
+//        dataList.add(serviceCard1);
+//        dataList.add(serviceCard2);
+//        dataList.add(serviceCard3);
+//        dataList.add(serviceCard4);
+//
+//        updateViewByList(dataList);
+//    }
 
     private void resetButton() {
         buttonCleaning.setImageResource(R.drawable.btn_cleaning);
@@ -254,8 +257,11 @@ public class CustomerHomePageFragment extends Fragment {
     //Http request and change view after getting response.
     @SuppressLint("CheckResult")
     private void randomlyRecommend(String token, Integer start) {
+        if(start == 0){
+            idList = new ArrayList<>();
+        }
         CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.randomlyRecommend(token, DEFAULT_RECOMMEND_NUMBER)
+        customerApi.randomlyRecommend(token, DEFAULT_RECOMMEND_NUMBER, idList.toArray(new String[0]))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceShortListData>>() {
@@ -263,6 +269,10 @@ public class CustomerHomePageFragment extends Fragment {
                     public void onNext(HttpBaseBean<ServiceShortListData> serviceShortListDataHttpBaseBean) {
                         if (serviceShortListDataHttpBaseBean.getSuccess()) {
                             try{
+                                for(ServiceShort serviceShort :
+                                        serviceShortListDataHttpBaseBean.getData().getServices()){
+                                    idList.add(serviceShort.getId().toString());
+                                }
                                 if(start == 0){
                                     dataList = getServiceCardList(
                                             serviceShortListDataHttpBaseBean.getData().getServices());
@@ -327,7 +337,7 @@ public class CustomerHomePageFragment extends Fragment {
         for (ServiceShort serviceShort : serviceShorts) {
             String avatarLink = Constant.BASE_URL + "public/service_provider/avatar?id=" + serviceShort.getProviderId().toString();
             String pictureLink = Constant.BASE_URL + "get_pic?id=" + serviceShort.getPictureId();
-            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getFee().toString(),
+            serviceCard = new ServiceCard(serviceShort.getUsername(), serviceShort.getId().toString(),
                     serviceShort.getTitle(), avatarLink, serviceShort.getDescription(),
                     pictureLink, serviceShort.getId(),serviceShort.getMark());
             serviceCards.add(serviceCard);

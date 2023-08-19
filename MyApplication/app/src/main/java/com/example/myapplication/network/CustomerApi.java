@@ -16,6 +16,7 @@ import com.example.myapplication.Bean.Httpdata.data.ServiceShortListData;
 import com.example.myapplication.Bean.Httpdata.data.TimeStampData;
 import com.google.api.Http;
 
+import java.util.List;
 import java.util.function.BooleanSupplier;
 
 import io.reactivex.rxjava3.core.Flowable;
@@ -103,49 +104,6 @@ public interface CustomerApi {
             @Header("Authorization") String authorization, @Part("service_id") Long serviceId,
             @Part("start_timestamp") Long startTimestamp, @Part("end_timestamp") Long endTimestamp);
 
-
-    //NORMAL
-    @GET("customer/self_details")
-    Flowable<HttpBaseBean<SelfDetailData>> getCustomerDetail(@Header("Authorization") String authorization);
-
-    @GET("customer/get_avatar")
-    Call<ResponseBody> getCustomerAvatar(@Header("Authorization") String authorizations);
-
-    @GET("customer/get_avatar_timestamp")
-    Flowable<HttpBaseBean<TimeStampData>> getCustomerAvatarTimeStamp(@Header("Authorization") String authorization);
-
-    @GET("customer/get_service")
-    Flowable<HttpBaseBean<ServiceDetailData>> customerGetServiceDetail(
-            @Header("Authorization") String authorization, @Query("id") Long serviceId);
-
-    @GET("customer/get_rec")
-    Flowable<HttpBaseBean<ServiceShortListData>> randomlyRecommend(
-            @Header("Authorization") String authorization, @Query("num") Integer recommendNum);
-
-    @GET("customer/renew_token")
-    Flowable<HttpBaseBean<LoginData>> customerReLogin(@Header("Authorization") String authorization);
-
-    @POST("customer/modify_detail")
-    @Multipart
-    Flowable<HttpBaseBean<ModifyDetailData>> modifyCustomerDetail(@Header("Authorization") String authorization
-            , @Part("key") String modifyItem, @Part("value") String ModifyContent);
-
-    @POST("customer/reset_password")
-    @Multipart
-    Flowable<HttpBaseBean<Object>> resetCustomerPassword(@Header("Authorization") String authorization
-            , @Part("old_value") String oldPassword, @Part("new_value") String newPassword);
-
-    @POST("customer/update_avatar")
-    @Multipart
-    Flowable<HttpBaseBean<TimeStampData>> updateCustomerAvatar(@Header("Authorization") String authorization
-            , @Part MultipartBody.Part part);
-
-    @DELETE("customer/delete_account")
-    Flowable<HttpBaseBean<Object>> deleteCustomerAccount(@Header("Authorization") String authorization);
-
-
-    //New
-    //NEW ORDER
     @GET("customer/booking_order/get_unconfirmed")
     Flowable<HttpBaseBean<OrderListData>> getCustomerUnconfirmedOrders(
             @Header("Authorization") String authorization,
@@ -170,5 +128,52 @@ public interface CustomerApi {
     Flowable<HttpBaseBean<OrderListData>> getCustomerProcessingOrders(
             @Header("Authorization") String authorization,
             @Query("start") Integer start, @Query("num") Integer number);
+
+
+    //NORMAL
+    @GET("customer/self_details")
+    Flowable<HttpBaseBean<SelfDetailData>> getCustomerDetail(@Header("Authorization") String authorization);
+
+    @GET("customer/get_avatar")
+    Call<ResponseBody> getCustomerAvatar(@Header("Authorization") String authorizations);
+
+    @GET("customer/get_avatar_timestamp")
+    Flowable<HttpBaseBean<TimeStampData>> getCustomerAvatarTimeStamp(@Header("Authorization") String authorization);
+
+    @GET("customer/get_service")
+    Flowable<HttpBaseBean<ServiceDetailData>> customerGetServiceDetail(
+            @Header("Authorization") String authorization, @Query("id") Long serviceId);
+
+    @GET("customer/get_rec")
+    Flowable<HttpBaseBean<ServiceShortListData>> randomlyRecommend(
+            @Header("Authorization") String authorization, @Query("num") Integer recommendNum,
+            @Query("list") String[] serviceList);
+
+    @GET("customer/renew_token")
+    Flowable<HttpBaseBean<LoginData>> customerReLogin(@Header("Authorization") String authorization);
+
+    @POST("customer/modify_detail")
+    @Multipart
+    Flowable<HttpBaseBean<ModifyDetailData>> modifyCustomerDetail(@Header("Authorization") String authorization
+            , @Part("key") String modifyItem, @Part("value") String ModifyContent);
+
+    @POST("customer/reset_password")
+    @Multipart
+    Flowable<HttpBaseBean<Object>> resetCustomerPassword(@Header("Authorization") String authorization
+            , @Part("old_value") String oldPassword, @Part("new_value") String newPassword);
+
+    @POST("customer/update_avatar")
+    @Multipart
+    Flowable<HttpBaseBean<TimeStampData>> updateCustomerAvatar(@Header("Authorization") String authorization
+            , @Part MultipartBody.Part part);
+
+    @DELETE("customer/delete_account")
+    Flowable<HttpBaseBean<Object>> deleteCustomerAccount(@Header("Authorization") String authorization);
+
+
+    //New
+    @GET("customer/booking_order/get_by_date")
+    Flowable<HttpBaseBean<OrderListData>> getCustomerOrdersByDate(
+            @Header("Authorization") String authorization, @Query("timestamp") Long timestamp);
 
 }

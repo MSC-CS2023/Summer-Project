@@ -117,6 +117,7 @@ public class ProviderOrderDetailProcessingActivity extends AppCompatActivity imp
         state.setText("");
         Glide.with(this)
                 .load(Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId())
+                .apply(Constant.avatarOptions)
                 .into(image);
     }
 
@@ -127,7 +128,8 @@ public class ProviderOrderDetailProcessingActivity extends AppCompatActivity imp
         if(customer.getId() != null){
             Glide.with(this)
                     .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
-                    .into(avatar);
+                    .apply(Constant.pictureOptions)
+                    .into(image);
         }
     }
 

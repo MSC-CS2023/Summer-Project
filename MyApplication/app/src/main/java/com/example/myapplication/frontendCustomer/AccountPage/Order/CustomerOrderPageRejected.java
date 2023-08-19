@@ -94,6 +94,7 @@ public class CustomerOrderPageRejected extends AppCompatActivity {
         if(order.getServiceShort().getPictureId() != null){
             Glide.with(this)
                     .load(Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId())
+                    .apply(Constant.pictureOptions)
                     .into(image);
         }
     }
@@ -105,6 +106,7 @@ public class CustomerOrderPageRejected extends AppCompatActivity {
         if(provider.getId() != null){
             Glide.with(this)
                     .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + provider.getId())
+                    .apply(Constant.avatarOptions)
                     .into(providerAvatar);
         }
     }

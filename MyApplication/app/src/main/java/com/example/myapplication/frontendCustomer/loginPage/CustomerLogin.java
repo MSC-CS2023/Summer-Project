@@ -48,8 +48,8 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view.getId() ==  R.id.btnCustomerLogin) {
-//            customerLogin(txtCustomerUsername.getText().toString(),txtCustomerPassword.getText().toString());
-            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
+            customerLogin(txtCustomerUsername.getText().toString(),txtCustomerPassword.getText().toString());
+//            startActivity(new Intent(CustomerLogin.this, CustomerMainActivity.class));
         }
         else if (view.getId() == R.id.txtCustomerRegister) {
             startActivity(new Intent(CustomerLogin.this, CustomerRegister.class));

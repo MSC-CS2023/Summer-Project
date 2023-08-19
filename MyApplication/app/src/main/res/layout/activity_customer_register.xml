@@ -55,7 +55,7 @@
                 android:orientation="vertical">
 
 
-                <ImageButton
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/customerAvatar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                     android:src="@drawable/btn_avatar2"
                     android:scaleType="fitCenter"
                     android:backgroundTint="@android:color/transparent"
-                    ></ImageButton>
+                    ></de.hdodenhof.circleimageview.CircleImageView>
 
 
 

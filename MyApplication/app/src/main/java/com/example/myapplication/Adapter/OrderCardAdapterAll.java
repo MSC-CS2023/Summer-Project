@@ -10,8 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.AdapterData.OrderCard;
 import com.example.myapplication.R;
+import com.example.myapplication.network.Constant;
 
 import java.util.List;
 
@@ -46,7 +48,9 @@ public class OrderCardAdapterAll extends RecyclerView.Adapter <OrderCardAdapterA
         holder.orderId.setText("orderID: " + orderCard.getOrderId().toString());
         holder.orderTitle.setText(orderCard.getOrderTitle());
         holder.orderPrice.setText("￡" + orderCard.getOrderPrice());
-//        Glide.with(this.context).load(orderCard.getPictureLink()).into(holder.orderPicture);
+        Glide.with(this.context).load(orderCard.getPictureLink())
+                .apply(Constant.pictureOptions)
+                .into(holder.orderPicture);
 //        holder.orderPicture.setImageResource(orderCard.getOrderPictureSrc());
         //没弄明白为什么加添加图片会报错
 

@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendProvider.homePages.ProviderServicesAdaptor;
+import com.example.myapplication.network.Constant;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAdaptor.ViewHolder> {
@@ -41,9 +43,11 @@ public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAd
         holder.title.setText(data.get(position).getTitle());
         holder.orderNum.setText(data.get(position).getOrderNum().toString());
         holder.price.setText(data.get(position).getPrice());
-        holder.image.setImageResource(context.getResources().getIdentifier(data.get(position).getImageSrc(),
-                "drawable", context.getPackageName()));
-//        Glide.with(this.context).load(data.get(position).getImageLink()).into(holder.image);
+//        holder.image.setImageResource(context.getResources().getIdentifier(data.get(position).getImageSrc(),
+//                "drawable", context.getPackageName()));
+        Glide.with(this.context).load(data.get(position).getImageLink())
+                .apply(Constant.pictureOptions)
+                .into(holder.image);
         holder.state.setText(data.get(position).getState());
 
     }

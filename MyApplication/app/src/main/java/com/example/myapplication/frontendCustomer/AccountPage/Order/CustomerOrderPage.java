@@ -253,7 +253,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CustomerOrderPage.this, "load more", Toast.LENGTH_SHORT).show();
 //                    orderCards.add(new OrderCard(121133L, "name1213",
 //                            "~"+ SystemClock.currentThreadTimeMillis(),
 //                            "link", "Processing"));

@@ -105,6 +105,7 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
         if(order.getServiceShort().getPictureId() != null){
             Glide.with(this)
                     .load(Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId())
+                    .apply(Constant.pictureOptions)
                     .into(image);
         }
     }
@@ -116,7 +117,8 @@ public class ProviderOrderDetailCancelledActivity extends AppCompatActivity impl
         if(customer.getId() != null){
             Glide.with(this)
                     .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
-                    .into(avatar);
+                    .apply(Constant.avatarOptions)
+                    .into(image);
         }
     }
 
