@@ -94,6 +94,7 @@ public class CustomerMakeOrderPage extends AppCompatActivity implements View.OnC
                         //update money
 //                        createCustomerOrder(token, serviceId, System.currentTimeMillis() + 36000000,
 //                                System.currentTimeMillis() + 39600000);
+                        finish();
                     }
                 })
                 .setNegativeButton("Cancel", null);
