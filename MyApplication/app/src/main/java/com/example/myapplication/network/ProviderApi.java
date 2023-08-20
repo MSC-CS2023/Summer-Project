@@ -127,7 +127,7 @@ public interface ProviderApi {
     Flowable<HttpBaseBean<SelfDetailData>> getProviderDetail(@Header("Authorization") String authorization);
 
     @GET("service_provider/get_avatar")
-    Call<ResponseBody> getProviderAvatar(@Header("Authorization") String authorizations);
+    Flowable<ResponseBody> getProviderAvatar(@Header("Authorization") String authorizations);
 
     @GET("service_provider/get_avatar_timestamp")
     Flowable<HttpBaseBean<TimeStampData>> getProviderAvatarTimeStamp(@Header("Authorization") String authorization);

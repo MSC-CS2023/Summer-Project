@@ -115,6 +115,10 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
             Toast.makeText(getApplicationContext(), "Email is mandatory!", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if(txtRegisterProviderAddress.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(), "Address is mandatory!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(txtRegisterProviderPassword1.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Password is mandatory!", Toast.LENGTH_SHORT).show();
             return false;

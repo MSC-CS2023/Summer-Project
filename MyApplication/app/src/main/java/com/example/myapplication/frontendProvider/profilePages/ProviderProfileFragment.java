@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -26,6 +27,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,8 +38,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
@@ -57,11 +64,18 @@ import java.io.InputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import retrofit2.http.Field;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -212,18 +226,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
         GlideUrl glideUrl = new GlideUrl(Constant.BASE_URL +
                 "public/service_provider/avatar?id=" + user.getId().toString());
 
-        GlideUrl glideUrl2 = new GlideUrl(Constant.BASE_URL +
-                "service_provider/get_avatar" ,new LazyHeaders.Builder()
-                .addHeader("token", token)
-                .build());
-
-        GlideUrl glideUrl3 = new GlideUrl(Constant.BASE_URL +
-                "get_pic?id=" + "1693293575215366146");
-
-        GlideUrl glideUrl4 = new GlideUrl("https://goo.gl/gEgYUd");
-
-
-        Glide.with(getActivity()).load(glideUrl4)
+        Glide.with(getActivity()).load(glideUrl)
                 .apply(Constant.avatarOptions)
                 .into(avatar);
     }
@@ -243,7 +246,6 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
                 try {
                     bitmap = compressImage(uri);
                 } catch (IOException ignored) {}
-//                Glide.with(this).load(bitmap).into(avatar);
                 updateAvatar();
             }
         }
@@ -314,7 +316,8 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
 
                         @Override
                         public void onError(Throwable t) {
-                            Log.i(TAG,"Network error! " + t.getMessage());
+                            Toast.makeText(getContext(),
+                                    "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override

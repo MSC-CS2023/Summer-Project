@@ -59,7 +59,7 @@
         android:background="@drawable/edit_text_rounded_corner"
         android:elevation="5dp"
         android:hint="    E-mail"
-        android:inputType="text" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/txtCustomerPassword"

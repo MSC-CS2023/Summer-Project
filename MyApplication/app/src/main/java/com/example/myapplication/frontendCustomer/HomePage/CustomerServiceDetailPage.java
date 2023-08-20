@@ -270,31 +270,74 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
                 });
     }
 
+
+    @SuppressLint("CheckResult")
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         UiSettings uiSettings = googleMap.getUiSettings();
         uiSettings.setCompassEnabled(true);
 
-        //只需要在此将provider的地址字符串赋值给providerAddress就行
-        String providerAddress = "Dean ";
+        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+        customerApi.customerGetServiceDetail(token, serviceId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new ResourceSubscriber<HttpBaseBean<ServiceDetailData>>() {
+                    @Override
+                    public void onNext(HttpBaseBean<ServiceDetailData> serviceDetailDataHttpBaseBean) {
+                        if(serviceDetailDataHttpBaseBean.getSuccess()){
+                            try {
+                                String providerAddress = serviceDetailDataHttpBaseBean.getData().getService().getAddress();
+                                String address =  providerAddress + ", United Kingdom";
+                                Geocoder geocoder = new Geocoder(getApplicationContext());
+                                try {
+                                    List<Address> addresses = geocoder.getFromLocationName(address, 1);
+                                    if(addresses != null && !addresses.isEmpty()) {
+                                        Address targetAddress = addresses.get(0);
+                                        LatLng latLng = new com.google.android.gms.maps.model.LatLng(targetAddress.getLatitude(),
+                                                targetAddress.getLongitude());
+                                        googleMap.addMarker(new MarkerOptions()
+                                                .position(latLng)
+                                                //改一下点击完mark后的title
+                                                .title(serviceDetailDataHttpBaseBean.getData().getService().getUsername()));
+                                        float zoomLevel = 15.0f;
+                                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }catch (NullPointerException ignored){}
+                        }
+                    }
 
-        String address =  providerAddress + ", United Kingdom";
-        Geocoder geocoder = new Geocoder(this);
-        try {
-            List<Address> addresses = geocoder.getFromLocationName(address, 1);
-            if(addresses != null && !addresses.isEmpty()) {
-                Address targetAddress = addresses.get(0);
-                LatLng latLng = new com.google.android.gms.maps.model.LatLng(targetAddress.getLatitude(),
-                        targetAddress.getLongitude());
-                googleMap.addMarker(new MarkerOptions()
-                .position(latLng)
-                        //改一下点击完mark后的title
-                .title("Provider name"));
-                float zoomLevel = 15.0f;
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {}
+                });
+        //只需要在此将provider的地址字符串赋值给providerAddress就行
+//        String providerAddress = "Dean ";
+//
+//        String address =  providerAddress + ", United Kingdom";
+//        Geocoder geocoder = new Geocoder(this);
+//        try {
+//            List<Address> addresses = geocoder.getFromLocationName(address, 1);
+//            if(addresses != null && !addresses.isEmpty()) {
+//                Address targetAddress = addresses.get(0);
+//                LatLng latLng = new com.google.android.gms.maps.model.LatLng(targetAddress.getLatitude(),
+//                        targetAddress.getLongitude());
+//                googleMap.addMarker(new MarkerOptions()
+//                .position(latLng)
+//                        //改一下点击完mark后的title
+//                .title("Provider name"));
+//                float zoomLevel = 15.0f;
+//                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }

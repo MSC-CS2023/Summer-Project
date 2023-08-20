@@ -65,6 +65,7 @@ public class Order {
      */
     private Long startTimestamp;
     private String state;
+    private String address;
 
     public Order(){
         serviceShort = new ServiceShort();
@@ -120,4 +121,7 @@ public class Order {
 
     public String getState() { return state; }
     public void setState(String value) { this.state = value; }
+
+    public String getAddress() { return address; }
+    public void setAddress(String value) { this.address = value; }
 }
