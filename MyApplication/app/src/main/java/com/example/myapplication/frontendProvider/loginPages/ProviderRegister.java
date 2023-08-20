@@ -181,17 +181,6 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
         return scaleFactor;
     }
 
-    private File bitmapToFile(Bitmap bitmap) {
-        File imageFile = new File(getCacheDir(), "image_file_name.jpg");
-        try (OutputStream outputStream = new FileOutputStream(imageFile)) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return imageFile;
-    }
-
     @SuppressLint("CheckResult")
     private void providerRegister(String email, String username, String password, String address, String tel){
         address = address.equals("")? null : address;
@@ -246,8 +235,6 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
 
             fos.flush();
             fos.close();
-            // 在这里，您可以将 bitmapFile 上传到服务器或云存储
-            // 这通常需要使用网络请求库执行上传操作
             MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
                     RequestBody.create(MediaType.parse("application/octet-stream"), bitmapFile));
             ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);

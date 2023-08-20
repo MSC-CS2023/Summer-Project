@@ -130,6 +130,12 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
         return rootView;
     }
 
+    public void onStart() {
+
+        super.onStart();
+        getProviderDetail(token);
+    }
+
     private void initView() {
         TextView title = rootView.findViewById(R.id.title);
         title.setText(mTitle);
@@ -264,7 +270,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
         FileOutputStream fos = null;
         File bitmapFile = null;
         try {
-            bitmapFile = File.createTempFile("bitmap", ".jpg", getContext().getCacheDir());
+            bitmapFile = File.createTempFile("bitmap", ".jpg", getActivity().getCacheDir());
             fos = new FileOutputStream(bitmapFile);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
 

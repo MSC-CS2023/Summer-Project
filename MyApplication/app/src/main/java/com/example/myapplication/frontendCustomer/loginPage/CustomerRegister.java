@@ -28,6 +28,7 @@ import com.example.myapplication.frontendCustomer.CustomerMainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.network.Constant;
 import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.PublicMethodApi;
 import com.example.myapplication.network.RetrofitClient;
 
@@ -129,9 +130,8 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
                 Uri uri = data.getData();
                 try {
                     bitmap = compressImage(uri);
-                } catch (IOException ignored) {
-                }
-                Glide.with(this).load(bitmapToFile(bitmap)).into(avatar);
+                } catch (IOException ignored) {}
+                Glide.with(this).load(bitmap).into(avatar);
             }
         }
     }
@@ -168,17 +168,6 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
         return scaleFactor;
     }
 
-    private File bitmapToFile(Bitmap bitmap) {
-        File imageFile = new File(getCacheDir(), "image_file_name.jpg");
-        try (OutputStream outputStream = new FileOutputStream(imageFile)) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return imageFile;
-    }
-
     @SuppressLint("CheckResult")
     private void customerRegister(String email, String username, String password, String address, String tel){
         //Optional part for http request.
@@ -198,9 +187,7 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
                                 sp.edit().putString("userType", "customer").apply();
                                 sp.edit().putString("token", loginDataHttpBaseBean.getData().getToken()).apply();
                                 sp.edit().putLong("exp", loginDataHttpBaseBean.getData().getExp()).apply();
-                                try{
-                                    updateAvatar(loginDataHttpBaseBean.getData().getToken(), bitmapToFile(bitmap));
-                                }catch (Exception ignored){}
+                                    updateAvatar(loginDataHttpBaseBean.getData().getToken());
                                 Toast.makeText(getApplicationContext(),
                                         loginDataHttpBaseBean.getData().getUser().getUsername() + "sign up successfully",
                                         Toast.LENGTH_SHORT).show();
@@ -223,32 +210,54 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
     }
 
     @SuppressLint("CheckResult")
-    private void updateAvatar(String token, File file){
+    private void updateAvatar(String token){
         if(bitmap == null){return;}
-        MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
-                RequestBody.create(MediaType.parse("application/octet-stream"), file));
-        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.updateCustomerAvatar(token, part)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new ResourceSubscriber<HttpBaseBean<TimeStampData>>() {
-                    @Override
-                    public void onNext(HttpBaseBean<TimeStampData> timeStampDataHttpBaseBean) {
-                        if(timeStampDataHttpBaseBean.getSuccess()){
-                            Log.i(TAG, "update successfully");
+        FileOutputStream fos = null;
+        File bitmapFile = null;
+        try {
+            bitmapFile = File.createTempFile("bitmap", ".jpg", getCacheDir());
+            fos = new FileOutputStream(bitmapFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+            fos.flush();
+            fos.close();
+            MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
+                    RequestBody.create(MediaType.parse("application/octet-stream"), bitmapFile));
+            CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
+            customerApi.updateCustomerAvatar(token, part)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new ResourceSubscriber<HttpBaseBean<TimeStampData>>() {
+                        @Override
+                        public void onNext(HttpBaseBean<TimeStampData> timeStampDataHttpBaseBean) {
+                            if(timeStampDataHttpBaseBean.getSuccess()){
+                                Log.i(TAG,"SUC! ");
+                            }else {
+                                Log.i(TAG,"FAL! ");
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable t) {
+                        @Override
+                        public void onError(Throwable t) {
+                            Log.i(TAG,"Network error! " + t.getMessage());
+                        }
 
-                    }
+                        @Override
+                        public void onComplete() {
 
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }

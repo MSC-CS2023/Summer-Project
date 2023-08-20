@@ -344,21 +344,4 @@ public class CustomerHomePageFragment extends Fragment {
         }
         return serviceCards;
     }
-
-//    private Bitmap getRoundedBitmap(Bitmap bitmap) {
-//        int width = bitmap.getWidth();
-//        int height = bitmap.getHeight();
-//        int radius = Math.min(width, height) / 2;
-//
-//        Bitmap output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-//        android.graphics.Canvas canvas = new android.graphics.Canvas(output);
-//
-//        android.graphics.Path path = new android.graphics.Path();
-//        path.addCircle(width / 2, height / 2, radius, android.graphics.Path.Direction.CW);
-//
-//        canvas.clipPath(path);
-//        canvas.drawBitmap(bitmap, 0, 0, null);
-//
-//        return output;
-//    }
 }
