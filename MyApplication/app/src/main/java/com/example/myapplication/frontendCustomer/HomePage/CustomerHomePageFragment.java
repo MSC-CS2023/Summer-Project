@@ -36,12 +36,17 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerHomePageFragment extends Fragment {
-    private static final Integer DEFAULT_RECOMMEND_NUMBER = 10;
+    private static final Integer DEFAULT_RECOMMEND_NUMBER = 5;
     private static final int ALL_TAB = 0;
     private static final int CLEANING_TAB = 1;
     private static final int MAINTAIN_TAB = 2;
     private static final int LAUNDRY_TAB = 3;
     private static final int LANDSCAPE_TAB = 4;
+
+    private static final long LOAD_INTERVAL = 2000;
+
+    private Long lastLoadTime = 0L;
+
 
     private Integer currentShowPosition;
     private String token;
@@ -214,6 +219,8 @@ public class CustomerHomePageFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
 
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
                 int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
@@ -221,12 +228,17 @@ public class CustomerHomePageFragment extends Fragment {
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
+                    long currentTime = System.currentTimeMillis();
+                    if (currentTime - lastLoadTime >= LOAD_INTERVAL) {
+                        currentShowPosition += DEFAULT_RECOMMEND_NUMBER;
+                        updatePage();
+                        serviceCardAdapter.notifyDataSetChanged();
+                        lastLoadTime = currentTime;
+                    }
 //                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
 //                            "Repair Air conditioner", "available tomorrow",
 //                            "balabala", "picSrc", 213L));
-                    currentShowPosition += DEFAULT_RECOMMEND_NUMBER;
-                    updatePage();
-                    serviceCardAdapter.notifyDataSetChanged();
+
                 }
             }
         });

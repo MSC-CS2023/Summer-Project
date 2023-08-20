@@ -474,6 +474,7 @@ public class ProviderOrdersFragment extends Fragment {
                     }
                 });
     }
+
     @SuppressLint("CheckResult")
     private void getProviderUnconfirmedOrders(String token, Integer start, Integer number){
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
