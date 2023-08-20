@@ -64,6 +64,7 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
     ImageButton timetable;
     CircleImageView avatar;
     TextView username;
+    TextView address;
     Bitmap bitmap;
 
     public CustomerAccountFragment() {}
@@ -96,6 +97,7 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
         wallet = rootView.findViewById(R.id.wallet);
         avatar = rootView.findViewById(R.id.accountAvatar);
         username = rootView.findViewById(R.id.accountUsername);
+        address = rootView.findViewById(R.id.address);
 
         setting.setOnClickListener(this);
         order.setOnClickListener(this);
@@ -147,6 +149,7 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
 
     private void updateView(User user){
         username.setText(user.getUsername());
+        address.setText(user.getAddress());
         Glide.with(getContext()).load(Constant.BASE_URL +
                 "public/customer/avatar?id=" + user.getId().toString())
                 .apply(Constant.avatarOptions)
@@ -220,8 +223,8 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
 
             fos.flush();
             fos.close();
-            // 在这里，您可以将 bitmapFile 上传到服务器或云存储
-            // 这通常需要使用网络请求库执行上传操作
+
+
             MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
                     RequestBody.create(MediaType.parse("application/octet-stream"), bitmapFile));
             CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);

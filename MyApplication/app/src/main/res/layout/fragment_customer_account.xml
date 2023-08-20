@@ -34,9 +34,10 @@
             android:layout_gravity="center_horizontal" />
 
         <TextView
+            android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="user information"
+            android:text=""
             android:textSize="15dp"
             android:textStyle="normal"
             android:textColor="@android:color/darker_gray"

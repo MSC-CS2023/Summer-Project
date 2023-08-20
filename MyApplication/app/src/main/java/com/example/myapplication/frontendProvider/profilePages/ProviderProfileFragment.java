@@ -84,6 +84,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
     CircleImageView avatar;
 
     TextView username;
+    TextView address;
     Bitmap bitmap;
 
     public ProviderProfileFragment() {
@@ -150,6 +151,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
         setting.setOnClickListener(this);
 
         username = rootView.findViewById(R.id.txt_username);
+        address = rootView.findViewById(R.id.txt_address);
         avatar = rootView.findViewById(R.id.img_avatar);
         avatar.setOnClickListener(this);
 
@@ -203,6 +205,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
 
     private void updateView(User user){
         username.setText(user.getUsername());
+        address.setText(user.getAddress());
         Glide.with(getContext()).load(Constant.BASE_URL +
                 "public/service_provider/avatar?id=" + user.getId().toString())
                 .apply(Constant.avatarOptions)
@@ -276,8 +279,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
 
             fos.flush();
             fos.close();
-            // 在这里，您可以将 bitmapFile 上传到服务器或云存储
-            // 这通常需要使用网络请求库执行上传操作
+
             MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
                     RequestBody.create(MediaType.parse("application/octet-stream"), bitmapFile));
             ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);

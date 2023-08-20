@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
@@ -56,7 +57,7 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
     EditText txtRegisterCustomerPassword2;
     EditText txtRegisterCustomerAddress;
 
-    ImageButton avatar;
+    CircleImageView avatar;
     Bitmap bitmap;
 
 

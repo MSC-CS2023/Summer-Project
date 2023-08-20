@@ -185,7 +185,7 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
                 } catch (IOException ignored) {}
                 image.setVisibility(View.VISIBLE);
                 Glide.with(this).load(bitmap).into(image);
-                addPicture(token, 1L);
+//                addPicture(token, 1L);
             }
         }
     }
@@ -280,12 +280,12 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
 
             fos.flush();
             fos.close();
-            // 在这里，您可以将 bitmapFile 上传到服务器或云存储
-            // 这通常需要使用网络请求库执行上传操作
+
+
             MultipartBody.Part part = MultipartBody.Part.createFormData("picture", "Picture.jpg",
                     RequestBody.create(MediaType.parse("application/octet-stream"), bitmapFile));
             ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
-            providerApi.addPictureToService(token, 1693076227913019390L, part)
+            providerApi.addPictureToService(token, serviceId, part)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(new ResourceSubscriber<HttpBaseBean<Object>>() {
@@ -294,7 +294,9 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
                             if(objectHttpBaseBean.getSuccess()){
                                 Log.i(TAG,"SUC! ");
                             }else{
-                                Log.i(TAG,"FAL! ");
+                                Log.i(TAG,"fa ");
+                                Log.i(TAG,objectHttpBaseBean.getMessage());
+                                Log.i(TAG," ");
                             }
                         }
 

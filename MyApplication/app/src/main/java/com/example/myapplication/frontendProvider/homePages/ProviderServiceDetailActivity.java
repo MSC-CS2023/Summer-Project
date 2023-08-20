@@ -162,7 +162,9 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
         address.setText(service.getAddress());
         serviceType.setText(service.getTag());
         Glide.with(getApplicationContext()).load(Constant.BASE_URL +
-                "get_pic?id=" + service.getPictureId()).into(serviceImg);
+                "get_pic?id=" + service.getPictureId())
+                .apply(Constant.pictureOptions)
+                .into(serviceImg);
     }
 
     private void modifyService(){

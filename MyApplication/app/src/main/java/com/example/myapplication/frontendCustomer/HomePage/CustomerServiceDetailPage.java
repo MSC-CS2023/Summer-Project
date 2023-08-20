@@ -276,7 +276,7 @@ public class CustomerServiceDetailPage extends AppCompatActivity implements View
         uiSettings.setCompassEnabled(true);
 
         //只需要在此将provider的地址字符串赋值给providerAddress就行
-        String providerAddress = "Dean Street Works, Dean Street, Bristol, BS2 8SF";
+        String providerAddress = "Dean ";
 
         String address =  providerAddress + ", United Kingdom";
         Geocoder geocoder = new Geocoder(this);

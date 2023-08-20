@@ -50,8 +50,7 @@
             <ImageView
                 android:id="@+id/ed_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxHeight="200sp"
+                android:layout_height="200sp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_sample1" />
 
@@ -135,7 +134,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/lorem_ipsum"
+                android:text=""
                 android:inputType="textMultiLine"
                 android:gravity="start"
                 android:hint="Null" />

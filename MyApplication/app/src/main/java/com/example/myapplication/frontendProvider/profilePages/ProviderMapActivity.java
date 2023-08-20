@@ -54,7 +54,6 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     private void initView() {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(view -> finish());
-
         initMap();
     }
 
@@ -99,7 +98,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void createDemoAddresses() {
-        customerAddresses.add("BS8 1RL");
+        customerAddresses.add("as3 1R2");
         customerAddresses.add("BS2 8HW");
         customerAddresses.add("BS1 1JQ");
         customerAddresses.add("BS1 3DW");

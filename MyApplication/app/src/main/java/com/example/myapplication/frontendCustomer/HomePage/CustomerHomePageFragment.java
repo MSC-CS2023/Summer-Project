@@ -161,25 +161,25 @@ public class CustomerHomePageFragment extends Fragment {
         }
     }
 
-//    private void createDemoData() {
-//        dataList = new ArrayList<>();
-//
-//        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
-//                "available tomorrow", "balabala", "picSrc", 213L, 4.0);
-//        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
-//                "available today", "balabala", "picSrc", 213L, 4.0);
-//        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
-//                "available today", "balabala", "picSrc",213L, 4.0);
-//        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
-//                "available today", "balabala", "picSrc",213L, 4.0);
-//
-//        dataList.add(serviceCard1);
-//        dataList.add(serviceCard2);
-//        dataList.add(serviceCard3);
-//        dataList.add(serviceCard4);
-//
-//        updateViewByList(dataList);
-//    }
+    private void createDemoData() {
+        dataList = new ArrayList<>();
+
+        ServiceCard serviceCard1 = new ServiceCard("Eric", "100","Repair Air conditioner",
+                "available tomorrow", "balabala", "picSrc", 213L, 4.0);
+        ServiceCard serviceCard2 = new ServiceCard("Alice", "150","Clean gutter",
+                "available today", "balabala", "picSrc", 213L, 4.0);
+        ServiceCard serviceCard3 = new ServiceCard("Alice", "140","Clean gutter",
+                "available today", "balabala", "picSrc",213L, 4.0);
+        ServiceCard serviceCard4 = new ServiceCard("Alice", "120","Clean gutter",
+                "available today", "balabala", "picSrc",213L, 4.0);
+
+        dataList.add(serviceCard1);
+        dataList.add(serviceCard2);
+        dataList.add(serviceCard3);
+        dataList.add(serviceCard4);
+
+        updateViewByList(dataList);
+    }
 
     private void resetButton() {
         buttonCleaning.setImageResource(R.drawable.btn_cleaning);

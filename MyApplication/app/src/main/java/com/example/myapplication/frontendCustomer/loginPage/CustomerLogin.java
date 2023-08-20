@@ -54,7 +54,6 @@ public class CustomerLogin extends AppCompatActivity implements View.OnClickList
         else if (view.getId() == R.id.txtCustomerRegister) {
             startActivity(new Intent(CustomerLogin.this, CustomerRegister.class));
         }
-
     }
 
     @SuppressLint("CheckResult")
