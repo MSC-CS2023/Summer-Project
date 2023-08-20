@@ -64,7 +64,6 @@ public class CustomerOrderPageUnconfirmed extends AppCompatActivity {
         initialView();
 
         updateOrder(token, orderId);
-        updateProvider();
 
         cancel = findViewById(R.id.btn_cancel);
         message = findViewById(R.id.btn_message);
@@ -193,6 +192,7 @@ public class CustomerOrderPageUnconfirmed extends AppCompatActivity {
                             try {
                                 provider = selfDetailDataHttpBaseBean.getData().getUser();
                                 updateProviderView();
+                                updateProvider();
                             }catch (NullPointerException ignored){}
                         }
                     }

@@ -22,12 +22,11 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/circular_background"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
                 android:scaleType="centerCrop"
-                android:src="@drawable/btn_avatar3" />
+                android:src="@drawable/btn_avatar1" />
 
             <Space
                 android:layout_width="10dp"

@@ -101,6 +101,10 @@ public class CustomerRegister extends AppCompatActivity implements View.OnClickL
             Toast.makeText(getApplicationContext(), "Username is mandatory!", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if(txtRegisterCustomerAddress.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(), "Address is mandatory!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(txtRegisterCustomerEmail.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Email is mandatory!", Toast.LENGTH_SHORT).show();
             return false;

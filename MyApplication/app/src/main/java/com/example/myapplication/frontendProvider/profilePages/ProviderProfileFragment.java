@@ -36,6 +36,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.User;
 import com.example.myapplication.Bean.Httpdata.data.SelfDetailData;
@@ -206,8 +208,22 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
     private void updateView(User user){
         username.setText(user.getUsername());
         address.setText(user.getAddress());
-        Glide.with(getContext()).load(Constant.BASE_URL +
-                "public/service_provider/avatar?id=" + user.getId().toString())
+
+        GlideUrl glideUrl = new GlideUrl(Constant.BASE_URL +
+                "public/service_provider/avatar?id=" + user.getId().toString());
+
+        GlideUrl glideUrl2 = new GlideUrl(Constant.BASE_URL +
+                "service_provider/get_avatar" ,new LazyHeaders.Builder()
+                .addHeader("token", token)
+                .build());
+
+        GlideUrl glideUrl3 = new GlideUrl(Constant.BASE_URL +
+                "get_pic?id=" + "1693293575215366146");
+
+        GlideUrl glideUrl4 = new GlideUrl("https://goo.gl/gEgYUd");
+
+
+        Glide.with(getActivity()).load(glideUrl4)
                 .apply(Constant.avatarOptions)
                 .into(avatar);
     }
@@ -227,7 +243,7 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
                 try {
                     bitmap = compressImage(uri);
                 } catch (IOException ignored) {}
-                Glide.with(this).load(bitmap).into(avatar);
+//                Glide.with(this).load(bitmap).into(avatar);
                 updateAvatar();
             }
         }

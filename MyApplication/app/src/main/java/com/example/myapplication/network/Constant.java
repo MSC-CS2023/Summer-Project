@@ -10,7 +10,8 @@ public class Constant {
 
     public static final RequestOptions avatarOptions = new RequestOptions()
             .placeholder(R.drawable.default_avatar)
-            .override(64,64);
+            .error(R.drawable.default_avatar_female1)
+            .fallback(R.drawable.default_avatar_female2);
 
     public static final RequestOptions pictureOptions = new RequestOptions()
             .placeholder(R.drawable.img_sample1);

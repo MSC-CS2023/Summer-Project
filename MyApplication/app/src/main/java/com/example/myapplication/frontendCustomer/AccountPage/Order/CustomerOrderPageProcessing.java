@@ -64,7 +64,6 @@ public class CustomerOrderPageProcessing extends AppCompatActivity {
         initialView();
 
         updateOrder(token, orderId);
-        updateProvider();
 
         finish = findViewById(R.id.btn_finish);
         message = findViewById(R.id.btn_message);
@@ -163,6 +162,7 @@ public class CustomerOrderPageProcessing extends AppCompatActivity {
                             try {
                                 order = orderDataHttpBaseBean.getData().getBookingOrder();
                                 updateOrderView();
+                                updateProvider();
                             }catch (NullPointerException ignored){}
                         }
                     }
@@ -170,7 +170,7 @@ public class CustomerOrderPageProcessing extends AppCompatActivity {
                     @Override
                     public void onError(Throwable t) {
                         Toast.makeText(getApplicationContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                "Network error!" + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -200,7 +200,7 @@ public class CustomerOrderPageProcessing extends AppCompatActivity {
                     @Override
                     public void onError(Throwable t) {
                         Toast.makeText(getApplicationContext(),
-                                "Network error! " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                "Network error!" + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

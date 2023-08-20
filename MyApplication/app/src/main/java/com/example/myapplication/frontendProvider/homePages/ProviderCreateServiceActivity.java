@@ -222,17 +222,6 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
         return scaleFactor;
     }
 
-    private File bitmapToFile(Bitmap bitmap) {
-        File imageFile = new File(getCacheDir(), "image_file_name.jpg");
-        try (OutputStream outputStream = new FileOutputStream(imageFile)) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return imageFile;
-    }
-
     @SuppressLint("CheckResult")
     private void createService(String token, String title, String description, Double price){
         ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);

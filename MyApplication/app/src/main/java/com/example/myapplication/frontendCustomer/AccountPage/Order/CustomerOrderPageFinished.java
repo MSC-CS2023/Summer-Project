@@ -67,7 +67,6 @@ public class CustomerOrderPageFinished extends AppCompatActivity {
         initialView();
 
         updateOrder(token, orderId);
-        updateProvider();
 
         //seekBar part
 

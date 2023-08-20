@@ -60,7 +60,6 @@ public class CustomerOrderPageRejected extends AppCompatActivity {
         initialView();
 
         updateOrder(token, orderId);
-        updateProvider();
 
         message = findViewById(R.id.btn_message);
 
@@ -124,6 +123,7 @@ public class CustomerOrderPageRejected extends AppCompatActivity {
                             try {
                                 order = orderDataHttpBaseBean.getData().getBookingOrder();
                                 updateOrderView();
+                                updateProvider();
                             }catch (NullPointerException ignored){}
                         }
                     }

@@ -64,6 +64,7 @@ public class CustomerOrderPage extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("ConfigSp", Context.MODE_PRIVATE);
         this.token = sp.getString("token", "");
+
         currentShowPosition = 0;
         currentTab = ALL_TAB;
 
@@ -199,7 +200,7 @@ public class CustomerOrderPage extends AppCompatActivity {
         });
     }
 
-    private void updateViewByList(List<OrderCard> orderCards) {
+    private void updateViewByList() {
         //RecyclerView down here
         RecyclerView recyclerView = findViewById(R.id.orderCardRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -306,7 +307,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                             try{
                                 if(start == 0){
                                     orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                    updateViewByList(orderCards);
+                                    updateViewByList();
                                 }else{
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
@@ -339,7 +340,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                             try{
                                 if(start == 0){
                                     orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                    updateViewByList(orderCards);
+                                    updateViewByList();
                                 }else{
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
@@ -372,7 +373,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                             try{
                                 if(start == 0){
                                     orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                    updateViewByList(orderCards);
+                                    updateViewByList();
                                 }else{
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
@@ -404,7 +405,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                             try{
                                 if(start == 0){
                                     orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                    updateViewByList(orderCards);
+                                    updateViewByList();
                                 }else{
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
@@ -436,7 +437,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                             try{
                                 if(start == 0){
                                     orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                    updateViewByList(orderCards);
+                                    updateViewByList();
                                 }else{
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
@@ -468,7 +469,7 @@ public class CustomerOrderPage extends AppCompatActivity {
                             try{
                                 if(start == 0){
                                     orderCards = getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders());
-                                    updateViewByList(orderCards);
+                                    updateViewByList();
                                 }else{
                                     orderCards.addAll(getOrderCardList(orderListDataHttpBaseBean.getData().getBookingOrders()));
                                     orderCardAdapter.notifyDataSetChanged();
