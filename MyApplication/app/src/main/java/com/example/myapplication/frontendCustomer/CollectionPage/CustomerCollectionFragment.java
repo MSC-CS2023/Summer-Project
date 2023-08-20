@@ -71,6 +71,14 @@ public class CustomerCollectionFragment extends Fragment {
         return rootView;
     }
 
+    public void onStart() {
+
+        super.onStart();
+        currentShowPosition = 0;
+        getCustomerFavourites(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+
+    }
+
 
     private void swipeDown() {
         swipeRefreshLayout = rootView.findViewById(R.id.swipeCollectionPage);

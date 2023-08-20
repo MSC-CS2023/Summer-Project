@@ -1,5 +1,7 @@
 package com.example.myapplication.frontendProvider.homePages;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -12,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +30,7 @@ import com.bumptech.glide.manager.RequestTracker;
 import com.bumptech.glide.request.target.BitmapThumbnailImageViewTarget;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.ServiceDetailData;
+import com.example.myapplication.Bean.Httpdata.data.TimeStampData;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendProvider.loginPages.ProviderRegister;
 import com.example.myapplication.network.Constant;
@@ -181,6 +185,7 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
                 } catch (IOException ignored) {}
                 image.setVisibility(View.VISIBLE);
                 Glide.with(this).load(bitmap).into(image);
+                addPicture(token, 1L);
             }
         }
     }
@@ -261,14 +266,59 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
                 });
     }
 
+    @SuppressLint("CheckResult")
     private void addPicture(String token, Long serviceId){
         if(bitmap == null){
             return;
         }
-        File file = bitmapToFile(bitmap);
-        MultipartBody.Part part = MultipartBody.Part.createFormData("picture", "Picture.jpg",
-                RequestBody.create(MediaType.parse("application/octet-stream"), file));
-        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
-        providerApi.addPictureToService(token, serviceId, part);
+        FileOutputStream fos = null;
+        File bitmapFile = null;
+        try {
+            bitmapFile = File.createTempFile("bitmap", ".jpg", getCacheDir());
+            fos = new FileOutputStream(bitmapFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+            fos.flush();
+            fos.close();
+            // 在这里，您可以将 bitmapFile 上传到服务器或云存储
+            // 这通常需要使用网络请求库执行上传操作
+            MultipartBody.Part part = MultipartBody.Part.createFormData("picture", "Picture.jpg",
+                    RequestBody.create(MediaType.parse("application/octet-stream"), bitmapFile));
+            ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
+            providerApi.addPictureToService(token, 1693076227913019390L, part)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new ResourceSubscriber<HttpBaseBean<Object>>() {
+                        @Override
+                        public void onNext(HttpBaseBean<Object> objectHttpBaseBean) {
+                            if(objectHttpBaseBean.getSuccess()){
+                                Log.i(TAG,"SUC! ");
+                            }else{
+                                Log.i(TAG,"FAL! ");
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable t) {
+                            Log.i(TAG,"Network error! " + t.getMessage());
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

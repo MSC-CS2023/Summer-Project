@@ -186,7 +186,7 @@ public interface CustomerApi {
     Flowable<HttpBaseBean<BalanceData>> customerDeposit(
             @Header("Authorization") String authorization, @Part("money") Double money);
 
-    @POST("customer/balance/witihdraw")
+    @POST("customer/balance/withdraw")
     @Multipart
     Flowable<HttpBaseBean<BalanceData>> customerWithdraw(
             @Header("Authorization") String authorization, @Part("money") Double money);

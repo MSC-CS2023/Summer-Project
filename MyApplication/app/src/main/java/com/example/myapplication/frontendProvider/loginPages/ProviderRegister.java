@@ -1,5 +1,7 @@
 package com.example.myapplication.frontendProvider.loginPages;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -12,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Bean.Httpdata.HttpBaseBean;
 import com.example.myapplication.Bean.Httpdata.data.LoginData;
+import com.example.myapplication.Bean.Httpdata.data.TimeStampData;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendProvider.ProviderMain;
 import com.example.myapplication.network.Constant;
@@ -140,7 +144,7 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
                 try {
                     bitmap = compressImage(uri);
                 } catch (IOException ignored) {}
-                Glide.with(this).load(uri).into(btnRegisterProviderUploadPortrait);
+                    Glide.with(this).load(bitmap).into(btnRegisterProviderUploadPortrait);
             }
         }
     }
@@ -233,13 +237,54 @@ public class ProviderRegister extends AppCompatActivity implements View.OnClickL
         if(bitmap == null){
             return;
         }
-        File file = null;
+        FileOutputStream fos = null;
+        File bitmapFile = null;
         try {
-            file = bitmapToFile(compressImage(myUri));
-        }catch (Exception ignored){}
-        MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
-                RequestBody.create(MediaType.parse("application/octet-stream"), file));
-        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
-        providerApi.updateProviderAvatar(token, part);
+            bitmapFile = File.createTempFile("bitmap", ".jpg", getCacheDir());
+            fos = new FileOutputStream(bitmapFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+
+            fos.flush();
+            fos.close();
+            // 在这里，您可以将 bitmapFile 上传到服务器或云存储
+            // 这通常需要使用网络请求库执行上传操作
+            MultipartBody.Part part = MultipartBody.Part.createFormData("avatar", "Avatar.jpg",
+                    RequestBody.create(MediaType.parse("application/octet-stream"), bitmapFile));
+            ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
+            providerApi.updateProviderAvatar(token, part)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new ResourceSubscriber<HttpBaseBean<TimeStampData>>() {
+                        @Override
+                        public void onNext(HttpBaseBean<TimeStampData> timeStampDataHttpBaseBean) {
+                            if(timeStampDataHttpBaseBean.getSuccess()){
+                                Log.i(TAG,"SUC! ");
+                            }else {
+                                Log.i(TAG,"FAL! ");
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable t) {
+                            Log.i(TAG,"Network error! " + t.getMessage());
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 }

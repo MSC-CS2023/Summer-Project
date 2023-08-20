@@ -61,6 +61,12 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
         return rootView;
     }
 
+    public void onStart() {
+
+        super.onStart();
+        getCustomerDetail(token);
+    }
+
     private void initialView(View rootView){
         setting = rootView.findViewById(R.id.setting);
         order = rootView.findViewById(R.id.order);

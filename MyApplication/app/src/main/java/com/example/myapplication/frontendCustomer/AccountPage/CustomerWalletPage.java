@@ -216,6 +216,8 @@ public class CustomerWalletPage extends AppCompatActivity {
                                         "Recharge successfully!", Toast.LENGTH_SHORT).show();
                                 balance.setText(balanceDataHttpBaseBean.getData().getBalance().toString());
                             }catch (NullPointerException ignored){}
+                        }else {
+                            Toast.makeText(getApplicationContext(), balanceDataHttpBaseBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override

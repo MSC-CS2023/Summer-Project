@@ -51,7 +51,7 @@ public interface ProviderApi {
             @Header("Authorization") String authorization, @Part("service_id") Long serviceId,
             @Part("key") String modifyItem, @Part("value") String modifyContent);
 
-    @POST("service_provider/service/add_pic")
+    @PUT("service_provider/service/add_pic")
     @Multipart
     Flowable<HttpBaseBean<Object>> addPictureToService(
             @Header("Authorization") String authorization, @Part("service_id") Long serviceId,
@@ -171,7 +171,7 @@ public interface ProviderApi {
             @Header("Authorization") String authorization, @Part("money") Double money);
 
 
-    @POST("service_provider/balance/witihdraw")
+    @POST("service_provider/balance/withdraw")
     @Multipart
     Flowable<HttpBaseBean<BalanceData>> providerWithdraw(
             @Header("Authorization") String authorization, @Part("money") Double money);

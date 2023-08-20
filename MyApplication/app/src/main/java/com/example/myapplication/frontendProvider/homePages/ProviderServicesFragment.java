@@ -105,6 +105,15 @@ public class ProviderServicesFragment extends Fragment{
         return rootView;
     }
 
+    public void onStart() {
+
+        super.onStart();
+
+        currentShowPosition = 0;
+        getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+
+    }
+
     private void initView() {
         TextView title = rootView.findViewById(R.id.title);
         title.setText(mText);
