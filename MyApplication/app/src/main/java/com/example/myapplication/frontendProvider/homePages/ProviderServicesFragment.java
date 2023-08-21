@@ -208,7 +208,7 @@ public class ProviderServicesFragment extends Fragment{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Create new service", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Create new service", Toast.LENGTH_SHORT).show();
                 Intent intentAddService = new Intent(getContext(), ProviderCreateServiceActivity.class);
                 startActivity(intentAddService);
             }
@@ -219,7 +219,7 @@ public class ProviderServicesFragment extends Fragment{
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Search services", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Search services", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -231,22 +231,22 @@ public class ProviderServicesFragment extends Fragment{
                 int position = tab.getPosition();
                 switch (position) {
                     case 0:
-                        Toast.makeText(getContext(), "All clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "All clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-                        Toast.makeText(getContext(), "Cleaning clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Cleaning clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
-                        Toast.makeText(getContext(), "Maintenance clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Maintenance clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
-                        Toast.makeText(getContext(), "Laundry clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Laundry clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
-                        Toast.makeText(getContext(), "Landscaping clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Landscaping clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 5:
-                        Toast.makeText(getContext(), "Others clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Others clicked", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
