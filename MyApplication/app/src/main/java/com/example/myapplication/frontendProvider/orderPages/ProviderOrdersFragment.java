@@ -30,7 +30,9 @@ import com.example.myapplication.network.RetrofitClient;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -523,11 +525,30 @@ public class ProviderOrdersFragment extends Fragment {
             String link = Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId();
             providerOrderCardData = new ProviderOrderCardData(
                     order.getServiceShort().getTitle(), order.getId(),
-                    //这里改时间
-                    order.getServiceShort().getFee().toString(), "img_sample2", order.getState(), link, "");
+                    order.getServiceShort().getFee().toString(),
+                    "img_sample2", order.getState(), link,
+                    getTime(order.getStartTimestamp(), order.getEndTimestamp()));
             providerOderCardList.add(providerOrderCardData);
         }
         return providerOderCardList;
+    }
+
+    private String getTime(Long startTime, Long endTime){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getDefault());
+        calendar.setTimeInMillis(startTime);
+        String slot = new String();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        slot = day + "/" + month + "/" + year + " " + hour + ":" + (minute < 10 ? "0" + minute : minute);
+        calendar.setTimeInMillis(endTime);
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        minute = calendar.get(Calendar.MINUTE);
+        slot = slot + " - "  + hour + ":" + (minute < 10 ? "0" + minute : minute);
+        return slot;
     }
 
 }
