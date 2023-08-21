@@ -34,6 +34,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -96,6 +97,11 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
     private ImageButton timetable;
     private ImageButton map;
     private ImageButton setting;
+    private ImageView star1;
+    private ImageView star2;
+    private ImageView star3;
+    private ImageView star4;
+    private ImageView star5;
 
     CircleImageView avatar;
 
@@ -166,6 +172,12 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
         setting = rootView.findViewById(R.id.btn_setting);
         setting.setOnClickListener(this);
 
+        star1 = rootView.findViewById(R.id.img_star1);
+        star2 = rootView.findViewById(R.id.img_star2);
+        star3 = rootView.findViewById(R.id.img_star3);
+        star4 = rootView.findViewById(R.id.img_star4);
+        star5 = rootView.findViewById(R.id.img_star5);
+
         username = rootView.findViewById(R.id.txt_username);
         address = rootView.findViewById(R.id.txt_address);
         avatar = rootView.findViewById(R.id.img_avatar);
@@ -229,6 +241,37 @@ public class ProviderProfileFragment extends Fragment implements View.OnClickLis
         Glide.with(getActivity()).load(glideUrl)
                 .apply(Constant.avatarOptions)
                 .into(avatar);
+
+        //在此处填入mark！！！！！！！！！！！！
+        updateRating(0d);
+    }
+
+    private void updateRating(Double rating) {
+        if(rating == 0.0) {
+            star5.setImageResource(R.drawable.img_yellow_star);
+        } else if(rating>0 && rating<0.5 ) {
+            star1.setImageResource(R.drawable.img_grey_star);
+            star2.setImageResource(R.drawable.img_grey_star);
+            star3.setImageResource(R.drawable.img_grey_star);
+            star4.setImageResource(R.drawable.img_grey_star);
+            star5.setImageResource(R.drawable.img_grey_star);
+        } else if(rating>=0.5 && rating<1.5) {
+            star2.setImageResource(R.drawable.img_grey_star);
+            star3.setImageResource(R.drawable.img_grey_star);
+            star4.setImageResource(R.drawable.img_grey_star);
+            star5.setImageResource(R.drawable.img_grey_star);
+        } else if(rating>=1.5 && rating<2.5) {
+            star3.setImageResource(R.drawable.img_grey_star);
+            star4.setImageResource(R.drawable.img_grey_star);
+            star5.setImageResource(R.drawable.img_grey_star);
+        } else if(rating>=2.5 && rating<3.5) {
+            star4.setImageResource(R.drawable.img_grey_star);
+            star5.setImageResource(R.drawable.img_grey_star);
+        } else if(rating>=3.5 && rating<4.5) {
+            star5.setImageResource(R.drawable.img_grey_star);
+        } else if(rating>=4.5) {
+            star5.setImageResource(R.drawable.img_yellow_star);
+        }
     }
 
     private void openGallery() {
