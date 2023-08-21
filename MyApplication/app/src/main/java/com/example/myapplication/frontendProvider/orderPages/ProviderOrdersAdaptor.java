@@ -63,6 +63,7 @@ public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAd
         TextView price;
         ImageView image;
         TextView state;
+        TextView slotTime;
 
         private int myPosition;
 
@@ -73,6 +74,7 @@ public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAd
             this.price = itemView.findViewById(R.id.order_card_price);
             this.image = itemView.findViewById(R.id.order_card_image);
             this.state = itemView.findViewById(R.id.order_card_state);
+            this.slotTime = itemView.findViewById(R.id.slot_time);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -129,25 +129,6 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:layout_marginTop="5dp"
-                android:text="Address:"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
-
-            <EditText
-                android:id="@+id/edtxt_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:inputType="textMultiLine"
-                android:hint="Please type your address." />
-
             <ImageView
                 android:id="@+id/img_uploaded"
                 android:layout_width="100dp"

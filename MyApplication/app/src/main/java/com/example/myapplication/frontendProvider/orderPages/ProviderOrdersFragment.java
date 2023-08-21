@@ -141,13 +141,13 @@ public class ProviderOrdersFragment extends Fragment {
     private void createDemoData(){
         data = new ArrayList<>();
         data.add(new ProviderOrderCardData("Cleaning", 382789574L, "100",
-                "img_sample2", "Unconfirmed", ""));
+                "img_sample2", "Unconfirmed", "", "2023.08.21-18:28"));
         data.add(new ProviderOrderCardData("Maintenance", 382723474L, "200",
-                "img_sample1", "Finished", ""));
+                "img_sample1", "Finished", "", "2023.08.21-18:28"));
         data.add(new ProviderOrderCardData("Laundry", 384389574L, "300",
-                "img_sample2", "Processing", ""));
+                "img_sample2", "Processing", "", "2023.08.21-18:28"));
         data.add(new ProviderOrderCardData("Laundry", 384389574L, "300",
-                "img_sample2", "Rejected", ""));
+                "img_sample2", "Rejected", "", "2023.08.21-18:28"));
         setAdaptor();
     }
 
@@ -523,7 +523,8 @@ public class ProviderOrdersFragment extends Fragment {
             String link = Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId();
             providerOrderCardData = new ProviderOrderCardData(
                     order.getServiceShort().getTitle(), order.getId(),
-                    order.getServiceShort().getFee().toString(), "img_sample2", order.getState(), link);
+                    //这里改时间
+                    order.getServiceShort().getFee().toString(), "img_sample2", order.getState(), link, "");
             providerOderCardList.add(providerOrderCardData);
         }
         return providerOderCardList;

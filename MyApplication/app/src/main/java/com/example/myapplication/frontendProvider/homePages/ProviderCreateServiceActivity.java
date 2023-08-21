@@ -62,7 +62,6 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
     private Spinner serviceType;
     private EditText description;
     private EditText price;
-    private EditText address;
     private ImageView image;
     private Button uploadImage;
 
@@ -87,7 +86,6 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
         title = findViewById(R.id.edtxt_title);
         description = findViewById(R.id.edtxt_description);
         price = findViewById(R.id.edtxt_price);
-        address = findViewById(R.id.edtxt_address);
         uploadImage = findViewById(R.id.btn_upload_image);
         uploadImage.setOnClickListener(this);
 
@@ -114,18 +112,12 @@ public class ProviderCreateServiceActivity extends AppCompatActivity implements 
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 if(position == 0) {
                     tag = "cleaning";
-                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type cleaning selected", Toast.LENGTH_SHORT).show();
                 } else if (position == 1) {
                     tag = "maintenance";
-                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type maintenance selected", Toast.LENGTH_SHORT).show();
                 } else if (position == 2) {
                     tag = "laundry";
-                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type laundry selected", Toast.LENGTH_SHORT).show();
                 } else if (position == 3) {
                     tag = "landscaping";
-                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type landscaping selected", Toast.LENGTH_SHORT).show();
-                } else if (position == 4) {
-                    Toast.makeText(ProviderCreateServiceActivity.this, "Service type others selected", Toast.LENGTH_SHORT).show();
                 }
             }
 

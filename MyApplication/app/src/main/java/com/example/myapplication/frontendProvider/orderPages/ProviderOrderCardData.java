@@ -8,14 +8,25 @@ public class ProviderOrderCardData {
     private String imageSrc;
     private String state;
     private String imageLink;
+    private String slotTime;
 
-    public ProviderOrderCardData(String title, Long orderNum, String price, String imageSrc, String state, String imageLink) {
+    public String getSlotTime() {
+        return slotTime;
+    }
+
+    public void setSlotTime(String slotTime) {
+        this.slotTime = slotTime;
+    }
+
+    public ProviderOrderCardData(String title, Long orderNum, String price, String imageSrc, String state, String imageLink
+    , String slotTime) {
         this.title = title;
         this.orderNum = orderNum;
         this.price = price;
         this.imageSrc = imageSrc;
         this.state = state;
         this.imageLink = imageLink;
+        this.slotTime = slotTime;
     }
 
     public String getTitle() {
