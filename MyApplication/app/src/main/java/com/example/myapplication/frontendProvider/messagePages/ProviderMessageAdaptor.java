@@ -15,7 +15,7 @@ import com.example.myapplication.frontendProvider.homePages.ProviderServicesAdap
 
 import java.util.List;
 
-public class ProviderMessageAdaptor extends RecyclerView.Adapter<ProviderMessageAdaptor.ViewHoder> {
+public class ProviderMessageAdaptor extends RecyclerView.Adapter<ProviderMessageAdaptor.ViewHolder> {
 
     private List<ProviderMessageCardData> data;
     private Context context;
@@ -26,13 +26,13 @@ public class ProviderMessageAdaptor extends RecyclerView.Adapter<ProviderMessage
 
     @NonNull
     @Override
-    public ViewHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.recyclerview_item_provider_message, null);
-        return new ViewHoder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHoder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.image.setImageResource(context.getResources().getIdentifier(data.get(position).getImageSrc(),
                 "drawable", context.getPackageName()));
         holder.username.setText(data.get(position).getUsername());
@@ -44,12 +44,12 @@ public class ProviderMessageAdaptor extends RecyclerView.Adapter<ProviderMessage
         return data == null ? 0 : data.size();
     }
 
-    public class ViewHoder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
         TextView username;
         TextView latestMessage;
 
-        public ViewHoder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.image = itemView.findViewById(R.id.img_avatar);
             this.username = itemView.findViewById(R.id.txt_username);

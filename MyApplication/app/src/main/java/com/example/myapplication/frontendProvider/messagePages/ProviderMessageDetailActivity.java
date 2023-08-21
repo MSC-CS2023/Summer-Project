@@ -2,6 +2,7 @@ package com.example.myapplication.frontendProvider.messagePages;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProviderMessageDetailActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView username;
@@ -20,6 +24,7 @@ public class ProviderMessageDetailActivity extends AppCompatActivity implements 
     private EditText message;
     private ImageButton send;
     private RecyclerView recyclerView;
+    private List<ProviderMessageDetailData> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +41,22 @@ public class ProviderMessageDetailActivity extends AppCompatActivity implements 
         send.setOnClickListener(this);
         recyclerView = findViewById(R.id.rv_provider_message_detail);
 
+        setAdapter();
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(view -> finish());
+    }
+
+    private void setAdapter() {
+        createDemoData();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new ProviderMessageDetailAdaptor(data, this));
+    }
+
+    private void createDemoData() {
+        data.add(new ProviderMessageDetailData("Sarah", "Hello from other side", "20230821014356000"));
+        data.add(new ProviderMessageDetailData("Sarah", "lets talk about your service", "20230832014506000"));
+        data.add(new ProviderMessageDetailData("Jack3", "Okay", "20230821014550000"));
     }
 
     @Override
