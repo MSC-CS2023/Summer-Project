@@ -174,9 +174,6 @@ public class ProviderServiceDetailActivity extends AppCompatActivity implements 
         if(service.getDescription() == null || !service.getDescription().equals(description.getText().toString())){
             modifyServiceDetail(token, serviceId, "description", description.getText().toString());
         }
-        if(service.getAddress() == null || !service.getAddress().equals(address.getText().toString())){
-            modifyServiceDetail(token, serviceId, "address", address.getText().toString());
-        }
         if(service.getFee() == null || !service.getFee().toString().equals(price.getText().toString())){
             modifyServiceDetail(token, serviceId, "fee", price.getText().toString());
         }

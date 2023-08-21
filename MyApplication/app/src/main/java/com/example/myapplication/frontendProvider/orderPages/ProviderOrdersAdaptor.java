@@ -48,6 +48,7 @@ public class ProviderOrdersAdaptor extends RecyclerView.Adapter<ProviderOrdersAd
         Glide.with(this.context).load(data.get(position).getImageLink())
                 .apply(Constant.pictureOptions)
                 .into(holder.image);
+        holder.slotTime.setText(data.get(position).getSlotTime());
         holder.state.setText(data.get(position).getState());
 
     }
