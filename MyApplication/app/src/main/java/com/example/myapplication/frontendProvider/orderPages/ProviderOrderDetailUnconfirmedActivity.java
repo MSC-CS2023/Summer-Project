@@ -149,7 +149,7 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
         Glide.with(this)
                 .load(Constant.BASE_URL + "get_pic?id=" + order.getServiceShort().getPictureId())
                 .apply(Constant.pictureOptions)
-                .into(avatar);
+                .into(image);
     }
 
     private void updateCustomerView(){
@@ -158,9 +158,9 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
         email.setText(customer.getEmail());
         if(customer.getId() != null){
             Glide.with(this)
-                    .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
+                    .load(Constant.BASE_URL + "public/customer/avatar?id=" + customer.getId())
                     .apply(Constant.avatarOptions)
-                    .into(image);
+                    .into(avatar);
         }
     }
 
@@ -175,6 +175,7 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
                     public void onNext(HttpBaseBean<OrderData> orderDataHttpBaseBean) {
                         if(orderDataHttpBaseBean.getSuccess()){
                             order = orderDataHttpBaseBean.getData().getBookingOrder();
+                            updateCustomer();
                             updateView();
                         }
                     }
@@ -269,7 +270,6 @@ public class ProviderOrderDetailUnconfirmedActivity extends AppCompatActivity im
                     public void onNext(HttpBaseBean<SelfDetailData> selfDetailDataHttpBaseBean) {
                         if(selfDetailDataHttpBaseBean.getSuccess()){
                             customer = selfDetailDataHttpBaseBean.getData().getUser();
-                            updateCustomer();
                             updateCustomerView();
                         }
                     }

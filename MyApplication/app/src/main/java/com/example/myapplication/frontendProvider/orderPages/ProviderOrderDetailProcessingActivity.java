@@ -127,7 +127,7 @@ public class ProviderOrderDetailProcessingActivity extends AppCompatActivity imp
         email.setText(customer.getEmail());
         if(customer.getId() != null){
             Glide.with(this)
-                    .load(Constant.BASE_URL + "public/service_provider/avatar?id=" + customer.getId())
+                    .load(Constant.BASE_URL + "public/customer/avatar?id=" + customer.getId())
                     .apply(Constant.avatarOptions)
                     .into(avatar);
         }

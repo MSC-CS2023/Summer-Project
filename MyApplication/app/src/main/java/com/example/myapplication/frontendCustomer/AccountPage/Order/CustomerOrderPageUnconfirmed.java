@@ -162,6 +162,7 @@ public class CustomerOrderPageUnconfirmed extends AppCompatActivity {
                             try {
                                 order = orderDataHttpBaseBean.getData().getBookingOrder();
                                 updateOrderView();
+                                updateProvider();
                             }catch (NullPointerException ignored){}
                         }
                     }
@@ -192,7 +193,6 @@ public class CustomerOrderPageUnconfirmed extends AppCompatActivity {
                             try {
                                 provider = selfDetailDataHttpBaseBean.getData().getUser();
                                 updateProviderView();
-                                updateProvider();
                             }catch (NullPointerException ignored){}
                         }
                     }
