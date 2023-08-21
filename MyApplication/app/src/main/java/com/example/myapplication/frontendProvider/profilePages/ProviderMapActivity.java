@@ -102,34 +102,37 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                         if(orderListDataHttpBaseBean.getSuccess()){
                             customerAddresses = new ArrayList<>();
                             message = new ArrayList<>();
-                            for(Order order : orderListDataHttpBaseBean.getData().getBookingOrders()){
-                                customerAddresses.add(order.getAddress());
-                                message.add(getTime(order.getStartTimestamp()));
-                            }
-                            Geocoder geocoder = new Geocoder(getApplicationContext());
-
-                            for(int i = 0; i < customerAddresses.size(); i++) {
-                                customerAddresses.get(i).concat(", United Kingdom");
-                                try {
-                                    List<Address> addresses = geocoder.getFromLocationName(customerAddresses.get(i), 1);
-                                    if(addresses != null && !addresses.isEmpty()) {
-                                        Address targetAddress = addresses.get(0);
-                                        latLng = new com.google.android.gms.maps.model.LatLng(targetAddress.getLatitude(),
-                                                targetAddress.getLongitude());
-                                        googleMap.addMarker(new MarkerOptions()
-                                                .position(latLng)
-                                                .title(message.get(i)));
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                            try {
+                                for(Order order : orderListDataHttpBaseBean.getData().getBookingOrders()){
+                                    customerAddresses.add(order.getAddress());
+                                    message.add(getTime(order.getStartTimestamp()));
                                 }
-                            }
-                            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                                googleMap.setMyLocationEnabled(true);
-                            }
+                                Geocoder geocoder = new Geocoder(getApplicationContext());
 
-                            float zoomLevel = 12.0f;
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
+                                for(int i = 0; i < customerAddresses.size(); i++) {
+                                    customerAddresses.get(i).concat(", United Kingdom");
+                                    try {
+                                        List<Address> addresses = geocoder.getFromLocationName(customerAddresses.get(i), 1);
+                                        if(addresses != null && !addresses.isEmpty()) {
+                                            Address targetAddress = addresses.get(0);
+                                            latLng = new com.google.android.gms.maps.model.LatLng(targetAddress.getLatitude(),
+                                                    targetAddress.getLongitude());
+                                            googleMap.addMarker(new MarkerOptions()
+                                                    .position(latLng)
+                                                    .title(message.get(i)));
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                                    googleMap.setMyLocationEnabled(true);
+                                }
+
+                                float zoomLevel = 12.0f;
+                                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
+                            }catch (Exception ignored){}
+
                         }
                     }
 

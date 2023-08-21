@@ -67,21 +67,17 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:layout_margin="5dp"
                         android:id="@+id/providerName"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2"
+                        android:layout_gravity="center"
                         android:text="username"
                         android:textStyle="bold"
-                        android:textSize="20dp"></TextView>
+                        android:textSize="30dp"></TextView>
 
-                    <TextView
-                        android:id="@+id/serviceInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="user information, clarify what kind of service "
-                        android:textColor="#333232"></TextView>
+
 
                 </LinearLayout>
 
@@ -172,6 +168,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:layout_gravity="center"
         android:gravity="bottom">
 
         <TextView
@@ -180,23 +177,11 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:layout_gravity="center_horizontal"
+            android:gravity="center"
             android:text="￡200"
             android:textSize="30dp"
             android:textStyle="bold"
             android:textColor="@color/red"></TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
-            android:text="discount detail/deposit detail"
-            android:textSize="15dp"
-            android:textStyle="normal"
-            android:textColor="@color/grey"></TextView>
-
-
-
 
 
 
@@ -206,6 +191,7 @@
             android:id="@+id/order"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:src="@drawable/btn_order"
             android:backgroundTint="@android:color/transparent">
