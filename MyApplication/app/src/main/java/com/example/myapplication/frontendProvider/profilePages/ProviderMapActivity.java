@@ -120,7 +120,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                                                 .position(latLng)
                                                 .title(message.get(i)));
                                     }
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
