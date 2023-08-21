@@ -41,13 +41,15 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 public class CustomerSearchPageFragment extends Fragment {
 
     Integer currentShowPosition;
-    static final Integer DEFAULT_SHOW_NUMBER = 5;
+    static final Integer DEFAULT_SHOW_NUMBER = 10;
+    private static final long LOAD_INTERVAL = 2000;
     private String sortType;
     private Boolean isDescending;
     private String searchKeyword;
     List<ServiceCard> dataList;
 
 
+    private Long lastLoadTime = 0L;
     private ImageButton btnSearch;
     private EditText keyword;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -225,10 +227,12 @@ public class CustomerSearchPageFragment extends Fragment {
 //                    dataList.add(new ServiceCard("Eric", "" + SystemClock.currentThreadTimeMillis(),
 //                            "Repair Air conditioner", "available tomorrow",
 //                            "balabala", "picSrc", 213L));
-
-                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-                    searchByKeyword(searchKeyword, sortType, isDescending, currentShowPosition);
-                    serviceCardAdapter.notifyDataSetChanged();
+                    Long currentTime = System.currentTimeMillis();
+                    if (currentTime - lastLoadTime >= LOAD_INTERVAL) {
+                        currentShowPosition += DEFAULT_SHOW_NUMBER;
+                        searchByKeyword(searchKeyword, sortType, isDescending, currentShowPosition);
+                        serviceCardAdapter.notifyDataSetChanged();
+                    }
                 }
             }
         });

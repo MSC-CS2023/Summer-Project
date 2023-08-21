@@ -35,7 +35,7 @@
                 android:id="@+id/serviceTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Service Tile XXXXXX"
+                android:text=""
                 android:textSize="35dp"
                 android:textStyle="bold">
             </TextView>
@@ -73,7 +73,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="2"
                         android:layout_gravity="center"
-                        android:text="username"
+                        android:text=""
                         android:textStyle="bold"
                         android:textSize="30dp"></TextView>
 
@@ -113,7 +113,7 @@
                     android:id="@+id/serviceDescribe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Describe service detail XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                    android:text=""
                     android:textSize="15dp"></TextView>
             </LinearLayout>
 
@@ -135,7 +135,7 @@
                     android:id="@+id/addressDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Address line + postcode "
+                    android:text=""
                     android:textSize="15dp"></TextView>
 
                 <Space
@@ -178,7 +178,7 @@
             android:layout_weight="2"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="￡200"
+            android:text=""
             android:textSize="30dp"
             android:textStyle="bold"
             android:textColor="@color/red"></TextView>
