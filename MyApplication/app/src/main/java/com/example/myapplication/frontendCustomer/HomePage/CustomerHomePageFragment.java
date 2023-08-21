@@ -42,12 +42,9 @@ public class CustomerHomePageFragment extends Fragment {
     private static final int MAINTAIN_TAB = 2;
     private static final int LAUNDRY_TAB = 3;
     private static final int LANDSCAPE_TAB = 4;
-
     private static final long LOAD_INTERVAL = 2000;
 
     private Long lastLoadTime = 0L;
-
-
     private Integer currentShowPosition;
     private String token;
     private Integer currentTab;
@@ -228,7 +225,7 @@ public class CustomerHomePageFragment extends Fragment {
                 // Determine whether to slide to the bottom and perform loading more operations
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                         && firstVisibleItemPosition >= 0) {
-                    long currentTime = System.currentTimeMillis();
+                    Long currentTime = System.currentTimeMillis();
                     if (currentTime - lastLoadTime >= LOAD_INTERVAL) {
                         currentShowPosition += DEFAULT_RECOMMEND_NUMBER;
                         updatePage();

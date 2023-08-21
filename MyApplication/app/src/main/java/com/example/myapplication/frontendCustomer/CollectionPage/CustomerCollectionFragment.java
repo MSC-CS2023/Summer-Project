@@ -38,10 +38,13 @@ import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
 
 public class CustomerCollectionFragment extends Fragment {
 
+    static final Integer DEFAULT_SHOW_NUMBER = 5;
+    private static final long LOAD_INTERVAL = 2000;
 
     String token;
     Integer currentShowPosition;
-    static final Integer DEFAULT_SHOW_NUMBER = 5;
+
+    private Long lastLoadTime = 0L;
     List<ServiceCard> dataList = new ArrayList<>();
 
     SwipeRefreshLayout swipeRefreshLayout;
@@ -155,10 +158,12 @@ public class CustomerCollectionFragment extends Fragment {
 //                            "Repair Air conditioner", "available tomorrow",
 //                            "balabala", "picSrc", 213L));
 //                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
-
-                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-                    getCustomerFavourites(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
-                    serviceCardAdapter.notifyDataSetChanged();
+                    Long currentTime = System.currentTimeMillis();
+                    if (currentTime - lastLoadTime >= LOAD_INTERVAL) {
+                        currentShowPosition += DEFAULT_SHOW_NUMBER;
+                        getCustomerFavourites(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                        serviceCardAdapter.notifyDataSetChanged();
+                    }
                 }
             }
         });

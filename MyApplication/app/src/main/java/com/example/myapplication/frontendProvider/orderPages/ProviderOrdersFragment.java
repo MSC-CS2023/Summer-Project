@@ -54,6 +54,10 @@ public class ProviderOrdersFragment extends Fragment {
     private static final int REJECTED_TAB = 5;
     private static final int CANCELED_TAB = 6;
 
+    private static final long LOAD_INTERVAL = 2000;
+
+
+    private Long lastLoadTime = 0L;
     // TODO: Rename and change types of parameters
     private String mTitle;
     private String token;
@@ -214,9 +218,12 @@ public class ProviderOrdersFragment extends Fragment {
 //                    data.add(new ProviderOrderCardData("Cleaning", SystemClock.currentThreadTimeMillis(),
 //                            "300", "img_sample2", "Finished", ""));
 //                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
-                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-                    updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
-                    providerOrdersAdaptor.notifyDataSetChanged();
+                    Long currentTime = System.currentTimeMillis();
+                    if (currentTime - lastLoadTime >= LOAD_INTERVAL) {
+                        currentShowPosition += DEFAULT_SHOW_NUMBER;
+                        updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                        providerOrdersAdaptor.notifyDataSetChanged();
+                    }
                 }
             }
         });

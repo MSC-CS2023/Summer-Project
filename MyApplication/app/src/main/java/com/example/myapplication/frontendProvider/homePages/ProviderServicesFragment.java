@@ -47,11 +47,13 @@ public class ProviderServicesFragment extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_TEXT = "param1";
+    static final Integer DEFAULT_SHOW_NUMBER = 5;
+    private static final long LOAD_INTERVAL = 2000;
+
     private List<ProviderServiceCardData> data = new ArrayList<>();
     private String token;
     Integer currentShowPosition;
-    static final Integer DEFAULT_SHOW_NUMBER = 5;
-
+    private Long lastLoadTime = 0L;
     // TODO: Rename and change types of parameters
     private String mText;
     private View rootView;
@@ -187,9 +189,12 @@ public class ProviderServicesFragment extends Fragment{
 //                    data.add(new ProviderServiceCardData("Laundry", "Some short description......",
 //                            "300" + SystemClock.currentThreadTimeMillis(), "img_sample1", 123L));
 //                    Toast.makeText(getContext(), "load more", Toast.LENGTH_SHORT).show();
-                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-                    getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
-                    providerServicesAdaptor.notifyDataSetChanged();
+                    Long currentTime = System.currentTimeMillis();
+                    if (currentTime - lastLoadTime >= LOAD_INTERVAL) {
+                        currentShowPosition += DEFAULT_SHOW_NUMBER;
+                        getProviderService(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                        providerServicesAdaptor.notifyDataSetChanged();
+                    }
                 }
             }
         });

@@ -47,7 +47,9 @@ public class CustomerOrderPage extends AppCompatActivity {
     private static final int FINISHED_TAB = 4;
     private static final int REJECTED_TAB = 5;
     private static final int CANCELED_TAB = 6;
+    private static final long LOAD_INTERVAL = 2000;
 
+    private Long lastLoadTime = 0L;
     private String token;
     Integer currentShowPosition;
     private int currentTab;
@@ -261,10 +263,12 @@ public class CustomerOrderPage extends AppCompatActivity {
 //                    orderCards.add(new OrderCard(121133L, "name1213",
 //                            "~"+ SystemClock.currentThreadTimeMillis(),
 //                            "link", "Finished"));
-
-                    currentShowPosition += DEFAULT_SHOW_NUMBER;
-                    updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
-                    orderCardAdapter.notifyDataSetChanged();
+                    Long currentTime = System.currentTimeMillis();
+                    if (currentTime - lastLoadTime >= LOAD_INTERVAL) {
+                        currentShowPosition += DEFAULT_SHOW_NUMBER;
+                        updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
+                        orderCardAdapter.notifyDataSetChanged();
+                    }
                 }
             }
         });
