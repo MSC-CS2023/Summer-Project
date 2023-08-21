@@ -20,6 +20,7 @@ import com.example.myapplication.Bean.Httpdata.data.OrderListData;
 import com.example.myapplication.R;
 import com.example.myapplication.frontendCustomer.AccountPage.CustomerTimetablePage;
 import com.example.myapplication.network.CustomerApi;
+import com.example.myapplication.network.ProviderApi;
 import com.example.myapplication.network.RetrofitClient;
 
 import java.util.ArrayList;
@@ -99,8 +100,8 @@ public class ProviderTimetableActivity extends AppCompatActivity {
 
     @SuppressLint("CheckResult")
     private void getOrderByDate(String token, Long timestamp){
-        CustomerApi customerApi = RetrofitClient.getInstance().getService(CustomerApi.class);
-        customerApi.getCustomerOrdersByDate(token, timestamp)
+        ProviderApi providerApi = RetrofitClient.getInstance().getService(ProviderApi.class);
+        providerApi.getProviderOrdersByDate(token, timestamp)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new ResourceSubscriber<HttpBaseBean<OrderListData>>() {

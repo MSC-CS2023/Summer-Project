@@ -158,8 +158,7 @@ public interface ProviderApi {
     //NEW
     @GET("service_provider/booking_order/get_by_date")
     Flowable<HttpBaseBean<OrderListData>> getProviderOrdersByDate(
-            @Header("Authorization") String authorization,
-            @Query("day") Integer day, @Query("month") Integer month, @Query("year") Integer year);
+            @Header("Authorization") String authorization, @Query("timestamp") Long timestamp);
 
     //NEW BALANCE
     @GET("service_provider/balance/get")
