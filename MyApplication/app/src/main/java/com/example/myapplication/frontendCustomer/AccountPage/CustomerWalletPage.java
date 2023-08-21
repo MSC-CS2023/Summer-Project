@@ -83,7 +83,7 @@ public class CustomerWalletPage extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 //add refresh action here
-                Toast.makeText(CustomerWalletPage.this, "refresh action", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CustomerWalletPage.this, "refresh action", Toast.LENGTH_SHORT).show();
                 //stop refresh
                 swipeRefreshLayout.setRefreshing(false);
             }

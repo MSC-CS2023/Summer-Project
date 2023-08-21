@@ -78,7 +78,7 @@ public class CustomerOrderPageUnconfirmed extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CustomerOrderPageUnconfirmed.this, "click message", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CustomerOrderPageUnconfirmed.this, "click message", Toast.LENGTH_SHORT).show();
             }
         });
 

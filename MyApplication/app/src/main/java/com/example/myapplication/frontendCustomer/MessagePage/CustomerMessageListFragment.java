@@ -58,9 +58,9 @@ public class CustomerMessageListFragment extends Fragment implements View.OnClic
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.message){
-            Toast.makeText(getContext(), "click message", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "click message", Toast.LENGTH_SHORT).show();
         } else if (view.getId() == R.id.notification) {
-            Toast.makeText(getContext(), "click notification", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "click notification", Toast.LENGTH_SHORT).show();
         }
     }
 }

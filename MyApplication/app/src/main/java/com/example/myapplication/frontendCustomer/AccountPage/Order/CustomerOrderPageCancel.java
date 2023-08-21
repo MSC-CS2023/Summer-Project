@@ -64,7 +64,7 @@ public class CustomerOrderPageCancel extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CustomerOrderPageCancel.this, "click message", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CustomerOrderPageCancel.this, "click message", Toast.LENGTH_SHORT).show();
             }
         });
     }

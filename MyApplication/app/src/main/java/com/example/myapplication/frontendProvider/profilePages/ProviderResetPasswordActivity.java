@@ -57,7 +57,7 @@ public class ProviderResetPasswordActivity extends AppCompatActivity implements 
     public void onClick(View view) {
         if(view.getId() == R.id.btn_save) {
             resetPassword();
-            Toast.makeText(this, "save clicked", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "save clicked", Toast.LENGTH_SHORT).show();
         }
     }
 

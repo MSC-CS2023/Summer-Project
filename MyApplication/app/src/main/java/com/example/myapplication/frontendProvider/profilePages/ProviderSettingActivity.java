@@ -64,7 +64,7 @@ public class ProviderSettingActivity extends AppCompatActivity implements View.O
             Intent intentToResetPassword = new Intent(this, ProviderResetPasswordActivity.class);
             startActivity(intentToResetPassword);
         } else if(view.getId() == R.id.help) {
-            Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show();
         } else if(view.getId() == R.id.delete_account) {
             deleteAlert();
         } else if(view.getId() == R.id.logout) {
@@ -80,7 +80,7 @@ public class ProviderSettingActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //发送请求删除账号
-                        Toast.makeText(getApplicationContext(), "Delete", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Delete", Toast.LENGTH_SHORT).show();
                         finishAffinity();
                         startActivity(new Intent(ProviderSettingActivity.this, ChooseActivity.class));
                     }

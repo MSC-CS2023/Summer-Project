@@ -85,7 +85,7 @@ public class CustomerOrderPageFinished extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 mark = seekBar.getProgress();
-                Toast.makeText(CustomerOrderPageFinished.this, "you choose " + mark + " marks", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CustomerOrderPageFinished.this, "you choose " + mark + " marks", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -103,7 +103,7 @@ public class CustomerOrderPageFinished extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CustomerOrderPageFinished.this, "click message", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CustomerOrderPageFinished.this, "click message", Toast.LENGTH_SHORT).show();
             }
         });
     }

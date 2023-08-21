@@ -169,7 +169,7 @@ public class ProviderServicesFragment extends Fragment{
             public void onRecyclerItemClick(int position) {
                 startActivity(new Intent(getContext(), ProviderServiceDetailActivity.class)
                         .putExtra("serviceId", data.get(position).getServiceId()));
-                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
             }
         });
 

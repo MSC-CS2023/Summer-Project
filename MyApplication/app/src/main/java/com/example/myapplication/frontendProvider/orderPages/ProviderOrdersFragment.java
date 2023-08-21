@@ -160,7 +160,7 @@ public class ProviderOrdersFragment extends Fragment {
             @Override
             public void onRefresh() {
 //                createDemoData();
-                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "refresh action", Toast.LENGTH_SHORT).show();
                 currentShowPosition = 0;
                 updateOrderData(token, currentShowPosition, DEFAULT_SHOW_NUMBER);
                 //stop refresh
@@ -238,7 +238,7 @@ public class ProviderOrdersFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Search services", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Search services", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -251,27 +251,27 @@ public class ProviderOrdersFragment extends Fragment {
                 switch (position) {
                     case 0:
                         currentTab = ALL_TAB;
-                        Toast.makeText(getContext(), "All clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "All clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
                         currentTab = UNCONFIRMED_TAB;
-                        Toast.makeText(getContext(), "Unconfirmed clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Unconfirmed clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
                         currentTab = PROCESSING_TAB;
-                        Toast.makeText(getContext(), "Processing clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Processing clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
                         currentTab = FINISHED_TAB;
-                        Toast.makeText(getContext(), "Finished clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Finished clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
                         currentTab = REJECTED_TAB;
-                        Toast.makeText(getContext(), "Rejected clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Rejected clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case 5:
                         currentTab = CANCELED_TAB;
-                        Toast.makeText(getContext(), "Cancelled clicked", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Cancelled clicked", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;

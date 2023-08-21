@@ -134,7 +134,7 @@ public class CustomerCollectionFragment extends Fragment {
             public void onItemClick(int position) {
                 startActivity(new Intent(getContext(), CustomerServiceDetailPage.class)
                         .putExtra("serviceId", dataList.get(position).getServiceId()));
-                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "click" + position, Toast.LENGTH_SHORT).show();
             }
         });
 

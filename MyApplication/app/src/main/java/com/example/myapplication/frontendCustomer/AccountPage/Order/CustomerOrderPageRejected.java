@@ -66,7 +66,7 @@ public class CustomerOrderPageRejected extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CustomerOrderPageRejected.this, "click message", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CustomerOrderPageRejected.this, "click message", Toast.LENGTH_SHORT).show();
             }
         });
 
