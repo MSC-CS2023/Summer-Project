@@ -46,22 +46,45 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/img_stars"
             android:layout_gravity="center_horizontal">
         </ImageView>
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/btnChatBot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/btn_aibot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoSection"></ImageButton>
+
+    <TextView
+        android:id="@+id/txtChatbot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Al Chat Bot"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnChatBot"></TextView>
+
 
     <GridLayout
-        android:layout_width="380dp"
+        android:id="@+id/function"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:columnCount="2"
         android:rowCount="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoSection">
+        app:layout_constraintTop_toBottomOf="@+id/txtChatbot">
 
         <LinearLayout
             android:layout_width="170dp"
@@ -171,4 +194,6 @@
         </LinearLayout>
 
     </GridLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

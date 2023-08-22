@@ -62,6 +62,8 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
     ImageButton order;
     ImageButton wallet;
     ImageButton timetable;
+
+    ImageButton chatBot;
     CircleImageView avatar;
     TextView username;
     TextView address;
@@ -95,6 +97,7 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
         order = rootView.findViewById(R.id.order);
         timetable =rootView.findViewById(R.id.timetable);
         wallet = rootView.findViewById(R.id.wallet);
+        chatBot = rootView.findViewById(R.id.btnChatBot);
         avatar = rootView.findViewById(R.id.accountAvatar);
         username = rootView.findViewById(R.id.accountUsername);
         address = rootView.findViewById(R.id.address);
@@ -103,6 +106,7 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
         order.setOnClickListener(this);
         timetable.setOnClickListener(this);
         wallet.setOnClickListener(this);
+        chatBot.setOnClickListener(this);
         avatar.setOnClickListener(this);
     }
 
@@ -118,6 +122,8 @@ public class CustomerAccountFragment extends Fragment implements View.OnClickLis
         }else if (view.getId() == R.id.accountAvatar) {
 //            startActivity(new Intent(getContext(), PersonalDetailPage.class));
             openGallery();
+        }else if (view.getId() == R.id.btnChatBot) {
+            startActivity(new Intent(getContext(), CustomerChatGPTpage.class));
         }
     }
 
