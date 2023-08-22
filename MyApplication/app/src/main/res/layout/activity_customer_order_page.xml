@@ -52,20 +52,21 @@
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/swipeOrderPage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nav_bar_out">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/orderCardRecyclerView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp"
-        tools:listitem="@layout/order_card_all_item"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nav_bar_out"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orderCardRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="30dp"
+            tools:listitem="@layout/order_card_all_item"></androidx.recyclerview.widget.RecyclerView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
