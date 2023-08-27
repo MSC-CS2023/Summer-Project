@@ -48,7 +48,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:layout_marginTop="5dp"
-                android:hint="Title"
+                android:hint="Add a Title to Your Service"
                 android:inputType="text"
                 android:textSize="30sp"
                 android:textStyle="bold"/>

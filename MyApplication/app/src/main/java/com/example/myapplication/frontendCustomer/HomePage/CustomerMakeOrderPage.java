@@ -72,7 +72,6 @@ public class CustomerMakeOrderPage extends AppCompatActivity implements View.OnC
         serviceStartHour = -1;
         serviceEndHour = -1;
 
-
         initializeVIew();
     }
 
